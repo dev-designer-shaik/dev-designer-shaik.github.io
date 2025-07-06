@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Marayai × DS Studio – Unified Digital Ecosystem Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* --- SAME DESIGN TOKEN SET AS ORIGINAL GUIDE --- */
+  :root{--primary-color:#007acc;--secondary-color:#28a745;--accent-color:#ffc107;--text-color:#333;
+        --bg-light:#fafafa;--bg-medium:#f8f9fa;--bg-dark:#1a1a1a;--card-bg:#fff;--border-color:#e9ecef;
+        --shadow-light:0 2px 8px rgba(0,0,0,0.05);--shadow-medium:0 2px 10px rgba(0,0,0,0.1);}
+  html,body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg-light);color:var(--text-color);line-height:1.6;}
+  header{background:var(--bg-dark);color:#fff;padding:1.5rem 2rem;position:sticky;top:0;z-index:1000;
+         box-shadow:var(--shadow-medium);}
+  h1{margin:0;font-size:1.9rem;font-weight:700}
+  .subtitle{margin:0.5rem 0 0 0;font-size:0.95rem;opacity:0.9;}
+  main{padding:2rem;max-width:1200px;margin:auto}
+  section{margin-bottom:4rem;background:var(--card-bg);padding:2.3rem;border-radius:10px;
+          border-left:6px solid var(--primary-color);box-shadow:var(--shadow-light);}
+  h2{color:var(--primary-color);font-size:1.8rem;margin-bottom:1.3rem;border-bottom:3px solid var(--primary-color);
+      padding-bottom:0.7rem;font-weight:700}
+  h3{color:var(--text-color);font-size:1.4rem;margin-top:2.2rem;margin-bottom:1rem;font-weight:600}
+  h4{color:var(--text-color);font-size:1.2rem;margin-top:1.8rem;margin-bottom:1rem;font-weight:600;}
+  .toc{background:var(--bg-medium);padding:1.8rem;border-radius:10px;margin-bottom:3rem;
+       box-shadow:var(--shadow-light);border:1px solid var(--border-color);}
+  .toc h3{margin-top:0;color:var(--primary-color);border-bottom:1px solid var(--primary-color);
+          padding-bottom:0.7rem;margin-bottom:1.3rem}
+  .toc ul{list-style:none;padding-left:0}
+  .toc li{margin:0.55rem 0}
+  .toc a{color:var(--primary-color);text-decoration:none;font-weight:500}
+  .toc a:hover{text-decoration:underline;color:var(--secondary-color)}
+  pre{background:#2d2d2d;color:#f8f8f2;padding:1.3rem;border-radius:8px;overflow-x:auto;margin:1.5rem 0;box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
+  code{font-family:'Fira Code', Monaco, Consolas, monospace;font-size:0.9rem;background:#eef;padding:0.2em 0.4em;border-radius:4px;color:#d63384;}
+  pre code{background:none;padding:0;color: inherit;font-size:0.95rem;}
+  .mermaid{background:var(--card-bg);border:1px solid var(--border-color);padding:1.3rem;border-radius:8px;
+           box-shadow:var(--shadow-light);margin:1.5rem 0; text-align: center;}
+  footer{background:var(--bg-dark);color:#fff;text-align:center;padding:2rem;margin-top:4rem;font-size:0.9rem}
+  footer p{margin:0.5rem 0;opacity:0.8;}
+  ul,ol{margin:1rem 0;padding-left:1.5rem;}
+  li{margin:0.75rem 0;}
+  table{border-collapse:collapse;width:100%;margin:1.5rem 0;box-shadow:var(--shadow-light);border-radius:8px;overflow:hidden;}
+  th,td{border:1px solid var(--border-color);padding:1rem;text-align:left;}
+  th{background:var(--primary-color);color:#fff;font-weight:600;text-transform: uppercase;font-size:0.9rem;}
+  tr:nth-child(even){background:var(--bg-medium);}
+  .note{background:#d1e7dd;padding:1.2rem;border-left:5px solid var(--secondary-color);margin:1.5rem 0;border-radius:6px;color:#0f5132;}
+  .highlight{background:#fff3cd;padding:1.2rem;border-left:5px solid var(--accent-color);margin:1.5rem 0;border-radius:6px;color:#664d03;}
+
+  @media(max-width:768px){
+    main{padding:1rem}
+    section{padding:1.5rem}
+    header{padding:1rem; text-align: center;}
+    h1{font-size:1.5rem;}
+    h2{font-size:1.6rem;}
+    h3{font-size:1.3rem;}
+    table, th, td {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    th {
+      text-align: center;
+      background: var(--primary-color);
+      color: #fff;
+    }
+    td {
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    tr {
+      margin-bottom: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: block;
+    }
+    td:before {
+      content: attr(data-label);
+      font-weight: bold;
+      display: inline-block;
+      width: 120px; /* Adjust as needed */
+      text-align: left;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Marayai × DS Studio – Unified Digital Ecosystem Guide</h1>
+  <p class="subtitle">DSI Media Repository Integration and Shared Drives Overview</p>
+</header>
+
+<main>
+
+<div class="toc">
+  <h3>📋 Table of Contents</h3>
+  <ul>
+    <li><a href="#purpose">1 Purpose & Scope</a></li>
+    <li><a href="#governance">2 Governance & IP Ownership</a></li>
+    <li><a href="#workspace">3 Google Workspace OU / Shared-Drive Architecture</a></li>
+    <li><a href="#repository">4 DSI Repository Structure</a></li>
+    <li><a href="#database">5 Database & Data-Lake Blueprint</a></li>
+    <li><a href="#automation">6 Automation & AI-Agent Matrix</a></li>
+    <li><a href="#media-guide">7 Media-Pipeline Implementation Guide</a></li>
+    <li><a href="#change">8 Change-Management & Review Cycle</a></li>
+  </ul>
+</div>
+
+<section id="purpose">
+<h2>🎯 Purpose & Scope</h2>
+<p> combineddigital stack. It replaces piecemeal PDFs and chat notes with a single, searchable HTML reference. Content is sourced from the </p>
+
+
+<h3>Core Technologies Used</h3>
+<div class="mermaid">
+graph LR
+    subgraph "Data Sources & Storage"
+        GD[Google Drive<br/>Primary Source]
+        QNAP[QNAP NAS<br/>Local Backup]
+        S3[AWS S3/GCS<br/>Cold Storage]
+    end
+    
+    subgraph "Processing & AI"
+        N8N[n8n<br/>Workflow Engine]
+        OAI[OpenAI<br/>AI Analysis]
+        PS[Google Pub/Sub<br/>Event Transport]
+    end
+    
+    subgraph "Databases"
+        WV[Weaviate<br/>Vector Search]
+        PG[PostgreSQL<br/>Metadata & Logs]
+    end
+    
+    subgraph "Distribution & CDN"
+        CDN[Cloudinary<br/>Media Optimization]
+        GC[Google Chat<br/>Notifications]
+    end
+    
+    style GD fill:#4285f4,color:#fff
+    style N8N fill:#ea4560,color:#fff
+    style WV fill:#fa6423,color:#fff
+    style PG fill:#336791,color:#fff
+    style CDN fill:#3448c5,color:#fff
+    style QNAP fill:#00a8e6,color:#fff
+    style OAI fill:#00a67e,color:#fff
+    style PS fill:#4285f4,color:#fff
+    style S3 fill:#ff9900,color:#fff
+    style GC fill:#34a853,color:#fff
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Technology</th>
+      <th>Primary Function</th>
+      <th>Integration Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Source Control</td><td>Google Drive</td><td>Primary media repository</td><td>n8n triggers, AI processing</td></tr>
+    <tr><td>Orchestration</td><td>n8n</td><td>Workflow automation engine</td><td>All systems integration hub</td></tr>
+    <tr><td>Vector Database</td><td>Weaviate</td><td>AI-powered semantic search</td><td>OpenAI embeddings, metadata</td></tr>
+    <tr><td>Relational DB</td><td>PostgreSQL</td><td>Structured metadata storage</td><td>Audit logs, processing status</td></tr>
+    <tr><td>AI Processing</td><td>OpenAI</td><td>Content analysis & tagging</td><td>Weaviate vectors, metadata</td></tr>
+    <tr><td>CDN & Optimization</td><td>Cloudinary</td><td>Media transformation & delivery</td><td>URL generation, format optimization</td></tr>
+    <tr><td>Local Backup</td><td>QNAP NAS</td><td>On-premise redundancy</td><td>Real-time Drive sync</td></tr>
+    <tr><td>Event Messaging</td><td>Google Pub/Sub</td><td>Real-time event processing</td><td>File upload triggers</td></tr>
+    <tr><td>Notifications</td><td>Google Chat</td><td>Team communication</td><td>Workflow status updates</td></tr>
+    <tr><td>Cold Storage</td><td>AWS S3/Google Cloud Storage</td><td>Long-term archival</td><td>Data lake, compliance</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="governance">
+<h2>🏛️ Governance & IP Ownership</h2>
+<h3>2.1 IP Hierarchy</h3>
+<div class="mermaid">
+graph LR
+MH[Marayai Holdings<br/>Parent Company] --> SF[Shaikdom Foundation<br/>Non‑Profit Arm]
+MH --> DSS[Designer Shaik Studio<br/>Creative Unit]
+DSS --> DSI[DSI Product Repository<br/>Content Hub]
+SF --> DSI
+</div>
+<h3>2.2 Digital Asset Ownership</h3>
+<p>All digital assets created or acquired by any entity within the Marayai ecosystem are ultimately owned by Marayai Holdings. Usage rights, licensing, and distribution are governed by specific protocols outlined in this guide.</p>
+<h3>2.3 Compliance & Legal</h3>
+<p>Adherence to regional data privacy laws (e.g., GDPR, ADGM) and international intellectual property regulations is mandatory. Regular audits are conducted to ensure compliance.</p>
+</section>
+
+<section id="workspace">
+<h2>🌐 Google Workspace OU / Shared-Drive Architecture</h2>
+<p>The Google Workspace environment is structured to reflect the organizational hierarchy and facilitate efficient collaboration and data management. Shared drives are used for centralized access and governance of key digital assets.</p>
+
+<h3>Current Workspace Shared Drives Directory</h3>
+<pre><code>
+
+[SANDBOX] DSI 00 - Archive
+[SANDBOX] DSI 01 - Technical-BIM & R&D
+[SANDBOX] DSI 02 - Finance & Legal
+[SANDBOX] DSI 03 - Marketing & Investor Relations
+[SANDBOX] DSI 04 - Project Marayai
+    Project‐Marayai
+    ├── Country_Nodes
+    ├── Desert_Voyager_Sculpture
+    ├── Master_Plans
+    └── Orb_Nexus_Bahrain
+        ├── CGI
+        ├── Drawings
+        └── Permits
+[SANDBOX] DSi 05 - Media Governance        
+    Governance & Protocols
+    ├── Change‐Log
+    ├── Domain & DNS Records
+    └── IP & Licences
+[SANDBOX] DSi 06 - Media Repository
+    DSI-Product-Repository
+    ├── DSI-Product-Repository
+    │   ├── Metadata
+    │   ├── Palace-of-Fragrances
+    │   ├── Palace-of-Precision
+    │   ├── Palace-of-Style
+    │   └── Processed-Media
+    │       ├── ERP-Integrated
+    │       ├── Social-Media-Posts
+    │       └── Web-Optimized
+    │           ├── Metadata
+    │           │   ├── AI-Generated-Tags
+    │           │   ├── Approval-Stages
+    │           │   ├── Media-Change-History
+    │           │   ├── Multilingual-Descriptions
+    │           │   └── Tagging-Data
+    │           │   └── Version-Control
+    │           ├── Palace-of-Fragrances
+    │           │   ├── Classic-Range
+    │           │   │   ├── Amber-Kroud
+    │           │   │   ├── Chic-Shaik-Emerald
+    │           │   │   ├── Opulent-Shaik-Amethyst
+    │           │   │   ├── Opulent-Shaik-Sapphire
+    │           │   │   └── Sochi-Onyx
+    │           │   └── Precious-Range
+    │           │       ├── Objet-d-Art-Luxury-Sterling-Silver
+    │           │       └── Objet-d-Art-Optimum-Precious-Gold
+    │           ├── Palace-of-Precision
+    │           └── Palace-of-Style
+</code></pre>
+
+<h3>3.1 Organizational Units (OUs)</h3>
+<p>OUs mirror the corporate structure, allowing for granular policy application and user management.</p>
+<pre><code>
+ Sandbox Test (Root OU  environment) [Acctual ROOT is designershaik.com]
+    ├── Group Central (Existing OU for Corporate Functions)
+    │   ├── Governance (For legal, compliance, HR, and IT oversight)
+    │   │   ├── Policies & Procedures
+    │   │   ├── Legal
+    │   │   ├── Compliance
+    │   │   └── IT Operations
+    │   ├── Finance
+    │   ├── Human Resources
+    │   └── Executive (For steering committee, board packs, KPI owners)
+    │       ├── Steering Committee
+    │       ├── Board
+    │       └── KPI Management
+    │
+    ├── DS_Studio (For design, production, and core media creation)
+    │   ├── Production (For active projects and raw creative assets)
+    │   │   ├── Video Production
+    │   │   ├── Photography
+    │   │   ├── Graphic Design
+    │   │   └── Audio Production
+    │   ├── Archives (Studio-specific, long-term raw asset storage)
+    │   ├── Processing & AI (For n8n, Weaviate, OpenAI integrations - primarily service accounts)
+    │   │   ├── Staging (Temporary storage during processing)
+    │   │   ├── AI-Processed (Output of AI tagging and metadata enrichment)
+    │   │   └── Metadata Logs (For PostgreSQL and audit trails)
+    │   ├── Processed Media (Categorized and optimized media for distribution)
+    │   │   ├── Web-Optimized (For Cloudinary distribution)
+    │   │   ├── Social-Media-Posts (Optimized for social channels)
+    │   │   ├── Ads-Promotions (Optimized for advertising campaigns)
+    │   │   └── Archived-Media (Long-term storage of final processed assets)
+    │   ├── Integration Accounts (For DSI Media Repository service accounts)
+    │   │   ├── n8n Service Account
+    │   │   ├── Weaviate Service Account
+    │   │   ├── Cloudinary Service Account
+    │   │   └── ERP Integration Account
+    │   └── Backup & Recovery (For QNAP NAS and disaster recovery plans for the repository)
+    │   └── Shared Resources (Studio-specific shared templates, guides)
+    │
+    ├── DS_Brand (For marketing, brand management, and external communications)
+    │   ├── Marketing Campaigns (For active campaign assets and planning)
+    │   │   ├── Product Launches
+    │   │   ├── Seasonal Promotions
+    │   │   └── Digital Advertising
+    │   ├── Brand Assets (Central repository for official logos, guidelines, approved media)
+    │   ├── Public Relations
+    │   ├── Social Media Management
+    │   └── Shared Resources (Brand-specific templates, communication guidelines)
+    │
+    │
+    └── MCV
+        ├── Engineering ( Engineering department)
+        ├── Manufacturing Admin ( Manufacturing Administration department)
+        ├── Production ( Production department)
+        └── Supply Chain Management ( Supply Chain Management department)
+  
+</code></pre>
+<h3>3.2 Shared Drive Naming Convention</h3>
+<p><code>[Prefix]_[Department/Project]_[Purpose]</code><br>e.g., <code>00_Governance_Protocols</code>, <code>10_Marayai_MasterPlans</code></p>
+<h3>3.3 Access & Permissions</h3>
+<p>Permissions are strictly managed at the OU and shared drive level, adhering to the principle of least privilege.</p>
+<h3>3.4 Integration with DSi Repository</h3>
+<p>Shared Drives serve as the primary source for media ingestion into the DSi Product Repository, ensuring a single source of truth.</p>
+</section>
+
+<section id="repository">
+<h2>📁 DSI Repository Structure</h2>
+<p>The DSI Media Repository Integration Architecture is an end-to-end automated media processing pipeline that streamlines the management of digital assets for DSI's luxury product lines. The system automatically ingests media files from Google Drive, processes them through AI services, stores semantic vectors in Weaviate, logs metadata in PostgreSQL, and optimizes media for CDN distribution.</p>
+
+<h3>High-Level Architecture</h3>
+<div class="mermaid">
+graph TB
+    subgraph "Data Sources"
+        GD[Google Drive<br/>DSI Product Repository]
+        QNAP[QNAP NAS<br/>Backup Storage]
+    end
+    subgraph "Processing Layer"
+        PS[Google Pub/Sub<br/>Event Transport]
+        N8N[n8n Workflows<br/>Orchestration Engine]
+        OAI[OpenAI<br/>AI Analysis]
+    end
+    subgraph "Storage Layer"
+        WV[Weaviate<br/>Vector Database]
+        PG[PostgreSQL<br/>Metadata & Logs]
+        CDN[Cloudinary<br/>CDN & Optimisation]
+    end
+    subgraph "Notification Layer"
+        GC[Google Chat<br/>Team Notifications]
+    end
+    GD -->|File Upload Event| PS
+    PS -->|Trigger| N8N
+    N8N -->|Send for Analysis| OAI
+    N8N -->|Store Vectors| WV
+    N8N -->|Log Metadata| PG
+    N8N -->|Upload & Optimize| CDN
+    N8N -->|Backup| QNAP
+    N8N -->|Notify Team| GC
+    N8N -->|Update Metadata| GD
+
+    style GD fill:#e1f5fe
+    style N8N fill:#f3e5f5
+    style WV fill:#e8f5e8
+    style PG fill:#fff3e0
+    style CDN fill:#fce4ec
+    style PS fill:#cceeff
+    style OAI fill:#ffebcc
+    style QNAP fill:#e6e6e6
+    style GC fill:#d3f5e9
+</div>
+<h3>Repository Folder Structure</h3>
+<div class="mermaid">
+graph TD
+    Root[DSI-Product-Repository]
+
+    subgraph "System Folders"
+        Meta[Metadata/]
+        Proc[Processed-Media/]
+    end
+
+    subgraph "Product Palaces"
+        PF[Palace-of-Fragrances/]
+        PP[Palace-of-Precision/]
+        PS[Palace-of-Style/]
+    end
+
+    subgraph "Metadata Structure"
+        Meta --> Tag[Tagging-Data/]
+        Meta --> AI[AI-Generated-Tags/]
+        Meta --> Multi[Multilingual-Descriptions/]
+        Meta --> Ver[Version-Control/]
+        Meta --> Change[Media-Change-History/]
+        Meta --> Approval[Approval-Stages/]
+    end
+
+    subgraph "Processed Media"
+        Proc --> Web[Web-Optimized/]
+        Proc --> ERP[ERP-Integrated/]
+        Proc --> Social[Social-Media-Posts/]
+    end
+
+    subgraph "Palace of Fragrances"
+        PF --> Precious[Precious-Range/]
+        PF --> Classic[Classic-Range/]
+
+        Precious --> OptimumGold[Objet-d-Art-Optimum-Precious-Gold/]
+        Precious --> SterlinSilver[Objet-d-Art-Luxury-Sterling-Silver/]
+
+        Classic --> Amethyst[Opulent-Shaik-Amethyst/]
+        Classic --> Sapphire[Opulent-Shaik-Sapphire/]
+        Classic --> Emerald[Chic-Shaik-Emerald/]
+        Classic --> Onyx[Sochi-Onyx/]
+        Classic --> Amber[Amber-Kroud/]
+    end
+
+    Root --> Meta
+    Root --> Proc
+    Root --> PF
+    Root --> PP
+    Root --> PS
+
+    style Root fill:#f9f9f9
+    style Meta fill:#e3f2fd
+    style Proc fill:#e8f5e8
+    style PF fill:#fce4ec
+    style PP fill:#fff3e0
+    style PS fill:#f3e5f5
+</div>
+<h3>File Naming Convention</h3>
+<div class="highlight">
+<strong>Pattern:</strong> <code>{ProductName}_{SKU}_{descriptor}_{timestamp}.{extension}</code> <br><br>
+<strong>Examples:</strong>
+<ul>
+  <li><code>Opulent-Shaik-Amethyst_OSA-GE-100_original_20250703.jpg</code></li>
+  <li><code>Objet-d-Art-Optimum_OAO-FL-50_web_optimized.webp</code></li>
+  <li><code>AstroTime-MK1_ATM-IG-001_ai_metadata.json</code></li>
+</ul>
+</div>
+</section>
+
+<section id="database">
+<h2>🗄️ Database & Data-Lake Blueprint</h2>
+<h3>5.1 PostgreSQL (Metadata & Logs)</h3>
+<p>Primary database for structured metadata, audit trails, and workflow logs.</p>
+  <pre><code>-- Media Assets Table
+CREATE TABLE media_assets (
+    id SERIAL PRIMARY KEY,
+    drive_file_id VARCHAR(255) UNIQUE,
+    weaviate_object_id UUID,
+    product_name VARCHAR(255),
+    sku VARCHAR(100),
+    file_url TEXT,
+    processing_status VARCHAR(50),
+    ai_description TEXT,
+    ai_tags TEXT[],
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Processing Logs Table
+CREATE TABLE processing_logs (
+    id SERIAL PRIMARY KEY,
+    media_asset_id INTEGER REFERENCES media_assets(id),
+    workflow_execution_id VARCHAR(255),
+    step_name VARCHAR(100),
+    status VARCHAR(50),
+    error_message TEXT,
+    processing_time INTERVAL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Indexes for Performance
+CREATE INDEX idx_media_assets_sku ON media_assets(sku);
+CREATE INDEX idx_media_assets_status ON media_assets(processing_status);
+CREATE INDEX idx_processing_logs_asset_id ON processing_logs(media_asset_id);
+CREATE INDEX idx_processing_logs_status ON processing_logs(status);</code></pre>
+<h3>5.2 Weaviate (Vector Database)</h3>
+<p>Used for storing semantic vectors generated from media content, enabling advanced AI-driven search and recommendations.</p>
+  <pre><code>{
+  "classes": [{
+    "class": "MediaAsset",
+    "vectorizer": "text2vec-openai",
+    "properties": [
+      {"name": "productName", "dataType": ["string"]},
+      {"name": "sku", "dataType": ["string"]},
+      {"name": "description", "dataType": ["text"]},
+      {"name": "tags", "dataType": ["string[]"]},
+      {"name": "fileUrl", "dataType": ["string"]},
+      {"name": "processingStatus", "dataType": ["string"]},
+      {"name": "driveFileId", "dataType": ["string"]},
+      {"name": "timestamp", "dataType": ["date"]}
+    ]
+  }]
+}</code></pre>
+<h3>5.3 Data Lake Strategy</h3>
+<p>The DSI Data Lake leverages AWS S3 as the primary storage backbone, integrating with Google Workspace Drive as the source repository. The architecture focuses on workflow-driven data movement where n8n processes append metadata and processed media back to Google Drive while maintaining long-term archives in AWS S3 with intelligent lifecycle management.</p>
+
+<h4>AWS-Centric Data Lake Architecture</h4>
+<div class="mermaid">
+graph TB
+    subgraph "Google Workspace (Source)"
+        GWS[Google Workspace Drive<br/>DSI Repository]
+        GWSMETA[Drive: /Metadata/<br/>AI Tags & Change History]
+        GWSPROC[Drive: /Processed-Media/<br/>CDN URLs & Optimized]
+    end
+    
+    subgraph "Processing Infrastructure"
+        N8N[n8n Container<br/>Workflow Orchestration]
+        WV[Weaviate Database<br/>Vector Storage]
+        RDS[AWS RDS PostgreSQL<br/>Metadata & Logs]
+    end
+    
+    subgraph "AWS Data Lake Tiers"
+        subgraph "Hot Storage (0-30 days)"
+            S3_STD[AWS S3 Standard<br/>Active Processing]
+            CDN[Cloudinary CDN<br/>Distribution Cache]
+        end
+        
+        subgraph "Warm Storage (30-365 days)"
+            S3_IA[AWS S3 Infrequent Access<br/>Recent Archives]
+        end
+        
+        subgraph "Cold Storage (1-7 years)"
+            S3_GLACIER[AWS S3 Glacier<br/>Long-term Archives]
+        end
+        
+        subgraph "Deep Archive (7+ years)"
+            S3_DEEP[AWS S3 Deep Archive<br/>Compliance Storage]
+        end
+    end
+    
+    subgraph "Monitoring & Analytics"
+        CW[CloudWatch<br/>Metrics & Logs]
+        ATHENA[AWS Athena<br/>SQL Analytics]
+        QSIGHT[QuickSight<br/>Business Intelligence]
+    end
+    
+    subgraph "Local Infrastructure"
+        QNAP[QNAP NAS<br/>Local Backup]
+    end
+    
+    %% Workflow Data Flows
+    GWS -->|File Upload Trigger| N8N
+    N8N -->|AI Processing| WV
+    N8N -->|Metadata Logging| RDS
+    N8N -->|CDN Upload| CDN
+    N8N -->|Archive Copy| S3_STD
+    N8N -->|Backup Sync| QNAP
+    
+    %% Workflow Append Operations
+    N8N -->|Append AI Metadata| GWSMETA
+    N8N -->|Append CDN URLs| GWSPROC
+    
+    %% AWS Lifecycle Management
+    S3_STD -->|30 days| S3_IA
+    S3_IA -->|365 days| S3_GLACIER
+    S3_GLACIER -->|7 years| S3_DEEP
+    
+    %% Monitoring Integration
+    N8N -->|Workflow Logs| CW
+    RDS -->|Query Logs| CW
+    WV -->|Performance Metrics| CW
+    S3_STD -->|Access Patterns| CW
+    
+    %% Analytics Pipeline
+    RDS -->|ETL Queries| ATHENA
+    S3_STD -->|Data Lake Queries| ATHENA
+    ATHENA -->|Business Reports| QSIGHT
+    
+    style GWS fill:#4285f4,color:#fff
+    style N8N fill:#f3e5f5,color:#000
+    style WV fill:#fa6423,color:#fff
+    style RDS fill:#ff9900,color:#fff
+    style S3_STD fill:#ff9900,color:#fff
+    style S3_IA fill:#ffb84d,color:#000
+    style S3_GLACIER fill:#cc7a00,color:#fff
+    style S3_DEEP fill:#806600,color:#fff
+    style CW fill:#ff4b4b,color:#fff
+    style CDN fill:#3448c5,color:#fff
+</div>
+
+<h4>Workflow-Driven Data Lifecycle</h4>
+<p>Based on the three core workflows, data moves through the system as follows:</p>
+
+<ol>
+  <li><strong>Workflow 1 - Ingestion & Backup:</strong>
+    <ul>
+      <li>File uploaded to Google Drive triggers n8n workflow</li>
+      <li>n8n creates change log in <code>/Metadata/Media-Change-History/</code></li>
+      <li>File copied to AWS S3 Standard for processing</li>
+      <li>Metadata logged to AWS RDS PostgreSQL</li>
+      <li>QNAP NAS backup triggered</li>
+    </ul>
+  </li>
+  
+  <li><strong>Workflow 2 - AI Processing & Metadata Enrichment:</strong>
+    <ul>
+      <li>n8n sends file to Weaviate for vector analysis</li>
+      <li>AI metadata generated and stored in Weaviate</li>
+      <li>n8n appends AI tags to <code>/Metadata/AI-Generated-Tags/</code></li>
+      <li>n8n appends tagging data to <code>/Metadata/Tagging-Data/</code></li>
+      <li>Processing logs stored in RDS PostgreSQL</li>
+    </ul>
+  </li>
+  
+  <li><strong>Workflow 3 - CDN Upload & Distribution:</strong>
+    <ul>
+      <li>Optimized files uploaded to Cloudinary CDN</li>
+      <li>n8n appends CDN URLs to <code>/Processed-Media/Web-Optimized/</code></li>
+      <li>Original files moved to appropriate S3 storage tier</li>
+      <li>Access patterns logged to CloudWatch</li>
+    </ul>
+  </li>
+</ol>
+
+<h4>AWS RDS PostgreSQL Integration</h4>
+<pre><code>-- Enhanced schema for data lake integration
+CREATE TABLE dsi_media_lake (
+    id SERIAL PRIMARY KEY,
+    drive_file_id VARCHAR(255) UNIQUE,
+    weaviate_object_id UUID,
+    s3_bucket VARCHAR(100),
+    s3_key VARCHAR(500),
+    current_storage_class VARCHAR(50),
+    product_name VARCHAR(255),
+    sku VARCHAR(100),
+    file_size_bytes BIGINT,
+    cloudinary_url TEXT,
+    processing_status VARCHAR(50),
+    created_at TIMESTAMP DEFAULT NOW(),
+    last_accessed TIMESTAMP,
+    storage_tier_updated TIMESTAMP,
+    lifecycle_stage VARCHAR(20) DEFAULT 'hot'
+);
+
+-- CloudWatch metrics table
+CREATE TABLE cloudwatch_metrics (
+    metric_id SERIAL PRIMARY KEY,
+    namespace VARCHAR(100),
+    metric_name VARCHAR(100),
+    value DECIMAL(10,2),
+    unit VARCHAR(20),
+    timestamp TIMESTAMP DEFAULT NOW(),
+    dimensions JSONB
+);
+
+-- Storage cost tracking
+CREATE TABLE storage_costs (
+    cost_id SERIAL PRIMARY KEY,
+    month_year VARCHAR(7),
+    storage_tier VARCHAR(20),
+    total_gb DECIMAL(10,3),
+    cost_usd DECIMAL(8,2),
+    file_count INTEGER,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+</code></pre>
+
+<h4>AWS S3 Lifecycle Configuration</h4>
+<pre><code>{
+  "Rules": [
+    {
+      "ID": "DSI-MediaLifecycle",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "dsi-media/"
+      },
+      "Transitions": [
+        {
+          "Days": 30,
+          "StorageClass": "STANDARD_IA"
+        },
+        {
+          "Days": 365,
+          "StorageClass": "GLACIER"
+        },
+        {
+          "Days": 2555,
+          "StorageClass": "DEEP_ARCHIVE"
+        }
+      ]
+    },
+    {
+      "ID": "DSI-ProcessedMedia",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "processed/"
+      },
+      "Transitions": [
+        {
+          "Days": 90,
+          "StorageClass": "STANDARD_IA"
+        },
+        {
+          "Days": 730,
+          "StorageClass": "GLACIER"
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+
+<h4>CloudWatch Monitoring & Alerting</h4>
+<pre><code># CloudWatch Custom Metrics from n8n workflows
+{
+  "namespace": "DSI/MediaRepository",
+  "metrics": [
+    {
+      "name": "WorkflowExecutions",
+      "unit": "Count",
+      "dimensions": {"WorkflowType": "MediaIngestion"}
+    },
+    {
+      "name": "StorageCostOptimization", 
+      "unit": "Percent",
+      "dimensions": {"Tier": "Hot|Warm|Cold|Archive"}
+    },
+    {
+      "name": "WeaviateQueryLatency",
+      "unit": "Milliseconds",
+      "dimensions": {"QueryType": "VectorSearch"}
+    },
+    {
+      "name": "DriveAppendOperations",
+      "unit": "Count", 
+      "dimensions": {"FolderType": "Metadata|ProcessedMedia"}
+    }
+  ]
+}
+
+# CloudWatch Alarms Configuration
+{
+  "alarms": [
+    {
+      "name": "DSI-HighStorageCosts",
+      "metric": "AWS/S3/BucketBytesStored",
+      "threshold": 1000000000000,
+      "comparison": "GreaterThanThreshold"
+    },
+    {
+      "name": "DSI-WorkflowFailures", 
+      "metric": "DSI/MediaRepository/WorkflowExecutions",
+      "threshold": 3,
+      "comparison": "LessThanThreshold",
+      "period": 300
+    }
+  ]
+}
+</code></pre>
+
+<h4>Cost Optimization for AWS-Only Architecture</h4>
+<div class="highlight">
+<strong>Monthly Cost Breakdown (1TB Dataset):</strong>
+<ul>
+  <li><strong>S3 Standard (100GB):</strong> $2.30/month - Active processing files</li>
+  <li><strong>S3 IA (300GB):</strong> $3.75/month - Recent archives</li>
+  <li><strong>S3 Glacier (500GB):</strong> $2.00/month - Long-term storage</li>
+  <li><strong>S3 Deep Archive (100GB):</strong> $0.10/month - Compliance archives</li>
+  <li><strong>RDS PostgreSQL (db.t3.micro):</strong> $15/month - Metadata database</li>
+  <li><strong>CloudWatch Logs & Metrics:</strong> $3-5/month - Monitoring</li>
+  <li><strong>Data Transfer:</strong> $2-4/month - API calls and transfers</li>
+  <li><strong>Total Monthly Cost:</strong> $28-32/month for 1TB with enterprise monitoring</li>
+</ul>
+</div>
+
+<h4>AWS Athena Analytics Queries</h4>
+<pre><code>-- Query for storage optimization recommendations
+SELECT 
+    product_name,
+    sku,
+    current_storage_class,
+    COUNT(*) as file_count,
+    SUM(file_size_bytes) / 1024 / 1024 / 1024 as total_gb,
+    CASE 
+        WHEN MAX(last_accessed) < CURRENT_DATE - INTERVAL '30' DAY 
+             AND current_storage_class = 'STANDARD' 
+        THEN 'Move to IA'
+        WHEN MAX(last_accessed) < CURRENT_DATE - INTERVAL '365' DAY 
+             AND current_storage_class = 'STANDARD_IA'
+        THEN 'Move to Glacier'
+        ELSE 'Current tier optimal'
+    END as recommendation
+FROM dsi_media_lake 
+GROUP BY product_name, sku, current_storage_class
+ORDER BY total_gb DESC;
+
+-- CloudWatch metrics analysis
+SELECT 
+    DATE_TRUNC('day', timestamp) as date,
+    AVG(value) as avg_workflow_time,
+    COUNT(*) as total_executions,
+    SUM(CASE WHEN value > 300 THEN 1 ELSE 0 END) as slow_executions
+FROM cloudwatch_metrics 
+WHERE metric_name = 'WorkflowExecutionTime'
+AND timestamp > CURRENT_DATE - INTERVAL '30' DAY
+GROUP BY DATE_TRUNC('day', timestamp)
+ORDER BY date DESC;
+</code></pre>
+</section>
+<section id="automation">
+<h2>🤖 Automation & AI-Agent Matrix</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Function Area</th>
+      <th>Tool / Agent</th>
+      <th>Relevant Sections</th>
+      <th>Key Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Media Ingestion</td><td>n8n</td><td>4.1</td><td>Google Drive ↔ Cloudinary sync</td></tr>
+    <tr><td>AI Tagging</td><td>OpenAI + Weaviate</td><td>4.2</td><td>Automatic metadata generation</td></tr>
+    <tr><td>CDN Optimisation</td><td>Cloudinary</td><td>4.3</td><td>Image / video format conversion</td></tr>
+    <tr><td>ERP Integration</td><td>n8n</td><td>6.2, 6.3</td><td>Product data sync</td></tr>
+    <tr><td>Legal</td><td>5.1</td><td>Compliance tracking</td></tr>
+    <tr><td>Investor Relations</td><td>20_Marketing</td><td>3.3, 3.4</td><td>Data-room generation</td></tr>
+    <tr><td>Operational Efficiency</td><td>40_Technical & APIs</td><td>6.2, 6.3, 6.4</td><td>ERP ↔ Weaviate sync; n8n orchestrator</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="media-guide">
+<h2>🎞️ Media-Pipeline Implementation Guide</h2>
+<p>This section details the complete technical specification for deploying the DSI Media Repository Integration Architecture with automated workflows from upload to CDN distribution.</p>
+
+<h3>Automated Workflow Processes</h3>
+<h4>Complete End-to-End Process Flow</h4>
+<div class="mermaid">
+flowchart TB
+    subgraph "Phase 1: Ingestion"
+        Upload[File Upload] --> Detection[Auto-Detection]
+        Detection --> Backup[QNAP Backup]
+        Backup --> Log[Change Log]
+    end
+
+    subgraph "Phase 2: AI Processing"
+        Log --> AI[Weaviate Analysis]
+        AI --> Tags[Generate Tags]
+        Tags --> Meta[Create Metadata]
+    end
+
+    subgraph "Phase 3: CDN Distribution"
+        Meta --> CDN[Cloudinary Upload]
+        CDN --> Optimize[Auto-Optimization]
+        Optimize --> URLs[Generate URLs]
+    end
+
+    subgraph "Phase 4: Integration"
+        URLs --> ERP[ERP Integration]
+        URLs --> Social[Social Media Variants]
+        URLs --> Web[Web Distribution]
+    end
+
+    Web --> Final[Media Ready for Distribution]
+
+    style Upload fill:#e1f5fe
+    style AI fill:#f3e5f5
+    style CDN fill:#fce4ec
+    style Final fill:#e8f5e8
+</div>
+
+<h4>Workflow 1: Media Ingestion & Backup</h4>
+<ol>
+  <li><strong>File Upload to Product Folder</strong> → Detect File via Google Drive API</li>
+  <li><strong>Extract Product Name & SKU</strong> from Folder Path</li>
+  <li><strong>Log File Information</strong> in Tracking System</li>
+  <li><strong>Trigger QNAP NAS Backup Sync</strong></li>
+  <li><strong>Create Initial Metadata Record</strong></li>
+  <li><strong>Send Google Chat Notification</strong></li>
+  <li><strong>Complete:</strong> Update <code>/Metadata/Media-Change-History/{ProductName}_{SKU}_change_log.json</code></li>
+  <li><strong>File Ready for AI Processing</strong></li>
+</ol>
+<div class="note">
+<strong>Output Location:</strong><br>
+<code>/Metadata/Media-Change-History/{ProductName}_{SKU}_change_log.json</code>
+</div>
+
+<h4>Workflow 2: AI Tagging & Metadata Enrichment</h4>
+<div class="mermaid">
+flowchart TD
+    Trigger[Media Ingestion Complete] --> Send[Send File to Weaviate for AI Analysis]
+    Send --> Generate[Generate Vector Embeddings]
+    Generate --> Extract[Extract Metadata<br/>- Objects<br/>- Colors<br/>- Themes]
+    Extract --> Context[Apply Product Context from Folder Structure]
+    Context --> Multilingual[Generate Multilingual Descriptions]
+    Multilingual --> Store[Store Enriched Metadata in Weaviate]
+    Store --> CreateFiles[Create Metadata Files]
+
+    CreateFiles --> AITags[/Metadata/AI-Generated-Tags/<br/>ProductName_SKU_ai_metadata.json/]
+    CreateFiles --> TagData[/Metadata/Tagging-Data/<br/>ProductName_SKU_tags.json/]
+
+    AITags --> NextWorkflow[Trigger CDN Upload Workflow]
+    TagData --> NextWorkflow
+
+    style Trigger fill:#e1f5fe
+    style AITags fill:#e8f5e8
+    style TagData fill:#e8f5e8
+    style NextWorkflow fill:#fff3e0
+</div>
+<ol>
+  <li><strong>Trigger: Media Ingestion Complete</strong></li>
+  <li><strong>Send File to Weaviate</strong> for AI Analysis</li>
+  <li><strong>Generate Vector Embeddings</strong></li>
+  <li><strong>Extract Metadata</strong> (Objects, Colors, Themes)</li>
+  <li><strong>Apply Product Context</strong> from Folder Structure</li>
+  <li><strong>Generate Multilingual Descriptions</strong></li>
+  <li><strong>Store Enriched Metadata</strong> in Weaviate</li>
+  <li><strong>Create Metadata Files:</strong>
+    <ul>
+      <li><code>/Metadata/AI-Generated-Tags/{ProductName}_{SKU}_ai_metadata.json</code></li>
+      <li><code>/Metadata/Tagging-Data/{ProductName}_{SKU}_tags.json</code></li>
+    </ul>
+  </li>
+  <li><strong>Trigger CDN Upload Workflow</strong></li>
+</ol>
+
+<h4>Workflow 3: CDN Upload & Optimization</h4>
+<div class="mermaid">
+flowchart TD
+    Start[AI Tagging Complete] --> Upload[Upload Images to Cloudinary with Auto-optimization]
+    Upload --> Video[Upload Videos to Vidjet Platform]
+    Video --> Formats[Generate Multiple Format Variants<br/>- WebP<br/>- Different Resolutions]
+    Formats --> CDNUrls[Create CDN URLs with Product Name Reference]
+    CDNUrls --> Store[Store CDN Links with Original File Path Mapping]
+    Store --> Update[Update Processed Media Folder]
+    Update --> Complete["/Processed-Media/Web-Optimized/<br/>[ProductName]_[SKU]_cloudinary_urls.json/"]
+    Complete --> Notification[Send Completion Notification]
+
+    style Start fill:#e1f5fe
+    style Complete fill:#e8f5e8
+    style Notification fill:#fff3e0
+</div>
+<ol>
+  <li><strong>Trigger: AI Tagging Complete</strong></li>
+  <li><strong>Upload Images to Cloudinary</strong> with Auto-optimization</li>
+  <li><strong>Upload Videos to Vidjet Platform</strong></li>
+  <li><strong>Generate Multiple Format Variants</strong> (WebP, different resolutions)</li>
+  <li><strong>Create CDN URLs</strong> with Product Name Reference</li>
+  <li><strong>Store CDN Links</strong> with Original File Path Mapping</li>
+  <li><strong>Update Processed Media Folder</strong></li>
+  <li><strong>Completion:</strong> Update <code>/Processed-Media/Web-Optimized/{ProductName}_{SKU}_cloudinary_urls.json</code></li>
+  <li><strong>Send Completion Notification</strong></li>
+</ol>
+
+</section>
+
+<section id="change">
+<h2>🔄 Change-Management & Review Cycle</h2>
+<ul>
+  <li><strong>Weekly “Friday Pulse”</strong> call logs headline updates → pushed to <code>03_Change‑Log/</code></li>
+  <li><strong>CR‑### form</strong> required for any schema or permission alteration (owner: Data Steward)</li>
+  <li>Superseded versions archived to <code>99_Archive/Governance</code></li>
+  <li>Next scheduled full review: <strong>01 Oct 2025</strong></li>
+</ul>
+</section>
+
+<section id="implementation">
+  <h2>🔧 Technical Implementation</h2>
+
+  <h3>Option A: Simplified Google Workspace Approach (Recommended)</h3>
+  <div class="highlight">
+    <strong>Best for:</strong> SMB teams with existing Google Workspace accounts
+  </div>
+
+  <h4>n8n Workflow Configuration</h4>
+  <pre><code>{
+  "workflowName": "DSI Media Upload Processor",
+  "trigger": {
+    "type": "Google Drive Trigger",
+    "settings": {
+      "authentication": "oAuth2",
+      "resource": "file", 
+      "event": "fileCreated",
+      "folderId": "{{ $env.DSI_DRIVE_FOLDER_ID }}",
+      "watchSubfolders": true,
+      "fileTypes": ["image/jpeg", "image/png", "image/webp", "video/mp4", "video/mov"],
+      "pollInterval": 300,
+      "excludePaths": ["Archives", "Metadata", "System-Integration"]
+    }
+  },
+  "filters": [{
+    "type": "IF", 
+    "condition": "{{ $json.path.includes('Product-Images') || $json.path.includes('Videos') || $json.path.includes('3D-Renders') }}"
+  }],
+  "errorHandling": {
+    "retryAttempts": 3,
+    "retryDelay": 60,
+    "errorNotification": "Google Chat"
+  }
+}</code></pre>
+
+  <h4>Setup Steps for Google Workspace</h4>
+  <ol>
+    <li>In n8n, go to Credentials → Add Credential → Google Drive OAuth2 API</li>
+    <li>Click "Connect my account" and sign in with your Google Workspace account</li>
+    <li>Grant permissions for Drive access</li>
+    <li>No need for separate GCP project or client IDs!</li>
+  </ol>
+
+  <h3>Environment Variables (Simplified Google Workspace Approach)</h3>
+  <pre><code># DSI Repository  
+DSI_DRIVE_FOLDER_ID=your_root_folder_id
+
+# AI & Vector Storage
+WEAVIATE_API_KEY=your_weaviate_key
+WEAVIATE_ENDPOINT=your_weaviate_url
+OPENAI_API_KEY=your_openai_key
+
+# CDN & Optimization
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key  
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Notifications (Optional)
+GOOGLE_CHAT_WEBHOOK=your_chat_webhook_url</code></pre>
+
+  <h3>Sample Output File Structure</h3>
+  <pre><code>{
+  "productName": "Opulent-Shaik-Amethyst",
+  "sku": "OSA-GE-100",
+  "originalFilePath": "/Palace-of-Fragrances/Classic-Range/Opulent-Shaik-Amethyst/Gold-Edition-for-Men/100ml/Product-Images/",
+  "cloudinaryUrls": {
+    "original": "https://res.cloudinary.com/dsi/image/upload/v1720000000/products/Opulent-Shaik-Amethyst_OSA-GE-100_original.jpg",
+    "webOptimized": "https://res.cloudinary.com/dsi/image/upload/f_webp,q_auto/v1720000000/products/Opulent-Shaik-Amethyst_OSA-GE-100_web.webp",
+    "thumbnail": "https://res.cloudinary.com/dsi/image/upload/w_300,h_300,c_fill/v1720000000/products/Opulent-Shaik-Amethyst_OSA-GE-100_thumb.jpg"
+  },
+  "metadata": {
+    "uploadDate": "2025-07-03T10:30:00Z",
+    "fileSize": "2.5MB",
+    "dimensions": "1920x1080",
+    "aiTags": ["perfume", "bottle", "gold", "luxury"],
+    "category": "Palace-of-Fragrances",
+    "range": "Classic-Range"
+  }
+}</code></pre>
+</section>
+
+
+<section id="deployment">
+  <h2>🚀 Deployment & Hosting Options</h2>
+
+  <div class="cost-comparison">
+    <div class="cost-card">
+      <h4>Option A: n8n.cloud + Self-hosted Weaviate</h4>
+      <p class="cost-price">~$27/month</p>
+      <ul>
+        <li><strong>Components:</strong> n8n (managed cloud service), Weaviate (VPS deployment), PostgreSQL (VPS deployment)</li>
+        <li><strong>Ideal For:</strong> Quick PoC, low operational overhead</li>
+        <li><strong>Complexity:</strong> Low</li>
+      </ul>
+    </div>
+    <div class="cost-card">
+      <h4>Option B: Fully Self-hosted</h4>
+      <p class="cost-price">~$12/month</p>
+      <ul>
+        <li><strong>Components:</strong> All services on Docker containers, single VPS or local server</li>
+        <li><strong>Ideal For:</strong> Cost-sensitive teams, full control</li>
+        <li><strong>Complexity:</strong> Medium</li>
+      </ul>
+    </div>
+    <div class="cost-card">
+      <h4>Option C: Kubernetes Cluster</h4>
+      <p class="cost-price">~$60+/month</p>
+      <ul>
+        <li><strong>Components:</strong> Helm charts for all services, auto-scaling capabilities, TLS Ingress, Load balancing</li>
+        <li><strong>Ideal For:</strong> Production scale, high availability</li>
+        <li><strong>Complexity:</strong> High</li>
+      </ul>
+    </div>
+    <div class="cost-card">
+      <h4>Option D: AWS Enterprise</h4>
+      <p class="cost-price">~$150-300/month</p>
+      <ul>
+        <li><strong>Components:</strong> ALB (Application Load Balancer), EC2 instances, RDS (managed PostgreSQL), S3 storage, IAM security</li>
+        <li><strong>Ideal For:</i> Enterprise SLA requirements</li>
+        <li><strong>Complexity:</strong> Very High</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Deployment Architecture Visualizations</h3>
+  <div class="deployment-graph-container">
+    <div>
+      <h3>Development Stack (n8n.cloud + VPS)</h3>
+      <div class="mermaid">
+        graph TD
+            subgraph "n8n.cloud (Managed Service)"
+                N8NC[n8n Cloud Workflow]
+            end
+            subgraph "Self-Hosted VPS"
+                WV_VPS[Weaviate Database]
+                PG_VPS[PostgreSQL Database]
+            end
+            GD_Dev[Google Drive File Upload] --> N8NC
+            N8NC -->|API Calls| WV_VPS
+            N8NC -->|API Calls| PG_VPS
+            N8NC -->|API Calls| OAI_Dev[OpenAI]
+            N8NC -->|API Calls| CDN_Dev[Cloudinary CDN]
+            N8NC -->|Notifications| GC_Dev[Google Chat]
+      </div>
+      <p style="text-align: center; font-style: italic; color: #555;">This setup is ideal for quick prototyping and small to medium-sized operations.</p>
+    </div>
+
+    <div>
+      <h3>Production Stack (Kubernetes Cluster)</h3>
+      <div class="mermaid">
+        graph TD
+            subgraph "Kubernetes Cluster (EKS/GKE)"
+                N8N_K8S[n8n Workers<br/>Pods] -- Traffic --> K8S_LB[Kubernetes Load Balancer]
+                N8N_K8S --> WV_K8S[Weaviate Service]
+                N8N_K8S --> PG_K8S[PostgreSQL Service]
+                WV_K8S --> K8S_STORAGE_WV[Persistent Storage<br/>e.g., EBS]
+                PG_K8S --> K8S_STORAGE_PG[Persistent Storage<br/>e.g., EBS]
+            end
+            GD_Prod[Google Drive<br/>File Upload] -- Pub/Sub Event --> PUB_SUB[Google Pub/Sub]
+            PUB_SUB -- Trigger --> K8S_LB
+            N8N_K8S --> OAI_Prod[OpenAI]
+            N8N_K8S --> CDN_Prod[Cloudinary CDN]
+            N8N_K8S --> GC_Prod[Google Chat]
+            
+            style K8S_LB fill:#fff3e0
+            style PUB_SUB fill:#cceeff
+            style N8N_K8S fill:#f3e5f5
+            style WV_K8S fill:#e8f5e8
+            style PG_K8S fill:#e0f2f7
+            style K8S_STORAGE_WV fill:#f8f8f8
+            style K8S_STORAGE_PG fill:#f8f8f8
+      </div>
+      <p style="text-align: center; font-style: italic; color: #555;">Designed for scalability, high availability, and enterprise-grade performance.</p>
+    </div>
+
+    <div>
+      <h3>Fully Self-hosted Stack (Docker Compose)</h3>
+      <div class="mermaid">
+        graph TD
+            subgraph "Single VPS / Local Server (Docker Compose)"
+                N8N_Local[n8n Container]
+                WV_Local[Weaviate Container]
+                PG_Local[PostgreSQL Container]
+            end
+            GD_Local[Google Drive<br/>File Upload] --> N8N_Local
+            N8N_Local -->|Internal Network| WV_Local
+            N8N_Local -->|Internal Network| PG_Local
+            N8N_Local --> OAI_Local[OpenAI]
+            N8N_Local --> CDN_Local[Cloudinary CDN]
+            N8N_Local --> GC_Local[Google Chat]
+
+            style N8N_Local fill:#f3e5f5
+            style WV_Local fill:#e8f5e8
+            style PG_Local fill:#e0f2f7
+      </div>
+      <p style="text-align: center; font-style: italic; color: #555;">Offers full control and cost-effectiveness for smaller-scale deployments.</p>
+    </div>
+  </div>
+
+  <h3>Docker Compose Setup (Fully Self-hosted)</h3>
+  <pre><code>version: '3.4'
+services:
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.31.5
+    ports: ["8080:8080"]
+    volumes: [weaviate_data:/var/lib/weaviate]
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      DEFAULT_VECTORIZER_MODULE: text2vec-openai
+      OPENAI_APIKEY: ${OPENAI_API_KEY}
+
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: metadata
+      POSTGRES_USER: dsiuser
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    ports: ["5432:5432"]
+
+  n8n:
+    image: n8nio/n8n:latest
+    ports: ["5678:5678"]
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_DATABASE: metadata
+      DB_POSTGRESDB_USER: dsiuser
+      DB_POSTGRESDB_PASSWORD: ${DB_PASSWORD}
+      N8N_BASIC_AUTH_ACTIVE: 'true'
+      N8N_BASIC_AUTH_USER: admin
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_PASSWORD}
+    volumes: [n8n_data:/home/node/.n8n]
+    depends_on: [postgres]</code></pre>
+
+  <h3>Kubernetes Production Deployment Steps</h3>
+  <h4>Create Amazon EKS Cluster</h4>
+  <pre><code>eksctl create cluster --name dsi-media-prod \
+  --region us-east-1 --version 1.29 \
+  --nodegroup-name ng-spot --nodes 3 --nodes-min 2 --nodes-max 6 \
+  --managed --node-type t3.large</code></pre>
+
+  <h4>Deploy Services (Helm Charts)</h4>
+  <pre><code># RabbitMQ
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install dsi-rmq bitnami/rabbitmq \
+  --set auth.username=dsi --set auth.password=securepass
+
+# n8n Worker
+helm repo add n8n https://8gears.container-registry.com/chartrepo/library
+helm install n8n-workflow n8n/n8n \
+  --set n8n.image.tag=latest \
+  --set rabbitmq.enabled=false \
+  --set externalRabbitmq=true \
+  --set externalRabbitmq.host=dsi-rmq-rabbitmq \
+  --set externalRabbitmq.port=5672 \
+  --set persistence.enabled=true
+
+# Weaviate
+helm repo add weaviate https://weaviate.github.io/weaviate-helm
+helm install weaviate weaviate/weaviate \
+  --set env.OPENAI_APIKEY=$OPENAI_API_KEY
+
+# PostgreSQL
+helm install dsi-pg bitnami/postgresql \
+  --set auth.username=dsi \
+  --set auth.password=$DB_PASSWORD \
+  --set primary.persistence.size=50Gi</code></pre>
+</section>
+
+<section id="security">
+  <h2>🔒 Security & Compliance</h2>
+
+  <h3>Data Protection Strategy</h3>
+  <div class="mermaid">
+    graph TD
+        subgraph "Security Layers"
+            API[API Key Management]
+            TLS[TLS Encryption]
+            IAM[Identity & Access Management]
+            Audit[Audit Logging]
+        end
+        
+        subgraph "Storage Security"
+            Vault[Credential Vaults]
+            Encrypt[Data Encryption at Rest]
+            Backup[Secure Backup Strategy]
+        end
+        
+        subgraph "Access Control"
+            RBAC[Role-Based Access Control]
+            MFA[Multi-Factor Authentication]
+            Network[Network Security]
+        end
+        
+        API --> Vault
+        TLS --> Encrypt
+        IAM --> RBAC
+        Audit --> Backup
+        
+        style API fill:#e3f2fd
+        style TLS fill:#e8f5e8
+        style IAM fill:#fff3e0
+        style Audit fill:#fce4ec
+  </div>
+
+  <h3>Security Requirements</h3>
+  <div class="warning">
+    <strong>Critical Security Measures:</strong>
+    <ul>
+      <li>All API keys stored in secure credential vaults</li>
+      <li>Encrypted communication between all services</li>
+      <li>Regular credential rotation schedule</li>
+      <li>Access logging and audit trails</li>
+      <li>Role-based permissions across all systems</li>
+      <li>Least privilege access principles</li>
+      <li>Regular access reviews and updates</li>
+      <li>Secure backup and recovery procedures</li>
+    </ul>
+  </div>
+
+  <h3>Compliance Standards</h3>
+  <ul>
+    <li><strong>GDPR</strong> - Compliant data handling</li>
+    <li><strong>SOC 2 Type II</strong> - Security and availability controls</li>
+    <li><strong>Regular Assessments</strong> - Regular security assessments</li>
+    <li><strong>Data Retention</strong> - Data retention policies</li>
+  </ul>
+</section>
+
+<section id="testing">
+  <h2>🧪 Testing & Monitoring</h2>
+
+  <h3>Testing Protocol</h3>
+  <div class="mermaid">
+flowchart TD
+    Upload[1. Test Upload] --> Logs[2. Verify Logs]
+    Logs --> Process[3. Process Validation]
+    Process --> Output[4. Output Check]
+    
+    Upload --> UploadDetail[Upload test image to<br/>Product-Images folder]
+    Logs --> LogDetail[Check n8n execution logs<br/>for trigger activation]
+    Process --> ProcessDetail[Confirm workflow<br/>processes file correctly]
+    Output --> OutputDetail[Verify Cloudinary URLs in<br/>Processed-Media folder]
+    
+    style Upload fill:#e1f5fe
+    style Logs fill:#f3e5f5
+    style Process fill:#fff3e0
+    style Output fill:#e8f5e8
+  </div>
+  <ol>
+    <li><strong>Test Upload:</strong> Upload test image to Product-Images folder.</li>
+    <li><strong>Verify Logs:</strong> Check n8n execution logs for trigger activation.</li>
+    <li><strong>Process Validation:</strong> Confirm workflow processes file correctly.</li>
+    <li><strong>Output Check:</strong> Verify Cloudinary URLs in Processed-Media folder.</li>
+  </ol>
+
+  <h3>Performance Monitoring</h3>
+  <div class="note">
+    <strong>Key Metrics to Track:</strong>
+    <ul>
+      <li>Execution logging in n8n</li>
+      <li>Failed triggers or timeouts</li>
+      <li>Upload frequency and polling interval optimization</li>
+      <li>CDN upload success rates</li>
+      <li>API call response times</li>
+      <li>Storage usage and growth rates</li>
+    </ul>
+  </div>
+
+  <h3>Error Handling Strategy</h3>
+  <ul>
+    <li><strong>Automated Recovery:</strong>
+      <ul>
+        <li>Retry logic for failed API calls (3 attempts with 60s delay)</li>
+        <li>Google Chat notifications for errors</li>
+        <li>Fallback to manual processing</li>
+        <li>Webhook delivery failure monitoring</li>
+      </ul>
+    </li>
+    <li><strong>Manual Intervention Triggers:</strong>
+      <ul>
+        <li>Three consecutive workflow failures</li>
+        <li>API rate limit exceeded</li>
+        <li>Storage capacity warnings</li>
+        <li>Security alerts</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section id="best-practices">
+  <h2>⭐ Best Practices & Optimization</h2>
+
+  <h3>Performance Optimization</h3>
+  <ul>
+    <li><strong>Event-driven Architecture:</strong>
+      <ul>
+        <li>Reduce latency with real-time triggers</li>
+        <li>Minimize API quota usage</li>
+        <li>Implement efficient polling strategies</li>
+      </ul>
+    </li>
+    <li><strong>Infrastructure as Code:</strong>
+      <ul>
+        <li>Version control all configuration changes</li>
+        <li>Automated deployment pipelines</li>
+        <li>Environment-specific configurations</li>
+      </ul>
+    </li>
+    <li><strong>Caching Strategy:</strong>
+      <ul>
+        <li>CDN edge caching for optimized media</li>
+        <li>Database query optimization</li>
+        <li>Vector search result caching</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Operational Excellence</h3>
+  <ul>
+    <li><strong>Monitoring & Alerting:</strong>
+      <ul>
+        <li>Prometheus + Grafana metrics</li>
+        <li>CloudWatch integration for AWS deployments</li>
+        <li>Custom dashboards for business metrics</li>
+        </ul>
+    </li>
+    <li><strong>Backup & Recovery:</strong>
+      <ul>
+        <li>PostgreSQL automated dumps</li>
+        <li>Weaviate vector database snapshots</li>
+        <li>Google Drive incremental backups via QNAP</li>
+        <li>Disaster recovery testing</li>
+      </ul>
+    </li>
+    <li><strong>CI/CD Pipeline:</strong>
+      <ul>
+        <li>Automated testing for workflow changes</li>
+        <li>Helm chart deployments</li>
+        <li>Blue/green deployment strategy</li>
+        <li>Rollback procedures</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Cost Optimization</h3>
+  <ul>
+    <li><strong>Resource Management:</strong>
+      <ul>
+        <li>Auto-scaling based on upload volume</li>
+        <li>Scheduled shutdown for development environments</li>
+        <li>CDN cost optimization through smart caching</li>
+        <li>Storage tiering for archival data</li>
+      </ul>
+    </li>
+    <li><strong>API Usage Optimization:</strong>
+      <ul>
+        <li>Batch processing where possible</li>
+        <li>Efficient API call patterns</li>
+        <li>Rate limiting and throttling</li>
+        <li>Usage monitoring and alerting</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Implementation Roadmap</h3>
+  <div class="highlight">
+    <strong>Phase 1: Foundation</strong>
+    <ul>
+      <li>For Google Workspace Approach: Set up basic infrastructure (Docker containers), configure n8n with Google Workspace OAuth, deploy PostgreSQL instance, test file upload detection with your GWS account.</li>
+      <li>For GCP Enterprise Approach: Set up GCP project and service accounts, configure Google Drive API access, deploy PostgreSQL and basic n8n instance, test file upload detection with service account.</li>
+    </ul>
+    
+    <strong>Phase 2: Core Workflows </strong>
+    <ul>
+      <li>Implement media ingestion workflow, set up Weaviate integration, configure AI tagging pipeline, test end-to-end basic flow.</li>
+    </ul>
+    
+    <strong>Phase 3: CDN Integration</strong>
+    <ul>
+      <li>Configure Cloudinary integration, implement optimization workflows, set up URL generation and mapping, test media distribution pipeline.</li>
+    </ul>
+
+    <strong>Phase 4: Production Hardening</strong>
+    <ul>
+      <li>Implement security measures, set up monitoring and alerting, configure backup procedures, performance testing and optimization.</li>
+    </ul>
+
+    <strong>Phase 5: Go-Live & Support</strong>
+    <ul>
+      <li>Production deployment, user training and documentation, ongoing monitoring and maintenance, continuous improvement.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2025 DSI Media Repository Implementation Guide</p>
+  <p>This documentation provides complete technical specifications for deploying the DSI Media Repository Integration Architecture with automated workflows from upload to CDN distribution.</p>
+</footer>
+
+</body>
+</html>
