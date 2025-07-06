@@ -5,164 +5,810 @@
 <title>DesignerShaik Documentation – Unified Digital Ecosystem Guide</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true});</script>
+<script>mermaid.initialize({startOnLoad:true, theme:'default', themeVariables: {primaryColor: '#007acc', primaryTextColor: '#fff', primaryBorderColor: '#005a9e', lineColor: '#333', secondaryColor: '#e3f2fd', tertiaryColor: '#fff3e0'}});</script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* --- ENHANCED DESIGN TOKEN SET --- */
-  :root{--primary-color:#007acc;--secondary-color:#28a745;--accent-color:#ffc107;--text-color:#333;
-        --bg-light:#fafafa;--bg-medium:#f8f9fa;--bg-dark:#1a1a1a;--card-bg:#fff;--border-color:#e9ecef;
-        --shadow-light:0 2px 8px rgba(0,0,0,0.05);--shadow-medium:0 2px 10px rgba(0,0,0,0.1);
-        --shadow-heavy:0 4px 20px rgba(0,0,0,0.15);--header-height:80px;--nav-height:60px;}
+  :root {
+    --primary-color: #007acc;
+    --secondary-color: #28a745;
+    --accent-color: #ffc107;
+    --text-color: #333;
+    --bg-light: #fafafa;
+    --bg-medium: #f8f9fa;
+    --bg-dark: #1a1a1a;
+    --card-bg: #fff;
+    --border-color: #e9ecef;
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.05);
+    --shadow-medium: 0 2px 10px rgba(0,0,0,0.1);
+    --shadow-heavy: 0 4px 20px rgba(0,0,0,0.15);
+    --header-height: 80px;
+    --nav-height: 60px;
+    --gradient-primary: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+    --gradient-secondary: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    --gradient-accent: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+  }
   
-  html,body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg-light);color:var(--text-color);line-height:1.6;scroll-behavior:smooth;}
+  * {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-color);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+  }
   
   /* HEADER STYLING */
-  header{background:linear-gradient(135deg, var(--bg-dark) 0%, #2d2d2d 100%);color:#fff;padding:1.5rem 3rem;
-         position:absolute;top:0;z-index:1000;box-shadow:var(--shadow-heavy);height:var(--header-height);
-         display:flex;align-items:center;justify-content:space-between;}
+  header {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #2d2d2d 100%);
+    color: #fff;
+    padding: 1.5rem 3rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-heavy);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   
-  .header-content{display:flex;align-items:center;gap:2rem;flex:1;}
-  .logo-container{display:flex;align-items:center;gap:1rem;}
-  .logo-container img{height:50px;width:auto;border-radius:8px;}
-  .header-text{flex:1;}
-  .header-text h1{margin:0;font-size:2.2rem;font-weight:700;letter-spacing:-0.5px;}
-  .header-text .subtitle{margin:0.3rem 0 0 0;font-size:1rem;opacity:0.9;font-weight:300;}
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo-container img {
+    height: 50px;
+    width: auto;
+    border-radius: 8px;
+  }
+  
+  .header-text {
+    flex: 1;
+  }
+  
+  .header-text h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  
+  .header-text .subtitle {
+    margin: 0.3rem 0 0 0;
+    font-size: 1rem;
+    opacity: 0.9;
+    font-weight: 300;
+  }
   
   /* HORIZONTAL NAVIGATION */
-  .horizontal-nav{background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);visibility: hidden; border-bottom:1px solid var(--border-color);
-                  position:fixed;top:var(--header-height);left:0;right:0;z-index:999;height:var(--nav-height);
-                  display:flex;align-items:center;padding:0 3rem;transform:translateY(-100%);
-                  transition:transform 0.3s ease;box-shadow:var(--shadow-medium);}
+  .horizontal-nav {
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(10px);
+    visibility: hidden;
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    z-index: 999;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-medium);
+  }
   
-  .horizontal-nav.visible{transform:translateY(0); visibility: visible;}
+  .horizontal-nav.visible {
+    transform: translateY(0);
+    visibility: visible;
+  }
   
-  .nav-links{display:flex;gap:0;list-style:none;margin:0;padding:0;flex:1;overflow-x:auto;}
-  .nav-links li{white-space:nowrap;}
-  .nav-links a{display:block;padding:0.8rem 1.5rem;color:var(--text-color);text-decoration:none;
-               font-weight:500;font-size:0.9rem;border-radius:6px;transition:all 0.2s ease;
-               border-bottom:3px solid transparent;}
-  .nav-links a:hover{background:var(--bg-medium);color:var(--primary-color);border-bottom-color:var(--primary-color);}
-  .nav-links a.active{background:var(--primary-color);color:#fff;border-bottom-color:var(--primary-color);}
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    overflow-x: auto;
+  }
+  
+  .nav-links li {
+    white-space: nowrap;
+  }
+  
+  .nav-links a {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+  }
+  
+  .nav-links a:hover {
+    background: var(--bg-medium);
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+  }
+  
+  .nav-links a.active {
+    background: var(--primary-color);
+    color: #fff;
+    border-bottom-color: var(--primary-color);
+  }
   
   /* MAIN CONTENT */
-  main{padding: 10rem 2.5rem;max-width:1400px;margin:auto;margin-top:0;}
+  main {
+    padding: 10rem 2.5rem 4rem;
+    max-width: 1400px;
+    margin: auto;
+    margin-top: 0;
+  }
   
   /* SECTIONS */
-  section{margin-bottom:5rem;background:var(--card-bg);padding:3rem;border-radius:12px;
-          border-left:6px solid var(--primary-color);box-shadow:var(--shadow-light);
-          transition:box-shadow 0.3s ease;}
-  section:hover{box-shadow:var(--shadow-medium);}
+  section {
+    margin-bottom: 5rem;
+    background: var(--card-bg);
+    padding: 3rem;
+    border-radius: 12px;
+    border-left: 6px solid var(--primary-color);
+    box-shadow: var(--shadow-light);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  section:hover {
+    box-shadow: var(--shadow-medium);
+  }
   
   /* TYPOGRAPHY */
-  h1{margin:0;font-size:2.2rem;font-weight:700;letter-spacing:-0.5px;}
-  h2{color:var(--primary-color);font-size:2rem;margin-bottom:1.5rem;border-bottom:3px solid var(--primary-color);
-      padding-bottom:1rem;font-weight:700;letter-spacing:-0.3px;}
-  h3{color:var(--text-color);font-size:1.5rem;margin-top:2.5rem;margin-bottom:1.2rem;font-weight:600;}
-  h4{color:var(--text-color);font-size:1.3rem;margin-top:2rem;margin-bottom:1rem;font-weight:600;}
+  h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  
+  h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  
+  h3 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+  
+  h4 {
+    color: var(--text-color);
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
   
   /* TABLE OF CONTENTS */
-  .toc{background:linear-gradient(135deg, var(--bg-medium) 0%, #f0f4f8 100%);padding:2.5rem;
-       border-radius:12px;margin-bottom:4rem;box-shadow:var(--shadow-medium);
-       border:1px solid var(--border-color);position:relative;}
-  .toc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;
-               background:linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-               border-radius:12px 12px 0 0;}
-  .toc h3{margin-top:0;color:var(--primary-color);border-bottom:2px solid var(--primary-color);
-          padding-bottom:1rem;margin-bottom:1.5rem;font-size:1.6rem;}
-  .toc ul{list-style:none;padding-left:0;display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:0.8rem;}
-  .toc li{margin:0;}
-  .toc a{color:var(--primary-color);text-decoration:none;font-weight:500;padding:0.8rem 1.2rem;
-         border-radius:8px;display:block;transition:all 0.2s ease;border:1px solid transparent;}
-  .toc a:hover{text-decoration:none;background:var(--card-bg);color:var(--secondary-color);
-               border-color:var(--secondary-color);transform:translateX(5px);box-shadow:var(--shadow-light);}
+  .toc {
+    background: linear-gradient(135deg, var(--bg-medium) 0%, #f0f4f8 100%);
+    padding: 2.5rem;
+    border-radius: 12px;
+    margin-bottom: 4rem;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--border-color);
+    position: relative;
+  }
+  
+  .toc::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .toc h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+  }
+  
+  .toc ul {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.8rem;
+  }
+  
+  .toc li {
+    margin: 0;
+  }
+  
+  .toc a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    display: block;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+  
+  .toc a:hover {
+    text-decoration: none;
+    background: var(--card-bg);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateX(5px);
+    box-shadow: var(--shadow-light);
+  }
   
   /* CODE AND PRE */
-  pre{background:#2d2d2d;color:#f8f8f2;padding:1.8rem;border-radius:10px;overflow-x:auto;
-      margin:2rem 0;box-shadow:inset 0 0 15px rgba(0,0,0,0.2);border:1px solid #444;}
-  code{font-family:'Fira Code', Monaco, Consolas, monospace;font-size:0.9rem;
-       background:#eef;padding:0.3em 0.6em;border-radius:4px;color:#d63384;}
-  pre code{background:none;padding:0;color:inherit;font-size:0.95rem;}
+  pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1.8rem;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 2rem 0;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+    border: 1px solid #444;
+    font-family: 'Fira Code', Monaco, Consolas, monospace;
+  }
+  
+  code {
+    font-family: 'Fira Code', Monaco, Consolas, monospace;
+    font-size: 0.9rem;
+    background: #eef;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    color: #d63384;
+  }
+  
+  pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: 0.95rem;
+  }
   
   /* MERMAID DIAGRAMS */
-  .mermaid{background:var(--card-bg);border:1px solid var(--border-color);padding:2rem;
-           border-radius:10px;box-shadow:var(--shadow-light);margin:2rem 0;text-align:center;
-           overflow-x:auto;}
+  .mermaid {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    margin: 2rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
   
   /* TABLES */
-  table{border-collapse:collapse;width:100%;margin:2rem 0;box-shadow:var(--shadow-light);
-        border-radius:10px;overflow:hidden;font-size:0.95rem;}
-  th,td{border:1px solid var(--border-color);padding:1.2rem;text-align:left;}
-  th{background:var(--primary-color);color:#fff;font-weight:600;text-transform:uppercase;
-     font-size:0.85rem;letter-spacing:0.5px;}
-  tr:nth-child(even){background:var(--bg-medium);}
-  tr:hover{background:#f0f7ff;}
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-light);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.95rem;
+  }
+  
+  th, td {
+    border: 1px solid var(--border-color);
+    padding: 1.2rem;
+    text-align: left;
+  }
+  
+  th {
+    background: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+  
+  tr:nth-child(even) {
+    background: var(--bg-medium);
+  }
+  
+  tr:hover {
+    background: #f0f7ff;
+  }
   
   /* NOTES AND HIGHLIGHTS */
-  .note{background:#d1e7dd;padding:1.5rem;border-left:5px solid var(--secondary-color);
-        margin:2rem 0;border-radius:8px;color:#0f5132;box-shadow:var(--shadow-light);}
-  .highlight{background:#fff3cd;padding:1.5rem;border-left:5px solid var(--accent-color);
-             margin:2rem 0;border-radius:8px;color:#664d03;box-shadow:var(--shadow-light);}
-  .warning{background:#f8d7da;padding:1.5rem;border-left:5px solid #dc3545;
-           margin:2rem 0;border-radius:8px;color:#721c24;box-shadow:var(--shadow-light);}
+  .note {
+    background: #d1e7dd;
+    padding: 1.5rem;
+    border-left: 5px solid var(--secondary-color);
+    margin: 2rem 0;
+    border-radius: 8px;
+    color: #0f5132;
+    box-shadow: var(--shadow-light);
+  }
+  
+  .highlight {
+    background: #fff3cd;
+    padding: 1.5rem;
+    border-left: 5px solid var(--accent-color);
+    margin: 2rem 0;
+    border-radius: 8px;
+    color: #664d03;
+    box-shadow: var(--shadow-light);
+  }
+  
+  .warning {
+    background: #f8d7da;
+    padding: 1.5rem;
+    border-left: 5px solid #dc3545;
+    margin: 2rem 0;
+    border-radius: 8px;
+    color: #721c24;
+    box-shadow: var(--shadow-light);
+  }
   
   /* LISTS */
-  ul,ol{margin:1.2rem 0;padding-left:1.8rem;}
-  li{margin:0.8rem 0;line-height:1.7;}
+  ul, ol {
+    margin: 1.2rem 0;
+    padding-left: 1.8rem;
+  }
+  
+  li {
+    margin: 0.8rem 0;
+    line-height: 1.7;
+  }
   
   /* COST COMPARISON CARDS */
-  .cost-comparison{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-                   gap:1.5rem;margin:2rem 0;}
-  .cost-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;
-             padding:1.5rem;box-shadow:var(--shadow-light);transition:all 0.3s ease;}
-  .cost-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-medium);}
-  .cost-card h4{margin-top:0;color:var(--primary-color);font-size:1.2rem;}
-  .cost-price{font-size:1.8rem;font-weight:700;color:var(--secondary-color);margin:0.5rem 0;}
+  .cost-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .cost-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+  }
+  
+  .cost-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .cost-card h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+  }
+  
+  .cost-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin: 0.5rem 0;
+  }
+  
+  /* WORKFLOW CARDS */
+  .workflow-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .workflow-card {
+    background: linear-gradient(135deg, var(--card-bg) 0%, #f8f9fa 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .workflow-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+  }
+  
+  .workflow-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .workflow-card h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .workflow-card ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+  
+  /* IMPLEMENTATION STEPS */
+  .implementation-steps {
+    background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .implementation-steps h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+  }
+  
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .step-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    padding-left: 3rem;
+  }
+  
+  .step-item::before {
+    content: attr(data-step);
+    position: absolute;
+    left: 1rem;
+    top: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  
+  /* AI AGENT SECTION */
+  .ai-agent-section {
+    background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e8 100%);
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+  
+  .ai-agent-section::before {
+    content: '🤖';
+    position: absolute;
+    top: -20px;
+    left: 2rem;
+    background: var(--card-bg);
+    padding: 0 1rem;
+    font-size: 2rem;
+  }
+  
+  .ai-agent-section h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+  }
+  
+  /* CHECKLIST */
+  .checklist {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .checklist h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+  }
+  
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    margin: 0.8rem 0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+  
+  .checklist-item:hover {
+    background: var(--bg-medium);
+  }
+  
+  .checklist-item input[type="checkbox"] {
+    margin-right: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  
+  /* TABS */
+  .tabs {
+    margin: 2rem 0;
+  }
+  
+  .tab-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0;
+    border-bottom: 2px solid var(--border-color);
+  }
+  
+  .tab-button {
+    padding: 0.8rem 1.5rem;
+    background: var(--bg-medium);
+    border: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    color: var(--text-color);
+  }
+  
+  .tab-button:hover {
+    background: var(--bg-light);
+  }
+  
+  .tab-button.active {
+    background: var(--primary-color);
+    color: #fff;
+  }
+  
+  .tab-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 2rem;
+  }
+  
+  .tab-pane {
+    display: none;
+  }
+  
+  .tab-pane.active {
+    display: block;
+  }
   
   /* DEPLOYMENT GRAPHS */
-  .deployment-graph-container{display:grid;grid-template-columns:1fr;gap:3rem;margin:2rem 0;}
-  .deployment-graph-container > div{background:var(--card-bg);padding:2rem;border-radius:10px;
-                                    box-shadow:var(--shadow-light);border:1px solid var(--border-color);}
+  .deployment-graph-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin: 2rem 0;
+  }
+  
+  .deployment-graph-container > div {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+  }
   
   /* FOOTER */
-  footer{background:linear-gradient(135deg, var(--bg-dark) 0%, #2d2d2d 100%);color:#fff;
-         text-align:center;padding:3rem;margin-top:5rem;font-size:0.95rem;}
-  footer p{margin:0.8rem 0;opacity:0.9;}
+  footer {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #2d2d2d 100%);
+    color: #fff;
+    text-align: center;
+    padding: 3rem;
+    margin-top: 5rem;
+    font-size: 0.95rem;
+  }
+  
+  footer p {
+    margin: 0.8rem 0;
+    opacity: 0.9;
+  }
   
   /* LAPTOP OPTIMIZATION */
-  @media(min-width:1024px){
-    .horizontal-nav{padding:0 5rem;}
-    main{padding:4rem 5rem;max-width:1600px;}
-    section{padding:3.5rem;}
-    header{padding:1.5rem 5rem;}
-    .nav-links{gap:0.5rem;}
-    .nav-links a{padding:0.8rem 1.8rem;}
-    .toc ul{grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));}
+  @media(min-width:1024px) {
+    .horizontal-nav {
+      padding: 0 5rem;
+    }
+    main {
+      padding: 4rem 5rem;
+      max-width: 1600px;
+    }
+    section {
+      padding: 3.5rem;
+    }
+    header {
+      padding: 1.5rem 5rem;
+    }
+    .nav-links {
+      gap: 0.5rem;
+    }
+    .nav-links a {
+      padding: 0.8rem 1.8rem;
+    }
+    .toc ul {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
   }
   
   /* TABLET AND MOBILE */
-  @media(max-width:1023px){
-    header{padding:1rem;flex-direction:column;text-align:center;height:auto;}
-    .header-content{flex-direction:column;gap:1rem;}
-    .horizontal-nav{padding:0 1rem;overflow-x:auto;}
-    .nav-links{gap:0;min-width:max-content;}
-    .nav-links a{padding:0.8rem 1rem;font-size:0.85rem;}
-    main{padding:2rem 1rem;}
-    section{padding:2rem;}
-    h1{font-size:1.8rem;}
-    h2{font-size:1.6rem;}
-    h3{font-size:1.4rem;}
-    .toc ul{grid-template-columns:1fr;}
-    .cost-comparison{grid-template-columns:1fr;}
-    table,th,td{display:block;width:100%;box-sizing:border-box;}
-    th{text-align:center;background:var(--primary-color);color:#fff;}
-    td{text-align:center;border-bottom:1px solid var(--border-color);}
-    tr{margin-bottom:1rem;border:1px solid var(--border-color);border-radius:8px;overflow:hidden;display:block;}
-    td:before{content:attr(data-label);font-weight:bold;display:inline-block;width:120px;text-align:left;}
+  @media(max-width:1023px) {
+    header {
+      padding: 1rem;
+      flex-direction: column;
+      text-align: center;
+      height: auto;
+    }
+    .header-content {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .horizontal-nav {
+      padding: 0 1rem;
+      overflow-x: auto;
+    }
+    .nav-links {
+      gap: 0;
+      min-width: max-content;
+    }
+    .nav-links a {
+      padding: 0.8rem 1rem;
+      font-size: 0.85rem;
+    }
+    main {
+      padding: 2rem 1rem;
+    }
+    section {
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 1.8rem;
+    }
+    h2 {
+      font-size: 1.6rem;
+    }
+    h3 {
+      font-size: 1.4rem;
+    }
+    .toc ul {
+      grid-template-columns: 1fr;
+    }
+    .cost-comparison {
+      grid-template-columns: 1fr;
+    }
+    .workflow-cards {
+      grid-template-columns: 1fr;
+    }
+    table, th, td {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    th {
+      text-align: center;
+      background: var(--primary-color);
+      color: #fff;
+    }
+    td {
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    tr {
+      margin-bottom: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      display: block;
+    }
+    td:before {
+      content: attr(data-label);
+      font-weight: bold;
+      display: inline-block;
+      width: 120px;
+      text-align: left;
+    }
   }
   
   /* SCROLL INDICATORS */
-  .section-visible{animation:fadeInUp 0.6s ease;}
-  @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+  .section-visible {
+    animation: fadeInUp 0.6s ease;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ENHANCED DIAGRAM CONTAINERS */
+  .diagram-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-light);
+  }
+  
+  .diagram-container h4 {
+    margin-top: 0;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* MCP BADGE */
+  .mcp-badge {
+    display: inline-block;
+    background: var(--gradient-primary);
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0 0.5rem;
+  }
 </style>
 </head>
 <body>
@@ -171,8 +817,8 @@
     <div class="logo-container">
       <img src="logo.webp" alt="DesignerShaik Logo" onerror="this.style.display='none'">
       <div class="header-text">
-        <h1>DesignerShaik Documentation</h1>
-        <p class="subtitle">Marayai × DS Studio – Unified Digital Ecosystem Guide</p>
+        <h1>DesignerShaik Development Documentation</h1>
+        <p class="subtitle">Automation and AI Agent  – Unified Digital Ecosystem Guide</p>
       </div>
     </div>
   </div>
@@ -186,6 +832,10 @@
     <li><a href="#repository" data-section="repository">Repository</a></li>
     <li><a href="#database" data-section="database">Database</a></li>
     <li><a href="#automation" data-section="automation">Automation</a></li>
+    <li><a href="#ai-agents" data-section="ai-agents">AI Agents</a></li>
+    <li><a href="#mcp-integration" data-section="mcp-integration">MCP Integration</a></li>
+    <li><a href="#ocr-services" data-section="ocr-services">OCR Services</a></li>
+    <li><a href="#plm-enhancement" data-section="plm-enhancement">PLM Enhancement</a></li>
     <li><a href="#media-guide" data-section="media-guide">Media Pipeline</a></li>
     <li><a href="#implementation" data-section="implementation">Implementation</a></li>
     <li><a href="#deployment" data-section="deployment">Deployment</a></li>
@@ -193,7 +843,12 @@
     <li><a href="#testing" data-section="testing">Testing</a></li>
     <li><a href="#best-practices" data-section="best-practices">Best Practices</a></li>
     <li><a href="#change" data-section="change">Change Management</a></li>
-  </ul>
+  
+    <li><a href="#monitoring-alerting" data-section="monitoring-alerting">Monitoring &amp; Alerting</a></li>
+<li><a href="#governance-workflows" data-section="governance-workflows">Governance Workflows</a></li>
+<li><a href="#archival-cost" data-section="archival-cost">Archival &amp; Cost Jobs</a></li>
+<li><a href="#voice-assist" data-section="voice-assist">Voice &amp; Quick‑Task Assist</a></li>
+</ul>
 </nav>
 
 <main>
@@ -207,6 +862,10 @@
     <li><a href="#repository">📁 DSI Repository Structure</a></li>
     <li><a href="#database">🗄️ Database & Data-Lake Blueprint</a></li>
     <li><a href="#automation">🤖 Automation & AI-Agent Matrix</a></li>
+    <li><a href="#ai-agents">🤖 AI Agents (Manus/Abacus) Implementation</a></li>
+    <li><a href="#mcp-integration">🔗 Model Context Protocol (MCP) Integration</a></li>
+    <li><a href="#ocr-services">📄 OCR Services & Document Intelligence</a></li>
+    <li><a href="#plm-enhancement">⚙️ PLM Enhancement & Early-Stage Design</a></li>
     <li><a href="#media-guide">🎞️ Media-Pipeline Implementation Guide</a></li>
     <li><a href="#implementation">🔧 Technical Implementation</a></li>
     <li><a href="#deployment">🚀 Deployment & Hosting Options</a></li>
@@ -214,7 +873,12 @@
     <li><a href="#testing">🧪 Testing & Monitoring</a></li>
     <li><a href="#best-practices">⭐ Best Practices & Optimization</a></li>
     <li><a href="#change">🔄 Change-Management & Review Cycle</a></li>
-  </ul>
+  
+    <li><a href="#monitoring-alerting" data-section="monitoring-alerting">Monitoring &amp; Alerting</a></li>
+<li><a href="#governance-workflows" data-section="governance-workflows">Governance Workflows</a></li>
+<li><a href="#archival-cost" data-section="archival-cost">Archival &amp; Cost Jobs</a></li>
+<li><a href="#voice-assist" data-section="voice-assist">Voice &amp; Quick‑Task Assist</a></li>
+</ul>
 </div>
 
 <section id="purpose">
@@ -234,17 +898,41 @@ graph LR
         N8N[n8n<br/>Workflow Engine]
         OAI[OpenAI<br/>AI Analysis]
         PS[Google Pub/Sub<br/>Event Transport]
+        MA[Manus/Abacus<br/>AI Agents]
+        WV[Weaviate<br/>Vector Search]
     end
     
     subgraph "Databases"
-        WV[Weaviate<br/>Vector Search]
         PG[PostgreSQL<br/>Metadata & Logs]
     end
     
     subgraph "Distribution & CDN"
         CDN[Cloudinary<br/>Media Optimization]
+        VJ[Vidjet<br/>Video Hosting]
         GC[Google Chat<br/>Notifications]
+        GM[Gemini AI<br/>Assistance]
     end
+    
+    subgraph "Business Systems"
+        ERP[ERPNext<br/>Product Management]
+        WC[WooCommerce<br/>eCommerce]
+        WF[Webflow<br/>Marketing]
+    end
+    
+    GD --> PS
+    PS --> N8N
+    N8N --> MA
+    N8N --> OAI
+    N8N --> WV
+    N8N --> PG
+    N8N --> CDN
+    N8N --> VJ
+    N8N --> GC
+    MA --> WV
+    MA --> ERP
+    WV --> ERP
+    CDN --> WC
+    CDN --> WF
     
     style GD fill:#4285f4,color:#fff
     style N8N fill:#ea4560,color:#fff
@@ -256,6 +944,12 @@ graph LR
     style PS fill:#4285f4,color:#fff
     style S3 fill:#ff9900,color:#fff
     style GC fill:#34a853,color:#fff
+    style MA fill:#9c27b0,color:#fff
+    style ERP fill:#dc3545,color:#fff
+    style WC fill:#7c3aed,color:#fff
+    style WF fill:#0ea5e9,color:#fff
+    style GM fill:#db4437,color:#fff
+    style VJ fill:#10b981,color:#fff
 </div>
 
 <table>
@@ -273,11 +967,18 @@ graph LR
     <tr><td>Vector Database</td><td>Weaviate</td><td>AI-powered semantic search</td><td>OpenAI embeddings, metadata</td></tr>
     <tr><td>Relational DB</td><td>PostgreSQL</td><td>Structured metadata storage</td><td>Audit logs, processing status</td></tr>
     <tr><td>AI Processing</td><td>OpenAI</td><td>Content analysis & tagging</td><td>Weaviate vectors, metadata</td></tr>
+    <tr><td>AI Agents</td><td>Manus/Abacus</td><td>Automated system configuration</td><td>All systems orchestration</td></tr>
     <tr><td>CDN & Optimization</td><td>Cloudinary</td><td>Media transformation & delivery</td><td>URL generation, format optimization</td></tr>
+    <tr><td>Video Platform</td><td>Vidjet</td><td>Product video hosting</td><td>Short-form videos, demos</td></tr>
     <tr><td>Local Backup</td><td>QNAP NAS</td><td>On-premise redundancy</td><td>Real-time Drive sync</td></tr>
     <tr><td>Event Messaging</td><td>Google Pub/Sub</td><td>Real-time event processing</td><td>File upload triggers</td></tr>
-    <tr><td>Notifications</td><td>Google Chat</td><td>Team communication</td><td>Workflow status updates</td></tr>
+    <tr><td>Communications</td><td>Google Chat + Gemini AI</td><td>Team collaboration & AI assistance</td><td>Workflow status, AI Q&A</td></tr>
+    <tr><td>Task Management</td><td>Gameplan</td><td>Visual workflow tracking</td><td>Task execution, Kanban boards</td></tr>
+    <tr><td>Documentation</td><td>Raven AI</td><td>Decision logging & tracking</td><td>AI-powered documentation</td></tr>
     <tr><td>Cold Storage</td><td>AWS S3/Google Cloud Storage</td><td>Long-term archival</td><td>Data lake, compliance</td></tr>
+    <tr><td>ERP</td><td>ERPNext</td><td>Product & inventory management</td><td>SKU, pricing, BOM tracking</td></tr>
+    <tr><td>eCommerce</td><td>WooCommerce</td><td>Online product sales</td><td>Product listings, media sync</td></tr>
+    <tr><td>Marketing</td><td>Webflow</td><td>Marketing websites</td><td>Content management, CDN</td></tr>
   </tbody>
 </table>
 </section>
@@ -286,11 +987,21 @@ graph LR
 <h2>🏛️ Governance & IP Ownership</h2>
 <h3>2.1 IP Hierarchy</h3>
 <div class="mermaid">
-graph LR
-MH[Marayai Holdings<br/>Parent Company] --> SF[Shaikdom Foundation<br/>Non‑Profit Arm]
-MH --> DSS[Designer Shaik Studio<br/>Creative Unit]
-DSS --> DSI[DSI Product Repository<br/>Content Hub]
-SF --> DSI
+graph TD
+    MH[Marayai Holdings<br/>Parent Company]
+    SF[Shaikdom Foundation<br/>Non-Profit Arm]
+    DSS[Designer Shaik Studio<br/>Creative Unit]
+    DSI[DSI Product Repository<br/>Content Hub]
+    
+    MH --> SF
+    MH --> DSS
+    DSS --> DSI
+    SF --> DSI
+    
+    style MH fill:#1a237e,color:#fff
+    style SF fill:#4a148c,color:#fff
+    style DSS fill:#e91e63,color:#fff
+    style DSI fill:#ff5722,color:#fff
 </div>
 <h3>2.2 Digital Asset Ownership</h3>
 <p>All digital assets created or acquired by any entity within the Marayai ecosystem are ultimately owned by Marayai Holdings. Usage rights, licensing, and distribution are governed by specific protocols outlined in this guide.</p>
@@ -357,7 +1068,7 @@ SF --> DSI
 <h3>3.1 Organizational Units (OUs)</h3>
 <p>OUs mirror the corporate structure, allowing for granular policy application and user management.</p>
 <pre><code>
- Sandbox Test (Root OU  environment) [Acctual ROOT is designershaik.com]
+ Sandbox Test (Root OU  environment) [Actual ROOT is designershaik.com]
     ├── Group Central (Existing OU for Corporate Functions)
     │   ├── Governance (For legal, compliance, HR, and IT oversight)
     │   │   ├── Policies & Procedures
@@ -436,6 +1147,7 @@ graph TB
         PS[Google Pub/Sub<br/>Event Transport]
         N8N[n8n Workflows<br/>Orchestration Engine]
         OAI[OpenAI<br/>AI Analysis]
+        MA[Manus/Abacus<br/>AI Agents]
     end
     subgraph "Storage Layer"
         WV[Weaviate<br/>Vector Database]
@@ -444,6 +1156,8 @@ graph TB
     end
     subgraph "Notification Layer"
         GC[Google Chat<br/>Team Notifications]
+        GM[Gemini AI<br/>Smart Assistance]
+        RV[Raven AI<br/>Decision Logs]
     end
     GD -->|File Upload Event| PS
     PS -->|Trigger| N8N
@@ -454,6 +1168,10 @@ graph TB
     N8N -->|Backup| QNAP
     N8N -->|Notify Team| GC
     N8N -->|Update Metadata| GD
+    MA -->|Orchestrate| N8N
+    MA -->|Configure| WV
+    GC -->|AI Assistance| GM
+    GC -->|Log Decisions| RV
 
     style GD fill:#e1f5fe
     style N8N fill:#f3e5f5
@@ -464,7 +1182,11 @@ graph TB
     style OAI fill:#ffebcc
     style QNAP fill:#e6e6e6
     style GC fill:#d3f5e9
+    style MA fill:#e1bee7
+    style GM fill:#ffcdd2
+    style RV fill:#dcedc8
 </div>
+
 <h3>Repository Folder Structure</h3>
 <div class="mermaid">
 graph TD
@@ -488,6 +1210,7 @@ graph TD
         Meta --> Ver[Version-Control/]
         Meta --> Change[Media-Change-History/]
         Meta --> Approval[Approval-Stages/]
+        Meta --> MCP[MCP-Context/]
     end
 
     subgraph "Processed Media"
@@ -522,7 +1245,9 @@ graph TD
     style PF fill:#fce4ec
     style PP fill:#fff3e0
     style PS fill:#f3e5f5
+    style MCP fill:#e1bee7
 </div>
+
 <h3>File Naming Convention</h3>
 <div class="highlight">
 <strong>Pattern:</strong> <code>{ProductName}_{SKU}_{descriptor}_{timestamp}.{extension}</code> <br><br>
@@ -533,23 +1258,55 @@ graph TD
   <li><code>AstroTime-MK1_ATM-IG-001_ai_metadata.json</code></li>
 </ul>
 </div>
+
+<h3>Enhanced Directory Structure for Product Repository</h3>
+<pre><code>/DSi-Product-Repository
+    /Palace-of-Fragrances
+        /Classic-Range
+            /Opulent-Shaik-Amethyst
+                /Media
+                    /Images
+                        /3D-Renders
+                        /Photos (Real, AI-Generated)
+                        /High-Resolution
+                        /Web-Optimized
+                    /Videos
+                        /Product-Showcase
+                        /Marketing-Campaigns
+                /Marketing
+                    /Brochures
+                    /Social-Media
+                    /Print-Ads
+                    /Event-Presentations
+                /ERP-Integration
+                    /SKU-Data
+                    /Pricing
+                    /Product-Specifications
+                /Archives
+                    /Old-Campaigns
+                    /Discontinued-Versions</code></pre>
 </section>
 
 <section id="database">
 <h2>🗄️ Database & Data-Lake Blueprint</h2>
 <h3>5.1 PostgreSQL (Metadata & Logs)</h3>
 <p>Primary database for structured metadata, audit trails, and workflow logs.</p>
-  <pre><code>-- Media Assets Table
+  <pre><code>-- Media Assets Table with MCP Support
 CREATE TABLE media_assets (
     id SERIAL PRIMARY KEY,
     drive_file_id VARCHAR(255) UNIQUE,
     weaviate_object_id UUID,
+    mcp_id VARCHAR(255),  -- Model Context Protocol ID
     product_name VARCHAR(255),
     sku VARCHAR(100),
     file_url TEXT,
     processing_status VARCHAR(50),
     ai_description TEXT,
     ai_tags TEXT[],
+    plm_stage VARCHAR(50), -- Concept, Gate-A, Prototype, PPAP, Production
+    designer_id VARCHAR(100),
+    revision VARCHAR(20),
+    linked_bom VARCHAR(100),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -563,14 +1320,31 @@ CREATE TABLE processing_logs (
     status VARCHAR(50),
     error_message TEXT,
     processing_time INTERVAL,
+    ai_agent VARCHAR(50), -- Tracks which AI agent performed the action
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Document Index Table for OCR
+CREATE TABLE document_index (
+    id SERIAL PRIMARY KEY,
+    mcp_id VARCHAR(255),
+    doc_type VARCHAR(100),
+    language VARCHAR(10),
+    full_text TEXT,
+    key_terms TEXT[],
+    drive_url TEXT,
+    cloudinary_url TEXT,
     created_at TIMESTAMP DEFAULT NOW()
 );
 
 -- Indexes for Performance
 CREATE INDEX idx_media_assets_sku ON media_assets(sku);
 CREATE INDEX idx_media_assets_status ON media_assets(processing_status);
+CREATE INDEX idx_media_assets_mcp ON media_assets(mcp_id);
 CREATE INDEX idx_processing_logs_asset_id ON processing_logs(media_asset_id);
-CREATE INDEX idx_processing_logs_status ON processing_logs(status);</code></pre>
+CREATE INDEX idx_processing_logs_status ON processing_logs(status);
+CREATE INDEX idx_document_index_mcp ON document_index(mcp_id);</code></pre>
+
 <h3>5.2 Weaviate (Vector Database)</h3>
 <p>Used for storing semantic vectors generated from media content, enabling advanced AI-driven search and recommendations.</p>
   <pre><code>{
@@ -580,15 +1354,32 @@ CREATE INDEX idx_processing_logs_status ON processing_logs(status);</code></pre>
     "properties": [
       {"name": "productName", "dataType": ["string"]},
       {"name": "sku", "dataType": ["string"]},
+      {"name": "mcp_id", "dataType": ["string"]},
       {"name": "description", "dataType": ["text"]},
       {"name": "tags", "dataType": ["string[]"]},
       {"name": "fileUrl", "dataType": ["string"]},
       {"name": "processingStatus", "dataType": ["string"]},
       {"name": "driveFileId", "dataType": ["string"]},
+      {"name": "plm_stage", "dataType": ["string"]},
       {"name": "timestamp", "dataType": ["date"]}
+    ]
+  },
+  {
+    "class": "DocAsset",
+    "vectorizer": "text2vec-openai",
+    "properties": [
+      {"name": "mcp_id", "dataType": ["string"]},
+      {"name": "sku", "dataType": ["string"]},
+      {"name": "page_count", "dataType": ["int"]},
+      {"name": "language", "dataType": ["string"]},
+      {"name": "doc_type", "dataType": ["string"]},
+      {"name": "key_terms", "dataType": ["string[]"]},
+      {"name": "full_text", "dataType": ["text"]},
+      {"name": "drive_url", "dataType": ["string"]}
     ]
   }]
 }</code></pre>
+
 <h3>5.3 Data Lake Strategy</h3>
 <p>The DSI Data Lake leverages AWS S3 as the primary storage backbone, integrating with Google Workspace Drive as the source repository. The architecture focuses on workflow-driven data movement where n8n processes append metadata and processed media back to Google Drive while maintaining long-term archives in AWS S3 with intelligent lifecycle management.</p>
 
@@ -605,6 +1396,7 @@ graph TB
         N8N[n8n Container<br/>Workflow Orchestration]
         WV[Weaviate Database<br/>Vector Storage]
         RDS[AWS RDS PostgreSQL<br/>Metadata & Logs]
+        MA[Manus/Abacus<br/>AI Agents]
     end
     
     subgraph "AWS Data Lake Tiers"
@@ -630,6 +1422,7 @@ graph TB
         CW[CloudWatch<br/>Metrics & Logs]
         ATHENA[AWS Athena<br/>SQL Analytics]
         QSIGHT[QuickSight<br/>Business Intelligence]
+        GRAFANA[Grafana<br/>KPI Dashboard]
     end
     
     subgraph "Local Infrastructure"
@@ -643,6 +1436,7 @@ graph TB
     N8N -->|CDN Upload| CDN
     N8N -->|Archive Copy| S3_STD
     N8N -->|Backup Sync| QNAP
+    MA -->|Orchestrate| N8N
     
     %% Workflow Append Operations
     N8N -->|Append AI Metadata| GWSMETA
@@ -658,6 +1452,7 @@ graph TB
     RDS -->|Query Logs| CW
     WV -->|Performance Metrics| CW
     S3_STD -->|Access Patterns| CW
+    CW -->|Metrics| GRAFANA
     
     %% Analytics Pipeline
     RDS -->|ETL Queries| ATHENA
@@ -674,6 +1469,8 @@ graph TB
     style S3_DEEP fill:#806600,color:#fff
     style CW fill:#ff4b4b,color:#fff
     style CDN fill:#3448c5,color:#fff
+    style MA fill:#9c27b0,color:#fff
+    style GRAFANA fill:#f46800,color:#fff
 </div>
 </section>
 
@@ -693,9 +1490,664 @@ graph TB
     <tr><td>AI Tagging</td><td>OpenAI + Weaviate</td><td>4.2</td><td>Automatic metadata generation</td></tr>
     <tr><td>CDN Optimisation</td><td>Cloudinary</td><td>4.3</td><td>Image / video format conversion</td></tr>
     <tr><td>ERP Integration</td><td>n8n</td><td>6.2, 6.3</td><td>Product data sync</td></tr>
-    <tr><td>Legal</td><td>5.1</td><td>Compliance tracking</td></tr>
+    <tr><td>AI Orchestration</td><td>Manus/Abacus</td><td>7.1, 7.2</td><td>Automated system configuration</td></tr>
+    <tr><td>Document Processing</td><td>AWS Textract + Google Vision</td><td>8.1</td><td>OCR for invoices, contracts</td></tr>
+    <tr><td>Communication</td><td>Google Chat + Gemini AI</td><td>7.3</td><td>AI-powered team assistance</td></tr>
+    <tr><td>Task Management</td><td>Gameplan + Raven</td><td>7.4</td><td>Visual workflow tracking</td></tr>
+    <tr><td>Legal & Compliance</td><td>Raven AI</td><td>5.1</td><td>Compliance tracking & decisions</td></tr>
     <tr><td>Investor Relations</td><td>20_Marketing</td><td>3.3, 3.4</td><td>Data-room generation</td></tr>
     <tr><td>Operational Efficiency</td><td>40_Technical & APIs</td><td>6.2, 6.3, 6.4</td><td>ERP ↔ Weaviate sync; n8n orchestrator</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="ai-agents">
+<h2>🤖 AI Agents (Manus/Abacus) Implementation</h2>
+
+<h3>Why Use AI Agents?</h3>
+<div class="ai-agent-section">
+<h4>Benefits of AI Agent Implementation</h4>
+<ul>
+  <li><strong>Automated Multi-System Setup:</strong> AI handles setup of complex integrations (Google Workspace, ERPNext, Weaviate, Cloudinary, WooCommerce, n8n)</li>
+  <li><strong>Configuration & Optimization:</strong> Automatically configures optimal settings based on best practices</li>
+  <li><strong>Continuous Maintenance & Scaling:</strong> AI continually adapts your workflows and updates configurations dynamically</li>
+  <li><strong>Reduced Human Error:</strong> Ensures consistent implementation across all systems</li>
+</ul>
+</div>
+
+<h3>AI Agent Selection</h3>
+<div class="workflow-cards">
+  <div class="workflow-card">
+    <h4>🔹 Manus AI</h4>
+    <ul>
+      <li>Specialized in automating repetitive system setups</li>
+      <li>Easy integration with APIs (ERPNext, Google, Cloudinary)</li>
+      <li>Ideal for quick configuration automation</li>
+      <li><strong>Best For:</strong> Rapid, repeatable system configurations</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>🔹 Abacus AI</h4>
+    <ul>
+      <li>Powerful data-driven decision-making</li>
+      <li>Advanced predictive & machine-learning capabilities</li>
+      <li>Automated recommendations for continuous optimization</li>
+      <li><strong>Best For:</strong> Advanced predictive analytics and intelligent system optimization</li>
+    </ul>
+  </div>
+</div>
+
+<h3>AI Agent Ecosystem Architecture</h3>
+<div class="mermaid">
+graph TB
+    subgraph "AI Agent Control Center"
+        MAC[Manus/Abacus<br/>AI Agent]
+    end
+    
+    subgraph "Configuration Management"
+        API[API Management]
+        MCP[MCP Standards]
+        WF[Workflow Templates]
+    end
+    
+    subgraph "Google Workspace"
+        GD[Google Drive]
+        GC[Google Chat]
+        GM[Gemini AI]
+        GS[Google Spaces]
+    end
+    
+    subgraph "Processing & Storage"
+        N8N[n8n Automation]
+        WV[Weaviate AI]
+        CDN[Cloudinary CDN]
+        PG[PostgreSQL]
+    end
+    
+    subgraph "Business Systems"
+        ERP[ERPNext]
+        WC[WooCommerce]
+        WF2[Webflow]
+    end
+    
+    subgraph "Documentation"
+        RV[Raven AI]
+        GP[Gameplan]
+    end
+    
+    MAC --> API
+    MAC --> MCP
+    MAC --> WF
+    
+    API --> GD
+    API --> GC
+    API --> N8N
+    API --> WV
+    API --> CDN
+    API --> PG
+    API --> ERP
+    API --> WC
+    API --> WF2
+    
+    MCP --> WV
+    MCP --> ERP
+    
+    WF --> N8N
+    
+    GC --> GM
+    GC --> GS
+    GC --> RV
+    GC --> GP
+    
+    style MAC fill:#9c27b0,color:#fff
+    style MCP fill:#e1bee7,color:#000
+    style API fill:#7b1fa2,color:#fff
+    style WF fill:#8e24aa,color:#fff
+</div>
+
+<h3>Preparing Your Ecosystem for AI Automation</h3>
+<div class="implementation-steps">
+<h4>✅ Step 1: Establish Clear API Integrations</h4>
+<div class="step-grid">
+  <div class="step-item" data-step="1">
+    <strong>Google Workspace:</strong>
+    <ul>
+      <li>Enable API keys for Google Drive, Google Chat, and Sheets</li>
+      <li>Configure permissions clearly (editor, viewer, admin)</li>
+    </ul>
+  </div>
+  <div class="step-item" data-step="2">
+    <strong>ERPNext:</strong>
+    <ul>
+      <li>Ensure API endpoints are accessible for product data syncing</li>
+      <li>API credentials securely generated and stored</li>
+    </ul>
+  </div>
+  <div class="step-item" data-step="3">
+    <strong>Cloudinary:</strong>
+    <ul>
+      <li>API Keys ready for automated uploads, optimization, and tagging</li>
+    </ul>
+  </div>
+  <div class="step-item" data-step="4">
+    <strong>Weaviate AI:</strong>
+    <ul>
+      <li>API access configured for auto-tagging media</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<h3>AI Agent Workflow Example</h3>
+<div class="mermaid">
+flowchart LR
+    A[New Product Media<br/>Uploaded to Drive] --> B[AI Agent Detects<br/>& Validates MCP]
+    B --> C[Triggers n8n<br/>Workflow]
+    C --> D[Weaviate AI<br/>Tags Assets]
+    D --> E[Cloudinary<br/>Optimizes Media]
+    E --> F[ERPNext<br/>Updates SKU]
+    F --> G[WooCommerce<br/>Updates Product]
+    G --> H[Google Chat<br/>Notifies Team]
+    H --> I[Raven Logs<br/>All Actions]
+    
+    style A fill:#e3f2fd
+    style B fill:#e1bee7
+    style C fill:#f3e5f5
+    style D fill:#e8f5e8
+    style E fill:#fce4ec
+    style F fill:#fff3e0
+    style G fill:#f3e5f5
+    style H fill:#d3f5e9
+    style I fill:#dcedc8
+</div>
+
+<h3>AI Agent Deployment Checklist</h3>
+<div class="checklist">
+<h4>Pre-Deployment Checklist</h4>
+<div class="checklist-item">
+  <input type="checkbox" id="check1">
+  <label for="check1">Google Workspace API Keys ready</label>
+</div>
+<div class="checklist-item">
+  <input type="checkbox" id="check2">
+  <label for="check2">Weaviate Schema & API configured</label>
+</div>
+<div class="checklist-item">
+  <input type="checkbox" id="check3">
+  <label for="check3">Cloudinary account & API integration complete</label>
+</div>
+<div class="checklist-item">
+  <input type="checkbox" id="check4">
+  <label for="check4">ERPNext product data & API endpoints verified</label>
+</div>
+<div class="checklist-item">
+  <input type="checkbox" id="check5">
+  <label for="check5">WooCommerce/Webflow integration API configured</label>
+</div>
+<div class="checklist-item">
+  <input type="checkbox" id="check6">
+  <label for="check6">n8n automation workflows clearly defined</label>
+</div>
+<div class="checklist-item">
+  <input type="checkbox" id="check7">
+  <label for="check7">MCP clearly documented for metadata and versioning standards</label>
+</div>
+</div>
+</section>
+
+<section id="mcp-integration">
+<h2>🔗 Model Context Protocol (MCP) Integration</h2>
+
+<h3>What is MCP?</h3>
+<p>Model Context Protocol (MCP) provides a standardized framework for managing metadata, versioning, and context tracking across all systems in the DSI ecosystem. It ensures consistency and enables AI agents to understand and manage content intelligently.</p>
+
+<h3>MCP Architecture in DSI Ecosystem</h3>
+<div class="mermaid">
+graph TB
+    subgraph "MCP Core"
+        MCPC[MCP Controller]
+        MCPS[MCP Schema]
+        MCPV[MCP Versioning]
+    end
+    
+    subgraph "MCP Tags"
+        TAG1[Product ID]
+        TAG2[Version]
+        TAG3[Status]
+        TAG4[PLM Stage]
+        TAG5[Designer ID]
+    end
+    
+    subgraph "Systems Using MCP"
+        GD[Google Drive]
+        WV[Weaviate]
+        CDN[Cloudinary]
+        ERP[ERPNext]
+        N8N[n8n]
+        AI[AI Agents]
+    end
+    
+    MCPC --> MCPS
+    MCPC --> MCPV
+    
+    MCPS --> TAG1
+    MCPS --> TAG2
+    MCPS --> TAG3
+    MCPS --> TAG4
+    MCPS --> TAG5
+    
+    TAG1 --> GD
+    TAG2 --> GD
+    TAG3 --> GD
+    TAG4 --> ERP
+    TAG5 --> ERP
+    
+    GD --> WV
+    GD --> CDN
+    WV --> AI
+    CDN --> AI
+    ERP --> AI
+    N8N --> AI
+    
+    style MCPC fill:#7b1fa2,color:#fff
+    style MCPS fill:#8e24aa,color:#fff
+    style MCPV fill:#9c27b0,color:#fff
+</div>
+
+<h3>MCP Tag Structure</h3>
+<div class="highlight">
+<strong>Standard MCP Tag Format:</strong>
+<pre><code>MCP-ID: [ProductName]_[Version]_[Status]
+Example: Opulent-Shaik-Amethyst_V1.3.3_FINAL
+
+Fields:
+- Product Name: Unique identifier for the product
+- Version: Semantic versioning (Major.Minor.Patch)
+- Status: DRAFT | REVIEW | FINAL | ARCHIVED
+- PLM Stage: Concept | Gate-A | Prototype | PPAP | Production
+- Designer ID: Staff code for IP tracking
+- Revision: A00, B02, etc.
+- Linked BOM: ERPNext BOM reference</code></pre>
+</div>
+
+<h3>MCP Implementation Benefits</h3>
+<div class="workflow-cards">
+  <div class="workflow-card">
+    <h4>🔹 Contextual Data Flow</h4>
+    <ul>
+      <li>Tracks how assets evolve across different teams</li>
+      <li>Maintains complete history of changes</li>
+      <li>Enables smart routing based on context</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>🔹 Versioning & Historical Changes</h4>
+    <ul>
+      <li>Ensures structured updates for media assets</li>
+      <li>Prevents accidental overwrites</li>
+      <li>Enables rollback to previous versions</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>🔹 Cross-Platform Metadata Consistency</h4>
+    <ul>
+      <li>Standardizes Weaviate AI tagging</li>
+      <li>Ensures ERPNext integration accuracy</li>
+      <li>Maintains eCommerce update consistency</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>🔹 Automation Governance</h4>
+    <ul>
+      <li>AI agents understand context automatically</li>
+      <li>Workflows route based on MCP tags</li>
+      <li>Maintains data integrity across systems</li>
+    </ul>
+  </div>
+</div>
+
+<h3>MCP Workflow Integration</h3>
+<div class="mermaid">
+flowchart LR
+    A[Asset Created] --> B[MCP Tag Assigned]
+    B --> C{Check Status}
+    C -->|DRAFT| D[Design Review]
+    C -->|REVIEW| E[Approval Workflow]
+    C -->|FINAL| F[Production Pipeline]
+    C -->|ARCHIVED| G[Cold Storage]
+    
+    D --> H[Update MCP Status]
+    E --> H
+    F --> I[Sync to ERP/CDN]
+    G --> J[AWS S3 Archive]
+    
+    H --> K[AI Agent Actions]
+    I --> K
+    J --> K
+    
+    K --> L[Update All Systems]
+    
+    style A fill:#e3f2fd
+    style B fill:#e1bee7
+    style C fill:#fff3e0
+    style K fill:#9c27b0,color:#fff
+    style L fill:#e8f5e8
+</div>
+
+<h3>MCP & AI Agent Interaction</h3>
+<div class="note">
+<strong>Important:</strong> AI Agents (Manus/Abacus) do NOT replace MCP. Instead, they:
+<ul>
+  <li>Use MCP as a structured data context framework</li>
+  <li>Read MCP tags to understand asset state and requirements</li>
+  <li>Update MCP tags as workflows progress</li>
+  <li>Ensure MCP compliance across all automated actions</li>
+</ul>
+</div>
+</section>
+
+<section id="ocr-services">
+<h2>📄 OCR Services & Document Intelligence</h2>
+
+<h3>Dual-Engine OCR Architecture</h3>
+<p>Adding a dual-engine OCR service (AWS Textract + Google Cloud Vision) at the ingestion edge dramatically improves document search recall and precision across the DSI ecosystem, while feeding cleaner, structured data into ERPNext, Weaviate, Cloudinary, and legal/procurement workflows.</p>
+
+<h3>OCR Service Architecture</h3>
+<div class="mermaid">
+graph TB
+    subgraph "Document Input"
+        PDF[PDF Documents]
+        IMG[Scanned Images]
+        INV[Invoices]
+        CON[Contracts]
+    end
+    
+    subgraph "OCR Edge Service"
+        PRE[Pre-processor<br/>Tesseract 5.4]
+        GCV[Google Cloud Vision<br/>Multi-language]
+        TXT[AWS Textract<br/>Forms & Tables]
+        MRG[Result Merger<br/>Textractor]
+    end
+    
+    subgraph "Output"
+        JSON[Structured JSON]
+        TXT2[Plain Text]
+        META[Metadata]
+    end
+    
+    subgraph "Integration"
+        WV[Weaviate<br/>Vector Search]
+        ERP[ERPNext<br/>Document Index]
+        CDN[Cloudinary<br/>Storage]
+        CHAT[Google Chat<br/>Notifications]
+    end
+    
+    PDF --> PRE
+    IMG --> PRE
+    INV --> PRE
+    CON --> PRE
+    
+    PRE --> GCV
+    PRE --> TXT
+    
+    GCV --> MRG
+    TXT --> MRG
+    
+    MRG --> JSON
+    MRG --> TXT2
+    MRG --> META
+    
+    JSON --> WV
+    JSON --> ERP
+    JSON --> CDN
+    META --> CHAT
+    
+    style PRE fill:#ffd54f,color:#000
+    style GCV fill:#4285f4,color:#fff
+    style TXT fill:#ff9900,color:#fff
+    style MRG fill:#66bb6a,color:#fff
+</div>
+
+<h3>OCR Implementation Benefits</h3>
+<table>
+  <thead>
+    <tr>
+      <th>System</th>
+      <th>Benefit from OCR Layer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Weaviate</td>
+      <td>Vector search now covers every scanned PO, contract, COA—retrievable by Arabic or English phrase</td>
+    </tr>
+    <tr>
+      <td>ERPNext</td>
+      <td>"Document Index" doctype auto-links PDF, JSON and Cloudinary raw file; shows vendor name, PO, total, due date parsed by Textract</td>
+    </tr>
+    <tr>
+      <td>Cloudinary</td>
+      <td>Stores audit-grade original + OCR JSON; Share Link pushes to outside counsel or suppliers in one click</td>
+    </tr>
+    <tr>
+      <td>Legal/Procurement</td>
+      <td>Gameplan board auto-populates "Awaiting Approval" cards when Textract detects a missing signature box</td>
+    </tr>
+    <tr>
+      <td>Custom ChatGPT Team</td>
+      <td>A simple retrieval chain ("summarise invoice 9876") returns structured fields + PDF link from Weaviate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>OCR n8n Workflow</h3>
+<pre><code>Google Drive Trigger
+   ↳   HTTP → OCR micro-service (returns JSON)
+   ↳   Function → add MCP tags + SHA-256
+   ↳   SplitInBatches
+        ├─ Weaviate Upsert (class: DocAsset)
+        │     props: {mcp_id, sku, language, key_terms, txt_vector}
+        ├─ ERPNext REST (doctype: "Document Index")
+        │     fields: {mcp_id, link_to_drive, supplier_id, po_no}
+        ├─ Cloudinary Upload (folder "docs/ocr/" ; resource_type: raw)
+        └─ Google Chat (channel #content-pipeline)</code></pre>
+
+<h3>Document Metadata Schema</h3>
+<pre><code>{
+  "class": "DocAsset",
+  "properties": [
+    {"name":"mcp_id","dataType":["string"]},
+    {"name":"sku","dataType":["string"]},
+    {"name":"page_count","dataType":["int"]},
+    {"name":"language","dataType":["string"]},
+    {"name":"doc_type","dataType":["string"]},   // invoice, COA, artwork brief…
+    {"name":"key_terms","dataType":["string[]"]},
+    {"name":"full_text","dataType":["text"]},
+    {"name":"drive_url","dataType":["string"]}
+  ]
+}</code></pre>
+
+<h3>Grafana OCR Monitoring Dashboard</h3>
+<div class="highlight">
+<strong>Key Metrics to Track:</strong>
+<ul>
+  <li><strong>Docs processed (24h):</strong> Total throughput</li>
+  <li><strong>Success Rate:</strong> OCR accuracy percentage</li>
+  <li><strong>Average Latency:</strong> Processing time per document</li>
+  <li><strong>Cost Analysis:</strong> Textract vs Vision API costs</li>
+  <li><strong>Error Tracking:</strong> Top 10 error messages</li>
+</ul>
+</div>
+</section>
+
+<section id="plm-enhancement">
+<h2>⚙️ PLM Enhancement & Early-Stage Design Integration</h2>
+
+<h3>Capturing Early Design Intelligence</h3>
+<p>The current repository excels at marketing-ready assets and ERP-linked SKUs, but the front end of the Product Lifecycle Management (PLM) chain—the "fuzzy front-end" of ideation, sketches, concept CAD, form-finding videos, supplier quotes, lab results—is where 80% of downstream decisions are made.</p>
+
+<h3>Enhanced PLM Directory Structure</h3>
+<pre><code>/DSi-Product-Repository
+   /Palace-of-Fragrances
+      /Classic-Range
+         /Opulent-Shaik-Amethyst
+            /00-Early-Design           ← NEW (Editors: design-only)
+               /01-Research
+                   /Trend-Reports
+                   /Competitive-Benchmarks
+                   /Raw-Materials
+               /02-Concept-Sketches
+                   /Paper-Scans
+                   /Procreate
+                   /Midjourney-Renders
+               /03-Concept-CAD
+                   /SolidWorks
+                   /Blender
+               /04-Design-Review
+                   /Stage-Gate-A         ← PDF deck, budget rough-order
+                   /Stage-Gate-B
+               /05-Prototype-Assets
+                   /3D-Print-STL
+                   /Resin-Casts
+               /_Archives
+            /Media                      ← Existing structure
+            /Marketing
+            /ERP-Integration</code></pre>
+
+<h3>PLM Workflow Integration</h3>
+<div class="mermaid">
+graph LR
+    subgraph "Early Design Phase"
+        A[Concept Sketch] --> B[CAD Design]
+        B --> C[Design Review]
+        C --> D[Prototype]
+    end
+    
+    subgraph "Production Phase"
+        D --> E[Final Design]
+        E --> F[Manufacturing]
+        F --> G[Quality Control]
+    end
+    
+    subgraph "Marketing Phase"
+        G --> H[Product Photography]
+        H --> I[Marketing Materials]
+        I --> J[Launch]
+    end
+    
+    subgraph "Systems Integration"
+        K[Weaviate AI]
+        L[ERPNext ECO]
+        M[Cloudinary]
+        N[WooCommerce]
+    end
+    
+    A --> K
+    B --> K
+    C --> L
+    D --> L
+    E --> L
+    H --> M
+    I --> M
+    J --> N
+    
+    style A fill:#e3f2fd
+    style C fill:#fff3e0
+    style E fill:#e8f5e8
+    style G fill:#fce4ec
+    style J fill:#f3e5f5
+</div>
+
+<h3>MCP Extension for PLM</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Example</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>plm_stage</td>
+      <td>Concept, Gate-A, Prototype, PPAP, Production</td>
+      <td>Allows AI agent & n8n to route to correct reviewers</td>
+    </tr>
+    <tr>
+      <td>designer_id</td>
+      <td>staff code</td>
+      <td>Ties asset to IP owner for royalty calc</td>
+    </tr>
+    <tr>
+      <td>revision</td>
+      <td>A00, B02</td>
+      <td>Keeps CAD/invoice cadence clear</td>
+    </tr>
+    <tr>
+      <td>linked_bom</td>
+      <td>ERPNext BOM#</td>
+      <td>Links early CAD to costing</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>PLM Automation Workflows</h3>
+<div class="workflow-cards">
+  <div class="workflow-card">
+    <h4>Sketch Upload Workflow</h4>
+    <ul>
+      <li>Auto-tag in Weaviate (plm_stage=Concept)</li>
+      <li>Notify #design-review in ChatGPT Team</li>
+      <li>Create ERPNext "Design Task" with due-date</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>CAD File Processing</h4>
+    <ul>
+      <li>Version stamp to MCP</li>
+      <li>Export STEP → Cloudinary (renders)</li>
+      <li>Push BOM estimate to ERPNext "Engineering BoM (Draft)"</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>Stage-Gate Review</h4>
+    <ul>
+      <li>Textract OCR + store JSON</li>
+      <li>Trigger Raven decision thread "Gate-B Approval"</li>
+      <li>Update ERPNext ECO status</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>Prototype to Production</h4>
+    <ul>
+      <li>Move approved designs to /Media branch</li>
+      <li>Update SKU with final specifications</li>
+      <li>Trigger marketing asset creation</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Best Practice Design Governance</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Control</th>
+      <th>How to Implement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Access Segregation</td>
+      <td>Early-Design folders = Editors: Design + CTO; Viewers inherit only after Gate-B</td>
+    </tr>
+    <tr>
+      <td>Watermarked exports</td>
+      <td>Cloudinary "dynamic transformations" add diagonal IP watermark on Concept CAD renders</td>
+    </tr>
+    <tr>
+      <td>Automated NDA check</td>
+      <td>n8n node scans Stage-Gate deck for missing NDA stamp; blocks ERPNext ECO submission if absent</td>
+    </tr>
   </tbody>
 </table>
 </section>
@@ -754,6 +2206,96 @@ flowchart TB
 <div class="note">
 <strong>Output Location:</strong><br>
 <code>/Metadata/Media-Change-History/{ProductName}_{SKU}_change_log.json</code>
+</div>
+
+<h3>Enhanced Communication Integration</h3>
+<div class="tabs">
+  <div class="tab-buttons">
+    <button class="tab-button active" onclick="showTab(event, 'google-chat')">Google Chat</button>
+    <button class="tab-button" onclick="showTab(event, 'gemini-ai')">Gemini AI</button>
+    <button class="tab-button" onclick="showTab(event, 'gameplan')">Gameplan</button>
+    <button class="tab-button" onclick="showTab(event, 'raven')">Raven AI</button>
+  </div>
+  <div class="tab-content">
+    <div id="google-chat" class="tab-pane active">
+      <h4>Google Chat Integration</h4>
+      <ul>
+        <li>Real-time team discussions & workflow updates</li>
+        <li>Automated notifications from n8n workflows</li>
+        <li>Integration with Google Workspace tools</li>
+        <li>Custom bot support for workflow automation</li>
+      </ul>
+      <pre><code>// Example Google Chat notification
+{
+  "space": "spaces/AAAAGdJKPXk",
+  "message": {
+    "text": "🔔 New product image uploaded → Processing in Weaviate AI",
+    "cards": [{
+      "sections": [{
+        "widgets": [{
+          "textParagraph": {
+            "text": "File: Opulent-Shaik-Amethyst_V1.3.jpg\nStatus: Processing\nMCP-ID: OSA_V1.3_REVIEW"
+          }
+        }]
+      }]
+    }]
+  }
+}</code></pre>
+    </div>
+    <div id="gemini-ai" class="tab-pane">
+      <h4>Google Gemini AI Integration</h4>
+      <ul>
+        <li>AI-powered summaries of discussions and decisions</li>
+        <li>Smart Q&A for team members</li>
+        <li>Automated daily workflow summaries</li>
+        <li>Integration with Raven for decision logging</li>
+      </ul>
+      <pre><code>// Gemini AI Daily Summary Example
+📜 Summary of today's media workflow decisions:
+✅ Agreed on Weaviate AI tagging for perfume bottle images
+✅ Cloudinary confirmed as the primary CDN
+✅ ERPNext media API integration starts next week
+📊 Processed: 47 images, 12 videos, 3 3D renders
+🚀 Next: Marketing campaign assets for Amber Kroud launch</code></pre>
+    </div>
+    <div id="gameplan" class="tab-pane">
+      <h4>Gameplan Task Management</h4>
+      <ul>
+        <li>Visual Kanban boards for workflow tracking</li>
+        <li>Automated task creation from Google Chat</li>
+        <li>Integration with n8n for status updates</li>
+        <li>Milestone tracking and dependencies</li>
+      </ul>
+      <div class="workflow-card">
+        <h4>Workflow Stages</h4>
+        <ul>
+          <li>To Do → In Progress → Review → Done</li>
+          <li>Automated status updates via n8n</li>
+          <li>Real-time Google Chat notifications</li>
+        </ul>
+      </div>
+    </div>
+    <div id="raven" class="tab-pane">
+      <h4>Raven AI Documentation</h4>
+      <ul>
+        <li>AI-powered decision logging and tracking</li>
+        <li>Automated workflow documentation</li>
+        <li>Integration with Google Chat for summaries</li>
+        <li>Historical decision search and retrieval</li>
+      </ul>
+      <pre><code>// Raven Decision Log Example
+{
+  "decision_id": "DEC-2025-001",
+  "timestamp": "2025-01-15T10:30:00Z",
+  "category": "Media Processing",
+  "decision": "Switch to Cloudinary for all product images",
+  "rationale": "Better CDN performance and automatic optimization",
+  "approved_by": ["CTO", "Marketing Head"],
+  "impact": ["All future uploads", "Retroactive optimization"],
+  "mcp_context": "Affects all Palace product lines"
+}</code></pre>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -815,7 +2357,40 @@ CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
 # Notifications (Optional)
-GOOGLE_CHAT_WEBHOOK=your_chat_webhook_url</code></pre>
+GOOGLE_CHAT_WEBHOOK=your_chat_webhook_url
+
+# AI Agents
+MANUS_API_KEY=your_manus_key
+ABACUS_API_KEY=your_abacus_key
+
+# OCR Services
+GCP_PROJECT_ID=your_gcp_project
+AWS_TEXTRACT_KEY=your_aws_key
+AWS_TEXTRACT_SECRET=your_aws_secret</code></pre>
+
+  <h3>Complete n8n Workflow Examples</h3>
+  <div class="workflow-cards">
+    <div class="workflow-card">
+      <h4>Media Upload & AI Tagging Workflow</h4>
+      <pre><code>// Workflow nodes
+1. Google Drive Trigger → New file detected
+2. Extract Metadata → Parse filename, path
+3. Weaviate AI → Generate tags, embeddings
+4. Cloudinary → Upload and optimize
+5. ERPNext → Update product records
+6. Google Chat → Send notification</code></pre>
+    </div>
+    <div class="workflow-card">
+      <h4>OCR Document Processing Workflow</h4>
+      <pre><code>// Workflow nodes
+1. Google Drive Trigger → PDF/Image upload
+2. OCR Service → Textract + Vision API
+3. Result Merger → Combine OCR outputs
+4. Weaviate → Store searchable text
+5. ERPNext → Create document index
+6. Raven AI → Log processing</code></pre>
+    </div>
+  </div>
 </section>
 
 <section id="deployment">
@@ -857,6 +2432,89 @@ GOOGLE_CHAT_WEBHOOK=your_chat_webhook_url</code></pre>
         <li><strong>Ideal For:</strong> Enterprise SLA requirements</li>
         <li><strong>Complexity:</strong> Very High</li>
       </ul>
+    </div>
+  </div>
+
+  <h3>Docker Compose Configuration (Self-Hosted)</h3>
+  <pre><code>version: "3.9"
+
+services:
+  n8n:
+    image: n8nio/n8n
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
+    volumes:
+      - n8n_data:/home/node/.n8n
+    ports:
+      - "5678:5678"
+    restart: unless-stopped
+
+  weaviate:
+    image: semitechnologies/weaviate:latest
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'false'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      DEFAULT_VECTORIZER_MODULE: 'text2vec-openai'
+      ENABLE_MODULES: 'text2vec-openai'
+      OPENAI_APIKEY: ${OPENAI_API_KEY}
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: dsi_media
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  ocr-service:
+    build: ./ocr-service
+    environment:
+      GCP_PROJECT_ID: ${GCP_PROJECT_ID}
+      AWS_ACCESS_KEY_ID: ${AWS_TEXTRACT_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_TEXTRACT_SECRET}
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+volumes:
+  n8n_data:
+  weaviate_data:
+  postgres_data:</code></pre>
+
+  <h3>Deployment Checklist</h3>
+  <div class="checklist">
+    <h4>Pre-Deployment Checklist</h4>
+    <div class="checklist-item">
+      <input type="checkbox" id="deploy1">
+      <label for="deploy1">Domain and SSL certificates configured</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="deploy2">
+      <label for="deploy2">Environment variables securely stored</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="deploy3">
+      <label for="deploy3">Backup strategy implemented</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="deploy4">
+      <label for="deploy4">Monitoring and alerting configured</label>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" id="deploy5">
+      <label for="deploy5">Load testing completed</label>
     </div>
   </div>
 </section>
@@ -901,16 +2559,72 @@ GOOGLE_CHAT_WEBHOOK=your_chat_webhook_url</code></pre>
   <div class="warning">
     <strong>Critical Security Measures:</strong>
     <ul>
-      <li>All API keys stored in secure credential vaults</li>
-      <li>Encrypted communication between all services</li>
-      <li>Regular credential rotation schedule</li>
-      <li>Access logging and audit trails</li>
+      <li>All API keys stored in secure credential vaults (AWS Secrets Manager / Google Secret Manager)</li>
+      <li>Encrypted communication between all services (TLS 1.3)</li>
+      <li>Regular credential rotation schedule (90 days)</li>
+      <li>Access logging and audit trails for all systems</li>
       <li>Role-based permissions across all systems</li>
       <li>Least privilege access principles</li>
       <li>Regular access reviews and updates</li>
       <li>Secure backup and recovery procedures</li>
+      <li>GDPR/ADGM compliance for data handling</li>
     </ul>
   </div>
+
+  <h3>API Security Configuration</h3>
+  <pre><code># Example: Secure API Configuration
+{
+  "security": {
+    "api_key_rotation": "90_days",
+    "encryption": {
+      "in_transit": "TLS_1.3",
+      "at_rest": "AES_256"
+    },
+    "access_control": {
+      "type": "RBAC",
+      "mfa_required": true,
+      "ip_whitelist": ["10.0.0.0/8", "192.168.0.0/16"]
+    },
+    "audit": {
+      "log_retention": "365_days",
+      "log_encryption": true,
+      "alert_on_anomaly": true
+    }
+  }
+}</code></pre>
+
+  <h3>Compliance Requirements</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Requirement</th>
+        <th>Implementation</th>
+        <th>Verification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GDPR Compliance</td>
+        <td>Data encryption, access controls, right to deletion</td>
+        <td>Quarterly audits</td>
+      </tr>
+      <tr>
+        <td>ADGM Regulations</td>
+        <td>Local data residency, financial data protection</td>
+        <td>Annual certification</td>
+      </tr>
+      <tr>
+        <td>IP Protection</td>
+        <td>Watermarking, access logs, NDA enforcement</td>
+        <td>Monthly review</td>
+      </tr>
+      <tr>
+        <td>SOC 2 Type II</td>
+        <td>Security controls, availability, confidentiality</td>
+        <td>Annual audit</td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
 <section id="testing">
@@ -934,6 +2648,49 @@ flowchart TD
     style Output fill:#e8f5e8
   </div>
 
+  <h3>End-to-End Testing Scenarios</h3>
+  <div class="implementation-steps">
+    <h4>Test Scenario Checklist</h4>
+    <div class="step-grid">
+      <div class="step-item" data-step="1">
+        <strong>Media Upload Test</strong>
+        <ul>
+          <li>Upload JPEG, PNG, WebP images</li>
+          <li>Upload MP4, MOV videos</li>
+          <li>Verify Weaviate tagging</li>
+          <li>Check Cloudinary optimization</li>
+        </ul>
+      </div>
+      <div class="step-item" data-step="2">
+        <strong>OCR Processing Test</strong>
+        <ul>
+          <li>Upload PDF invoice (Arabic/English)</li>
+          <li>Verify Textract/Vision processing</li>
+          <li>Check document indexing</li>
+          <li>Test search functionality</li>
+        </ul>
+      </div>
+      <div class="step-item" data-step="3">
+        <strong>ERP Integration Test</strong>
+        <ul>
+          <li>Create new SKU in ERPNext</li>
+          <li>Verify media linking</li>
+          <li>Check WooCommerce sync</li>
+          <li>Test pricing updates</li>
+        </ul>
+      </div>
+      <div class="step-item" data-step="4">
+        <strong>AI Agent Test</strong>
+        <ul>
+          <li>Deploy Manus/Abacus in sandbox</li>
+          <li>Test automated configurations</li>
+          <li>Verify MCP compliance</li>
+          <li>Check decision logging</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <h3>Performance Monitoring</h3>
   <div class="note">
     <strong>Key Metrics to Track:</strong>
@@ -944,8 +2701,21 @@ flowchart TD
       <li>CDN upload success rates</li>
       <li>API call response times</li>
       <li>Storage usage and growth rates</li>
+      <li>OCR processing accuracy (target ≥97%)</li>
+      <li>AI tagging precision and recall</li>
     </ul>
   </div>
+
+  <h3>Monitoring Dashboard Configuration</h3>
+  <pre><code># Grafana Dashboard Metrics
+- ocr_docs_total: Total documents processed
+- ocr_docs_success_rate: Success percentage
+- media_processing_latency: Average processing time
+- api_response_times: Service response metrics
+- storage_usage_trends: Growth patterns
+- error_rate_by_service: Failure analysis
+- user_activity_metrics: Team engagement
+- cost_per_operation: Budget tracking</code></pre>
 </section>
 
 <section id="best-practices">
@@ -958,6 +2728,7 @@ flowchart TD
         <li>Reduce latency with real-time triggers</li>
         <li>Minimize API quota usage</li>
         <li>Implement efficient polling strategies</li>
+        <li>Use webhooks where available</li>
       </ul>
     </li>
     <li><strong>Infrastructure as Code:</strong>
@@ -965,6 +2736,7 @@ flowchart TD
         <li>Version control all configuration changes</li>
         <li>Automated deployment pipelines</li>
         <li>Environment-specific configurations</li>
+        <li>Terraform/Ansible for consistency</li>
       </ul>
     </li>
     <li><strong>Caching Strategy:</strong>
@@ -972,13 +2744,22 @@ flowchart TD
         <li>CDN edge caching for optimized media</li>
         <li>Database query optimization</li>
         <li>Vector search result caching</li>
+        <li>API response caching</li>
+      </ul>
+    </li>
+    <li><strong>AI Optimization:</strong>
+      <ul>
+        <li>Batch processing for efficiency</li>
+        <li>Model selection based on use case</li>
+        <li>Cost-aware API usage</li>
+        <li>Fallback strategies for failures</li>
       </ul>
     </li>
   </ul>
 
   <h3>Implementation Roadmap</h3>
   <div class="highlight">
-    <strong>Phase 1: Foundation</strong>
+    <strong>Phase 1: Foundation (Week 1-2)</strong>
     <ul>
       <li>Set up basic infrastructure (Docker containers)</li>
       <li>Configure n8n with Google Workspace OAuth</li>
@@ -986,7 +2767,7 @@ flowchart TD
       <li>Test file upload detection</li>
     </ul>
     
-    <strong>Phase 2: Core Workflows</strong>
+    <strong>Phase 2: Core Workflows (Week 3-4)</strong>
     <ul>
       <li>Implement media ingestion workflow</li>
       <li>Set up Weaviate integration</li>
@@ -994,7 +2775,7 @@ flowchart TD
       <li>Test end-to-end basic flow</li>
     </ul>
     
-    <strong>Phase 3: CDN Integration</strong>
+    <strong>Phase 3: CDN Integration (Week 5-6)</strong>
     <ul>
       <li>Configure Cloudinary integration</li>
       <li>Implement optimization workflows</li>
@@ -1002,7 +2783,23 @@ flowchart TD
       <li>Test media distribution pipeline</li>
     </ul>
 
-    <strong>Phase 4: Production Hardening</strong>
+    <strong>Phase 4: Business System Integration (Week 7-8)</strong>
+    <ul>
+      <li>Connect ERPNext for SKU management</li>
+      <li>Implement WooCommerce/Webflow sync</li>
+      <li>Configure Google Chat notifications</li>
+      <li>Set up Gameplan/Raven integration</li>
+    </ul>
+
+    <strong>Phase 5: AI Agent Deployment (Week 9-10)</strong>
+    <ul>
+      <li>Deploy Manus/Abacus in sandbox</li>
+      <li>Configure MCP standards</li>
+      <li>Test automated workflows</li>
+      <li>Validate AI decision-making</li>
+    </ul>
+
+    <strong>Phase 6: Production Hardening (Week 11-12)</strong>
     <ul>
       <li>Implement security measures</li>
       <li>Set up monitoring and alerting</li>
@@ -1010,23 +2807,225 @@ flowchart TD
       <li>Performance testing and optimization</li>
     </ul>
   </div>
+
+  <h3>Optimization Tips</h3>
+  <div class="workflow-cards">
+    <div class="workflow-card">
+      <h4>🚀 Media Processing</h4>
+      <ul>
+        <li>Use WebP for images (30-40% smaller)</li>
+        <li>Implement lazy loading</li>
+        <li>Generate responsive image sets</li>
+        <li>Optimize video bitrates</li>
+      </ul>
+    </div>
+    <div class="workflow-card">
+      <h4>📊 Database Performance</h4>
+      <ul>
+        <li>Index frequently queried fields</li>
+        <li>Implement query caching</li>
+        <li>Regular vacuum operations</li>
+        <li>Partition large tables</li>
+      </ul>
+    </div>
+    <div class="workflow-card">
+      <h4>🤖 AI Efficiency</h4>
+      <ul>
+        <li>Batch similar operations</li>
+        <li>Cache embedding results</li>
+        <li>Use appropriate model sizes</li>
+        <li>Implement retry logic</li>
+      </ul>
+    </div>
+    <div class="workflow-card">
+      <h4>🔄 Workflow Automation</h4>
+      <ul>
+        <li>Minimize sequential operations</li>
+        <li>Implement parallel processing</li>
+        <li>Use queuing for large batches</li>
+        <li>Monitor resource usage</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <section id="change">
 <h2>🔄 Change-Management & Review Cycle</h2>
+
+<h3>Change Management Process</h3>
+<div class="mermaid">
+graph LR
+    A[Change Request] --> B{Impact Assessment}
+    B -->|Low| C[Quick Review]
+    B -->|Medium| D[Team Review]
+    B -->|High| E[Steering Committee]
+    
+    C --> F[Implementation]
+    D --> F
+    E --> F
+    
+    F --> G[Testing]
+    G --> H[Deployment]
+    H --> I[Documentation]
+    I --> J[Notification]
+    
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style F fill:#e8f5e8
+    style H fill:#fce4ec
+    style J fill:#f3e5f5
+</div>
+
+<h3>Regular Review Schedule</h3>
 <ul>
   <li><strong>Weekly "Friday Pulse"</strong> call logs headline updates → pushed to <code>03_Change‑Log/</code></li>
   <li><strong>CR‑### form</strong> required for any schema or permission alteration (owner: Data Steward)</li>
   <li>Superseded versions archived to <code>99_Archive/Governance</code></li>
+  <li>Monthly architecture review meetings</li>
+  <li>Quarterly security audits</li>
   <li>Next scheduled full review: <strong>01 Oct 2025</strong></li>
 </ul>
+
+<h3>Change Request Template</h3>
+<pre><code># Change Request: CR-2025-001
+
+## Summary
+Brief description of the proposed change
+
+## Impact Analysis
+- Systems affected: [List systems]
+- Risk level: [Low/Medium/High]
+- Rollback plan: [Yes/No]
+
+## Technical Details
+- Current state
+- Proposed state
+- Migration steps
+
+## Approvals Required
+- [ ] Technical Lead
+- [ ] Security Team
+- [ ] Business Owner
+- [ ] Compliance Officer
+
+## Timeline
+- Implementation: [Date]
+- Testing: [Date]
+- Go-live: [Date]</code></pre>
+
+<h3>Documentation Standards</h3>
+<div class="note">
+<strong>All changes must include:</strong>
+<ul>
+  <li>Updated technical documentation</li>
+  <li>Revised workflow diagrams</li>
+  <li>API documentation updates</li>
+  <li>User guide modifications</li>
+  <li>Training materials if needed</li>
+</ul>
+</div>
+
+<h3>Future Roadmap</h3>
+<div class="implementation-steps">
+<h4>Upcoming Enhancements</h4>
+<div class="step-grid">
+  <div class="step-item" data-step="Q1">
+    <strong>Q1 2025</strong>
+    <ul>
+      <li>Complete AI agent deployment</li>
+      <li>Enhance OCR capabilities</li>
+      <li>Expand PLM integration</li>
+    </ul>
+  </div>
+  <div class="step-item" data-step="Q2">
+    <strong>Q2 2025</strong>
+    <ul>
+      <li>DSI Sales integration</li>
+      <li>MCV Manufacturing linkage</li>
+      <li>Advanced analytics dashboard</li>
+    </ul>
+  </div>
+  <div class="step-item" data-step="Q3">
+    <strong>Q3 2025</strong>
+    <ul>
+      <li>MA Global expansion</li>
+      <li>Real estate project integration</li>
+      <li>Investor portal development</li>
+    </ul>
+  </div>
+  <div class="step-item" data-step="Q4">
+    <strong>Q4 2025</strong>
+    <ul>
+      <li>Full ecosystem optimization</li>
+      <li>Advanced AI capabilities</li>
+      <li>Global rollout completion</li>
+    </ul>
+  </div>
+</div>
+</div>
 </section>
+
+
+<!-- =================== NEW SECTIONS FROM v2 =================== -->
+<section id="monitoring-alerting">
+<h2>📈 Monitoring & Alerting</h2>
+<table>
+  <thead>
+    <tr><th>#</th><th>Trigger</th><th>Workflow Steps</th><th>Systems</th><th>Output</th><th>Owner</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>6.2</td><td>WVT health‑check (5 min)</td><td>Cron → /v1/meta; on 5xx notify #ai‑stack</td><td>n8n / WVT / GWS</td><td>AI‑DB uptime alert</td><td>AI Ops</td></tr>
+    <tr><td>6.3</td><td>CLO usage spike</td><td>Cloudinary webhook when bandwidth &gt; 80 % plan → cost report → Chat</td><td>CLO / n8n / GWS</td><td>Cost alert</td><td>Media Pipeline</td></tr>
+    <tr><td>6.4</td><td>R53 fail‑over event</td><td>Route 53 health alarm → Chat ping → auto‑shift weight to healthy CDN</td><td>AWS R53 / n8n / GWS</td><td>Zero‑downtime switch</td><td>Infra Ops</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="governance-workflows">
+<h2>🛡️ Governance & Compliance Workflows</h2>
+<table>
+  <thead>
+    <tr><th>#</th><th>Trigger</th><th>Workflow Steps</th><th>Systems</th><th>Output</th><th>Owner</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>5.1</td><td>Monthly Workspace Security API dump</td><td>Shared links / DLP → RVN PDF → email CISO</td><td>GWS Admin / n8n / RVN</td><td>Compliance report</td><td>IT Security</td></tr>
+    <tr><td>5.2</td><td>Quarterly Steering Committee KPI pack</td><td>Auto‑compile KPI pack from ERP BI → RVN → share link</td><td>ERP / RVN / GWS</td><td>Board pack</td><td>Corp Strategy</td></tr>
+    <tr><td>5.3</td><td>OCR privacy check</td><td>Scan OCR JSON for PII → flag in RVN; auto‑expire drive link after 30 d</td><td>OCR / n8n / RVN</td><td>PII log + retention</td><td>Legal Counsel</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="archival-cost">
+<h2>💾 Archival & Cost‑Optimisation Jobs</h2>
+<table>
+  <thead>
+    <tr><th>#</th><th>Trigger</th><th>Workflow Steps</th><th>Systems</th><th>Output</th><th>Owner</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>8.1</td><td>Semi‑annual CLO purge</td><td>Scan CLO assets &gt; 2 y unused → purge &amp; export list to RVN</td><td>n8n / CLO / RVN</td><td>CDN cost report + purge</td><td>Media Pipeline</td></tr>
+    <tr><td>8.2</td><td>Annual Glacier review</td><td>Export S3 analytics → suggest Glacier transition → RVN board note</td><td>AWS / n8n / RVN</td><td>Storage‑tier plan</td><td>Infra Ops</td></tr>
+    <tr><td>8.3</td><td>S3 Intelligent‑Tiering audit</td><td>Mark objects not auto‑tiered → force move; update cost dashboard</td><td>AWS / n8n</td><td>Optimised storage spend</td><td>Infra Ops</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="voice-assist">
+<h2>🎤 Voice & Quick‑Task Assist</h2>
+<p><em>Unchanged from v1 – retained here for completeness.</em></p>
+<ul>
+  <li>Google Voice triggers quick‑task n8n flows (e.g., "log decision", "start stand‑up").</li>
+  <li>Voice transcripts auto‑attached to Raven decision logs.</li>
+  <li>Gemini AI provides real‑time summarisation and task delegation.</li>
+</ul>
+</section>
+<!-- =================== END NEW SECTIONS =================== -->
 
 </main>
 
 <footer>
   <p>© 2025 DSI Media Repository Implementation Guide</p>
   <p>This documentation provides complete technical specifications for deploying the DSI Media Repository Integration Architecture with automated workflows from upload to CDN distribution.</p>
+  <p>Version 2.0 - Enhanced with AI Agents, MCP Integration, OCR Services, and PLM Enhancement</p>
 </footer>
 
 <script>
@@ -1107,11 +3106,32 @@ document.querySelectorAll('section').forEach(section => {
   sectionObserver.observe(section);
 });
 
+// Tab functionality
+function showTab(evt, tabName) {
+  var i, tabcontent, tabbuttons;
+  tabcontent = document.getElementsByClassName("tab-pane");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].classList.remove('active');
+  }
+  tabbuttons = document.getElementsByClassName("tab-button");
+  for (i = 0; i < tabbuttons.length; i++) {
+    tabbuttons[i].classList.remove('active');
+  }
+  document.getElementById(tabName).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
   updateActiveNavItem();
+  
+  // Initialize Mermaid with custom theme
+  if (typeof mermaid !== 'undefined') {
+    mermaid.init();
+  }
 });
 </script>
 
 </body>
 </html>
+
