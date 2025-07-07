@@ -1130,6 +1130,316 @@ graph TD
 <p>Permissions are strictly managed at the OU and shared drive level, adhering to the principle of least privilege.</p>
 <h3>3.4 Integration with DSi Repository</h3>
 <p>Shared Drives serve as the primary source for media ingestion into the DSi Product Repository, ensuring a single source of truth.</p>
+
+<h3>3.5 Media Processing Workflow</h3>
+<div class="mermaid">
+graph TD
+    A[Google Drive Trigger: New File] --> B[Extract Metadata & Path Analysis]
+    B --> C[QNAP NAS Backup Sync]
+    C --> D[Weaviate AI: Generate Tags & Embeddings]
+    D --> E[Cloudinary: Upload & Optimize]
+    E --> F[Create Processed Media Package]
+    F --> G[Update Search Index]
+    G --> H[ERPNext Integration]
+    H --> I[Google Chat Notification]
+    I --> J[Final Archive to Processed Folders]
+    
+    style A fill:#4285f4,color:#fff
+    style D fill:#fa6423,color:#fff
+    style E fill:#3448c5,color:#fff
+    style G fill:#e8f5e8
+    style J fill:#fce4ec
+</div>
+
+<h3>3.6 Repository Structure Overview</h3>
+<div class="highlight">
+<strong>System Architecture:</strong>
+<ul>
+  <li><strong>Palace Directories:</strong> Input folders for raw media uploads (Palace-of-Fragrances, Palace-of-Precision, Palace-of-Style)</li>
+  <li><strong>Metadata Directory:</strong> System folder containing AI-generated tags, search indices, and processing logs</li>
+  <li><strong>Processed-Media Directory:</strong> System folder with optimized, distributed-ready media files</li>
+</ul>
+</div>
+
+<pre><code>/DSI-Product-Repository
+    /Metadata                           ← SYSTEM FOLDER: Search indices & AI metadata
+        /Products
+            /opulent_shaik_amethyst_metadata.json
+            /all_products_index.json
+        /Media-Index
+            /searchable_media_index.json
+            /tags_taxonomy.json
+        /Search-Databases
+            /full_text_search.json
+            /visual_similarity_index.json
+        /AI-Generated-Tags
+        /Approval-Stages
+        /Media-Change-History
+        /Multilingual-Descriptions
+        /Tagging-Data
+        /Version-Control
+    
+    /Processed-Media                    ← SYSTEM FOLDER: Optimized & distributed media
+        /ERP-Integrated
+        /Social-Media-Posts
+        /Web-Optimized
+            /Palace-of-Fragrances
+                /Classic-Range
+                    /Amber-Kroud
+                    /Chic-Shaik-Emerald
+                    /Opulent-Shaik-Amethyst
+                    /Opulent-Shaik-Sapphire
+                    /Sochi-Onyx
+                /Precious-Range
+                    /Objet-d-Art-Luxury-Sterling-Silver
+                    /Objet-d-Art-Optimum-Precious-Gold
+            /Palace-of-Precision
+            /Palace-of-Style
+    
+    /Palace-of-Fragrances               ← INPUT FOLDER: Raw media uploads
+        /Classic-Range
+            /Opulent-Shaik-Amethyst
+                /Media
+                    /Images
+                        /3D-Renders
+                        /Photos (Real, AI-Generated)
+                        /High-Resolution
+                    /Videos
+                        /Product-Showcase
+                        /Marketing-Campaigns
+                /Marketing
+                    /Brochures
+                    /Social-Media
+                    /Print-Ads
+                    /Event-Presentations
+    
+    /Palace-of-Precision                ← INPUT FOLDER: Raw media uploads
+    /Palace-of-Style                    ← INPUT FOLDER: Raw media uploads
+</code></pre>
+
+<h3>3.7 Workflow Steps</h3>
+
+<h4>Step 1: Intelligent File Detection & Metadata Extraction</h4>
+<div class="workflow-card">
+<ul>
+  <li><strong>Trigger:</strong> Google Drive API detects new file in Palace directories</li>
+  <li><strong>Path Analysis:</strong> Extract product name, SKU, and category from folder structure</li>
+  <li><strong>File Validation:</strong> Verify file type, size, and naming conventions</li>
+  <li><strong>MCP Assignment:</strong> Generate Model Context Protocol ID for tracking</li>
+  <li><strong>Initial Logging:</strong> Create processing record in PostgreSQL</li>
+</ul>
+</div>
+
+<h4>Step 2: AI-Powered Content Analysis</h4>
+<div class="workflow-card">
+<ul>
+  <li><strong>Weaviate Processing:</strong> Generate semantic embeddings and visual analysis</li>
+  <li><strong>OpenAI Tagging:</strong> Extract colors, composition, style, and brand compliance</li>
+  <li><strong>Quality Assessment:</strong> Rate image quality and brand alignment</li>
+  <li><strong>Metadata Generation:</strong> Create comprehensive metadata package</li>
+  <li><strong>Vector Storage:</strong> Store embeddings for semantic search</li>
+</ul>
+</div>
+
+<h4>Step 3: Multi-Platform Distribution</h4>
+<div class="workflow-card">
+<ul>
+  <li><strong>Cloudinary Optimization:</strong> Generate multiple formats and sizes</li>
+  <li><strong>Naming Convention Application:</strong> Apply standardized file naming</li>
+  <li><strong>Search Index Updates:</strong> Update all search databases</li>
+  <li><strong>Google Drive Enhancement:</strong> Add rich descriptions and properties</li>
+  <li><strong>System Integration:</strong> Update ERPNext, WooCommerce, and Webflow</li>
+</ul>
+</div>
+
+<h3>3.8 Google Drive Searchable Organization</h3>
+
+<h4>File Naming Convention</h4>
+<div class="highlight">
+<strong>Standard Format:</strong> <code>{ProductName}_{SKU}_{descriptor}_{timestamp}.{ext}</code>
+<br><br>
+<strong>Examples:</strong>
+<ul>
+  <li><code>optimized_hero_Opulent-Shaik-Amethyst_OSA-001_20250707T143000Z.webp</code></li>
+  <li><code>optimized_social_instagram_Chic-Shaik-Emerald_CSE-002_20250707T143000Z.jpg</code></li>
+  <li><code>optimized_thumb_Objet-d-Art-Gold_OAG-100_20250707T143000Z.webp</code></li>
+</ul>
+</div>
+
+<h4> File Descriptions</h4>
+<pre><code>🏷️ PRODUCT: Opulent Shaik Amethyst | SKU: OSA-001
+📂 CATEGORY: Classic Range | Palace of Fragrances
+🎨 AI TAGS: luxurious, elegant, premium, amethyst, purple, product-shot
+🔗 CLOUDINARY: https://res.cloudinary.com/dsi/palace-of-fragrances/classic-range/opulent-shaik-amethyst/hero-001
+📊 QUALITY: 94% | BRAND COMPLIANCE: 97%
+🎯 USAGE: Hero image, Web optimized, Social media ready
+📅 CREATED: 2025-07-07T14:30:00Z | PROCESSED: 2025-07-07T14:35:00Z
+🔍 SEARCHABLE TERMS: Opulent Shaik Amethyst, OSA-001, purple fragrance, luxury perfume, hero shot, product photography</code></pre>
+
+<h3>3.9 Comprehensive Search Index Creation</h3>
+
+<h4>Master Search Database Structure</h4>
+<pre><code>// /Metadata/Search-Databases/searchable_media_index.json
+{
+  "last_updated": "2025-07-07T14:35:00Z",
+  "total_assets": 1247,
+  "search_version": "2.1",
+  "products": {
+    "opulent_shaik_amethyst": {
+      "product_info": {
+        "name": "Opulent Shaik Amethyst",
+        "sku": "OSA-001",
+        "category": "Classic Range",
+        "brand": "Palace of Fragrances"
+      },
+      "assets": [
+        {
+          "asset_id": "OSA-001-hero-20250707T143000Z",
+          "mcp_id": "Opulent-Shaik-Amethyst_V1.0_FINAL",
+          "file_info": {
+            "drive_file_id": "1A2B3C4D5E6F7G8H9I0J",
+            "original_name": "product_hero_shot.jpg",
+            "processed_name": "optimized_hero_Opulent-Shaik-Amethyst_OSA-001_20250707T143000Z.webp",
+            "location": "/Processed-Media/Web-Optimized/Palace-of-Fragrances/Classic-Range/Opulent-Shaik-Amethyst/"
+          },
+          "ai_metadata": {
+            "tags": ["luxurious", "elegant", "premium", "amethyst", "purple"],
+            "description": "Elegant amethyst-colored luxury fragrance bottle...",
+            "color_palette": ["#8B5A96", "#E6E6FA", "#4B0082"],
+            "quality_score": 0.94,
+            "brand_compliance": 0.97
+          },
+          "cloudinary_urls": {
+            "original": "https://res.cloudinary.com/dsi/palace-of-fragrances/classic-range/opulent-shaik-amethyst/hero-001",
+            "web_optimized": "https://res.cloudinary.com/dsi/.../w_800,h_600,c_fill,q_auto,f_webp",
+            "thumbnail": "https://res.cloudinary.com/dsi/.../w_400,h_400,c_fill,q_auto,f_webp"
+          },
+          "usage_info": {
+            "approved_for": ["web", "social", "print", "marketing"],
+            "restrictions": [],
+            "expires": null
+          },
+          "timestamps": {
+            "uploaded": "2025-07-07T14:30:00Z",
+            "processed": "2025-07-07T14:35:00Z",
+            "last_accessed": "2025-07-07T16:22:00Z"
+          }
+        }
+      ]
+    }
+  }
+}</code></pre>
+
+<h3>3.10 Google Drive Advanced Search Implementation</h3>
+
+<h4>Native Google Drive Search Enhancement</h4>
+<div class="workflow-cards">
+  <div class="workflow-card">
+    <h4>🔍 Search by Product</h4>
+    <ul>
+      <li><strong>Product Names:</strong> "Opulent Shaik Amethyst" returns all variants</li>
+      <li><strong>SKU Codes:</strong> "OSA-001" finds all related files</li>
+      <li><strong>Categories:</strong> "Classic Range" shows all products in range</li>
+      <li><strong>Brands:</strong> "Palace of Fragrances" displays entire brand portfolio</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>🎨 Search by Style & Tags</h4>
+    <ul>
+      <li><strong>Visual Tags:</strong> "purple fragrance" finds color-matched assets</li>
+      <li><strong>Composition:</strong> "hero shot" returns main product images</li>
+      <li><strong>Quality Metrics:</strong> "brand compliance 97%" finds high-quality assets</li>
+      <li><strong>Usage Type:</strong> "social media ready" shows optimized variants</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>📊 Search by Metadata</h4>
+    <ul>
+      <li><strong>Processing Status:</strong> "approved" shows ready-to-use assets</li>
+      <li><strong>File Types:</strong> "webp optimized" finds web-ready formats</li>
+      <li><strong>Dates:</strong> "processed 2025-07-07" shows recent updates</li>
+      <li><strong>Sizes:</strong> "thumbnail" finds preview images</li>
+    </ul>
+  </div>
+  <div class="workflow-card">
+    <h4>🔗 Search by Integration</h4>
+    <ul>
+      <li><strong>Cloudinary URLs:</strong> Direct CDN link searches</li>
+      <li><strong>MCP IDs:</strong> Version control tracking</li>
+      <li><strong>ERP Links:</strong> SKU-based product connections</li>
+      <li><strong>Campaign Usage:</strong> Marketing campaign associations</li>
+    </ul>
+  </div>
+</div>
+
+<h4>Google Sheets Search Dashboard Integration</h4>
+<pre><code>// Google Apps Script for Advanced Search Dashboard
+function createSearchDashboard() {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  
+  // Set up headers
+  sheet.getRange('A1:H1').setValues([
+    ['Product Name', 'SKU', 'Category', 'File Type', 'Quality Score', 'Drive Link', 'Cloudinary URL', 'Last Updated']
+  ]);
+  
+  // Fetch search index data
+  const indexFile = DriveApp.getFilesByName('searchable_media_index.json').next();
+  const indexData = JSON.parse(indexFile.getBlob().getDataAsString());
+  
+  let row = 2;
+  for (const [productKey, productData] of Object.entries(indexData.products)) {
+    productData.assets.forEach(asset => {
+      sheet.getRange(row, 1, 1, 8).setValues([[
+        productData.product_info.name,
+        productData.product_info.sku,
+        productData.product_info.category,
+        asset.file_info.processed_name.split('.').pop(),
+        Math.round(asset.ai_metadata.quality_score * 100) + '%',
+        `https://drive.google.com/file/d/${asset.file_info.drive_file_id}`,
+        asset.cloudinary_urls.web_optimized,
+        asset.timestamps.processed
+      ]]);
+      row++;
+    });
+  }
+  
+  // Add filters and formatting
+  sheet.getRange(1, 1, row-1, 8).createFilter();
+  sheet.getRange('A1:H1').setBackground('#4285f4').setFontColor('white').setFontWeight('bold');
+}
+
+function searchAssets(searchTerm) {
+  // Advanced search function with multiple criteria
+  const indexFile = DriveApp.getFilesByName('searchable_media_index.json').next();
+  const indexData = JSON.parse(indexFile.getBlob().getDataAsString());
+  
+  let results = [];
+  
+  for (const [productKey, productData] of Object.entries(indexData.products)) {
+    productData.assets.forEach(asset => {
+      const searchableContent = [
+        productData.product_info.name,
+        productData.product_info.sku,
+        productData.product_info.category,
+        ...asset.ai_metadata.tags,
+        asset.ai_metadata.description
+      ].join(' ').toLowerCase();
+      
+      if (searchableContent.includes(searchTerm.toLowerCase())) {
+        results.push({
+          product: productData.product_info.name,
+          sku: productData.product_info.sku,
+          file: asset.file_info.processed_name,
+          quality: asset.ai_metadata.quality_score,
+          drive_link: `https://drive.google.com/file/d/${asset.file_info.drive_file_id}`,
+          cloudinary_url: asset.cloudinary_urls.web_optimized
+        });
+      }
+    });
+  }
+  
+  return results.sort((a, b) => b.quality - a.quality);
+}</code></pre>
 </section>
 
 <section id="repository">
@@ -1259,32 +1569,6 @@ graph TD
 </ul>
 </div>
 
-<h3>Enhanced Directory Structure for Product Repository</h3>
-<pre><code>/DSi-Product-Repository
-    /Palace-of-Fragrances
-        /Classic-Range
-            /Opulent-Shaik-Amethyst
-                /Media
-                    /Images
-                        /3D-Renders
-                        /Photos (Real, AI-Generated)
-                        /High-Resolution
-                        /Web-Optimized
-                    /Videos
-                        /Product-Showcase
-                        /Marketing-Campaigns
-                /Marketing
-                    /Brochures
-                    /Social-Media
-                    /Print-Ads
-                    /Event-Presentations
-                /ERP-Integration
-                    /SKU-Data
-                    /Pricing
-                    /Product-Specifications
-                /Archives
-                    /Old-Campaigns
-                    /Discontinued-Versions</code></pre>
 </section>
 
 <section id="database">
@@ -1986,7 +2270,7 @@ graph TB
 <h3>Capturing Early Design Intelligence</h3>
 <p>The current repository excels at marketing-ready assets and ERP-linked SKUs, but the front end of the Product Lifecycle Management (PLM) chain—the "fuzzy front-end" of ideation, sketches, concept CAD, form-finding videos, supplier quotes, lab results—is where 80% of downstream decisions are made.</p>
 
-<h3>Enhanced PLM Directory Structure</h3>
+<h3> PLM (MCV) Directory Structure</h3>
 <pre><code>/DSi-Product-Repository
    /Palace-of-Fragrances
       /Classic-Range
@@ -2153,62 +2437,7 @@ graph LR
 </section>
 
 <section id="media-guide">
-<h2>🎞️ Media-Pipeline Implementation Guide</h2>
-<p>This section details the complete technical specification for deploying the DSI Media Repository Integration Architecture with automated workflows from upload to CDN distribution.</p>
-
-<h3>Automated Workflow Processes</h3>
-<h4>Complete End-to-End Process Flow</h4>
-<div class="mermaid">
-flowchart TB
-    subgraph "Phase 1: Ingestion"
-        Upload[File Upload] --> Detection[Auto-Detection]
-        Detection --> Backup[QNAP Backup]
-        Backup --> Log[Change Log]
-    end
-
-    subgraph "Phase 2: AI Processing"
-        Log --> AI[Weaviate Analysis]
-        AI --> Tags[Generate Tags]
-        Tags --> Meta[Create Metadata]
-    end
-
-    subgraph "Phase 3: CDN Distribution"
-        Meta --> CDN[Cloudinary Upload]
-        CDN --> Optimize[Auto-Optimization]
-        Optimize --> URLs[Generate URLs]
-    end
-
-    subgraph "Phase 4: Integration"
-        URLs --> ERP[ERP Integration]
-        URLs --> Social[Social Media Variants]
-        URLs --> Web[Web Distribution]
-    end
-
-    Web --> Final[Media Ready for Distribution]
-
-    style Upload fill:#e1f5fe
-    style AI fill:#f3e5f5
-    style CDN fill:#fce4ec
-    style Final fill:#e8f5e8
-</div>
-
-<h4>Workflow 1: Media Ingestion & Backup</h4>
-<ol>
-  <li><strong>File Upload to Product Folder</strong> → Detect File via Google Drive API</li>
-  <li><strong>Extract Product Name & SKU</strong> from Folder Path</li>
-  <li><strong>Log File Information</strong> in Tracking System</li>
-  <li><strong>Trigger QNAP NAS Backup Sync</strong></li>
-  <li><strong>Create Initial Metadata Record</strong></li>
-  <li><strong>Send Google Chat Notification</strong></li>
-  <li><strong>Complete:</strong> Update <code>/Metadata/Media-Change-History/{ProductName}_{SKU}_change_log.json</code></li>
-  <li><strong>File Ready for AI Processing</strong></li>
-</ol>
-<div class="note">
-<strong>Output Location:</strong><br>
-<code>/Metadata/Media-Change-History/{ProductName}_{SKU}_change_log.json</code>
-</div>
-
-<h3>Enhanced Communication Integration</h3>
+<h2>Communication Integration/h2>
 <div class="tabs">
   <div class="tab-buttons">
     <button class="tab-button active" onclick="showTab(event, 'google-chat')">Google Chat</button>
