@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -839,15 +840,7 @@
     <li><a href="#media-guide" data-section="media-guide">Media Pipeline</a></li>
     <li><a href="#implementation" data-section="implementation">Implementation</a></li>
     <li><a href="#deployment" data-section="deployment">Deployment</a></li>
-    <li><a href="#security" data-section="security">Security</a></li>
     <li><a href="#testing" data-section="testing">Testing</a></li>
-    <li><a href="#best-practices" data-section="best-practices">Best Practices</a></li>
-    <li><a href="#change" data-section="change">Change Management</a></li>
-  
-    <li><a href="#monitoring-alerting" data-section="monitoring-alerting">Monitoring &amp; Alerting</a></li>
-<li><a href="#governance-workflows" data-section="governance-workflows">Governance Workflows</a></li>
-<li><a href="#archival-cost" data-section="archival-cost">Archival &amp; Cost Jobs</a></li>
-<li><a href="#voice-assist" data-section="voice-assist">Voice &amp; Quick‑Task Assist</a></li>
 </ul>
 </nav>
 
@@ -869,21 +862,21 @@
     <li><a href="#media-guide">🎞️ Media-Pipeline Implementation Guide</a></li>
     <li><a href="#implementation">🔧 Technical Implementation</a></li>
     <li><a href="#deployment">🚀 Deployment & Hosting Options</a></li>
-    <li><a href="#security">🔒 Security & Compliance</a></li>
     <li><a href="#testing">🧪 Testing & Monitoring</a></li>
-    <li><a href="#best-practices">⭐ Best Practices & Optimization</a></li>
-    <li><a href="#change">🔄 Change-Management & Review Cycle</a></li>
-  
-    <li><a href="#monitoring-alerting" data-section="monitoring-alerting">Monitoring &amp; Alerting</a></li>
-<li><a href="#governance-workflows" data-section="governance-workflows">Governance Workflows</a></li>
-<li><a href="#archival-cost" data-section="archival-cost">Archival &amp; Cost Jobs</a></li>
-<li><a href="#voice-assist" data-section="voice-assist">Voice &amp; Quick‑Task Assist</a></li>
 </ul>
 </div>
 
 <section id="purpose">
 <h2>🎯 Purpose & Scope</h2>
-<p>This unified guide consolidates the DSI Media Repository Integration Architecture into a single, comprehensive digital stack. It replaces piecemeal PDFs and chat notes with a single, searchable HTML reference. Content is sourced from the technical specifications and implementation guidelines.</p>
+<p>The DSI Media Repository Integration Architecture is a comprehensive, AI-powered digital asset management ecosystem that automates the complete lifecycle of luxury product media from initial design concepts through production-ready marketing assets. This unified guide consolidates the DSI Media Repository Integration Architecture into a single, comprehensive digital stack that replaces piecemeal PDFs and chat notes with a single, searchable HTML reference. Content is sourced from the technical specifications and implementation guidelines.</p>
+<h3>Core Architecture Overview:</h3>
+<ul>
+  <li><strong>Source:</strong> Google Drive hierarchical repository structure</li>
+  <li><strong>Processing:</strong> n8n workflow automation with AI-powered analysis</li>
+  <li><strong>Storage:</strong> Multi-tier approach with Weaviate vector database and PostgreSQL</li>
+  <li><strong>Distribution:</strong> Cloudinary CDN optimization and multi-platform sync</li>
+  <li><strong>Intelligence:</strong> OpenAI-powered metadata extraction and MCP compliance</li>
+</ul>
 
 <h3>Core Technologies Used</h3>
 <div class="mermaid">
@@ -1011,59 +1004,29 @@ graph TD
 
 <section id="workspace">
 <h2>🌐 Google Workspace OU / Shared-Drive Architecture</h2>
-<p>The Google Workspace environment is structured to reflect the organizational hierarchy and facilitate efficient collaboration and data management. Shared drives are used for centralized access and governance of key digital assets.</p>
+<p>The Google Workspace environment is structured to reflect the organizational hierarchy and facilitate efficient collaboration and data management. Shared drives are used for centralized access and governance of key digital assets. Google Drive serves as the primary media repository with structured organizational units (OUs) that mirror the corporate structure, allowing for granular policy application and user management.</p>
 
 <h3>Current Workspace Shared Drives Directory</h3>
 <pre><code>
-[SANDBOX] DSI 00 - Archive
-[SANDBOX] DSI 01 - Technical-BIM & R&D
-[SANDBOX] DSI 02 - Finance & Legal
-[SANDBOX] DSI 03 - Marketing & Investor Relations
-[SANDBOX] DSI 04 - Project Marayai
-    Project‐Marayai
-    ├── Country_Nodes
-    ├── Desert_Voyager_Sculpture
-    ├── Master_Plans
-    └── Orb_Nexus_Bahrain
-        ├── CGI
-        ├── Drawings
-        └── Permits
-[SANDBOX] DSi 05 - Media Governance        
-    Governance & Protocols
-    ├── Change‐Log
-    ├── Domain & DNS Records
-    └── IP & Licences
-[SANDBOX] DSi 06 - Media Repository
-    DSI-Product-Repository
-    ├── DSI-Product-Repository
-    │   ├── Metadata
-    │   ├── Palace-of-Fragrances
-    │   ├── Palace-of-Precision
-    │   ├── Palace-of-Style
-    │   └── Processed-Media
-    │       ├── ERP-Integrated
-    │       ├── Social-Media-Posts
-    │       └── Web-Optimized
-    │           ├── Metadata
-    │           │   ├── AI-Generated-Tags
-    │           │   ├── Approval-Stages
-    │           │   ├── Media-Change-History
-    │           │   ├── Multilingual-Descriptions
-    │           │   └── Tagging-Data
-    │           │   └── Version-Control
-    │           ├── Palace-of-Fragrances
-    │           │   ├── Classic-Range
-    │           │   │   ├── Amber-Kroud
-    │           │   │   ├── Chic-Shaik-Emerald
-    │           │   │   ├── Opulent-Shaik-Amethyst
-    │           │   │   ├── Opulent-Shaik-Sapphire
-    │           │   │   └── Sochi-Onyx
-    │           │   └── Precious-Range
-    │           │       ├── Objet-d-Art-Luxury-Sterling-Silver
-    │           │       └── Objet-d-Art-Optimum-Precious-Gold
-    │           ├── Palace-of-Precision
-    │           └── Palace-of-Style
-</code></pre>
+[SANDBOX] DSI 06 - Media Repository
+├── DSI-Product-Repository/
+│   ├── Palace-of-Fragrances/
+│   │   ├── Classic-Range/
+│   │   │   ├── Opulent-Shaik-Amethyst/
+│   │   │   ├── Chic-Shaik-Emerald/
+│   │   │   ├── Amber-Kroud/
+│   │   │   ├── Opulent-Shaik-Sapphire/
+│   │   │   └── Sochi-Onyx/
+│   │   └── Precious-Range/
+│   │       ├── Objet-d-Art-Luxury-Sterling-Silver/
+│   │       └── Objet-d-Art-Optimum-Precious-Gold/
+│   ├── Palace-of-Precision/
+│   └── Palace-of-Style/
+└── Processed-Media/
+    ├── ERP-Integrated/
+    ├── Social-Media-Posts/
+    └── Web-Optimized/
+</code></pre></code></pre>
 
 <h3>3.1 Organizational Units (OUs)</h3>
 <p>OUs mirror the corporate structure, allowing for granular policy application and user management.</p>
@@ -1131,7 +1094,36 @@ graph TD
 <h3>3.4 Integration with DSi Repository</h3>
 <p>Shared Drives serve as the primary source for media ingestion into the DSi Product Repository, ensuring a single source of truth.</p>
 
-<h3>3.5 Media Processing Workflow</h3>
+<h3>3.5 Real-Time Event Detection</h3>
+<p>The system uses Google Pub/Sub for real-time event processing with file upload triggers, creating an immediate response system for new media uploads.</p>
+<h4>Event Flow:</h4>
+<ul>
+  <li>Google Drive Webhook → File upload detected</li>
+  <li>Cloud Function → drive-webhook-to-pubsub processes headers</li>
+  <li>Pub/Sub Message → Triggers n8n workflow orchestration</li>
+  <li>Metadata Extraction → Intelligent product and SKU detection</li>
+</ul>
+
+<h3>3.6 Multi-Format Support</h3>
+<p>The ingestion system supports comprehensive media formats:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Media Type</th>
+      <th>Supported Formats</th>
+      <th>Processing Pipeline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Images</td><td>JPEG, PNG, WebP, TIFF</td><td>AI analysis → Cloudinary optimization</td></tr>
+    <tr><td>Videos</td><td>MP4, MOV, AVI</td><td>Video transcoding → Vidjet hosting</td></tr>
+    <tr><td>3D Models</td><td>.blend, .obj, .stl, .fbx, .3ds</td><td>Render generation → CDN distribution</td></tr>
+    <tr><td>CAD Files</td><td>.step, .dwg, .iges, .stp</td><td>Technical processing → PLM integration</td></tr>
+    <tr><td>Documents</td><td>PDF, DOC, DOCX</td><td>OCR processing → Document intelligence</td></tr>
+  </tbody>
+</table>
+
+<h3>3.7 Media Processing Workflow</h3>
 <div class="mermaid">
 graph TD
     A[Google Drive Trigger: New File] --> B[Extract Metadata & Path Analysis]
@@ -1446,6 +1438,36 @@ function searchAssets(searchTerm) {
 <h2>📁 DSI Repository Structure</h2>
 <p>The DSI Media Repository Integration Architecture is an end-to-end automated media processing pipeline that streamlines the management of digital assets for DSI's luxury product lines. The system automatically ingests media files from Google Drive, processes them through AI services, stores semantic vectors in Weaviate, logs metadata in PostgreSQL, and optimizes media for CDN distribution.</p>
 
+<h3>Intelligent Metadata Definition</h3>
+<p>Metadata is dynamically generated and enriched to ensure comprehensive and accurate product information, enabling advanced search and integration.</p>
+
+<h4>AI-Powered Product Detection</h4>
+<p>Products are automatically detected and classified based on folder paths and filename analysis. This ensures accurate categorization and metadata assignment from the moment a file is ingested.</p>
+<pre><code>
+# Example: Python snippet for product detection from path
+def extract_product_info(file_path):
+    parts = file_path.split('/')
+    if 'Palace-of-Fragrances' in parts:
+        palace_index = parts.index('Palace-of-Fragrances')
+        if len(parts) > palace_index + 2:
+            product_name = parts[palace_index + 2]
+            return product_name.replace('-', ' ')
+    return 'Unknown Product'
+
+file_path = '/DSI-Product-Repository/Palace-of-Fragrances/Classic-Range/Opulent-Shaik-Amethyst/Media/image.jpg'
+print(extract_product_info(file_path))
+# Output: Opulent Shaik Amethyst
+</code></pre>
+
+<h4>Dynamic Metadata Enrichment</h4>
+<p>Metadata is continuously enriched through various AI-driven processes:</p>
+<ul>
+  <li><strong>AI Content Analysis:</strong> Automated tagging and description generation based on visual and textual content.</li>
+  <li><strong>Contextual Path Analysis:</strong> Extracting product, category, and project information from file paths.</li>
+  <li><strong>Historical Pattern Recognition:</strong> Learning from past metadata assignments to improve accuracy.</li>
+  <li><strong>Cross-Platform Validation:</strong> Verifying metadata consistency across integrated systems like ERPNext.</li>
+</ul>
+
 <h3>High-Level Architecture</h3>
 <div class="mermaid">
 graph TB
@@ -1573,6 +1595,9 @@ graph TD
 
 <section id="database">
 <h2>🗄️ Database & Data-Lake Blueprint</h2>
+<h3>Advanced Indexing & Search Architecture</h3>
+<p>The DSI ecosystem leverages advanced indexing and search architectures to ensure rapid and accurate retrieval of media assets and documents, powered by vector databases and dual-engine OCR.</p>
+
 <h3>5.1 PostgreSQL (Metadata & Logs)</h3>
 <p>Primary database for structured metadata, audit trails, and workflow logs.</p>
   <pre><code>-- Media Assets Table with MCP Support
@@ -1664,7 +1689,18 @@ CREATE INDEX idx_document_index_mcp ON document_index(mcp_id);</code></pre>
   }]
 }</code></pre>
 
-<h3>5.3 Data Lake Strategy</h3>
+<h3>5.3 Dual-Engine OCR Architecture</h3>
+<p>The system utilizes a dual-engine OCR architecture (AWS Textract + Google Cloud Vision) for robust document intelligence, improving search recall and precision across the DSI ecosystem.</p>
+
+<h4>Benefits of Dual-Engine OCR:</h4>
+<ul>
+  <li><strong>Weaviate Integration:</strong> OCR-extracted text is vectorized and stored in Weaviate for semantic search, allowing retrieval by natural language queries.</li>
+  <li><strong>ERPNext Linkage:</strong> Structured data from OCR (e.g., invoice details) is automatically linked to ERPNext, enhancing product and financial management.</li>
+  <li><strong>Legal Workflow Automation:</strong> Automated flagging of documents for legal review based on content analysis (e.g., missing signatures, specific clauses).</li>
+  <li><strong>Multi-language Support:</strong> Comprehensive support for various languages, including Arabic, ensuring global applicability.</li>
+</ul>
+
+<h3>5.4 Data Lake Strategy</h3>
 <p>The DSI Data Lake leverages AWS S3 as the primary storage backbone, integrating with Google Workspace Drive as the source repository. The architecture focuses on workflow-driven data movement where n8n processes append metadata and processed media back to Google Drive while maintaining long-term archives in AWS S3 with intelligent lifecycle management.</p>
 
 <h4>AWS-Centric Data Lake Architecture</h4>
@@ -2270,7 +2306,8 @@ graph TB
 <h3>Capturing Early Design Intelligence</h3>
 <p>The current repository excels at marketing-ready assets and ERP-linked SKUs, but the front end of the Product Lifecycle Management (PLM) chain—the "fuzzy front-end" of ideation, sketches, concept CAD, form-finding videos, supplier quotes, lab results—is where 80% of downstream decisions are made.</p>
 
-<h3> PLM (MCV) Directory Structure</h3>
+<h3>Extended PLM Directory Structure</h3>
+<p>The PLM directory structure has been extended to include a new '00-Early-Design' folder and its sub-structure within the product hierarchy, ensuring early design intelligence is captured and managed.</p>
 <pre><code>/DSi-Product-Repository
    /Palace-of-Fragrances
       /Classic-Range
@@ -2297,6 +2334,25 @@ graph TB
             /Media                      ← Existing structure
             /Marketing
             /ERP-Integration</code></pre>
+
+<h3>PLM Workflow Automation</h3>
+<p>Automated actions and system integrations are defined for different PLM stages to streamline the product development process.</p>
+<table>
+  <thead>
+    <tr>
+      <th>PLM Stage</th>
+      <th>Automated Actions</th>
+      <th>System Integration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Concept</td><td>Auto-tag in Weaviate (plm_stage=Concept), Notify #design-review in Google Chat, Create ERPNext "Design Task"</td><td>Weaviate, Google Chat, ERPNext</td></tr>
+    <tr><td>Gate-A</td><td>Textract OCR on review docs, Trigger Raven decision thread, Update ERPNext ECO status</td><td>AWS Textract, Raven AI, ERPNext</td></tr>
+    <tr><td>Prototype</td><td>Version stamp to MCP, Export STEP to Cloudinary (renders), Push BOM estimate to ERPNext</td><td>MCP, Cloudinary, ERPNext</td></tr>
+    <tr><td>PPAP</td><td>Move approved designs to /Media branch, Update SKU with final specifications, Trigger marketing asset creation</td><td>Google Drive, ERPNext, n8n</td></tr>
+    <tr><td>Production</td><td>Final asset optimization, Sync to WooCommerce/Webflow, Generate compliance reports</td><td>Cloudinary, WooCommerce, Webflow, Raven AI</td></tr>
+  </tbody>
+</table>
 
 <h3>PLM Workflow Integration</h3>
 <div class="mermaid">
@@ -2437,7 +2493,7 @@ graph LR
 </section>
 
 <section id="media-guide">
-<h2>Communication Integration/h2>
+<h2>🎞️ Media-Pipeline Implementation Guide</h2>
 <div class="tabs">
   <div class="tab-buttons">
     <button class="tab-button active" onclick="showTab(event, 'google-chat')">Google Chat</button>
@@ -2531,94 +2587,83 @@ graph LR
 <section id="implementation">
   <h2>🔧 Technical Implementation</h2>
 
+  <h3>Google Cloud Function Deployment Guide</h3>
+  <p>This section details the deployment of a Google Cloud Function to act as a webhook for Google Drive changes, forwarding them to Google Pub/Sub. This function is crucial for triggering real-time media ingestion workflows.</p>
+
+  <h4>1. `requirements.txt`</h4>
+  <pre><code>
+google-cloud-pubsub==2.15.0
+google-cloud-storage==2.10.0
+</code></pre>
+
+  <h4>2. `main.py` (Python Code for `drive_webhook_to_pubsub`)</h4>
+  <pre><code>
+import os
+import base64
+from google.cloud import pubsub_v1
+
+PROJECT_ID = os.environ.get("GCP_PROJECT_ID")
+TOPIC_ID = os.environ.get("GCP_PUBSUB_TOPIC_ID")
+
+def drive_webhook_to_pubsub(request):
+    publisher = pubsub_v1.PublisherClient()
+    topic_path = publisher.topic_path(PROJECT_ID, TOPIC_ID)
+
+    # Extract relevant headers from the Drive webhook notification
+    headers = dict(request.headers)
+    message_data = {
+        "X-Goog-Channel-ID": headers.get("X-Goog-Channel-ID"),
+        "X-Goog-Channel-Token": headers.get("X-Goog-Channel-Token"),
+        "X-Goog-Channel-Expiration": headers.get("X-Goog-Channel-Expiration"),
+        "X-Goog-Message-Number": headers.get("X-Goog-Message-Number"),
+        "X-Goog-Resource-State": headers.get("X-Goog-Resource-State"),
+        "X-Goog-Resource-ID": headers.get("X-Goog-Resource-ID"),
+        "X-Goog-Resource-URI": headers.get("X-Goog-Resource-URI"),
+        "Content-Type": headers.get("Content-Type"),
+        "Content-Length": headers.get("Content-Length"),
+        "Body": request.get_data(as_text=True) # Capture the body if any
+    }
+
+    # Convert message_data to a string and then to bytes
+    data_str = str(message_data)
+    data_bytes = data_str.encode("utf-8")
+
+    # Publish the message to Pub/Sub
+    future = publisher.publish(topic_path, data_bytes)
+    print(f"Published message ID: {future.result()}")
+
+    return "OK", 200
+</code></pre>
+
+  <h4>3. Deployment Commands</h4>
+  <pre><code>
+# Deploy the Cloud Function
+gcloud functions deploy drive-webhook-to-pubsub \
+    --runtime python39 \
+    --trigger-http \
+    --allow-unauthenticated \
+    --entry-point drive_webhook_to_pubsub \
+    --set-env-vars GCP_PROJECT_ID=your-gcp-project-id,GCP_PUBSUB_TOPIC_ID=your-pubsub-topic-id
+
+# After deployment, get the function's trigger URL
+gcloud functions describe drive-webhook-to-pubsub --format="value(httpsTrigger.url)"
+</code></pre>
+
+  <h4>4. Script for Exploring Drive Folder IDs</h4>
+  <pre><code>
+# Bash script to list Google Drive folder IDs (requires gdrive CLI tool)
+# Install gdrive: https://github.com/prasmussen/gdrive
+
+gdrive list --query "mimeType = 'application/vnd.google-apps.folder' and 'PARENT_FOLDER_ID' in parents" \
+    --name-width 100 --columns id,name
+
+# Replace PARENT_FOLDER_ID with the ID of the parent folder you want to explore.
+# For example, to list subfolders of 'DSI-Product-Repository', use its ID.
+</code></pre>
+
   <h3>Option A: Simplified Google Workspace Approach (Recommended)</h3>
   <div class="highlight">
     <strong>Best for:</strong> SMB teams with existing Google Workspace accounts
-  </div>
-
-  <h4>n8n Workflow Configuration</h4>
-  <pre><code>{
-  "workflowName": "DSI Media Upload Processor",
-  "trigger": {
-    "type": "Google Drive Trigger",
-    "settings": {
-      "authentication": "oAuth2",
-      "resource": "file", 
-      "event": "fileCreated",
-      "folderId": "{{ $env.DSI_DRIVE_FOLDER_ID }}",
-      "watchSubfolders": true,
-      "fileTypes": ["image/jpeg", "image/png", "image/webp", "video/mp4", "video/mov"],
-      "pollInterval": 300,
-      "excludePaths": ["Archives", "Metadata", "System-Integration"]
-    }
-  },
-  "filters": [{
-    "type": "IF", 
-    "condition": "{{ $json.path.includes('Product-Images') || $json.path.includes('Videos') || $json.path.includes('3D-Renders') }}"
-  }],
-  "errorHandling": {
-    "retryAttempts": 3,
-    "retryDelay": 60,
-    "errorNotification": "Google Chat"
-  }
-}</code></pre>
-
-  <h4>Setup Steps for Google Workspace</h4>
-  <ol>
-    <li>In n8n, go to Credentials → Add Credential → Google Drive OAuth2 API</li>
-    <li>Click "Connect my account" and sign in with your Google Workspace account</li>
-    <li>Grant permissions for Drive access</li>
-    <li>No need for separate GCP project or client IDs!</li>
-  </ol>
-
-  <h3>Environment Variables (Simplified Google Workspace Approach)</h3>
-  <pre><code># DSI Repository  
-DSI_DRIVE_FOLDER_ID=your_root_folder_id
-
-# AI & Vector Storage
-WEAVIATE_API_KEY=your_weaviate_key
-WEAVIATE_ENDPOINT=your_weaviate_url
-OPENAI_API_KEY=your_openai_key
-
-# CDN & Optimization
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key  
-CLOUDINARY_API_SECRET=your_api_secret
-
-# Notifications (Optional)
-GOOGLE_CHAT_WEBHOOK=your_chat_webhook_url
-
-# AI Agents
-MANUS_API_KEY=your_manus_key
-ABACUS_API_KEY=your_abacus_key
-
-# OCR Services
-GCP_PROJECT_ID=your_gcp_project
-AWS_TEXTRACT_KEY=your_aws_key
-AWS_TEXTRACT_SECRET=your_aws_secret</code></pre>
-
-  <h3>Complete n8n Workflow Examples</h3>
-  <div class="workflow-cards">
-    <div class="workflow-card">
-      <h4>Media Upload & AI Tagging Workflow</h4>
-      <pre><code>// Workflow nodes
-1. Google Drive Trigger → New file detected
-2. Extract Metadata → Parse filename, path
-3. Weaviate AI → Generate tags, embeddings
-4. Cloudinary → Upload and optimize
-5. ERPNext → Update product records
-6. Google Chat → Send notification</code></pre>
-    </div>
-    <div class="workflow-card">
-      <h4>OCR Document Processing Workflow</h4>
-      <pre><code>// Workflow nodes
-1. Google Drive Trigger → PDF/Image upload
-2. OCR Service → Textract + Vision API
-3. Result Merger → Combine OCR outputs
-4. Weaviate → Store searchable text
-5. ERPNext → Create document index
-6. Raven AI → Log processing</code></pre>
-    </div>
   </div>
 </section>
 
@@ -2748,114 +2793,6 @@ volumes:
   </div>
 </section>
 
-<section id="security">
-  <h2>🔒 Security & Compliance</h2>
-
-  <h3>Data Protection Strategy</h3>
-  <div class="mermaid">
-    graph TD
-        subgraph "Security Layers"
-            API[API Key Management]
-            TLS[TLS Encryption]
-            IAM[Identity & Access Management]
-            Audit[Audit Logging]
-        end
-        
-        subgraph "Storage Security"
-            Vault[Credential Vaults]
-            Encrypt[Data Encryption at Rest]
-            Backup[Secure Backup Strategy]
-        end
-        
-        subgraph "Access Control"
-            RBAC[Role-Based Access Control]
-            MFA[Multi-Factor Authentication]
-            Network[Network Security]
-        end
-        
-        API --> Vault
-        TLS --> Encrypt
-        IAM --> RBAC
-        Audit --> Backup
-        
-        style API fill:#e3f2fd
-        style TLS fill:#e8f5e8
-        style IAM fill:#fff3e0
-        style Audit fill:#fce4ec
-  </div>
-
-  <h3>Security Requirements</h3>
-  <div class="warning">
-    <strong>Critical Security Measures:</strong>
-    <ul>
-      <li>All API keys stored in secure credential vaults (AWS Secrets Manager / Google Secret Manager)</li>
-      <li>Encrypted communication between all services (TLS 1.3)</li>
-      <li>Regular credential rotation schedule (90 days)</li>
-      <li>Access logging and audit trails for all systems</li>
-      <li>Role-based permissions across all systems</li>
-      <li>Least privilege access principles</li>
-      <li>Regular access reviews and updates</li>
-      <li>Secure backup and recovery procedures</li>
-      <li>GDPR/ADGM compliance for data handling</li>
-    </ul>
-  </div>
-
-  <h3>API Security Configuration</h3>
-  <pre><code># Example: Secure API Configuration
-{
-  "security": {
-    "api_key_rotation": "90_days",
-    "encryption": {
-      "in_transit": "TLS_1.3",
-      "at_rest": "AES_256"
-    },
-    "access_control": {
-      "type": "RBAC",
-      "mfa_required": true,
-      "ip_whitelist": ["10.0.0.0/8", "192.168.0.0/16"]
-    },
-    "audit": {
-      "log_retention": "365_days",
-      "log_encryption": true,
-      "alert_on_anomaly": true
-    }
-  }
-}</code></pre>
-
-  <h3>Compliance Requirements</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Requirement</th>
-        <th>Implementation</th>
-        <th>Verification</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>GDPR Compliance</td>
-        <td>Data encryption, access controls, right to deletion</td>
-        <td>Quarterly audits</td>
-      </tr>
-      <tr>
-        <td>ADGM Regulations</td>
-        <td>Local data residency, financial data protection</td>
-        <td>Annual certification</td>
-      </tr>
-      <tr>
-        <td>IP Protection</td>
-        <td>Watermarking, access logs, NDA enforcement</td>
-        <td>Monthly review</td>
-      </tr>
-      <tr>
-        <td>SOC 2 Type II</td>
-        <td>Security controls, availability, confidentiality</td>
-        <td>Annual audit</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
 <section id="testing">
   <h2>🧪 Testing & Monitoring</h2>
 
@@ -2947,306 +2884,8 @@ flowchart TD
 - cost_per_operation: Budget tracking</code></pre>
 </section>
 
-<section id="best-practices">
-  <h2>⭐ Best Practices & Optimization</h2>
-
-  <h3>Performance Optimization</h3>
-  <ul>
-    <li><strong>Event-driven Architecture:</strong>
-      <ul>
-        <li>Reduce latency with real-time triggers</li>
-        <li>Minimize API quota usage</li>
-        <li>Implement efficient polling strategies</li>
-        <li>Use webhooks where available</li>
-      </ul>
-    </li>
-    <li><strong>Infrastructure as Code:</strong>
-      <ul>
-        <li>Version control all configuration changes</li>
-        <li>Automated deployment pipelines</li>
-        <li>Environment-specific configurations</li>
-        <li>Terraform/Ansible for consistency</li>
-      </ul>
-    </li>
-    <li><strong>Caching Strategy:</strong>
-      <ul>
-        <li>CDN edge caching for optimized media</li>
-        <li>Database query optimization</li>
-        <li>Vector search result caching</li>
-        <li>API response caching</li>
-      </ul>
-    </li>
-    <li><strong>AI Optimization:</strong>
-      <ul>
-        <li>Batch processing for efficiency</li>
-        <li>Model selection based on use case</li>
-        <li>Cost-aware API usage</li>
-        <li>Fallback strategies for failures</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3>Implementation Roadmap</h3>
-  <div class="highlight">
-    <strong>Phase 1: Foundation (Week 1-2)</strong>
-    <ul>
-      <li>Set up basic infrastructure (Docker containers)</li>
-      <li>Configure n8n with Google Workspace OAuth</li>
-      <li>Deploy PostgreSQL instance</li>
-      <li>Test file upload detection</li>
-    </ul>
-    
-    <strong>Phase 2: Core Workflows (Week 3-4)</strong>
-    <ul>
-      <li>Implement media ingestion workflow</li>
-      <li>Set up Weaviate integration</li>
-      <li>Configure AI tagging pipeline</li>
-      <li>Test end-to-end basic flow</li>
-    </ul>
-    
-    <strong>Phase 3: CDN Integration (Week 5-6)</strong>
-    <ul>
-      <li>Configure Cloudinary integration</li>
-      <li>Implement optimization workflows</li>
-      <li>Set up URL generation and mapping</li>
-      <li>Test media distribution pipeline</li>
-    </ul>
-
-    <strong>Phase 4: Business System Integration (Week 7-8)</strong>
-    <ul>
-      <li>Connect ERPNext for SKU management</li>
-      <li>Implement WooCommerce/Webflow sync</li>
-      <li>Configure Google Chat notifications</li>
-      <li>Set up Gameplan/Raven integration</li>
-    </ul>
-
-    <strong>Phase 5: AI Agent Deployment (Week 9-10)</strong>
-    <ul>
-      <li>Deploy Manus/Abacus in sandbox</li>
-      <li>Configure MCP standards</li>
-      <li>Test automated workflows</li>
-      <li>Validate AI decision-making</li>
-    </ul>
-
-    <strong>Phase 6: Production Hardening (Week 11-12)</strong>
-    <ul>
-      <li>Implement security measures</li>
-      <li>Set up monitoring and alerting</li>
-      <li>Configure backup procedures</li>
-      <li>Performance testing and optimization</li>
-    </ul>
-  </div>
-
-  <h3>Optimization Tips</h3>
-  <div class="workflow-cards">
-    <div class="workflow-card">
-      <h4>🚀 Media Processing</h4>
-      <ul>
-        <li>Use WebP for images (30-40% smaller)</li>
-        <li>Implement lazy loading</li>
-        <li>Generate responsive image sets</li>
-        <li>Optimize video bitrates</li>
-      </ul>
-    </div>
-    <div class="workflow-card">
-      <h4>📊 Database Performance</h4>
-      <ul>
-        <li>Index frequently queried fields</li>
-        <li>Implement query caching</li>
-        <li>Regular vacuum operations</li>
-        <li>Partition large tables</li>
-      </ul>
-    </div>
-    <div class="workflow-card">
-      <h4>🤖 AI Efficiency</h4>
-      <ul>
-        <li>Batch similar operations</li>
-        <li>Cache embedding results</li>
-        <li>Use appropriate model sizes</li>
-        <li>Implement retry logic</li>
-      </ul>
-    </div>
-    <div class="workflow-card">
-      <h4>🔄 Workflow Automation</h4>
-      <ul>
-        <li>Minimize sequential operations</li>
-        <li>Implement parallel processing</li>
-        <li>Use queuing for large batches</li>
-        <li>Monitor resource usage</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section id="change">
-<h2>🔄 Change-Management & Review Cycle</h2>
-
-<h3>Change Management Process</h3>
-<div class="mermaid">
-graph LR
-    A[Change Request] --> B{Impact Assessment}
-    B -->|Low| C[Quick Review]
-    B -->|Medium| D[Team Review]
-    B -->|High| E[Steering Committee]
-    
-    C --> F[Implementation]
-    D --> F
-    E --> F
-    
-    F --> G[Testing]
-    G --> H[Deployment]
-    H --> I[Documentation]
-    I --> J[Notification]
-    
-    style A fill:#e3f2fd
-    style B fill:#fff3e0
-    style F fill:#e8f5e8
-    style H fill:#fce4ec
-    style J fill:#f3e5f5
-</div>
-
-<h3>Regular Review Schedule</h3>
-<ul>
-  <li><strong>Weekly "Friday Pulse"</strong> call logs headline updates → pushed to <code>03_Change‑Log/</code></li>
-  <li><strong>CR‑### form</strong> required for any schema or permission alteration (owner: Data Steward)</li>
-  <li>Superseded versions archived to <code>99_Archive/Governance</code></li>
-  <li>Monthly architecture review meetings</li>
-  <li>Quarterly security audits</li>
-  <li>Next scheduled full review: <strong>01 Oct 2025</strong></li>
-</ul>
-
-<h3>Change Request Template</h3>
-<pre><code># Change Request: CR-2025-001
-
-## Summary
-Brief description of the proposed change
-
-## Impact Analysis
-- Systems affected: [List systems]
-- Risk level: [Low/Medium/High]
-- Rollback plan: [Yes/No]
-
-## Technical Details
-- Current state
-- Proposed state
-- Migration steps
-
-## Approvals Required
-- [ ] Technical Lead
-- [ ] Security Team
-- [ ] Business Owner
-- [ ] Compliance Officer
-
-## Timeline
-- Implementation: [Date]
-- Testing: [Date]
-- Go-live: [Date]</code></pre>
-
-<h3>Documentation Standards</h3>
-<div class="note">
-<strong>All changes must include:</strong>
-<ul>
-  <li>Updated technical documentation</li>
-  <li>Revised workflow diagrams</li>
-  <li>API documentation updates</li>
-  <li>User guide modifications</li>
-  <li>Training materials if needed</li>
-</ul>
-</div>
-
-<h3>Future Roadmap</h3>
-<div class="implementation-steps">
-<h4>Upcoming Enhancements</h4>
-<div class="step-grid">
-  <div class="step-item" data-step="Q1">
-    <strong>Q1 2025</strong>
-    <ul>
-      <li>Complete AI agent deployment</li>
-      <li>Enhance OCR capabilities</li>
-      <li>Expand PLM integration</li>
-    </ul>
-  </div>
-  <div class="step-item" data-step="Q2">
-    <strong>Q2 2025</strong>
-    <ul>
-      <li>DSI Sales integration</li>
-      <li>MCV Manufacturing linkage</li>
-      <li>Advanced analytics dashboard</li>
-    </ul>
-  </div>
-  <div class="step-item" data-step="Q3">
-    <strong>Q3 2025</strong>
-    <ul>
-      <li>MA Global expansion</li>
-      <li>Real estate project integration</li>
-      <li>Investor portal development</li>
-    </ul>
-  </div>
-  <div class="step-item" data-step="Q4">
-    <strong>Q4 2025</strong>
-    <ul>
-      <li>Full ecosystem optimization</li>
-      <li>Advanced AI capabilities</li>
-      <li>Global rollout completion</li>
-    </ul>
-  </div>
-</div>
-</div>
-</section>
 
 
-<!-- =================== NEW SECTIONS FROM v2 =================== -->
-<section id="monitoring-alerting">
-<h2>📈 Monitoring & Alerting</h2>
-<table>
-  <thead>
-    <tr><th>#</th><th>Trigger</th><th>Workflow Steps</th><th>Systems</th><th>Output</th><th>Owner</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>6.2</td><td>WVT health‑check (5 min)</td><td>Cron → /v1/meta; on 5xx notify #ai‑stack</td><td>n8n / WVT / GWS</td><td>AI‑DB uptime alert</td><td>AI Ops</td></tr>
-    <tr><td>6.3</td><td>CLO usage spike</td><td>Cloudinary webhook when bandwidth &gt; 80 % plan → cost report → Chat</td><td>CLO / n8n / GWS</td><td>Cost alert</td><td>Media Pipeline</td></tr>
-    <tr><td>6.4</td><td>R53 fail‑over event</td><td>Route 53 health alarm → Chat ping → auto‑shift weight to healthy CDN</td><td>AWS R53 / n8n / GWS</td><td>Zero‑downtime switch</td><td>Infra Ops</td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="governance-workflows">
-<h2>🛡️ Governance & Compliance Workflows</h2>
-<table>
-  <thead>
-    <tr><th>#</th><th>Trigger</th><th>Workflow Steps</th><th>Systems</th><th>Output</th><th>Owner</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>5.1</td><td>Monthly Workspace Security API dump</td><td>Shared links / DLP → RVN PDF → email CISO</td><td>GWS Admin / n8n / RVN</td><td>Compliance report</td><td>IT Security</td></tr>
-    <tr><td>5.2</td><td>Quarterly Steering Committee KPI pack</td><td>Auto‑compile KPI pack from ERP BI → RVN → share link</td><td>ERP / RVN / GWS</td><td>Board pack</td><td>Corp Strategy</td></tr>
-    <tr><td>5.3</td><td>OCR privacy check</td><td>Scan OCR JSON for PII → flag in RVN; auto‑expire drive link after 30 d</td><td>OCR / n8n / RVN</td><td>PII log + retention</td><td>Legal Counsel</td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="archival-cost">
-<h2>💾 Archival & Cost‑Optimisation Jobs</h2>
-<table>
-  <thead>
-    <tr><th>#</th><th>Trigger</th><th>Workflow Steps</th><th>Systems</th><th>Output</th><th>Owner</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>8.1</td><td>Semi‑annual CLO purge</td><td>Scan CLO assets &gt; 2 y unused → purge &amp; export list to RVN</td><td>n8n / CLO / RVN</td><td>CDN cost report + purge</td><td>Media Pipeline</td></tr>
-    <tr><td>8.2</td><td>Annual Glacier review</td><td>Export S3 analytics → suggest Glacier transition → RVN board note</td><td>AWS / n8n / RVN</td><td>Storage‑tier plan</td><td>Infra Ops</td></tr>
-    <tr><td>8.3</td><td>S3 Intelligent‑Tiering audit</td><td>Mark objects not auto‑tiered → force move; update cost dashboard</td><td>AWS / n8n</td><td>Optimised storage spend</td><td>Infra Ops</td></tr>
-  </tbody>
-</table>
-</section>
-
-<section id="voice-assist">
-<h2>🎤 Voice & Quick‑Task Assist</h2>
-<p><em>Unchanged from v1 – retained here for completeness.</em></p>
-<ul>
-  <li>Google Voice triggers quick‑task n8n flows (e.g., "log decision", "start stand‑up").</li>
-  <li>Voice transcripts auto‑attached to Raven decision logs.</li>
-  <li>Gemini AI provides real‑time summarisation and task delegation.</li>
-</ul>
-</section>
 <!-- =================== END NEW SECTIONS =================== -->
 
 </main>
