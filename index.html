@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1123,24 +1124,150 @@ graph TD
   </tbody>
 </table>
 
-<h3>3.7 Media Processing Workflow</h3>
+<h3>3.7 Complete Media Processing Workflow (v2)</h3>
+<p>
+  The workflow is now split into two coordinated pipelines:
+  <strong>(1) Real-Time Optimization</strong> &nbsp;→&nbsp; <strong>(2) Scheduled / On-Demand Integration.</strong>
+  This keeps the critical “optimize & store” path lightning-fast, while heavy-weight
+  ERP / CMS syncing runs when convenient or on request.
+</p>
+
+<!-- ────────────────────────────────────────────────── -->
+<h4>Unified Workflow Overview</h4>
+<div class="workflow-card">
+<p><strong>End-to-End (Refactored):</strong> From webhook trigger ➜ optimized asset in Drive ➜ (later) integration & publishing</p>
+
 <div class="mermaid">
-graph TD
-    A[Google Drive Trigger: New File] --> B[Extract Metadata & Path Analysis]
-    B --> C[QNAP NAS Backup Sync]
-    C --> D[Weaviate AI: Generate Tags & Embeddings]
-    D --> E[Cloudinary: Upload & Optimize]
-    E --> F[Create Processed Media Package]
-    F --> G[Update Search Index]
-    G --> H[ERPNext Integration]
-    H --> I[Google Chat Notification]
-    I --> J[Final Archive to Processed Folders]
+flowchart TD
+    %% ─────────── 1. GOOGLE WORKSPACE INGRESS ───────────
+    subgraph "GOOGLE WORKSPACE"
+        A[📁 Google Drive<br/>Palace Folders] --> B[🔗 Drive API<br/>Webhook]
+        B --> C[☁️ Cloud Function<br/>drive-webhook-forwarder]
+    end
     
-    style A fill:#4285f4,color:#fff
-    style D fill:#fa6423,color:#fff
-    style E fill:#3448c5,color:#fff
-    style G fill:#e8f5e8
-    style J fill:#fce4ec
+    %% ─────────── 2. MAIN WEBHOOK CONTROLLER ───────────
+    subgraph "MAIN WEBHOOK CONTROLLER"
+        C --> D[🎯 n8n Main Webhook]
+        D --> E[🗄️ PostgreSQL<br/>Status Lookup]
+        E --> F{📊 Route Decision}
+    end
+    
+    %% ─────────── 3. DRAFT & APPROVAL ───────────
+    subgraph "DRAFT PIPELINE"
+        F -->|NEW FILE| G[📝 Draft Pipeline]
+        G --> H[📊 Path Analysis]
+        H --> I[🏷️ MCP-ID Generation]
+        I --> J[💾 DB → DRAFT]
+        J --> K[📧 Google Chat<br/>Approval Request]
+    end
+    
+    subgraph "APPROVAL WORKFLOW"
+        K --> L[📝 Google Forms]
+        L --> M{✅ Decision}
+        M -->|APPROVED| N[✅ DB → APPROVED]
+        M -->|REJECTED| O[❌ DB → REJECTED]
+        M -->|REVISION| P[🔄 DB → REVISION]
+    end
+    
+    %% ─────────── 4. REAL-TIME PRODUCTION PIPELINE ───────────
+    subgraph "REAL-TIME PRODUCTION PIPELINE"
+        N --> Q[🚀 Production Pipeline]
+        Q --> R[🤖 OpenAI Analysis]
+        R --> S[🧠 Weaviate Embeddings]
+        S --> T[📸 Cloudinary Optimize]
+        T --> U[🎨 Multi-format Gen + URLs]
+    end
+    
+    %% 🆕  5. OPTIMIZED STORAGE (END OF RT PIPELINE) ───────────
+    subgraph "OPTIMIZED STORAGE"
+        U --> AA[📁 Google Drive<br/>Processed-Media]
+        AA --> Z[💾 DB → OPTIMIZED Status]
+    end
+    
+    %% ─────────── 6. REVISION HANDLING ───────────
+    subgraph "REVISION PIPELINE"
+        F -->|EXISTING - REJECTED| DD[🔄 Revision Pipeline]
+        F -->|EXISTING - REVISION| DD
+        O --> EE[📧 Gmail Rejection Notice]
+        P --> FF[💬 Chat Revision Req.]
+        DD --> HH[📁 Drive Revisions]
+    end
+    
+    %% 🆕  7. SCHEDULED / CHAT-TRIGGERED INTEGRATION ───────────
+    subgraph "INTEGRATION WORKFLOW (Deferred)"
+        style V fill:#dc3545,color:#fff
+        style W fill:#7c3aed,color:#fff
+        style X fill:#0ea5e9,color:#fff
+        style Y fill:#34a853,color:#fff
+
+        trigger[⏰ n8n Cron<br/>or 💬 Chat / Slash-Cmd] --> check[🔍 Scan for<br/>OPTIMIZED]
+        check --> V[🏪 ERPNext]
+        V --> W[🛒 WooCommerce]
+        W --> X[🌐 Webflow]
+        X --> Y[📱 Social Media]
+        Y --> Z2[💾 DB → PUBLISHED]
+        Z2 --> BB[📋 Sheets Dashboard]
+        BB --> CC[📊 Grafana Metrics]
+    end
+    
+    %% ─────────── 8. MONITORING ───────────
+    subgraph "ALERTS & OBSERVABILITY"
+        BB --> LL[🚨 Chat Status Alerts]
+        CC --> MM[📧 Gmail Perf Alerts]
+    end
+    
+    %% ──────── Styling tweaks for clarity ─────────
+    classDef drive fill:#4285f4,color:#fff;
+    class A,B,AA drive;
+    classDef chat fill:#34a853,color:#fff;
+    class K,LL chat;
+    classDef db fill:#336791,color:#fff;
+    class E,J,N,O,P,Z,Z2 db;
+</div>
+</div>
+
+<!-- ────────────────────────────────────────────────── -->
+<h4>Technology Stack (Optimized)</h4>
+<div class="workflow-cards">
+
+  <div class="workflow-card">
+    <h4>📡 Event & Messaging</h4>
+    <ul>
+      <li><strong>Google Drive API:</strong> change webhooks</li>
+      <li><strong>Cloud Function:</strong> secure forwarder</li>
+      <li><strong>n8n Webhooks + Cron:</strong> routing & scheduled jobs</li>
+      <li><strong>Google Chat Slash-Cmd:</strong> on-demand integration trigger</li>
+    </ul>
+  </div>
+
+  <div class="workflow-card">
+    <h4>🔧 Processing & AI</h4>
+    <ul>
+      <li><strong>OpenAI Vision:</strong> asset analysis & tagging</li>
+      <li><strong>Weaviate:</strong> semantic vector DB</li>
+      <li><strong>Cloudinary:</strong> multi-format optimization</li>
+      <li><strong>PostgreSQL:</strong> single source of truth</li>
+    </ul>
+  </div>
+
+  <div class="workflow-card">
+    <h4>📊 Interface & Management</h4>
+    <ul>
+      <li><strong>Google Sheets + Grafana:</strong> live dashboards & KPIs</li>
+      <li><strong>Google Forms:</strong> human approvals</li>
+      <li><strong>Gmail + Chat:</strong> alerts & notifications</li>
+    </ul>
+  </div>
+
+  <div class="workflow-card">
+    <h4>🌐 Distribution & Integration (Deferred)</h4>
+    <ul>
+      <li><strong>ERPNext:</strong> product master sync</li>
+      <li><strong>WooCommerce:</strong> e-commerce listings</li>
+      <li><strong>Webflow:</strong> marketing sites & landing pages</li>
+      <li><strong>Social APIs:</strong> scheduled posts</li>
+    </ul>
+  </div>
 </div>
 
 <h3>3.6 Repository Structure Overview</h3>
