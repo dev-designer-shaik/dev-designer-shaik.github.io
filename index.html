@@ -14,16 +14,17 @@
     <header class="header">
         <div class="header__content">
             <div class="header__logo-container">
-                <img src="logo.webp" alt="DesignerShaik Logo" class="header__logo" >
+                <img src="logo.webp" alt="DSI Logo" class="header__logo">
                 <button class="header__sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">Menu</button>
             </div>
             <div class="header__text">
-                <h1 class="header__title">DesignerShaik Development Documentation</h1>
-                <p class="header__subtitle">Automation and AI Agent – Unified Digital Ecosystem Guide</p>
+                <h1 class="header__title">DSI IT Documentation</h1>
+                <p class="header__subtitle">Unified Digital Ecosystem & Automation Guide</p>
             </div>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
         </div>
     </header>
+
     <nav class="sidebar-nav" id="sidebarNav">
         <div class="nav-header">
             <button class="nav-collapse-btn" id="navCollapseBtn" aria-label="Collapse navigation">
@@ -32,19 +33,24 @@
         </div>
         <ul class="nav-links">
             <li><a href="#purpose" data-section="purpose">Purpose & Scope</a></li>
-            <li><a href="#governance" data-section="governance">Governance</a></li>
-            <li><a href="#workspace" data-section="workspace">Workspace</a></li>
-            <li><a href="#repository" data-section="repository">Repository</a></li>
-            <li><a href="#database" data-section="database">Database</a></li>
-            <li><a href="#automation" data-section="automation">Automation</a></li>
+            <li><a href="#governance" data-section="governance">Governance & IP</a></li>
+            <li><a href="#architecture" data-section="architecture">System Architecture</a></li>
+            <li><a href="#repository-structure" data-section="repository-structure">Repository Structure</a></li>
+            <li><a href="#tech-stack" data-section="tech-stack">Technology Stack</a></li>
+            <li><a href="#database-schema" data-section="database-schema">Database Schema</a></li>
+            <li><a href="#workflows" data-section="workflows">n8n Workflows</a></li>
+            <li><a href="#enhanced-workflows" data-section="enhanced-workflows"> Workflows</a></li>
             <li><a href="#ai-agents" data-section="ai-agents">AI Agents</a></li>
-            <li><a href="#mcp-integration" data-section="mcp-integration">MCP Integration</a></li>
-            <li><a href="#enhanced-workflows" data-section="enhanced-workflows">Enhanced Workflows</a></li>
+            <li><a href="#mcp-protocol" data-section="mcp-protocol">MCP Protocol</a></li>
+            <li><a href="#ai-integration" data-section="ai-integration">AI Integration</a></li>
             <li><a href="#ocr-services" data-section="ocr-services">OCR Services</a></li>
             <li><a href="#plm-enhancement" data-section="plm-enhancement">PLM Enhancement</a></li>
+            <li><a href="#cloudinary" data-section="cloudinary">Cloudinary Config</a></li>
+            <li><a href="#erp-sync" data-section="erp-sync">ERPNext Sync</a></li>
+            <li><a href="#drive-webhook" data-section="drive-webhook">Drive Webhook Setup</a></li>
             <li><a href="#implementation" data-section="implementation">Implementation</a></li>
             <li><a href="#deployment" data-section="deployment">Deployment</a></li>
-            <li><a href="#testing" data-section="testing">Testing</a></li>
+            <li><a href="#testing" data-section="testing">Testing Procedures</a></li>
         </ul>
     </nav>
 
@@ -52,25 +58,13 @@
 
         <section id="purpose" class="content-section">
             <h2 class="content-section__title">Purpose & Scope</h2>
-            <p>The DSI Media Repository Integration Architecture is a comprehensive, AI-powered digital asset management ecosystem that automates the complete lifecycle of luxury product media from initial design concepts through production-ready marketing assets. This unified guide consolidates the DSI Media Repository Integration Architecture into a single, comprehensive digital stack that replaces piecemeal PDFs and chat notes with a single, searchable HTML reference. Content is sourced from the technical specifications and implementation guidelines.</p>
+            <p>The DSI Media Repository Integration Architecture is a comprehensive, AI-powered digital asset management ecosystem that automates the complete lifecycle of luxury product media from initial design concepts through production-ready marketing assets. This unified guide consolidates the DSI Media Repository Integration Architecture into a single, comprehensive digital stack that replaces piecemeal PDFs and chat notes with a single, searchable HTML reference.</p>
 
             <h3 class="content-section__subtitle">Core Architecture Overview</h3>
-            <ul>
-                <li><strong>Source:</strong> Google Drive hierarchical repository structure</li>
-                <li><strong>Processing:</strong> n8n workflow automation with AI-powered analysis</li>
-                <li><strong>Storage:</strong> Multi-tier approach with Weaviate vector database and PostgreSQL</li>
-                <li><strong>Distribution:</strong> Cloudinary CDN optimization and multi-platform sync</li>
-                <li><strong>Intelligence:</strong> OpenAI-powered metadata extraction and MCP compliance</li>
-            </ul>
-
-            <h3 class="content-section__subtitle">Core Technologies Used</h3>
-            <div class="diagram-split">
-                <div class="diagram-part">
-                    <h4>Data Sources & Processing</h4>
-                    <div class="mermaid-container">
-                        <div class="mermaid">
+            <div class="mermaid-container2">
+                <div class="mermaid">
 graph TB
-    subgraph DS["Data Sources"]
+    subgraph DL["Data Layer"]
         GD["🗂️ Google Drive<br>Primary Source"]
         QNAP["💾 QNAP NAS<br>Local Backup"]
         S3["☁️ AWS S3/GCS<br>Cold Storage"]
@@ -83,19 +77,6 @@ graph TB
         MA["🎯 Manus/Abacus<br>AI Agents"]
     end
 
-    GD --> PS
-    PS --> N8N
-    N8N --> MA
-    N8N --> OAI
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="diagram-part">
-                    <h4>Storage & Distribution</h4>
-                    <div class="mermaid-container">
-                        <div class="mermaid">
-graph TB
     subgraph ST["Storage"]
         WV["🔍 Weaviate<br>Vector Search"]
         PG["🗄️ PostgreSQL<br>Metadata & Logs"]
@@ -112,15 +93,21 @@ graph TB
         WC["🛒 WooCommerce<br>eCommerce"]
         WF["🎨 Webflow<br>Marketing"]
     end
-    
+
+    GD --> PS
+    PS --> N8N
+    N8N --> MA
+    N8N --> OAI
+    OAI --> WV
+    N8N --> PG
+    N8N --> CDN
     WV --> ERP
     CDN --> WC
     CDN --> WF
-                        </div>
-                    </div>
                 </div>
             </div>
 
+            <h3 class="content-section__subtitle">Core Technologies Used</h3>
             <table class="data-table">
                 <thead>
                     <tr>
@@ -150,73 +137,139 @@ graph TB
                     <tr><td data-label="Category">Marketing</td><td data-label="Technology">Webflow</td><td data-label="Primary Function">Marketing websites</td><td data-label="Integration Points">Content management, CDN</td></tr>
                 </tbody>
             </table>
+
+            <h3 class="content-section__subtitle">Automation & AI-Agent Matrix</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Function Area</th>
+                        <th scope="col">Tool / Agent</th>
+                        <th scope="col">Relevant Sections</th>
+                        <th scope="col">Key Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Function Area">Media Ingestion</td><td data-label="Tool / Agent">n8n</td><td data-label="Relevant Sections">4.1</td><td data-label="Key Use Case">Google Drive ↔ Cloudinary sync</td></tr>
+                    <tr><td data-label="Function Area">AI Tagging</td><td data-label="Tool / Agent">OpenAI + Weaviate</td><td data-label="Relevant Sections">4.2</td><td data-label="Key Use Case">Automatic metadata generation</td></tr>
+                    <tr><td data-label="Function Area">CDN Optimisation</td><td data-label="Tool / Agent">Cloudinary</td><td data-label="Relevant Sections">4.3</td><td data-label="Key Use Case">Image / video format conversion</td></tr>
+                    <tr><td data-label="Function Area">ERP Integration</td><td data-label="Tool / Agent">n8n</td><td data-label="Relevant Sections">6.2, 6.3</td><td data-label="Key Use Case">Product data sync</td></tr>
+                    <tr><td data-label="Function Area">AI Orchestration</td><td data-label="Tool / Agent">Manus/Abacus</td><td data-label="Relevant Sections">7.1, 7.2</td><td data-label="Key Use Case">Automated system configuration</td></tr>
+                    <tr><td data-label="Function Area">Document Processing</td><td data-label="Tool / Agent">AWS Textract + Google Vision</td><td data-label="Relevant Sections">8.1</td><td data-label="Key Use Case">OCR for invoices, contracts</td></tr>
+                    <tr><td data-label="Function Area">Communication</td><td data-label="Tool / Agent">Google Chat + Gemini AI</td><td data-label="Relevant Sections">7.3</td><td data-label="Key Use Case">AI-powered team assistance</td></tr>
+                    <tr><td data-label="Function Area">Task Management</td><td data-label="Tool / Agent">Gameplan + Raven</td><td data-label="Relevant Sections">7.4</td><td data-label="Key Use Case">Visual workflow tracking</td></tr>
+                    <tr><td data-label="Function Area">Legal & Compliance</td><td data-label="Tool / Agent">Raven AI</td><td data-label="Relevant Sections">5.1</td><td data-label="Key Use Case">Compliance tracking & decisions</td></tr>
+                    <tr><td data-label="Function Area">Investor Relations</td><td data-label="Tool / Agent">20_Marketing</td><td data-label="Relevant Sections">3.3, 3.4</td><td data-label="Key Use Case">Data-room generation</td></tr>
+                    <tr><td data-label="Function Area">Operational Efficiency</td><td data-label="Tool / Agent">40_Technical & APIs</td><td data-label="Relevant Sections">6.2, 6.3, 6.4</td><td data-label="Key Use Case">ERP ↔ Weaviate sync; n8n orchestrator</td></tr>
+                </tbody>
+            </table>
         </section>
 
         <section id="governance" class="content-section">
             <h2 class="content-section__title">Governance & IP Ownership</h2>
+            
             <h3 class="content-section__subtitle">IP Hierarchy</h3>
-            <div class="mermaid-container">
+            <div class="mermaid-container7">
                 <div class="mermaid">
+%%{init: {
+  "theme": "base",
+  "themeCSS": ".edgePath marker path { fill: #808080 !important; stroke: #536277 !important; }\n.marker { fill: #808080 !important; }\n.text-item-align { fill: #808080 !important; }\n.subgraph .title { fill: #808080 !important; }"
+}}%%
 graph TB
-    MH["🏢 Marayai Holdings<br>Parent Company"]
-    SF["🌟 Shaikdom Foundation<br>Non-Profit Arm"]
-    DSS["🎨 Designer Shaik Studio<br>Creative Unit"]
-    DSI["📁 DSI Product Repository<br>Content Hub"]
+    MH["Marayai Holdings<br>Parent Company"]
+    SF["Shaikdom Foundation<br>Non-Profit Arm"]
+    DSS["Designer Shaik Studio<br>Creative Unit"]
+    DSI["DSI Product Repository<br>Content Hub"]
     
     MH --> SF
     MH --> DSS
     DSS --> DSI
     SF --> DSI
-    
-    style MH fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
-    style SF fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
-    style DSS fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style DSI fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+
                 </div>
             </div>
+
             <h3 class="content-section__subtitle">Digital Asset Ownership</h3>
             <p>All digital assets created or acquired by any entity within the Marayai ecosystem are ultimately owned by Marayai Holdings. Usage rights, licensing, and distribution are governed by specific protocols outlined in this guide.</p>
+            
             <h3 class="content-section__subtitle">Compliance & Legal</h3>
             <p>Adherence to regional data privacy laws (e.g., GDPR, ADGM) and international intellectual property regulations is mandatory. Regular audits are conducted to ensure compliance.</p>
         </section>
 
-        <section id="workspace" class="content-section">
-            <h2 class="content-section__title">Google Workspace OU / Shared-Drive Architecture</h2>
-            <p>The Google Workspace environment is structured to reflect the organizational hierarchy and facilitate efficient collaboration and data management. Shared drives are used for centralized access and governance of key digital assets. Google Drive serves as the primary media repository with structured organizational units (OUs) that mirror the corporate structure, allowing for granular policy application and user management.</p>
+        <section id="architecture" class="content-section">
+            <h2 class="content-section__title">System Architecture</h2>
+            
+            <h3 class="content-section__subtitle">Core Components</h3>
+            <div class="mermaid-container5">
+                <div class="mermaid">
+%%{init: {
+  "theme": "base",
+  "themeCSS": ".edgePath marker path { fill: #808080 !important; stroke: #536277 !important; }\n.marker { fill: #808080 !important; }\n.text-item-align { fill: #808080 !important; }\n.subgraph .title { fill: #808080 !important; }"
+}}%%
+graph TB
+    subgraph Input["Data Input Layer"]
+        GD["Google Drive<br>Primary Repository"]
+        PS["Google Pub/Sub<br>Event Stream"]
+        CF["Cloud Function<br>Webhook Handler"]
+    end
 
-            <h3 class="content-section__subtitle">Current Workspace Shared Drives Directory</h3>
+    subgraph Processing["Processing Layer"]
+        N8N["n8n<br>Workflow Engine"]
+        OAI["OpenAI API<br>Vision & Analysis"]
+        OCR["Dual OCR<br>Textract + Vision"]
+    end
+
+    subgraph Storage["Storage Layer"]
+        PG["PostgreSQL<br>Metadata & Logs"]
+        WV["Weaviate<br>Vector Database"]
+        CDN["Cloudinary<br>Media CDN"]
+    end
+
+    subgraph Distribution["Distribution Layer"]
+        ERP["ERPNext<br>Product Data"]
+        WC["WooCommerce<br>eCommerce"]
+        WF["Webflow<br>Marketing Sites"]
+    end
+
+    GD --> PS
+    PS --> CF
+    CF --> N8N
+    N8N --> OAI
+    N8N --> OCR
+    N8N --> PG
+    OAI --> WV
+    N8N --> CDN
+    CDN --> ERP
+    CDN --> WC
+    CDN --> WF
+                </div>
+            </div>
+
+            <h3 class="content-section__subtitle">Data Flow</h3>
             <pre class="code-block">
-[SANDBOX] DSI 06 - Media Repository
-├── DSI-Product-Repository/
-│   ├── Palace-of-Fragrances/
-│   │   ├── Classic-Range/
-│   │   │   ├── Opulent-Shaik-Amethyst/
-│   │   │   ├── Chic-Shaik-Emerald/
-│   │   │   ├── Amber-Kroud/
-│   │   │   ├── Opulent-Shaik-Sapphire/
-│   │   │   └── Sochi-Onyx/
-│   │   └── Precious-Range/
-│   │       ├── Objet-d-Art-Luxury-Sterling-Silver/
-│   │       └── Objet-d-Art-Optimum-Precious-Gold/
-│   ├── Palace-of-Precision/
-│   └── Palace-of-Style/
-└── Processed-Media/
-    ├── ERP-Integrated/
-    ├── Social-Media-Posts/
-    └── Web-Optimized/
+1. File Upload → Google Drive
+2. Drive API → Webhook Notification
+3. Cloud Function → Pub/Sub Message
+4. n8n Trigger → Workflow Execution
+5. AI Processing → Metadata Extraction
+6. Database Storage → PostgreSQL + Weaviate
+7. CDN Optimization → Cloudinary
+8. System Sync → ERPNext, WooCommerce, Webflow
             </pre>
         </section>
 
-        <section id="repository" class="content-section">
-            <h2 class="content-section__title">DSI Repository Structure</h2>
-            <p>The DSI Media Repository Integration Architecture is an end-to-end automated media processing pipeline that streamlines the management of digital assets for DSI's luxury product lines. The system automatically ingests media files from Google Drive, processes them through AI services, stores semantic vectors in Weaviate, logs metadata in PostgreSQL, and optimizes media for CDN distribution.</p>
-
+        <section id="repository-structure" class="content-section">
+            <h2 class="content-section__title">Repository Structure</h2>
+            
             <h3 class="content-section__subtitle">Repository Folder Structure</h3>
             <div class="diagram-split">
                 <div class="diagram-part">
                     <h4>System Structure</h4>
-                    <div class="mermaid-container">
+                    <div class="mermaid-container2">
                         <div class="mermaid">
+%%{init: {
+  "theme": "base",
+  "themeCSS": ".edgePath marker path { fill: #808080 !important; stroke: #536277 !important; }\n.marker { fill: #808080 !important; }\n.text-item-align { fill: #808080 !important; }\n.subgraph .title { fill: #808080 !important; }"
+}}%%
 graph TB
     Root["📁 DSI-Product-Repository"]
     
@@ -238,17 +291,18 @@ graph TB
     Root --> SF
     Meta --> MS
     
-    style Root fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
-    style Meta fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
-    style Proc fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
                         </div>
                     </div>
                 </div>
                 
                 <div class="diagram-part">
                     <h4>Product Structure</h4>
-                    <div class="mermaid-container">
+                    <div class="mermaid-container1">
                         <div class="mermaid">
+%%{init: {
+  "theme": "base",
+  "themeCSS": ".edgePath marker path { fill: #808080 !important; stroke: #536277 !important; }\n.marker { fill: #808080 !important; }\n.text-item-align { fill: #808080 !important; }\n.subgraph .title { fill: #808080 !important; }"
+}}%%
 graph TB
     subgraph PP["Product Palaces"]
         PF["🌸 Palace-of-Fragrances"]
@@ -278,83 +332,597 @@ graph TB
     Precious --> PR
     Classic --> CR
     
-    style PF fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
-    style Precious fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
-    style Classic fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+
                         </div>
                     </div>
                 </div>
             </div>
 
+            <h3 class="content-section__subtitle">Google Drive Hierarchy</h3>
+            <pre class="code-block">
+[SANDBOX] DSI 06 - Media Repository/
+├── DSI-Product-Repository/
+│   ├── Palace-of-Fragrances/
+│   │   ├── Classic-Range/
+│   │   │   ├── Opulent-Shaik-Amethyst/
+│   │   │   │   ├── 00-Early-Design/
+│   │   │   │   │   ├── 01-Research/
+│   │   │   │   │   ├── 02-Concept-Sketches/
+│   │   │   │   │   ├── 03-Concept-CAD/
+│   │   │   │   │   ├── 04-Design-Review/
+│   │   │   │   │   └── 05-Prototype-Assets/
+│   │   │   │   ├── Media/
+│   │   │   │   │   ├── Images/
+│   │   │   │   │   │   ├── 3D-Renders/
+│   │   │   │   │   │   ├── Photos/
+│   │   │   │   │   │   └── Web-Optimized/
+│   │   │   │   │   └── Videos/
+│   │   │   │   ├── Marketing/
+│   │   │   │   └── ERP-Integration/
+│   │   │   ├── Chic-Shaik-Emerald/
+│   │   │   ├── Amber-Kroud/
+│   │   │   ├── Opulent-Shaik-Sapphire/
+│   │   │   └── Sochi-Onyx/
+│   │   └── Precious-Range/
+│   │       ├── Objet-d-Art-Luxury-Sterling-Silver/
+│   │       └── Objet-d-Art-Optimum-Precious-Gold/
+│   ├── Palace-of-Precision/
+│   │   └── AstroTime-MK1/
+│   └── Palace-of-Style/
+└── Processed-Media/
+    ├── ERP-Integrated/
+    ├── Marketing/
+    └── Web-Optimized/
+            </pre>
+
             <h3 class="content-section__subtitle">File Naming Convention</h3>
             <div class="highlight-box">
-                <strong>Pattern:</strong> <code>{ProductName}_{SKU}_{descriptor}_{timestamp}.{extension}</code> <br><br>
-                <strong>Examples:</strong>
+                <strong>Pattern:</strong> <code>{ProductName}_{SKU}_{descriptor}_{timestamp}.{extension}</code>
                 <ul>
-                    <li><code>Opulent-Shaik-Amethyst_OSA-GE-100_original_20250703.jpg</code></li>
-                    <li><code>Objet-d-Art-Optimum_OAO-FL-50_web_optimized.webp</code></li>
-                    <li><code>AstroTime-MK1_ATM-IG-001_ai_metadata.json</code></li>
+                    <li><code>Opulent-Shaik-Amethyst_OSA-GE-100_hero_20250703.jpg</code></li>
+                    <li><code>AstroTime-MK1_ATM-IG-001_3d_render.blend</code></li>
+                    <li><code>Objet-d-Art-Optimum_OAO-FL-50_metadata.json</code></li>
                 </ul>
             </div>
         </section>
 
-        <section id="database" class="content-section">
-            <h2 class="content-section__title">Database & Data-Lake Blueprint</h2>
-            <h3 class="content-section__subtitle">Advanced Indexing & Search Architecture</h3>
-            <p>The DSI ecosystem leverages advanced indexing and search architectures to ensure rapid and accurate retrieval of media assets and documents, powered by vector databases and dual-engine OCR.</p>
-
-            <h3 class="content-section__subtitle">PostgreSQL (Metadata & Logs)</h3>
-            <p>Primary database for structured metadata, audit trails, and workflow logs.</p>
-            <pre class="code-block">
--- Media Assets Table with MCP Support
-CREATE TABLE media_assets (
-    id SERIAL PRIMARY KEY,
-    drive_file_id VARCHAR(255) UNIQUE,
-    weaviate_object_id UUID,
-    mcp_id VARCHAR(255),  -- Model Context Protocol ID
-    product_name VARCHAR(255),
-    sku VARCHAR(100),
-    file_url TEXT,
-    processing_status VARCHAR(50),
-    ai_description TEXT,
-    ai_tags TEXT[],
-    plm_stage VARCHAR(50), -- Concept, Gate-A, Prototype, PPAP, Production
-    designer_id VARCHAR(100),
-    revision VARCHAR(20),
-    linked_bom VARCHAR(100),
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-);
-            </pre>
-        </section>
-
-        <section id="automation" class="content-section">
-            <h2 class="content-section__title">Automation & AI-Agent Matrix</h2>
+        <section id="tech-stack" class="content-section">
+            <h2 class="content-section__title">Technology Stack</h2>
+            
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th scope="col">Function Area</th>
-                        <th scope="col">Tool / Agent</th>
-                        <th scope="col">Relevant Sections</th>
-                        <th scope="col">Key Use Case</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Version/Details</th>
+                        <th scope="col">Purpose</th>
+                        <th scope="col">Credentials Location</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td data-label="Category">Media Ingestion</td><td data-label="Tool / Agent">n8n</td><td data-label="Relevant Sections">4.1</td><td data-label="Key Use Case">Google Drive ↔ Cloudinary sync</td></tr>
-                    <tr><td data-label="Category">AI Tagging</td><td data-label="Tool / Agent">OpenAI + Weaviate</td><td data-label="Relevant Sections">4.2</td><td data-label="Key Use Case">Automatic metadata generation</td></tr>
-                    <tr><td data-label="Category">CDN Optimisation</td><td data-label="Tool / Agent">Cloudinary</td><td data-label="Relevant Sections">4.3</td><td data-label="Key Use Case">Image / video format conversion</td></tr>
-                    <tr><td data-label="Category">ERP Integration</td><td data-label="Tool / Agent">n8n</td><td data-label="Relevant Sections">6.2, 6.3</td><td data-label="Key Use Case">Product data sync</td></tr>
-                    <tr><td data-label="Category">AI Orchestration</td><td data-label="Tool / Agent">Manus/Abacus</td><td data-label="Relevant Sections">7.1, 7.2</td><td data-label="Key Use Case">Automated system configuration</td></tr>
-                    <tr><td data-label="Category">Document Processing</td><td data-label="Tool / Agent">AWS Textract + Google Vision</td><td data-label="Relevant Sections">8.1</td><td data-label="Key Use Case">OCR for invoices, contracts</td></tr>
-                    <tr><td data-label="Category">Communication</td><td data-label="Tool / Agent">Google Chat + Gemini AI</td><td data-label="Relevant Sections">7.3</td><td data-label="Key Use Case">AI-powered team assistance</td></tr>
-                    <tr><td data-label="Category">Task Management</td><td data-label="Tool / Agent">Gameplan + Raven</td><td data-label="Relevant Sections">7.4</td><td data-label="Key Use Case">Visual workflow tracking</td></tr>
-                    <tr><td data-label="Category">Legal & Compliance</td><td data-label="Tool / Agent">Raven AI</td><td data-label="Relevant Sections">5.1</td><td data-label="Key Use Case">Compliance tracking & decisions</td></tr>
-                    <tr><td data-label="Category">Investor Relations</td><td data-label="Tool / Agent">20_Marketing</td><td data-label="Relevant Sections">3.3, 3.4</td><td data-label="Key Use Case">Data-room generation</td></tr>
-                    <tr><td data-label="Category">Operational Efficiency</td><td data-label="Tool / Agent">40_Technical & APIs</td><td data-label="Relevant Sections">6.2, 6.3, 6.4</td><td data-label="Key Use Case">ERP ↔ Weaviate sync; n8n orchestrator</td></tr>
+                    <tr>
+                        <td data-label="Service">Google Workspace</td>
+                        <td data-label="Version">Enterprise</td>
+                        <td data-label="Purpose">Primary file storage, collaboration</td>
+                        <td data-label="Credentials">Service Account: dsi-drive-watcher.json</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Service">n8n</td>
+                        <td data-label="Version">1.27.2</td>
+                        <td data-label="Purpose">Workflow automation engine</td>
+                        <td data-label="Credentials">Admin: akhil@designershaik.com</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Service">PostgreSQL</td>
+                        <td data-label="Version">15.3</td>
+                        <td data-label="Purpose">Metadata storage, audit logs</td>
+                        <td data-label="Credentials">Connection: postgresql://dsi_user:pass@localhost:5432/dsi_media</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Service">Weaviate</td>
+                        <td data-label="Version">1.21.0</td>
+                        <td data-label="Purpose">Vector database for semantic search</td>
+                        <td data-label="Credentials">API Key: weaviate-api-key-prod</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Service">OpenAI API</td>
+                        <td data-label="Version">GPT-4 Vision</td>
+                        <td data-label="Purpose">Image analysis, tagging</td>
+                        <td data-label="Credentials">API Key: sk-proj-...</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Service">Cloudinary</td>
+                        <td data-label="Version">Enterprise</td>
+                        <td data-label="Purpose">Media CDN, transformation</td>
+                        <td data-label="Credentials">Cloud Name: designershaik</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Service">ERPNext</td>
+                        <td data-label="Version">14.0</td>
+                        <td data-label="Purpose">Product management, inventory</td>
+                        <td data-label="Credentials">API Key: erp-api-key-prod</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Service">Redis</td>
+                        <td data-label="Version">7.0</td>
+                        <td data-label="Purpose">Queue management, caching</td>
+                        <td data-label="Credentials">Connection: redis://localhost:6379</td>
+                    </tr>
                 </tbody>
             </table>
         </section>
 
+        <section id="database-schema" class="content-section">
+            <h2 class="content-section__title">Database Schema</h2>
+
+<h3 class="content-section__subtitle">PostgreSQL Schema Visualization</h3>
+<div class="mermaid-container">
+    <div class="mermaid" id="media-assets-er-diagram">
+erDiagram
+    media_assets {
+        SERIAL id PK
+        VARCHAR drive_file_id UK
+        UUID weaviate_object_id
+        VARCHAR mcp_id
+        VARCHAR product_name
+        VARCHAR sku
+        VARCHAR file_name
+        BIGINT file_size
+        VARCHAR mime_type
+        TEXT drive_folder_path
+        TEXT cloudinary_url
+        VARCHAR processing_status
+        TEXT ai_description
+        TEXT ai_tags
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+
+    processing_logs {
+        SERIAL id PK
+        INTEGER media_asset_id FK
+        VARCHAR workflow_id
+        VARCHAR step_name
+        VARCHAR status
+        TEXT message
+        TIMESTAMP created_at
+    }
+
+    approval_records {
+        SERIAL id PK
+        INTEGER media_asset_id FK
+        VARCHAR approver_email
+        VARCHAR approval_status
+        TEXT comments
+        TIMESTAMP approved_at
+    }
+
+    sync_status {
+        SERIAL id PK
+        INTEGER media_asset_id FK
+        VARCHAR target_system
+        VARCHAR sync_status
+        TIMESTAMP last_sync_at
+        TEXT error_message
+    }
+
+    media_assets ||--o{ processing_logs : "logs"
+    media_assets ||--o{ approval_records : "approvals"
+    media_assets ||--o{ sync_status : "sync"
+    </div>
+</div>
+
+<h3 class="content-section__subtitle">Redis Keys Structure</h3>
+<div class="mermaid-container">
+    <div class="mermaid">
+graph TB
+    subgraph "Queue Keys"
+        QPM["queue:media:pending<br/>📋 Pending files"]
+        QPR["queue:media:processing<br/>⚙️ Active processing"]
+        QPF["queue:media:failed<br/>❌ Failed attempts"]
+    end
+
+    subgraph "Cache Keys"
+        CF["cache:folder:ID<br/>📁 Folder metadata"]
+        CP["cache:product:SKU<br/>🏷️ Product info"]
+        CC["cache:cloudinary:ID<br/>🌐 CDN URLs"]
+    end
+
+    subgraph "Lock Keys"
+        LF["lock:file:ID<br/>🔒 Processing lock"]
+        LW["lock:workflow:ID<br/>⚡ Workflow lock"]
+    end
+    </div>
+</div>
+
+            <h3 class="content-section__subtitle">PostgreSQL Tables</h3>
+            <pre class="code-block">
+-- Media Assets Table
+CREATE TABLE media_assets (
+    id SERIAL PRIMARY KEY,
+    drive_file_id VARCHAR(255) UNIQUE NOT NULL,
+    weaviate_object_id UUID,
+    mcp_id VARCHAR(255),
+    product_name VARCHAR(255),
+    sku VARCHAR(100),
+    file_name VARCHAR(500),
+    file_size BIGINT,
+    mime_type VARCHAR(100),
+    drive_folder_path TEXT,
+    cloudinary_url TEXT,
+    cloudinary_public_id VARCHAR(255),
+    cloudinary_transformations JSONB,
+    processing_status VARCHAR(50) DEFAULT 'PENDING',
+    ai_description TEXT,
+    ai_tags TEXT[],
+    plm_stage VARCHAR(50),
+    designer_id VARCHAR(100),
+    revision VARCHAR(20),
+    linked_bom VARCHAR(100),
+    quality_score DECIMAL(3,2),
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
+    processed_at TIMESTAMP,
+    INDEX idx_sku (sku),
+    INDEX idx_status (processing_status),
+    INDEX idx_mcp (mcp_id)
+);
+
+-- Processing Logs Table
+CREATE TABLE processing_logs (
+    id SERIAL PRIMARY KEY,
+    media_asset_id INTEGER REFERENCES media_assets(id),
+    workflow_id VARCHAR(100),
+    step_name VARCHAR(100),
+    status VARCHAR(50),
+    message TEXT,
+    metadata JSONB,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Approval Records Table
+CREATE TABLE approval_records (
+    id SERIAL PRIMARY KEY,
+    media_asset_id INTEGER REFERENCES media_assets(id),
+    approver_email VARCHAR(255),
+    approval_status VARCHAR(50),
+    comments TEXT,
+    approved_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Sync Status Table
+CREATE TABLE sync_status (
+    id SERIAL PRIMARY KEY,
+    media_asset_id INTEGER REFERENCES media_assets(id),
+    target_system VARCHAR(50), -- 'ERPNEXT', 'WOOCOMMERCE', 'WEBFLOW'
+    sync_status VARCHAR(50),
+    last_sync_at TIMESTAMP,
+    error_message TEXT,
+    retry_count INTEGER DEFAULT 0
+);
+            </pre>
+        </section>
+
+        <section id="workflows" class="content-section">
+            <h2 class="content-section__title">n8n Workflows</h2>
+
+            <h3 class="content-section__subtitle">1. Media Ingestion Workflow</h3>
+            <pre class="code-block">
+// Workflow ID: media-ingestion-prod
+// Trigger: Google Pub/Sub
+
+1. Pub/Sub Trigger Node
+   - Topic: dsi-product-repository
+   - Subscription: dsi-product-repository-sub
+
+2. Parse Message Node (Function)
+   const attributes = $json.message.attributes;
+   const resourceId = attributes['x-goog-resource-id'];
+   const resourceState = attributes['x-goog-resource-state'];
+   
+   return {
+     json: {
+       fileId: resourceId,
+       action: resourceState,
+       timestamp: new Date().toISOString()
+     }
+   };
+
+3. Get File Metadata (Google Drive API)
+   - File ID: {{$json.fileId}}
+   - Fields: id,name,mimeType,parents,createdTime,modifiedTime,size
+
+4. Extract Product Info (Function)
+   const filePath = $json.parents.join('/');
+   let productInfo = {};
+   
+   if (filePath.includes('Palace-of-Fragrances')) {
+     if (filePath.includes('Opulent-Shaik-Amethyst')) {
+       productInfo = {
+         palace: 'Palace-of-Fragrances',
+         range: 'Classic-Range',
+         product: 'Opulent-Shaik-Amethyst',
+         sku: 'OSA-CL-100'
+       };
+     }
+   }
+   
+   return { json: productInfo };
+
+5. Check Database Status (PostgreSQL)
+   SELECT * FROM media_assets 
+   WHERE drive_file_id = '{{$json.fileId}}'
+   LIMIT 1;
+
+6. Route Decision (Switch)
+   - New File → Insert Pipeline
+   - Existing File → Update Pipeline
+   - Deleted File → Archive Pipeline
+            </pre>
+
+            <h3 class="content-section__subtitle">2. AI Processing Workflow</h3>
+            <pre class="code-block">
+// Workflow ID: ai-processing-prod
+// Called by: media-ingestion-prod
+
+1. Download File (Google Drive)
+   - File ID: {{$json.fileId}}
+   - Output: Binary Data
+
+2. OpenAI Vision Analysis
+   const imageBase64 = $binary.data.toString('base64');
+   
+   const response = await $http.request({
+     method: 'POST',
+     url: 'https://api.openai.com/v1/chat/completions',
+     headers: {
+       'Authorization': 'Bearer {{$credentials.openai.apiKey}}',
+       'Content-Type': 'application/json'
+     },
+     body: {
+       model: 'gpt-4-vision-preview',
+       messages: [{
+         role: 'user',
+         content: [{
+           type: 'text',
+           text: 'Analyze this luxury product image. Extract: product type, colors, materials, style, target audience.'
+         }, {
+           type: 'image_url',
+           image_url: {
+             url: `data:image/jpeg;base64,${imageBase64}`
+           }
+         }]
+       }]
+     }
+   });
+
+3. Generate Embeddings (Weaviate)
+   - Class: MediaAsset
+   - Properties: description, tags, productName, sku
+
+4. Store Metadata (PostgreSQL)
+   INSERT INTO media_assets (
+     drive_file_id, product_name, sku, 
+     ai_description, ai_tags, processing_status
+   ) VALUES (
+     '{{$json.fileId}}', '{{$json.productName}}', 
+     '{{$json.sku}}', '{{$json.aiDescription}}', 
+     '{{$json.aiTags}}', 'PROCESSED'
+   );
+            </pre>
+
+            <h3 class="content-section__subtitle">3. Cloudinary Upload Workflow</h3>
+            <pre class="code-block">
+// Workflow ID: cloudinary-upload-prod
+
+1. Upload to Cloudinary
+   const cloudinary = require('cloudinary').v2;
+   
+   cloudinary.config({
+     cloud_name: '{{$credentials.cloudinary.cloudName}}',
+     api_key: '{{$credentials.cloudinary.apiKey}}',
+     api_secret: '{{$credentials.cloudinary.apiSecret}}'
+   });
+   
+   const uploadResult = await cloudinary.uploader.upload($binary.data, {
+     folder: `dsi/${$json.palace}/${$json.range}/${$json.product}`,
+     public_id: `${$json.sku}_${Date.now()}`,
+     resource_type: 'auto',
+     tags: $json.aiTags,
+     context: {
+       product_name: $json.productName,
+       sku: $json.sku,
+       mcp_id: $json.mcpId
+     }
+   });
+
+2. Generate Transformations
+   const transformations = [
+     { name: 'thumbnail', options: 'c_thumb,w_150,h_150' },
+     { name: 'web', options: 'q_auto,f_auto,w_800' },
+     { name: 'social', options: 'c_fill,w_1200,h_630' },
+     { name: 'print', options: 'q_100,dpr_2.0' }
+   ];
+
+3. Update Database with URLs
+   UPDATE media_assets 
+   SET cloudinary_url = '{{$json.secure_url}}',
+       cloudinary_transformations = '{{$json.transformations}}',
+       processing_status = 'OPTIMIZED'
+   WHERE drive_file_id = '{{$json.fileId}}';
+            </pre>
+        </section>
+
+<section id="enhanced-workflows" class="content-section">
+            <h2 class="content-section__title"> MCP Workflow Architecture</h2>
+
+            <div class="diagram-container">
+                <h2 class="diagram-container__title">E2E n8n-Native & Redis-Queued Architecture</h2>
+                <div class="workflow-diagram-split">
+                    <div class="workflow-part">
+                        <h4>Event Processing Pipeline</h4>
+                        <div class="mermaid-container">
+                            <div class="mermaid">
+flowchart TB
+    subgraph EI["EVENT INGESTION"]
+        A["🗂️ Google Drive Trigger<br>File Upload"]
+        B["🔄 Switch: Filter & Dedup<br>Validate File"]
+        C["⚙️ Function: Enrich Metadata<br>Extract Properties"]
+        Q["🔴 Redis Queue<br>Priority Processing"]
+    end
+    
+    subgraph DR["DB ROUTING"]
+        D["🗄️ PostgreSQL Lookup<br>& Row Lock"]
+        E{{"❓ File Status<br>New/Revision/Rejected"}}
+    end
+    
+    A --> B
+    B --> C
+    C --> Q
+    Q --> D
+    D --> E
+    
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-part">
+                        <h4>Processing & Approval</h4>
+                        <div class="mermaid-container1">
+                            <div class="mermaid" >
+flowchart TB
+    subgraph DP["DRAFT PIPELINE"]
+        F["📊 Path Analysis<br>& Classification"]
+        G["🏷️ MCP-ID Generation<br>Versioning"]
+        H["📝 PostgreSQL: status=DRAFT"]
+    end
+    
+    subgraph AS["APPROVAL SYSTEM"]
+        I["📋 Create approval_record<br>PostgreSQL"]
+        J{{"🔀 Approval Method<br>Forms/Sheets/Chat"}}
+        K["📝 Google Forms<br>Approval"]
+        L["📊 Google Sheets<br>Approval"]
+        M["💬 Google Chat<br>Approval"]
+        N{{"✅ Decision Validation<br>Consensus Check"}}
+        O["✅ PostgreSQL: status=APPROVED"]
+    end
+    
+    F --> G
+    G --> H
+    H --> I
+    I --> J
+    J --> K
+    J --> L
+    J --> M
+    K --> N
+    L --> N
+    M --> N
+    N --> O
+    
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-part">
+                        <h4>Production & Distribution</h4>
+                        <div class="mermaid-container">
+                            <div class="mermaid">
+flowchart TD
+    subgraph SS["SCHEDULED SYNC"]
+        Z["⏰ Cron Trigger<br>Scheduled Sync"]
+        AA["📊 Fetch OPTIMIZED<br>PostgreSQL Query"]
+        BB["📊 ERPNext Sync<br>Product Data"]
+        CC["🛒 WooCommerce Sync<br>eCommerce Listings"]
+        DD["🎨 Webflow Publish<br>Marketing Content"]
+        EE["📈 Status Update<br>Processing Complete"]
+        FF["🎯 PostgreSQL: status=PUBLISHED"]
+    end
+    
+    Z --> AA
+    AA --> BB
+    BB --> CC
+    CC --> DD
+    DD --> EE
+    EE --> FF
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-part">
+                        <h4>Production Pipeline</h4>
+                        <div class="mermaid-container">
+                            <div class="mermaid">
+flowchart TD
+    subgraph PP["PRODUCTION PIPELINE"]
+        P["🚀 Init Production<br>n8n Workflow"]
+        R["🤖 OpenAI Analysis<br>Tag Generation"]
+        S["🔍 Weaviate Embeddings<br>Semantic Indexing"]
+        T["🌐 Cloudinary Optimization<br>Format Conversion"]
+        U["🔗 Generate Formats & URLs<br>Multi-Platform"]
+        V["📁 Google Drive<br>Processed Folder"]
+        W["✅ PostgreSQL: status=OPTIMIZED"]
+    end
+
+    P --> R
+    R --> S
+    S --> T
+    T --> U
+    U --> V
+    V --> W
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="diagram-container__description">
+                    <p>Uses n8n's native Google Drive Trigger and Switch/Function nodes for routing, Redis for prioritized queuing, PostgreSQL for transactional state & locking, and BigQuery/Grafana for analytics and alerts. Secrets live in n8n's credential store, and retry/DLQ logic is built-in.</p>
+                </div>
+            </div>
+
+            <h3 class="content-section__subtitle">Key Workflow Improvements</h3>
+            <div class="workflow-cards">
+                <div class="workflow-card">
+                    <h4 class="workflow-card__title">Processing Pipeline</h4>
+                    <ul>
+                        <li><strong>Redis Queue Management:</strong> Priority-based processing with better load distribution</li>
+                        <li><strong>PostgreSQL Row Locking:</strong> Prevents duplicate processing and ensures data consistency</li>
+                        <li><strong>Consolidated Approval System:</strong> Multiple approval methods (Forms, Sheets, Chat) with unified validation</li>
+                        <li><strong>Automated Revision Handling:</strong> Smart routing for rejected/revision items back to appropriate workflows</li>
+                    </ul>
+                </div>
+                
+                <div class="workflow-card">
+                    <h4 class="workflow-card__title">Advanced Observability</h4>
+                    <ul>
+                        <li><strong>BigQuery Integration:</strong> Data lake for comprehensive analytics and reporting</li>
+                        <li><strong>Grafana Dashboards:</strong> Real-time monitoring of all workflow stages</li>
+                        <li><strong>Multi-Channel Alerts:</strong> Proactive notifications via Chat and Gmail</li>
+                        <li><strong>Performance Metrics:</strong> Comprehensive tracking of processing times and success rates</li>
+                    </ul>
+                </div>
+                
+                <div class="workflow-card">
+                    <h4 class="workflow-card__title">Intelligent Routing</h4>
+                    <ul>
+                        <li><strong>Path Analysis:</strong> Smart classification based on file location and metadata</li>
+                        <li><strong>MCP-ID Generation:</strong> Automatic versioning and context protocol assignment</li>
+                        <li><strong>Decision Validation:</b> Multi-step approval process with fallback mechanisms</li>
+                        <li><strong>Status Tracking:</strong> Complete lifecycle management from DRAFT to PUBLISHED</li>
+                    </ul>
+                </div>
+                
+                <div class="workflow-card">
+                    <h4 class="workflow-card__title">Optimized Performance</h4>
+                    <ul>
+                        <li><strong>Scheduled Integration:</strong> Deferred heavy operations to optimize real-time performance</li>
+                        <li><strong>Cron-based Sync:</strong> Efficient batch processing for ERP and eCommerce updates</li>
+                        <li><strong>Multi-platform Publishing:</strong> Automated distribution to all connected systems</li>
+                        <li><strong>Error Recovery:</strong> Built-in retry logic and dead letter queue handling</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
         <section id="ai-agents" class="content-section">
             <h2 class="content-section__title">AI Agents (Manus/Abacus) Implementation</h2>
 
@@ -392,11 +960,17 @@ CREATE TABLE media_assets (
             </div>
         </section>
 
-        <section id="mcp-integration" class="content-section">
-            <h2 class="content-section__title">Model Context Protocol (MCP) Integration</h2>
+        <section id="mcp-protocol" class="content-section">
+            <h2 class="content-section__title">Model Context Protocol (MCP)</h2>
 
             <h3 class="content-section__subtitle">What is MCP?</h3>
             <p>Model Context Protocol (MCP) provides a standardized framework for managing metadata, versioning, and context tracking across all systems in the DSI ecosystem. It ensures consistency and enables AI agents to understand and manage content intelligently.</p>
+
+            <h3 class="content-section__subtitle">MCP ID Structure</h3>
+            <div class="highlight-box">
+                <strong>Format:</strong> <code>[ProductName]_[Version]_[Status]_[Timestamp]</code><br>
+                <strong>Example:</strong> <code>Opulent-Shaik-Amethyst_V1.3.3_FINAL_20250703</code>
+            </div>
 
             <h3 class="content-section__subtitle">MCP Tag Structure</h3>
             <div class="highlight-box">
@@ -415,176 +989,190 @@ Fields:
 - Linked BOM: ERPNext BOM reference
                 </pre>
             </div>
+
+            <h3 class="content-section__subtitle">MCP Implementation</h3>
+            <pre class="code-block">
+// Generate MCP ID Function
+function generateMCPId(productInfo, fileMetadata) {
+  const version = calculateVersion(fileMetadata);
+  const status = determineStatus(fileMetadata);
+  const timestamp = formatDate(new Date());
+  
+  return `${productInfo.product}_${version}_${status}_${timestamp}`;
+}
+
+function calculateVersion(metadata) {
+  // Major.Minor.Patch versioning
+  const major = metadata.plmStage === 'Production' ? 1 : 0;
+  const minor = metadata.revisionCount || 0;
+  const patch = metadata.updateCount || 0;
+  
+  return `V${major}.${minor}.${patch}`;
+}
+
+function determineStatus(metadata) {
+  const statusMap = {
+    'Draft': 'DRAFT',
+    'Review': 'REVIEW',
+    'Approved': 'FINAL',
+    'Archived': 'ARCHIVED'
+  };
+  
+  return statusMap[metadata.approvalStatus] || 'DRAFT';
+}
+            </pre>
+
+            <h3 class="content-section__subtitle">MCP Metadata Fields</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Field">Product Name</td>
+                        <td data-label="Type">String</td>
+                        <td data-label="Description">Full product name</td>
+                        <td data-label="Example">Opulent-Shaik-Amethyst</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Field">Version</td>
+                        <td data-label="Type">String</td>
+                        <td data-label="Description">Semantic version</td>
+                        <td data-label="Example">V1.3.3</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Field">Status</td>
+                        <td data-label="Type">Enum</td>
+                        <td data-label="Description">Current lifecycle status</td>
+                        <td data-label="Example">FINAL</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Field">PLM Stage</td>
+                        <td data-label="Type">Enum</td>
+                        <td data-label="Description">Product lifecycle stage</td>
+                        <td data-label="Example">Production</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Field">Designer ID</td>
+                        <td data-label="Type">String</td>
+                        <td data-label="Description">Creator identifier</td>
+                        <td data-label="Example">DSI-D-001</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Field">Linked BOM</td>
+                        <td data-label="Type">String</td>
+                        <td data-label="Description">ERPNext BOM reference</td>
+                        <td data-label="Example">BOM-OSA-001</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
-        <section id="enhanced-workflows" class="content-section">
-            <h2 class="content-section__title">Enhanced MCP Workflow Architecture</h2>
+        <section id="ai-integration" class="content-section">
+            <h2 class="content-section__title">AI Integration</h2>
 
-            <div class="diagram-container">
-                <h2 class="diagram-container__title">E2E n8n-Native & Redis-Queued Architecture</h2>
-                <div class="workflow-diagram-split">
-                    <div class="workflow-part">
-                        <h4>Event Processing Pipeline</h4>
-                        <div class="mermaid-container">
-                            <div class="mermaid">
-flowchart TB
-    subgraph EI["EVENT INGESTION"]
-        A["🗂️ Google Drive Trigger<br>File Upload"]
-        B["🔄 Switch: Filter & Dedup<br>Validate File"]
-        C["⚙️ Function: Enrich Metadata<br>Extract Properties"]
-        Q["🔴 Redis Queue<br>Priority Processing"]
-    end
+            <h3 class="content-section__subtitle">OpenAI Vision Analysis</h3>
+            <pre class="code-block">
+// Image Analysis Configuration
+const analyzeImage = async (imageBuffer) => {
+  const prompt = `
+    Analyze this luxury product image and extract:
+    1. Product type and category
+    2. Primary colors (hex codes if possible)
+    3. Materials and textures visible
+    4. Style descriptors (modern, classic, etc.)
+    5. Target audience demographics
+    6. Suggested marketing keywords
+    7. Quality assessment (1-10)
     
-    subgraph DR["DB ROUTING"]
-        D["🗄️ PostgreSQL Lookup<br>& Row Lock"]
-        E{"❓ File Status<br>New/Revision/Rejected"}
-    end
-    
-    A --> B
-    B --> C
-    C --> Q
-    Q --> D
-    D --> E
-    
-    style A fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
-    style Q fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style D fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="workflow-part">
-                        <h4>Processing & Approval</h4>
-                        <div class="mermaid-container">
-                            <div class="mermaid">
-flowchart TB
-    subgraph DP["DRAFT PIPELINE"]
-        F["📊 Path Analysis<br>& Classification"]
-        G["🏷️ MCP-ID Generation<br>Versioning"]
-        H["📝 PostgreSQL: status=DRAFT"]
-    end
-    
-    subgraph AS["APPROVAL SYSTEM"]
-        I["📋 Create approval_record<br>PostgreSQL"]
-        J{"🔀 Approval Method<br>Forms/Sheets/Chat"}
-        K["📝 Google Forms<br>Approval"]
-        L["📊 Google Sheets<br>Approval"]
-        M["💬 Google Chat<br>Approval"]
-        N{"✅ Decision Validation<br>Consensus Check"}
-        O["✅ PostgreSQL: status=APPROVED"]
-    end
-    
-    F --> G
-    G --> H
-    H --> I
-    I --> J
-    J --> K
-    J --> L
-    J --> M
-    K --> N
-    L --> N
-    M --> N
-    N --> O
-    
-    style F fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
-    style J fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
-    style O fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="workflow-part">
-                        <h4>Production & Distribution</h4>
-                        <div class="mermaid-container">
-                            <div class="mermaid">
-flowchart TB
-    subgraph PP["PRODUCTION PIPELINE"]
-        P["🚀 Init Production<br>n8n Workflow"]
-        R["🤖 OpenAI Analysis<br>Tag Generation"]
-        S["🔍 Weaviate Embeddings<br>Semantic Indexing"]
-        T["🌐 Cloudinary Optimization<br>Format Conversion"]
-        U["🔗 Generate Formats & URLs<br>Multi-Platform"]
-        V["📁 Google Drive<br>Processed Folder"]
-        W["✅ PostgreSQL: status=OPTIMIZED"]
-    end
-    
-    subgraph SS["SCHEDULED SYNC"]
-        Z["⏰ Cron Trigger<br>Scheduled Sync"]
-        AA["📊 Fetch OPTIMIZED<br>PostgreSQL Query"]
-        BB["📊 ERPNext Sync<br>Product Data"]
-        CC["🛒 WooCommerce Sync<br>eCommerce Listings"]
-        DD["🎨 Webflow Publish<br>Marketing Content"]
-        EE["📈 Status Update<br>Processing Complete"]
-        FF["🎯 PostgreSQL: status=PUBLISHED"]
-    end
-    
-    P --> R
-    R --> S
-    S --> T
-    T --> U
-    U --> V
-    V --> W
-    Z --> AA
-    AA --> BB
-    BB --> CC
-    CC --> DD
-    DD --> EE
-    EE --> FF
-    
-    style P fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
-    style T fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
-    style FF fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="diagram-container__description">
-                    <p>This enhanced version uses n8n's native Google Drive Trigger and Switch/Function nodes for routing, Redis for prioritized queuing, PostgreSQL for transactional state & locking, and BigQuery/Grafana for analytics and alerts. Secrets live in n8n's credential store, and retry/DLQ logic is built-in.</p>
-                </div>
-            </div>
+    Return as structured JSON.
+  `;
+  
+  const response = await openai.chat.completions.create({
+    model: "gpt-4-vision-preview",
+    messages: [{
+      role: "user",
+      content: [
+        { type: "text", text: prompt },
+        { 
+          type: "image_url", 
+          image_url: {
+            url: `data:image/jpeg;base64,${imageBuffer.toString('base64')}`
+          }
+        }
+      ]
+    }],
+    max_tokens: 500
+  });
+  
+  return JSON.parse(response.choices[0].message.content);
+};
+            </pre>
 
-            <h3 class="content-section__subtitle">Key Workflow Improvements</h3>
-            <div class="workflow-cards">
-                <div class="workflow-card">
-                    <h4 class="workflow-card__title">Enhanced Processing Pipeline</h4>
-                    <ul>
-                        <li><strong>Redis Queue Management:</strong> Priority-based processing with better load distribution</li>
-                        <li><strong>PostgreSQL Row Locking:</strong> Prevents duplicate processing and ensures data consistency</li>
-                        <li><strong>Consolidated Approval System:</strong> Multiple approval methods (Forms, Sheets, Chat) with unified validation</li>
-                        <li><strong>Automated Revision Handling:</strong> Smart routing for rejected/revision items back to appropriate workflows</li>
-                    </ul>
-                </div>
-                
-                <div class="workflow-card">
-                    <h4 class="workflow-card__title">Advanced Observability</h4>
-                    <ul>
-                        <li><strong>BigQuery Integration:</strong> Data lake for comprehensive analytics and reporting</li>
-                        <li><strong>Grafana Dashboards:</strong> Real-time monitoring of all workflow stages</li>
-                        <li><strong>Multi-Channel Alerts:</strong> Proactive notifications via Chat and Gmail</li>
-                        <li><strong>Performance Metrics:</strong> Comprehensive tracking of processing times and success rates</li>
-                    </ul>
-                </div>
-                
-                <div class="workflow-card">
-                    <h4 class="workflow-card__title">Intelligent Routing</h4>
-                    <ul>
-                        <li><strong>Path Analysis:</strong> Smart classification based on file location and metadata</li>
-                        <li><strong>MCP-ID Generation:</strong> Automatic versioning and context protocol assignment</li>
-                        <li><strong>Decision Validation:</strong> Multi-step approval process with fallback mechanisms</li>
-                        <li><strong>Status Tracking:</strong> Complete lifecycle management from DRAFT to PUBLISHED</li>
-                    </ul>
-                </div>
-                
-                <div class="workflow-card">
-                    <h4 class="workflow-card__title">Optimized Performance</h4>
-                    <ul>
-                        <li><strong>Scheduled Integration:</strong> Deferred heavy operations to optimize real-time performance</li>
-                        <li><strong>Cron-based Sync:</strong> Efficient batch processing for ERP and eCommerce updates</li>
-                        <li><strong>Multi-platform Publishing:</strong> Automated distribution to all connected systems</li>
-                        <li><strong>Error Recovery:</strong> Built-in retry logic and dead letter queue handling</li>
-                    </ul>
-                </div>
-            </div>
+            <h3 class="content-section__subtitle">Weaviate Vector Storage</h3>
+            <pre class="code-block">
+// Weaviate Schema
+{
+  "class": "MediaAsset",
+  "description": "DSI product media assets",
+  "vectorizer": "text2vec-openai",
+  "properties": [
+    {
+      "name": "productName",
+      "dataType": ["string"],
+      "description": "Product name"
+    },
+    {
+      "name": "sku",
+      "dataType": ["string"],
+      "description": "Stock keeping unit"
+    },
+    {
+      "name": "description",
+      "dataType": ["text"],
+      "description": "AI-generated description"
+    },
+    {
+      "name": "tags",
+      "dataType": ["string[]"],
+      "description": "AI-generated tags"
+    },
+    {
+      "name": "colors",
+      "dataType": ["string[]"],
+      "description": "Detected colors"
+    },
+    {
+      "name": "qualityScore",
+      "dataType": ["number"],
+      "description": "AI quality assessment"
+    }
+  ]
+}
+
+// Store in Weaviate
+const storeInWeaviate = async (mediaData) => {
+  const result = await client.data
+    .creator()
+    .withClassName('MediaAsset')
+    .withProperties({
+      productName: mediaData.productName,
+      sku: mediaData.sku,
+      description: mediaData.aiDescription,
+      tags: mediaData.aiTags,
+      colors: mediaData.detectedColors,
+      qualityScore: mediaData.qualityScore
+    })
+    .do();
+    
+  return result.id;
+};
+            </pre>
         </section>
 
         <section id="ocr-services" class="content-section">
@@ -594,7 +1182,7 @@ flowchart TB
             <p>Adding a dual-engine OCR service (AWS Textract + Google Cloud Vision) at the ingestion edge dramatically improves document search recall and precision across the DSI ecosystem, while feeding cleaner, structured data into ERPNext, Weaviate, Cloudinary, and legal/procurement workflows.</p>
 
             <h3 class="content-section__subtitle">OCR Service Architecture</h3>
-            <div class="mermaid-container">
+            <div class="mermaid-container5">
                 <div class="mermaid">
 graph TB
     subgraph DI["Document Input"]
@@ -636,9 +1224,7 @@ graph TB
     JSON --> CDN
     META --> CHAT
     
-    style PRE fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
-    style MRG fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
-    style JSON fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+
                 </div>
             </div>
         </section>
@@ -678,6 +1264,192 @@ graph TB
             /Media                      ← Existing structure
             /Marketing
             /ERP-Integration
+            </pre>
+        </section>
+
+        <section id="cloudinary" class="content-section">
+            <h2 class="content-section__title">Cloudinary Configuration</h2>
+
+            <h3 class="content-section__subtitle">Upload Presets</h3>
+            <pre class="code-block">
+// DSI Upload Preset Configuration
+{
+  "name": "dsi-product-media",
+  "unsigned": false,
+  "folder": "dsi/products",
+  "allowed_formats": ["jpg", "png", "webp", "mp4", "mov"],
+  "transformation": [
+    {
+      "quality": "auto:best",
+      "fetch_format": "auto"
+    }
+  ],
+  "eager": [
+    {
+      "width": 150,
+      "height": 150,
+      "crop": "thumb",
+      "gravity": "auto"
+    },
+    {
+      "width": 800,
+      "quality": "auto",
+      "fetch_format": "auto"
+    },
+    {
+      "width": 1200,
+      "height": 630,
+      "crop": "fill",
+      "gravity": "auto"
+    }
+  ],
+  "eager_async": true,
+  "auto_tagging": 80,
+  "categorization": "google_tagging",
+  "detection": "adv_face"
+}
+            </pre>
+
+            <h3 class="content-section__subtitle">Transformation URLs</h3>
+            <div class="highlight-box">
+                <strong>Base URL:</strong> <code>https://res.cloudinary.com/designershaik/</code><br><br>
+                <strong>Transformations:</strong>
+                <ul>
+                    <li>Thumbnail: <code>/c_thumb,w_150,h_150/</code></li>
+                    <li>Web Optimized: <code>/q_auto,f_auto,w_800/</code></li>
+                    <li>Social Media: <code>/c_fill,w_1200,h_630/</code></li>
+                    <li>Print Quality: <code>/q_100,dpr_2.0/</code></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="erp-sync" class="content-section">
+            <h2 class="content-section__title">ERPNext Synchronization</h2>
+
+            <h3 class="content-section__subtitle">API Configuration</h3>
+            <pre class="code-block">
+// ERPNext API Client
+const ERPNextClient = {
+  baseURL: 'https://erp.designershaik.com',
+  apiKey: process.env.ERPNEXT_API_KEY,
+  apiSecret: process.env.ERPNEXT_API_SECRET,
+  
+  async getProduct(sku) {
+    const response = await fetch(`${this.baseURL}/api/resource/Item/${sku}`, {
+      headers: {
+        'Authorization': `token ${this.apiKey}:${this.apiSecret}`
+      }
+    });
+    return response.json();
+  },
+  
+  async updateProductImage(sku, imageUrl) {
+    const response = await fetch(`${this.baseURL}/api/resource/Item/${sku}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${this.apiKey}:${this.apiSecret}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        image: imageUrl,
+        website_image: imageUrl
+      })
+    });
+    return response.json();
+  }
+};
+            </pre>
+
+            <h3 class="content-section__subtitle">Sync Workflow</h3>
+            <pre class="code-block">
+// Daily sync cron job
+0 2 * * * → Trigger ERPNext sync workflow
+
+1. Get optimized media from PostgreSQL
+   SELECT * FROM media_assets 
+   WHERE processing_status = 'OPTIMIZED' 
+   AND sku IS NOT NULL;
+
+2. For each media asset:
+   - Check if product exists in ERPNext
+   - Update product images
+   - Update product attributes
+   - Log sync status
+
+3. Update sync_status table
+   INSERT INTO sync_status (
+     media_asset_id, target_system, 
+     sync_status, last_sync_at
+   ) VALUES (?, 'ERPNEXT', 'SUCCESS', NOW());
+            </pre>
+        </section>
+
+        <section id="drive-webhook" class="content-section">
+            <h2 class="content-section__title">Drive Webhook Setup</h2>
+
+            <h3 class="content-section__subtitle">Cloud Function Deployment</h3>
+            <pre class="code-block">
+# main.py
+import os
+import base64
+from google.cloud import pubsub_v1
+
+PROJECT_ID = os.environ.get("GCP_PROJECT_ID")
+TOPIC_ID = os.environ.get("GCP_PUBSUB_TOPIC_ID")
+
+def drive_webhook_to_pubsub(request):
+    publisher = pubsub_v1.PublisherClient()
+    topic_path = publisher.topic_path(PROJECT_ID, TOPIC_ID)
+
+    headers = dict(request.headers)
+    message_data = {
+        "X-Goog-Channel-ID": headers.get("X-Goog-Channel-ID"),
+        "X-Goog-Channel-Token": headers.get("X-Goog-Channel-Token"),
+        "X-Goog-Resource-State": headers.get("X-Goog-Resource-State"),
+        "X-Goog-Resource-ID": headers.get("X-Goog-Resource-ID"),
+        "X-Goog-Resource-URI": headers.get("X-Goog-Resource-URI")
+    }
+
+    data_str = str(message_data)
+    data_bytes = data_str.encode("utf-8")
+
+    future = publisher.publish(topic_path, data_bytes)
+    print(f"Published message ID: {future.result()}")
+
+    return "OK", 200
+            </pre>
+
+            <h3 class="content-section__subtitle">Deploy Command</h3>
+            <pre class="code-block">
+gcloud functions deploy drive-webhook-to-pubsub \
+  --gen2 \
+  --runtime=python311 \
+  --region=us-central1 \
+  --source=. \
+  --entry-point=drive_webhook_to_pubsub \
+  --trigger-http \
+  --allow-unauthenticated \
+  --set-env-vars=GCP_PROJECT_ID=n8n-drive-integration-465208,GCP_PUBSUB_TOPIC_ID=dsi-product-repository \
+  --service-account=dsi-drive-watcher@n8n-drive-integration-465208.iam.gserviceaccount.com
+            </pre>
+
+            <h3 class="content-section__subtitle">Watch Configuration</h3>
+            <pre class="code-block">
+# Set up Drive watch
+FOLDER_ID="10gv8kw_YR8_i1t2S7x-Z_43-QlwoVFN8"
+FUNCTION_URL="https://us-central1-n8n-drive-integration-465208.cloudfunctions.net/drive-webhook-to-pubsub"
+CHANNEL_ID="dsi-media-channel-$(date +%s)"
+TOKEN=$(gcloud auth print-access-token)
+
+curl -X POST \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "'"${CHANNEL_ID}"'",
+    "type": "web_hook",
+    "address": "'"${FUNCTION_URL}"'"
+  }' \
+  "https://www.googleapis.com/drive/v3/files/${FOLDER_ID}/watch?supportsAllDrives=true"
             </pre>
         </section>
 
@@ -774,12 +1546,107 @@ def drive_webhook_to_pubsub(request):
                     </ul>
                 </div>
             </div>
+
+            <h3 class="content-section__subtitle">Docker Compose Setup</h3>
+            <pre class="code-block">
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
+      - N8N_HOST=n8n.designershaik.com
+      - N8N_PROTOCOL=https
+      - N8N_WEBHOOK_BASE_URL=https://n8n.designershaik.com
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=n8n_user
+      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=dsi_user
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=dsi_media
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  weaviate:
+    image: semitechnologies/weaviate:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=false
+      - AUTHENTICATION_APIKEY_ENABLED=true
+      - AUTHENTICATION_APIKEY_ALLOWED_KEYS=${WEAVIATE_API_KEY}
+      - PERSISTENCE_DATA_PATH=/var/lib/weaviate
+      - DEFAULT_VECTORIZER_MODULE=text2vec-openai
+      - ENABLE_MODULES=text2vec-openai
+      - OPENAI_APIKEY=${OPENAI_API_KEY}
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+
+volumes:
+  n8n_data:
+  postgres_data:
+  weaviate_data:
+  redis_data:
+            </pre>
+
+            <h3 class="content-section__subtitle">Environment Variables</h3>
+            <pre class="code-block">
+# .env file
+N8N_USER=admin
+N8N_PASSWORD=secure_password_here
+DB_PASSWORD=postgres_password_here
+POSTGRES_PASSWORD=postgres_password_here
+WEAVIATE_API_KEY=weaviate_api_key_here
+OPENAI_API_KEY=sk-proj-...
+REDIS_PASSWORD=redis_password_here
+
+# Google Cloud
+GCP_PROJECT_ID=n8n-drive-integration-465208
+GCP_SERVICE_ACCOUNT_EMAIL=dsi-drive-watcher@n8n-drive-integration-465208.iam.gserviceaccount.com
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=designershaik
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# ERPNext
+ERPNEXT_URL=https://erp.designershaik.com
+ERPNEXT_API_KEY=your_api_key
+ERPNEXT_API_SECRET=your_api_secret
+            </pre>
         </section>
 
         <section id="testing" class="content-section">
             <h2 class="content-section__title">Testing & Monitoring</h2>
 
-            <h3 class="content-section__subtitle">Enhanced Testing Protocol</h3>
+            <h3 class="content-section__subtitle">Testing Protocol</h3>
             <div class="mermaid-container">
                 <div class="mermaid">
 flowchart TB
@@ -803,15 +1670,12 @@ flowchart TB
     Output -.-> OutputDetail["🌐 Verify Cloudinary URLs in<br>Processed-Media folder"]
     Monitor -.-> MonitorDetail["📈 Check Grafana dashboard<br>for metrics updates"]
     
-    style Upload fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
-    style Queue fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style Monitor fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
                 </div>
             </div>
 
             <h3 class="content-section__subtitle">Performance Monitoring Dashboard</h3>
             <div class="note-box">
-                <strong>Enhanced Key Metrics to Track:</strong>
+                <strong>Key Metrics to Track:</strong>
                 <ul>
                     <li><strong>Queue Performance:</strong> Redis queue length and processing times</li>
                     <li><strong>Database Locks:</strong> PostgreSQL lock wait times and deadlocks</li>
@@ -826,7 +1690,7 @@ flowchart TB
 
             <h3 class="content-section__subtitle">End-to-End Testing Scenarios</h3>
             <div class="implementation-steps">
-                <h4 class="implementation-steps__title">Enhanced Test Scenario Checklist</h4>
+                <h4 class="implementation-steps__title">Test Scenario Checklist</h4>
                 <div class="step-grid">
                     <div class="step-item" data-step="1">
                         <strong>Queue Management Test</strong>
@@ -898,13 +1762,39 @@ flowchart TB
                     <label for="prod7">Team training completed on new workflows</label>
                 </div>
             </div>
+
+            <h3 class="content-section__subtitle">Test Upload Process</h3>
+            <pre class="code-block">
+# Test file upload
+1. Upload test image to: DSI-Product-Repository/Palace-of-Fragrances/Classic-Range/Opulent-Shaik-Amethyst/Media/Images/
+
+2. Monitor Pub/Sub subscription:
+   gcloud pubsub subscriptions pull dsi-product-repository-sub --auto-ack
+
+3. Check n8n execution logs:
+   docker logs dsi_n8n_1 --tail 100 -f
+
+4. Verify PostgreSQL record:
+   SELECT * FROM media_assets 
+   WHERE drive_file_id = 'YOUR_FILE_ID';
+
+5. Check Weaviate storage:
+   curl http://localhost:8080/v1/objects?class=MediaAsset
+
+6. Verify Cloudinary upload:
+   https://res.cloudinary.com/designershaik/image/upload/dsi/...
+            </pre>
+
         </section>
+
     </main>
 
     <footer class="footer">
         <p>© 2025 DSI Media Repository Implementation Guide</p>
         <p>This documentation provides complete technical specifications for deploying the DSI Media Repository Integration Architecture with automated workflows from upload to CDN distribution.</p>
         <p>Version 3.0 - Enhanced with Optimized MCP Workflows, Redis Queue Management, Advanced Monitoring, and Production-Ready Architecture</p>
+        <p>Maintained by: Mohamed Elberier (mdad@designershaik.com) </p>
+        <p>Last Updated: January 2025</p>
     </footer>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
@@ -913,3 +1803,4 @@ flowchart TB
 <script src="script.js"></script>
 </body>
 </html>
+
