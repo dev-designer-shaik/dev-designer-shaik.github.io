@@ -528,13 +528,17 @@ body {
 
 }
 
-
+.nav-section-header{
+    font-size: small;
+    font-weight: 900;
+    font-stretch: expanded;
+    font-style: oblique;
+}
 
 .nav-links {
-
-    list-style: none;
-
-    padding: 1rem 0;
+list-style: none;
+padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+font-size: small;
 
 }
 
