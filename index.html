@@ -365,134 +365,137 @@ graph TB
             <div class="mermaid-container1">
                 <div class="mermaid" id="media-assets-er-diagram">
 erDiagram
-    media_assets {
-        SERIAL id PK
-        VARCHAR drive_file_id UK
-        UUID weaviate_object_id
-        VARCHAR mcp_id
-        VARCHAR product_name
-        VARCHAR sku
-        VARCHAR file_name
-        BIGINT file_size
-        VARCHAR mime_type
-        TEXT drive_folder_path
-        TEXT cloudinary_url
-        VARCHAR processing_status
-        TEXT ai_description
-        TEXT ai_tags
+    direction LR
+
+    folder_structure {
+        SERIAL    id               PK
+        VARCHAR   drive_folder_id  UK
+        TEXT      folder_name
+        TEXT      full_path        "e.g. /assets/images/2025/07"
+        TIMESTAMP last_synced_at
         TIMESTAMP created_at
         TIMESTAMP updated_at
     }
 
-    folder_structure {
-        SERIAL id PK
-        VARCHAR drive_folder_id UK
-        TEXT folder_path UK
-        VARCHAR parent_folder_id FK "REFERENCES folder_structure(drive_folder_id)"
-        TEXT folder_name
-        TIMESTAMP last_synced_at
-        BOOLEAN is_monitored
-        TEXT sync_configuration JSONB
+    media_assets {
+        SERIAL    id               PK
+        UUID      weaviate_object_id
+        VARCHAR   drive_file_id    UK
+        VARCHAR   mcp_id
+        VARCHAR   product_name
+        VARCHAR   sku
+        VARCHAR   file_name
+        BIGINT    file_size
+        VARCHAR   mime_type
+        INTEGER   parent_id        FK  "→ folder_structure.id"
+        TEXT      cloudinary_url
+        VARCHAR   processing_status
+        TEXT      ai_description
+        TEXT      ai_tags
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
     processing_logs {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR workflow_id
-        VARCHAR step_name
-        VARCHAR status
-        TEXT message
+        SERIAL    id               PK
+        INTEGER   media_asset_id   FK  "→ media_assets.id"
+        VARCHAR   workflow_id
+        VARCHAR   step_name
+        VARCHAR   status
+        TEXT      message
         TIMESTAMP created_at
     }
 
     approval_records {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR approver_email
-        VARCHAR approval_status
-        TEXT comments
+        SERIAL    id               PK
+        INTEGER   media_asset_id   FK  "→ media_assets.id"
+        VARCHAR   approver_email
+        VARCHAR   approval_status
+        TEXT      comments
         TIMESTAMP approved_at
     }
 
     sync_status {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR target_system
-        VARCHAR sync_status
+        SERIAL    id               PK
+        INTEGER   media_asset_id   FK  "→ media_assets.id"
+        VARCHAR   target_system
+        VARCHAR   sync_status
         TIMESTAMP last_sync_at
-        TEXT error_message
+        TEXT      error_message
     }
 
     plm_transitions {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR from_stage
-        VARCHAR to_stage
-        VARCHAR triggered_by
-        VARCHAR transition_type
-        VARCHAR approval_by
-        TEXT comments
-        VARCHAR rabbitmq_message_id
+        SERIAL    id               PK
+        INTEGER   media_asset_id   FK  "→ media_assets.id"
+        VARCHAR   from_stage
+        VARCHAR   to_stage
+        VARCHAR   triggered_by
+        VARCHAR   transition_type
+        VARCHAR   approval_by
+        TEXT      comments
+        VARCHAR   rabbitmq_message_id
         TIMESTAMP created_at
     }
 
     event_history {
-        SERIAL id PK
-        VARCHAR event_id UK
-        VARCHAR exchange
-        VARCHAR routing_key
-        JSONB payload
-        BOOLEAN processed
+        SERIAL    id               PK
+        VARCHAR   event_id         UK
+        VARCHAR   exchange
+        VARCHAR   routing_key
+        JSONB     payload
+        BOOLEAN   processed
         TIMESTAMP processed_at
-        TEXT error_message
-        INTEGER retry_count
+        TEXT      error_message
+        INTEGER   retry_count
         TIMESTAMP created_at
     }
 
     solidworks_metadata {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR part_number
-        VARCHAR material
-        DECIMAL weight
-        JSONB dimensions
-        JSONB custom_properties
-        JSONB bom_data
+        SERIAL    id               PK
+        INTEGER   media_asset_id   FK  "→ media_assets.id"
+        VARCHAR   part_number
+        VARCHAR   material
+        DECIMAL   weight
+        JSONB     dimensions
+        JSONB     custom_properties
+        JSONB     bom_data
         TIMESTAMP extracted_at
     }
 
     document_index {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR mcp_id
-        VARCHAR doc_type
-        VARCHAR language
-        TEXT full_text
-        TEXT[] key_terms
-        JSONB extracted_data
-        DECIMAL ocr_confidence
-        TEXT drive_url
-        TEXT cloudinary_url
+        SERIAL    id               PK
+        INTEGER   media_asset_id   FK  "→ media_assets.id"
+        VARCHAR   mcp_id
+        VARCHAR   doc_type
+        VARCHAR   language
+        TEXT      full_text
+        TEXT[]    key_terms
+        JSONB     extracted_data
+        DECIMAL   ocr_confidence
+        TEXT      drive_url
+        TEXT      cloudinary_url
         TIMESTAMP created_at
     }
 
     approval_matrix {
-        SERIAL id PK
-        VARCHAR plm_stage
-        VARCHAR approver_role
-        VARCHAR approver_email
-        INTEGER approval_order
-        BOOLEAN is_mandatory
+        SERIAL    id               PK
+        VARCHAR   plm_stage
+        VARCHAR   approver_role
+        VARCHAR   approver_email
+        INTEGER   approval_order
+        BOOLEAN   is_mandatory
         TIMESTAMP created_at
     }
 
-    media_assets ||--o{ processing_logs : "logs"
-    media_assets ||--o{ approval_records : "approvals"
-    media_assets ||--o{ sync_status : "sync"
-    media_assets ||--o{ plm_transitions : "transitions"
-    media_assets ||--o{ solidworks_metadata : "solidworks_data"
-    media_assets ||--o{ document_index : "document_data"
-    media_assets }--|| folder_structure : "located_in"
+    %% Relationships
+    folder_structure ||--o{ media_assets         : contains
+    media_assets      ||--o{ processing_logs     : logs
+    media_assets      ||--o{ approval_records    : approvals
+    media_assets      ||--o{ sync_status         : sync
+    media_assets      ||--o{ plm_transitions     : transitions
+    media_assets      ||--o{ solidworks_metadata : solidworks_data
+    media_assets      ||--o{ document_index      : document_data
+
                 </div>
             </div>
 
