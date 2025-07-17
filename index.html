@@ -384,6 +384,17 @@ erDiagram
         TIMESTAMP updated_at
     }
 
+    folder_structure {
+        SERIAL id PK
+        VARCHAR drive_folder_id UK
+        TEXT folder_path UK
+        VARCHAR parent_folder_id FK "REFERENCES folder_structure(drive_folder_id)"
+        TEXT folder_name
+        TIMESTAMP last_synced_at
+        BOOLEAN is_monitored
+        TEXT sync_configuration JSONB
+    }
+
     processing_logs {
         SERIAL id PK
         INTEGER media_asset_id FK
@@ -481,6 +492,7 @@ erDiagram
     media_assets ||--o{ plm_transitions : "transitions"
     media_assets ||--o{ solidworks_metadata : "solidworks_data"
     media_assets ||--o{ document_index : "document_data"
+    media_assets }--|| folder_structure : "located_in"
                 </div>
             </div>
 
