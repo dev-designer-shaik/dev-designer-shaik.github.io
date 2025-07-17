@@ -62,7 +62,7 @@
 
     --font-size-sm: 0.875rem;
 
-    --font-size-base: 0.7rem;
+    --font-size-base: 0.85rem;
 
     --font-size-lg: 1.125rem;
 
@@ -680,7 +680,7 @@ font-size: small;
 
 .content-section__subtitle {
 
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-lg);
 
     font-weight: 600;
 
