@@ -62,7 +62,7 @@
 
     --font-size-sm: 0.875rem;
 
-    --font-size-base: 1rem;
+    --font-size-base: 0.7rem;
 
     --font-size-lg: 1.125rem;
 
@@ -662,7 +662,7 @@ font-size: small;
 
 .content-section__title {
 
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-xl);
 
     font-weight: 700;
 
@@ -680,7 +680,7 @@ font-size: small;
 
 .content-section__subtitle {
 
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-l);
 
     font-weight: 600;
 
@@ -1401,29 +1401,19 @@ font-size: small;
 
 
 
-.code-block {
-
-    background-color: var(--bg-tertiary);
-
-    border: 1px solid var(--border-color);
-
-    border-radius: var(--border-radius);
-
-    padding: 1.5rem;
-
-    font-family: var(--font-family-mono);
-
-    font-size: var(--font-size-sm);
-
-    line-height: 1.5;
-
-    overflow-x: auto;
-
-    margin: 1rem 0;
-
-    color: var(--text-primary);
-
+code-block {
+   background-color: var(--bg-tertiary);
+   border: 1px solid var(--border-color);
+   border-radius: var(--border-radius);
+   padding: 1.5rem;
+   font-family: var(--font-family-mono);
+   font-size: 0.5rem;
+   line-height: 1;
+   overflow-x: auto;
+   margin: 1rem 0;
+   color: var(--text-primary);
 }
+
 
 
 
@@ -1563,7 +1553,7 @@ font-size: small;
 
 .cost-card__title {
 
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
 
     font-weight: 600;
 
