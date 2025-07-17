@@ -245,6 +245,10 @@ body {
 #media-assets-er-diagram svg tspan {
     fill: #1e293b !important;
 }
+#weaviate-er-diagram svg text,
+#weaviate-er-diagram svg tspan {
+    fill: #1e293b !important;
+}   
 
 .header__logo-container {
 
