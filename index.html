@@ -76,7 +76,7 @@ graph TB
         N8N["⚙️ n8n<br>Workflow Engine"]
         OAI["🤖 OpenAI<br>AI Analysis"]
         PS["📡 Google Pub/Sub<br>Event Transport"]
-        MA["🎯 Manus/Abacus<br>AI Agents"]
+        SA["🎯 Service Agents<br>K8s Orchestration"]
     end
 
     subgraph ST["Storage"]
@@ -98,7 +98,7 @@ graph TB
 
     GD --> PS
     PS --> N8N
-    N8N --> MA
+    N8N --> SA
     N8N --> OAI
     OAI --> WV
     N8N --> PG
@@ -281,7 +281,7 @@ graph TB
             <h3 class="content-section__subtitle">Repository Folder Structure</h3>
             <div class="diagram-split">
                 <div class="diagram-part">
-                    <h4>System Structure</h4>
+                    <h4>Event-Driven Directory Structure</h4>
                     <div class="mermaid-container2">
                         <div class="mermaid">
 %%{init: {
@@ -291,29 +291,27 @@ graph TB
 graph TB
     Root["📁 DSI-Product-Repository"]
     
-    subgraph SF["System Folders"]
-        Meta["📋 Metadata"]
-        Proc["⚡ Processed-Media"]
+    subgraph PLM["PLM Stages"]
+        Draft["00-Early-Design<br>Concept Stage"]
+        GateA["01-Design-Review<br>Gate-A Stage"]
+        Prototype["02-Prototype<br>Prototype Stage"]
+        PPAP["03-Quality<br>PPAP Stage"]
+        Production["04-Production<br>Production Stage"]
     end
     
-    subgraph MS["Metadata Structure"]
-        Tag["🏷️ Tagging-Data"]
-        AI["🤖 AI-Generated-Tags"]
-        Multi["🌐 Multilingual-Descriptions"]
-        Ver["📝 Version-Control"]
-        Change["📊 Media-Change-History"]
-        Approval["✅ Approval-Stages"]
-        MCP["🔗 MCP-Context"]
+    subgraph Meta["Metadata"]
+        MCP["MCP-Registry"]
+        Event["Event-History"]
     end
     
-    Root --> SF
-    Meta --> MS
+    Root --> PLM
+    PLM --> Meta
                         </div>
                     </div>
                 </div>
                 
                 <div class="diagram-part">
-                    <h4>Product Structure</h4>
+                    <h4>Processed Media Structure</h4>
                     <div class="mermaid-container1">
                         <div class="mermaid">
 %%{init: {
@@ -321,33 +319,24 @@ graph TB
   "themeCSS": ".edgePath marker path { fill: #808080 !important; stroke: #536277 !important; }\n.marker { fill: #808080 !important; }\n.text-item-align { fill: #808080 !important; }\n.subgraph .title { fill: #808080 !important; }"
 }}%%
 graph TB
-    subgraph PP["Product Palaces"]
-        PF["🌸 Palace-of-Fragrances"]
-        PPR["⚙️ Palace-of-Precision"]
-        PS["👔 Palace-of-Style"]
+    PM["📁 Processed-Media"]
+    
+    subgraph ERP["ERP-Integrated"]
+        SKU_Prod["[SKU]_[ProductName]_[Version]"]
     end
     
-    subgraph POF["Palace of Fragrances"]
-        Precious["💎 Precious-Range"]
-        Classic["🏛️ Classic-Range"]
+    subgraph Web["Web-Optimized"]
+        Cloudinary["Cloudinary-URLs"]
+        CDN["CDN-Manifests"]
     end
     
-    subgraph PR["Precious Range"]
-        OptimumGold["🥇 Objet-d-Art-Optimum<br>Precious-Gold"]
-        SterlinSilver["🥈 Objet-d-Art-Luxury<br>Sterling-Silver"]
+    subgraph Social["Social-Media-Posts"]
+        Platform_Prod["[Platform]_[ProductName]_[Date]"]
     end
     
-    subgraph CR["Classic Range"]
-        Amethyst["💜 Opulent-Shaik<br>Amethyst"]
-        Sapphire["💙 Opulent-Shaik<br>Sapphire"]
-        Emerald["💚 Chic-Shaik<br>Emerald"]
-        Onyx["🖤 Sochi-Onyx"]
-        Amber["🧡 Amber-Kroud"]
-    end
-    
-    PF --> POF
-    Precious --> PR
-    Classic --> CR
+    PM --> ERP
+    PM --> Web
+    PM --> Social
                         </div>
                     </div>
                 </div>
@@ -355,39 +344,33 @@ graph TB
 
             <h3 class="content-section__subtitle">Google Drive Hierarchy</h3>
             <pre class="code-block">
-[SANDBOX] DSI 06 - Media Repository/
-├── DSI-Product-Repository/
-│   ├── Palace-of-Fragrances/
-│   │   ├── Classic-Range/
-│   │   │   ├── Opulent-Shaik-Amethyst/
-│   │   │   │   ├── 00-Early-Design/
-│   │   │   │   │   ├── 01-Research/
-│   │   │   │   │   ├── 02-Concept-Sketches/
-│   │   │   │   │   ├── 03-Concept-CAD/
-│   │   │   │   │   ├── 04-Design-Review/
-│   │   │   │   │   └── 05-Prototype-Assets/
-│   │   │   │   ├── Media/
-│   │   │   │   │   ├── Images/
-│   │   │   │   │   │   ├── 3D-Renders/
-│   │   │   │   │   │   ├── Photos/
-│   │   │   │   │   │   └── Web-Optimized/
-│   │   │   │   │   └── Videos/
-│   │   │   │   ├── Marketing/
-│   │   │   │   └── ERP-Integration/
-│   │   │   ├── Chic-Shaik-Emerald/
-│   │   │   ├── Amber-Kroud/
-│   │   │   ├── Opulent-Shaik-Sapphire/
-│   │   │   └── Sochi-Onyx/
-│   │   └── Precious-Range/
-│   │       ├── Objet-d-Art-Luxury-Sterling-Silver/
-│   │       └── Objet-d-Art-Optimum-Precious-Gold/
-│   ├── Palace-of-Precision/
-│   │   └── AstroTime-MK1/
-│   └── Palace-of-Style/
-└── Processed-Media/
-    ├── ERP-Integrated/
-    ├── Marketing/
-    └── Web-Optimized/
+/DSI-Product-Repository/
+├── Palace-of-Fragrances/
+│   ├── Classic-Range/
+│   │   └── [Product-Name]/
+│   │       ├── 00-Early-Design/         # Concept Stage
+│   │       │   ├── Research/
+│   │       │   ├── Sketches/
+│   │       │   └── Concept-CAD/
+│   │       ├── 01-Design-Review/        # Gate-A Stage
+│   │       │   ├── Feasibility/
+│   │       │   └── Approvals/
+│   │       ├── 02-Prototype/            # Prototype Stage
+│   │       │   ├── SOLIDWORKS/
+│   │       │   ├── 3D-Prints/
+│   │       │   └── BOM/
+│   │       ├── 03-Quality/              # PPAP Stage
+│   │       │   ├── Testing/
+│   │       │   └── Certifications/
+│   │       ├── 04-Production/           # Production Stage
+│   │       │   ├── Final-Media/
+│   │       │   └── Marketing-Assets/
+│   │       └── Metadata/
+│   │           ├── MCP-Registry/
+│   │           └── Event-History/
+│   └── Precious-Range/
+├── Palace-of-Precision/
+└── Palace-of-Style/
             </pre>
 
             <h3 class="content-section__subtitle">File Naming Convention</h3>
@@ -458,9 +441,75 @@ erDiagram
         TEXT error_message
     }
 
+    plm_transitions {
+        SERIAL id PK
+        INTEGER media_asset_id FK
+        VARCHAR from_stage
+        VARCHAR to_stage
+        VARCHAR triggered_by
+        VARCHAR transition_type
+        VARCHAR approval_by
+        TEXT comments
+        VARCHAR rabbitmq_message_id
+        TIMESTAMP created_at
+    }
+
+    event_history {
+        SERIAL id PK
+        VARCHAR event_id UK
+        VARCHAR exchange
+        VARCHAR routing_key
+        JSONB payload
+        BOOLEAN processed
+        TIMESTAMP processed_at
+        TEXT error_message
+        INTEGER retry_count
+        TIMESTAMP created_at
+    }
+
+    solidworks_metadata {
+        SERIAL id PK
+        INTEGER media_asset_id FK
+        VARCHAR part_number
+        VARCHAR material
+        DECIMAL weight
+        JSONB dimensions
+        JSONB custom_properties
+        JSONB bom_data
+        TIMESTAMP extracted_at
+    }
+
+    document_index {
+        SERIAL id PK
+        INTEGER media_asset_id FK
+        VARCHAR mcp_id
+        VARCHAR doc_type
+        VARCHAR language
+        TEXT full_text
+        TEXT[] key_terms
+        JSONB extracted_data
+        DECIMAL ocr_confidence
+        TEXT drive_url
+        TEXT cloudinary_url
+        TIMESTAMP created_at
+    }
+
+    approval_matrix {
+        SERIAL id PK
+        VARCHAR plm_stage
+        VARCHAR approver_role
+        VARCHAR approver_email
+        INTEGER approval_order
+        BOOLEAN is_mandatory
+        TIMESTAMP created_at
+    }
+
     media_assets ||--o{ processing_logs : "logs"
     media_assets ||--o{ approval_records : "approvals"
     media_assets ||--o{ sync_status : "sync"
+    media_assets ||--o{ plm_transitions : "transitions"
+    media_assets ||--o{ solidworks_metadata : "solidworks_data"
+    media_assets ||--o{ document_index : "document_data"
                 </div>
             </div>
 
@@ -494,30 +543,28 @@ CREATE TABLE media_assets (
     id SERIAL PRIMARY KEY,
     drive_file_id VARCHAR(255) UNIQUE NOT NULL,
     weaviate_object_id UUID,
-    mcp_id VARCHAR(255),
-    product_name VARCHAR(255),
+    mcp_id VARCHAR(255) UNIQUE NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    product_line VARCHAR(100),
+    product_range VARCHAR(100),
     sku VARCHAR(100),
-    file_name VARCHAR(500),
-    file_size BIGINT,
-    mime_type VARCHAR(100),
-    drive_folder_path TEXT,
+    file_url TEXT NOT NULL,
     cloudinary_url TEXT,
-    cloudinary_public_id VARCHAR(255),
-    cloudinary_transformations JSONB,
-    processing_status VARCHAR(50) DEFAULT 'PENDING',
+    mime_type VARCHAR(100),
+    file_size BIGINT,
+    processing_status VARCHAR(50) DEFAULT 'pending',
+    plm_stage VARCHAR(50) DEFAULT 'Draft',
+    designer_id VARCHAR(100),
+    revision VARCHAR(20) DEFAULT 'A00',
+    linked_bom VARCHAR(100),
+    linked_eco VARCHAR(100),
     ai_description TEXT,
     ai_tags TEXT[],
-    plm_stage VARCHAR(50),
-    designer_id VARCHAR(100),
-    revision VARCHAR(20),
-    linked_bom VARCHAR(100),
     quality_score DECIMAL(3,2),
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
-    processed_at TIMESTAMP,
-    INDEX idx_sku (sku),
-    INDEX idx_status (processing_status),
-    INDEX idx_mcp (mcp_id)
+    published_at TIMESTAMP,
+    archived_at TIMESTAMP
 );
 
 -- Processing Logs Table
@@ -553,6 +600,83 @@ CREATE TABLE sync_status (
     error_message TEXT,
     retry_count INTEGER DEFAULT 0
 );
+
+-- PLM Transitions Table
+CREATE TABLE plm_transitions (
+    id SERIAL PRIMARY KEY,
+    media_asset_id INTEGER REFERENCES media_assets(id),
+    from_stage VARCHAR(50),
+    to_stage VARCHAR(50),
+    triggered_by VARCHAR(100),
+    transition_type VARCHAR(50), -- 'manual', 'automated', 'approval'
+    approval_by VARCHAR(100),
+    comments TEXT,
+    rabbitmq_message_id VARCHAR(255),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Event History Table
+CREATE TABLE event_history (
+    id SERIAL PRIMARY KEY,
+    event_id VARCHAR(255) UNIQUE NOT NULL,
+    exchange VARCHAR(100),
+    routing_key VARCHAR(255),
+    payload JSONB,
+    processed BOOLEAN DEFAULT FALSE,
+    processed_at TIMESTAMP,
+    error_message TEXT,
+    retry_count INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- SOLIDWORKS Metadata Table
+CREATE TABLE solidworks_metadata (
+    id SERIAL PRIMARY KEY,
+    media_asset_id INTEGER REFERENCES media_assets(id),
+    part_number VARCHAR(100),
+    material VARCHAR(100),
+    weight DECIMAL(10,3),
+    dimensions JSONB,
+    custom_properties JSONB,
+    bom_data JSONB,
+    extracted_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Document Index Table (OCR)
+CREATE TABLE document_index (
+    id SERIAL PRIMARY KEY,
+    media_asset_id INTEGER REFERENCES media_assets(id),
+    mcp_id VARCHAR(255),
+    doc_type VARCHAR(100),
+    language VARCHAR(10),
+    full_text TEXT,
+    key_terms TEXT[],
+    extracted_data JSONB,
+    ocr_confidence DECIMAL(3,2),
+    drive_url TEXT,
+    cloudinary_url TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Approval Matrix Table
+CREATE TABLE approval_matrix (
+    id SERIAL PRIMARY KEY,
+    plm_stage VARCHAR(50),
+    approver_role VARCHAR(100),
+    approver_email VARCHAR(255),
+    approval_order INTEGER,
+    is_mandatory BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Create Indexes
+CREATE INDEX idx_media_assets_sku ON media_assets(sku);
+CREATE INDEX idx_media_assets_mcp ON media_assets(mcp_id);
+CREATE INDEX idx_media_assets_plm_stage ON media_assets(plm_stage);
+CREATE INDEX idx_media_assets_status ON media_assets(processing_status);
+CREATE INDEX idx_plm_transitions_asset ON plm_transitions(media_asset_id);
+CREATE INDEX idx_event_history_processed ON event_history(processed);
+CREATE INDEX idx_document_index_mcp ON document_index(mcp_id);
             </pre>
 
             <h3 class="content-section__subtitle">Weaviate Vector Schema</h3>
@@ -609,8 +733,16 @@ CREATE TABLE sync_status (
             <div class="mermaid-container">
                 <div class="mermaid">
 flowchart LR
+  %% ----------------------- RabbitMQ -----------------------
   subgraph RabbitMQ
-    E[(drive.events EXCHANGE)]
+    %% Exchanges
+    E[(drive.events<br/>EXCHANGE)]
+    FP[(file.preprocess<br/>EXCHANGE)]
+    AE[(asset.events<br/>EXCHANGE)]
+    PT[(plm.transitions<br/>EXCHANGE)]
+    SN[(system.notifications<br/>EXCHANGE)]
+
+    %% Queues
     subgraph Queues
       Qdoc[(document_ingest_queue)]
       Qimg[(image_ingest_queue)]
@@ -618,9 +750,16 @@ flowchart LR
       Q3d[(3d_model_ingest_queue)]
       Qaud[(audio_ingest_queue)]
       Qapp[(approval_request_queue)]
-      Qpub[(publish_market_queue)]
+      Qpre[(file.preprocess_queue)]
+      Qdraft[(draft.processor)]
+      QgateA[(gateA.reviewer)]
+      Qproto[(prototype.manager)]
+      Qppap[(ppap.quality)]
+      Qprod[(production.publisher)]
+      Qnotif[(notifications.googlechat)]
     end
 
+    %% drive.events bindings
     E -->|file.document.*| Qdoc
     E -->|file.approved.image.*| Qimg
     E -->|file.approved.video.*| Qvid
@@ -629,22 +768,46 @@ flowchart LR
 
     E -->|file.image.created| Qapp
     E -->|file.video.created| Qapp
-    E -->|file.3d_model.created| Qapp
     E -->|file.audio.created| Qapp
 
-    E -->|file.publish.*| Qpub
+    %% New exchanges' bindings
+    FP -->|file| Qpre
+
+    %% asset.events bindings
+    AE -->|asset.*.*.created| Qdraft
+    AE -->|asset.*.*.approved| QgateA
+    AE -->|asset.solidworks.*.created| Qproto
+    AE -->|asset.*.*.stage.ppap| Qppap
+    AE -->|asset.*.*.stage.production| Qprod
+
+    %% plm.transitions bindings
+    PT -->|plm.stage.gateA| QgateA
+    PT -->|plm.stage.prototype| Qproto
+    PT -->|plm.stage.ppap| Qppap
+    PT -->|plm.stage.production| Qprod
+
+    %% system.notifications bindings
+    SN -->|#| Qnotif
   end
 
+  %% ----------------------- n8n Workflows ------------------
   subgraph n8n Workflows
-    Qdoc --> Wdoc[Document Ingest]
-    Qimg --> Wimg[Image Ingest]
-    Qvid --> Wvid[Video Ingest]
-    Q3d --> W3d[3D Model Ingest]
-    Qaud --> Waud[Audio Ingest]
-    Qapp --> Wapp[Approval Request]
-    Qpub --> Wpub[Publish to Market]
+    Qdoc  --> Wdoc[Document&nbsp;Ingest]
+    Qimg  --> Wimg[Image&nbsp;Ingest]
+    Qvid  --> Wvid[Video&nbsp;Ingest]
+    Q3d   --> W3d[3D&nbsp;Model&nbsp;Ingest]
+    Qaud  --> Waud[Audio&nbsp;Ingest]
+    Qapp  --> Wapp[Approval&nbsp;Request]
+    Qpre  --> Wpre[File&nbsp;Preprocess]
+    Qdraft --> Wdraft[PLM&nbsp;Draft&nbsp;Processor]
+    QgateA --> WgateA[PLM&nbsp;Gate-A&nbsp;Reviewer]
+    Qproto --> Wproto[PLM&nbsp;Prototype&nbsp;Manager]
+    Qppap --> Wppap[PLM&nbsp;PPAP&nbsp;Quality]
+    Qprod --> Wprod[PLM&nbsp;Production&nbsp;Publisher]
+    Qnotif --> Wnotif[System&nbsp;Notifications]
   end
                 </div>
+            </div>
             </div>
 
             <h3 class="content-section__subtitle">Event Routing Strategy</h3>
@@ -781,6 +944,79 @@ flowchart TB
                     <tr><td data-label="Processing Stage">Processing Complete</td><td data-label="Status Code">OPTIMIZED</td><td data-label="Duration (Avg)">N/A</td><td data-label="Success Rate">98.9%</td></tr>
                 </tbody>
             </table>
+        </section>
+
+        <section id="plm-stages" class="content-section">
+            <h2 class="content-section__title">PLM Stages Documentation</h2>
+
+            <h3 class="content-section__subtitle">Overview of PLM Stages</h3>
+            <p>The Product Lifecycle Management (PLM) system is designed to manage the entire lifecycle of a product from its conception, through design and manufacture, to service and disposal. Each stage is characterized by specific activities, deliverables, and approval processes, ensuring a structured and controlled progression of product development.</p>
+
+            <h3 class="content-section__subtitle">Draft Stage (Concept)</h3>
+            <p>The Draft stage is the initial phase where new product ideas and concepts are captured. Any new file uploaded to the product folder is automatically considered a draft. This stage focuses on early design intelligence, including research, sketches, and concept CAD. The system automatically registers each new concept as a PLM item in the database and creates a corresponding Engineering Change Order (ECO) in ERPNext.</p>
+            <pre class="code-block">
+<b>Event:</b> asset.*.*.created
+<b>Producer:</b> Google Drive Webhook → RabbitMQ
+<b>Consumer:</b> draft.processor queue
+<b>Actions:</b>
+1. Insert Product Draft record in PostgreSQL (media_assets table), setting plm_stage=\'Draft\'.
+2. Call ERPNext API to create a Concept ECO.
+3. Send Google Chat notification: \"New draft asset uploaded: &lt;filename&gt; (ECO #…)\".
+            </pre>
+
+            <h3 class="content-section__subtitle">Gate-A Approval (Feasibility Review)</h3>
+            <p>The Gate-A stage automates the submission of concept deliverables for review and captures approval/rejection status. Once an ECO is approved in ERPNext, the asset transitions to this stage. The system can optionally perform OCR and compliance checks on attached documents. Upon approval, an Approval Certificate is generated, detailing the approver, date, and specific approval data from the workflow.</p>
+            <pre class="code-block">
+<b>Event:</b> asset.*.*.approved
+<b>Trigger:</b> ERPNext ECO transitions to \"Approved\" → MCP server publishes asset.*.*.approved.
+<b>Consumer:</b> gateA.reviewer queue
+<b>Actions:</b>
+1. Update media_assets.plm_stage=\'Gate-A\'.
+2. Generate an Approval Document (PDF) with approver name, timestamp, and approval data.
+3. Store document link in ERPNext ECO as an attachment.
+4. Notify stakeholders via Google Chat.
+            </pre>
+
+            <h3 class="content-section__subtitle">Prototype Stage</h3>
+            <p>Following Gate-A approval, the Prototype stage initiates the physical prototyping process. This includes Bill of Material (BOM) generation in ERPNext and tracking of prototype assets. For SOLIDWORKS files, the system automatically extracts metadata using the SOLIDWORKS API and creates work orders in ERPNext. An Approval Certificate is generated upon successful completion of this stage, confirming the prototype's readiness.</p>
+            <pre class="code-block">
+<b>Event:</b> asset.solidworks.*.created
+<b>Producer:</b> Designer uploads .SLDPRT or .SLDASM → RabbitMQ
+<b>Consumer:</b> prototype.manager queue
+<b>Actions:</b>
+1. Extract custom properties (part number, material) using SOLIDWORKS API and push to PostgreSQL.
+2. Call ERPNext to auto-generate a Prototype Work Order with BOM.
+3. Update media_assets with plm_stage=\'Prototype\'.
+4. Generate an Approval Certificate for prototype readiness.
+            </pre>
+
+            <h3 class="content-section__subtitle">PPAP (Production Part Approval Process) Stage</h3>
+            <p>The PPAP stage validates production readiness through quality checks, supplier sign-offs, and sample approvals. Once prototype samples are tested and ERPNext QC Inspection is \"Accepted\", the system publishes an event to trigger this stage. Upon successful completion, a signed PPAP Certificate PDF is generated, confirming material readiness and quality compliance. This certificate includes details of the quality checks, approvers, and dates.</p>
+            <pre class="code-block">
+<b>Event:</b> asset.*.*.stage.ppap
+<b>Trigger:</b> ERPNext QC Inspection \"Accepted\" → MCP publishes asset.*.*.stage.ppap.
+<b>Consumer:</b> ppap.quality queue
+<b>Actions:</b>
+1. Create/Update ERPNext Quality Inspection records.
+2. Upon pass, mark plm_stage=\'PPAP\' in PostgreSQL.
+3. Generate a signed PPAP Certificate PDF with quality data and approver details.
+4. Notify procurement and operations.
+            </pre>
+
+            <h3 class="content-section__subtitle">Production & Publishing Stage</h3>
+            <p>The final stage, Production & Publishing, is triggered when ERPNext signals \"Material Ready\". In this phase, the final SKU is generated using n8n automation pipelines, leveraging Google Drive folder names and file names. The product is then published live on WooCommerce and Webflow. All finalized media is archived, and a final Approval Certificate is generated, confirming the product is ready for market and detailing all publishing information.</p>
+            <pre class="code-block">
+<b>Event:</b> asset.*.*.stage.production
+<b>Trigger:</b> ERPNext Material Ready webhook → MCP publishes asset.*.*.stage.production.
+<b>Consumer:</b> production.publisher queue
+<b>Actions:</b>
+1. Generate final SKU in ERPNext via n8n automation (parsing Drive metadata and file name).
+2. Push SKU, pricing, stock levels to WooCommerce via its REST API.
+3. Create or update the Webflow CMS item and trigger a site publish via Webflow API.
+4. Archive media under /Processed-Media/ERP-Integrated/ and confirm backup.
+5. Generate a final Approval Certificate for production readiness and publishing details.
+6. Broadcast \"Product &lt;SKU&gt; is live\" to Google Chat.
+            </pre>
         </section>
 
         <section id="external-integrations" class="content-section">
@@ -942,7 +1178,7 @@ graph TB
             </div>
 
             <h3 class="content-section__subtitle">Model Context Protocol (MCP)</h3>
-            <p>The Model Context Protocol provides standardized metadata management across all systems in the DSI ecosystem. MCP ensures consistency and enables AI agents to understand and manage content intelligently through structured context tracking and version control.</p>
+            <p>The Model Context Protocol provides standardized metadata management across all systems in the DSI ecosystem. MCP ensures consistency and enables AI agents to understand and manage content intelligently through structured context tracking and version control. The protocol integrates deeply with RabbitMQ to provide event-driven context propagation, where each message carries MCP metadata that allows services to understand the full context of an asset's lifecycle. When deployed on Kubernetes, MCP-enabled Service Agents orchestrate complex workflows by subscribing to specific RabbitMQ exchanges and queues, processing messages based on their MCP context, and publishing enriched events back to the system. These Service Agents run as lightweight Kubernetes deployments, each responsible for specific aspects of the media processing pipeline, from AI analysis to format conversion. The agents automatically scale based on queue depth and processing load, ensuring efficient resource utilization while maintaining context consistency across all distributed services.</p>
 
             <h3 class="content-section__subtitle">AI Processing Metrics</h3>
             <table class="data-table">
