@@ -280,36 +280,7 @@ graph TB
             
             <h3 class="content-section__subtitle">Repository Folder Structure</h3>
             <div class="diagram-split">
-                <div class="diagram-part">
-                    <h4>Event-Driven Directory Structure</h4>
-                    <div class="mermaid-container2">
-                        <div class="mermaid">
-%%{init: {
-  "theme": "base",
-  "themeCSS": ".edgePath marker path { fill: #808080 !important; stroke: #536277 !important; }\n.marker { fill: #808080 !important; }\n.text-item-align { fill: #808080 !important; }\n.subgraph .title { fill: #808080 !important; }"
-}}%%
-graph TB
-    Root["📁 DSI-Product-Repository"]
-    
-    subgraph PLM["PLM Stages"]
-        Draft["00-Early-Design<br>Concept Stage"]
-        GateA["01-Design-Review<br>Gate-A Stage"]
-        Prototype["02-Prototype<br>Prototype Stage"]
-        PPAP["03-Quality<br>PPAP Stage"]
-        Production["04-Production<br>Production Stage"]
-    end
-    
-    subgraph Meta["Metadata"]
-        MCP["MCP-Registry"]
-        Event["Event-History"]
-    end
-    
-    Root --> PLM
-    PLM --> Meta
-                        </div>
-                    </div>
-                </div>
-                
+
                 <div class="diagram-part">
                     <h4>Processed Media Structure</h4>
                     <div class="mermaid-container1">
