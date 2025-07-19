@@ -682,6 +682,63 @@ function setupErrorHandling() {
     });
 }
 
+// ===== COLLAPSIBLE CODE BLOCKS =====
+function initializeCollapsibleCodeBlocks() {
+    const codeBlocks = document.querySelectorAll('.code-block.collapsible');
+    
+    codeBlocks.forEach(block => {
+        const header = block.querySelector('.code-header');
+        const content = block.querySelector('.code-content');
+        const toggle = block.querySelector('.code-toggle');
+        
+        if (!header || !content || !toggle) return;
+        
+        // Set initial state (collapsed)
+        content.classList.remove('expanded');
+        toggle.textContent = '▼';
+        
+        // Add click event listener
+        header.addEventListener('click', () => {
+            const isExpanded = content.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Collapse
+                content.classList.remove('expanded');
+                toggle.textContent = '▼';
+                toggle.setAttribute('aria-label', 'Expand code block');
+            } else {
+                // Expand
+                content.classList.add('expanded');
+                toggle.textContent = '▲';
+                toggle.setAttribute('aria-label', 'Collapse code block');
+            }
+        });
+        
+        // Keyboard accessibility
+        header.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                header.click();
+            }
+        });
+        
+        // Make header focusable
+        header.setAttribute('tabindex', '0');
+        header.setAttribute('role', 'button');
+        header.setAttribute('aria-expanded', 'false');
+        
+        // Update aria-expanded when toggled
+        const observer = new MutationObserver(() => {
+            const isExpanded = content.classList.contains('expanded');
+            header.setAttribute('aria-expanded', isExpanded.toString());
+        });
+        
+        observer.observe(content, { attributes: true, attributeFilter: ['class'] });
+    });
+    
+    console.log(`Initialized ${codeBlocks.length} collapsible code blocks`);
+}
+
 // ===== INITIALIZATION =====
 function initializeApp() {
     console.log('Initializing DesignerShaik Documentation...');
@@ -694,6 +751,7 @@ function initializeApp() {
         initializeAccessibility();
         initializePerformanceMonitoring();
         setupErrorHandling();
+        initializeCollapsibleCodeBlocks();
         
         // Mermaid initialization with delay to ensure DOM is ready
         setTimeout(() => {
