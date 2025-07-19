@@ -435,23 +435,12 @@ erDiagram
                 </div>
                 <div class="code-content">
                     <pre><code>-- Media Assets Table
--- ================================
---  Database & Extension Setup
--- ================================
 
--- (Uncomment to create the database)
--- CREATE DATABASE media_assets_db;
-
--- Enable UUID generation and trigram search
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pg_trgm";
-CREATE EXTENSION IF NOT EXISTS unaccent;  -- Optional: for accent‐insensitive matching
+CREATE EXTENSION IF NOT EXISTS unaccent;  
 
--- ================================
---  Tables
--- ================================
 
--- 1. Main media assets
 CREATE TABLE media_assets (
     id                   BIGSERIAL PRIMARY KEY,
     drive_file_id        VARCHAR(255) UNIQUE NOT NULL,
@@ -757,8 +746,38 @@ SELECT *
 FROM media_assets
 WHERE metadata @> '{"product":{"line":"Premium Series"}}';
 */
+-- ----------------------------------------------------------------
+-- Helper to turn a JSONB array of strings into a real TEXT[]
+-- ----------------------------------------------------------------
+-- 1) (Optional) Drop any old, bad index
+-- 1) Helper: JSONB → TEXT[]
+CREATE OR REPLACE FUNCTION jsonb_to_text_array(js JSONB)
+  RETURNS TEXT[]
+  LANGUAGE SQL
+  IMMUTABLE
+AS $$
+  SELECT array_agg(elem)
+    FROM jsonb_array_elements_text(js) AS elem;
+$$;
+Run that first (just this one statement).
 
+Node #2: Create the trigram index
+sql
+Copy
+Edit
+-- 2) Drop any stale index
+DROP INDEX IF EXISTS idx_media_assets_ai_tags_trgm;
 
+-- 3) Proper GIN+pg_trgm index on your exploded tag-string
+CREATE INDEX idx_media_assets_ai_tags_trgm
+  ON media_assets
+  USING gin (
+    ( array_to_string(
+        jsonb_to_text_array(metadata->'ai'->'tags'),
+        ' '
+      )
+    ) gin_trgm_ops
+  );
 
 </code></pre>
                 </div>
