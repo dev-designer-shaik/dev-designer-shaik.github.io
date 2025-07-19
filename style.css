@@ -1448,7 +1448,7 @@ font-size: small;
 }
 
 .code-content.expanded {
-    max-height: 2000px;
+    max-height: 20000px;
     transition: max-height 0.5s ease-in;
 }
 
