@@ -55,16 +55,16 @@
 
     --font-family-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 
-    --font-size-xs: 0.75rem;
+    --font-size-xs: 0.36rem;
 
-    --font-size-sm: 0.875rem;
+    --font-size-sm: 0.4rem;
 
-      --font-size-base: 0.9rem;
-    --font-size-lg: 1rem;
-    --font-size-xl: 1.1rem;
-    --font-size-2xl: 1.25rem;
-    --font-size-3xl: 1.5rem;
-    --font-size-4xl: 1.8rem;
+      --font-size-base: 0.45rem;
+    --font-size-lg: 0.5rem;
+    --font-size-xl: 0.55rem;
+    --font-size-2xl: 0.62rem;
+    --font-size-3xl: 0.75rem;
+    --font-size-4xl: 0.9rem;
 
     
 
