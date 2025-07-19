@@ -435,144 +435,364 @@ erDiagram
                 </div>
                 <div class="code-content">
                     <pre><code>-- Media Assets Table
-CREATE TABLE media_assets (
-    id SERIAL PRIMARY KEY,
-    drive_file_id VARCHAR(255) UNIQUE NOT NULL,
-    weaviate_object_id UUID,
-    mcp_id VARCHAR(255) UNIQUE NOT NULL,
-    product_name VARCHAR(255) NOT NULL,
-    product_line VARCHAR(100),
-    product_range VARCHAR(100),
-    sku VARCHAR(100),
-    file_url TEXT NOT NULL,
-    cloudinary_url TEXT,
-    mime_type VARCHAR(100),
-    file_size BIGINT,
-    processing_status VARCHAR(50) DEFAULT 'pending',
-    plm_stage VARCHAR(50) DEFAULT 'Draft',
-    designer_id VARCHAR(100),
-    revision VARCHAR(20) DEFAULT 'A00',
-    linked_bom VARCHAR(100),
-    linked_eco VARCHAR(100),
-    ai_description TEXT,
-    ai_tags TEXT[],
-    quality_score DECIMAL(3,2),
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW(),
-    published_at TIMESTAMP,
-    archived_at TIMESTAMP
+-- Rewritten SQL Schema for Media Assets with Multilingual AI Tags and Enhanced Search
+
+-- Enable required extensions (if not already enabled)
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pg_trgm"; -- For text search and fuzzy matching
+CREATE EXTENSION IF NOT EXISTS "unaccent"; -- For better text matching with diacritics
+
+-- Main media assets table with updated JSONB metadata for multilingual AI tags
+-- First, drop existing indexes that might conflict with the new metadata structure
+DROP INDEX IF EXISTS idx_media_assets_ai_tags;
+
+ALTER TABLE media_assets
+  ALTER COLUMN metadata SET DEFAULT '{
+    "product": {},
+    "file": {},
+    "folder": {},
+    "plm": {},
+    "ai": {
+      "tags_en": [],
+      "tags_ar": [],
+      "quality_score": null
+    },
+    "custom": {}
+  }'::jsonb;
+
+-- Add tsvector columns for multilingual full-text search
+ALTER TABLE media_assets
+  ADD COLUMN IF NOT EXISTS tsv_en tsvector,
+  ADD COLUMN IF NOT EXISTS tsv_ar tsvector;
+
+-- Create or replace the trigger function to update search vectors for English and Arabic tags
+CREATE OR REPLACE FUNCTION media_assets_tsv_trigger()
+RETURNS trigger AS $$
+BEGIN
+  NEW.tsv_en := to_tsvector('english',
+    array_to_string( (SELECT array_agg(elem->>0) FROM jsonb_array_elements(NEW.metadata->'ai'->'tags_en') AS elem), ' ')
+  );
+  NEW.tsv_ar := to_tsvector('arabic',
+    array_to_string( (SELECT array_agg(elem->>0) FROM jsonb_array_elements(NEW.metadata->'ai'->'tags_ar') AS elem), ' ')
+  );
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create or replace the trigger itself
+DROP TRIGGER IF EXISTS tsv_update ON media_assets;
+CREATE TRIGGER tsv_update
+  BEFORE INSERT OR UPDATE ON media_assets
+  FOR EACH ROW EXECUTE FUNCTION media_assets_tsv_trigger();
+
+-- Create a controlled-vocabulary table for AI tags
+CREATE TABLE IF NOT EXISTS ai_tag_dictionary (
+  id SERIAL PRIMARY KEY,
+  lang CHAR(2) NOT NULL,        -- 'en' or 'ar'
+  tag_text TEXT UNIQUE NOT NULL,
+  normalized_tag TEXT NOT NULL,  -- e.g. lowercased, unaccented
+  CONSTRAINT unique_tag_lang UNIQUE (tag_text, lang)
 );
 
--- Processing Logs Table
-CREATE TABLE processing_logs (
-    id SERIAL PRIMARY KEY,
-    media_asset_id INTEGER REFERENCES media_assets(id),
-    workflow_id VARCHAR(100),
-    step_name VARCHAR(100),
+-- Continue with other table definitions from the original schema, ensuring they are compatible
+-- (Assuming these tables are already created and just need to be included for completeness)
+
+-- Main media assets table (re-creation for reference, assuming it exists)
+-- CREATE TABLE media_assets (
+--     id BIGSERIAL PRIMARY KEY,
+--     drive_file_id VARCHAR(255) UNIQUE NOT NULL,
+--     weaviate_object_id UUID DEFAULT uuid_generate_v4(),
+--     mcp_id VARCHAR(255) NOT NULL UNIQUE,
+--     file_name VARCHAR(500) NOT NULL,
+--     mime_type VARCHAR(100),
+--     file_size BIGINT,
+--     metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+--     sync_configuration JSONB DEFAULT '{}'::jsonb,
+--     processing_status VARCHAR(50) DEFAULT 'pending',
+--     created_at TIMESTAMPTZ DEFAULT NOW(),
+--     updated_at TIMESTAMPTZ DEFAULT NOW(),
+--     last_synced_at TIMESTAMPTZ,
+--     published_at TIMESTAMPTZ,
+--     archived_at TIMESTAMPTZ,
+--     CONSTRAINT chk_processing_status 
+--         CHECK (processing_status IN ('pending', 'processing', 'completed', 'failed', 'archived'))
+-- );
+
+-- Processing logs with JSONB metadata
+CREATE TABLE IF NOT EXISTS processing_logs (
+    id BIGSERIAL PRIMARY KEY,
+    media_asset_id BIGINT NOT NULL,
+    workflow_id VARCHAR(255),
+    step_name VARCHAR(255),
     status VARCHAR(50),
     message TEXT,
-    metadata JSONB,
-    created_at TIMESTAMP DEFAULT NOW()
+    metadata JSONB DEFAULT '{}',
+    context JSONB DEFAULT '{}', -- Additional flexible data
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT fk_processing_logs_media_asset 
+        FOREIGN KEY (media_asset_id) 
+        REFERENCES media_assets(id) 
+        ON DELETE CASCADE,
+    CONSTRAINT chk_log_status 
+        CHECK (status IN ('started', 'in_progress', 'completed', 'failed', 'skipped'))
 );
 
--- Approval Records Table
-CREATE TABLE approval_records (
-    id SERIAL PRIMARY KEY,
-    media_asset_id INTEGER REFERENCES media_assets(id),
-    approver_email VARCHAR(255),
-    approval_status VARCHAR(50),
-    comments TEXT,
-    approved_at TIMESTAMP,
-    created_at TIMESTAMP DEFAULT NOW()
+-- Approval records with JSONB for workflow data
+CREATE TABLE IF NOT EXISTS approval_records (
+    id BIGSERIAL PRIMARY KEY,
+    media_asset_id BIGINT NOT NULL,
+    approver_email VARCHAR(255) NOT NULL,
+    approval_status VARCHAR(50) DEFAULT 'pending',
+    approval_metadata JSONB DEFAULT '{
+        "comments": null,
+        "conditions": [],
+        "attachments": [],
+        "delegation": null
+    }'::jsonb,
+    approved_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT fk_approval_records_media_asset 
+        FOREIGN KEY (media_asset_id) 
+        REFERENCES media_assets(id) 
+        ON DELETE CASCADE,
+    CONSTRAINT chk_approval_status 
+        CHECK (approval_status IN ('pending', 'approved', 'rejected', 'revoked'))
 );
 
--- Sync Status Table
-CREATE TABLE sync_status (
-    id SERIAL PRIMARY KEY,
-    media_asset_id INTEGER REFERENCES media_assets(id),
-    target_system VARCHAR(50), -- 'ERPNEXT', 'WOOCOMMERCE', 'WEBFLOW'
-    sync_status VARCHAR(50),
-    last_sync_at TIMESTAMP,
-    error_message TEXT,
-    retry_count INTEGER DEFAULT 0
+-- Sync status with JSONB for system-specific data
+CREATE TABLE IF NOT EXISTS sync_status (
+    id BIGSERIAL PRIMARY KEY,
+    media_asset_id BIGINT NOT NULL,
+    target_system VARCHAR(100) NOT NULL,
+    sync_status VARCHAR(50) DEFAULT 'pending',
+    sync_metadata JSONB DEFAULT '{
+        "last_error": null,
+        "retry_count": 0,
+        "sync_details": {},
+        "performance_metrics": {}
+    }'::jsonb,
+    last_sync_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT fk_sync_status_media_asset 
+        FOREIGN KEY (media_asset_id) 
+        REFERENCES media_assets(id) 
+        ON DELETE CASCADE,
+    CONSTRAINT uk_sync_status_asset_system 
+        UNIQUE (media_asset_id, target_system),
+    CONSTRAINT chk_sync_status 
+        CHECK (sync_status IN ('pending', 'syncing', 'success', 'failed', 'retry'))
 );
 
--- PLM Transitions Table
-CREATE TABLE plm_transitions (
-    id SERIAL PRIMARY KEY,
-    media_asset_id INTEGER REFERENCES media_assets(id),
-    from_stage VARCHAR(50),
-    to_stage VARCHAR(50),
-    triggered_by VARCHAR(100),
-    transition_type VARCHAR(50), -- 'manual', 'automated', 'approval'
-    approval_by VARCHAR(100),
-    comments TEXT,
+-- PLM transitions with JSONB for flexible workflow data
+CREATE TABLE IF NOT EXISTS plm_transitions (
+    id BIGSERIAL PRIMARY KEY,
+    media_asset_id BIGINT NOT NULL,
+    transition_data JSONB NOT NULL DEFAULT '{
+        "from_stage": null,
+        "to_stage": null,
+        "triggered_by": null,
+        "transition_type": null,
+        "approval_by": null,
+        "comments": null,
+        "conditions": [],
+        "metadata": {}
+    }'::jsonb,
     rabbitmq_message_id VARCHAR(255),
-    created_at TIMESTAMP DEFAULT NOW()
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT fk_plm_transitions_media_asset 
+        FOREIGN KEY (media_asset_id) 
+        REFERENCES media_assets(id) 
+        ON DELETE CASCADE
 );
 
--- Event History Table
-CREATE TABLE event_history (
-    id SERIAL PRIMARY KEY,
+-- Event history with JSONB payload
+CREATE TABLE IF NOT EXISTS event_history (
+    id BIGSERIAL PRIMARY KEY,
     event_id VARCHAR(255) UNIQUE NOT NULL,
-    exchange VARCHAR(100),
+    event_type VARCHAR(100),
+    exchange VARCHAR(255),
     routing_key VARCHAR(255),
-    payload JSONB,
-    processed BOOLEAN DEFAULT FALSE,
-    processed_at TIMESTAMP,
-    error_message TEXT,
-    retry_count INTEGER DEFAULT 0,
-    created_at TIMESTAMP DEFAULT NOW()
+    payload JSONB NOT NULL,
+    processing_metadata JSONB DEFAULT '{
+        "processed": false,
+        "processed_at": null,
+        "error_message": null,
+        "retry_count": 0,
+        "processing_time_ms": null
+    }'::jsonb,
+    created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- SOLIDWORKS Metadata Table
-CREATE TABLE solidworks_metadata (
-    id SERIAL PRIMARY KEY,
-    media_asset_id INTEGER REFERENCES media_assets(id),
-    part_number VARCHAR(100),
-    material VARCHAR(100),
-    weight DECIMAL(10,3),
-    dimensions JSONB,
-    custom_properties JSONB,
-    bom_data JSONB,
-    extracted_at TIMESTAMP DEFAULT NOW()
+-- SolidWorks metadata as JSONB
+CREATE TABLE IF NOT EXISTS solidworks_metadata (
+    id BIGSERIAL PRIMARY KEY,
+    media_asset_id BIGINT NOT NULL UNIQUE,
+    sw_metadata JSONB NOT NULL DEFAULT '{
+        "part_number": null,
+        "material": null,
+        "weight": null,
+        "dimensions": {},
+        "custom_properties": {},
+        "bom_data": [],
+        "features": [],
+        "configurations": [],
+        "references": []
+    }'::jsonb,
+    extracted_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT fk_solidworks_metadata_media_asset 
+        FOREIGN KEY (media_asset_id) 
+        REFERENCES media_assets(id) 
+        ON DELETE CASCADE
 );
 
--- Document Index Table (OCR)
-CREATE TABLE document_index (
-    id SERIAL PRIMARY KEY,
-    media_asset_id INTEGER REFERENCES media_assets(id),
+-- Document index with JSONB for extracted data
+CREATE TABLE IF NOT EXISTS document_index (
+    id BIGSERIAL PRIMARY KEY,
+    media_asset_id BIGINT NOT NULL,
     mcp_id VARCHAR(255),
     doc_type VARCHAR(100),
-    language VARCHAR(10),
+    language VARCHAR(10) DEFAULT 'en',
     full_text TEXT,
-    key_terms TEXT[],
-    extracted_data JSONB,
-    ocr_confidence DECIMAL(3,2),
-    drive_url TEXT,
-    cloudinary_url TEXT,
-    created_at TIMESTAMP DEFAULT NOW()
+    search_vector tsvector, -- PostgreSQL full-text search
+    document_metadata JSONB DEFAULT '{
+        "key_terms": [],
+        "entities": {},
+        "extracted_data": {},
+        "ocr_data": {},
+        "urls": {},
+        "confidence_scores": {}
+    }'::jsonb,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT fk_document_index_media_asset 
+        FOREIGN KEY (media_asset_id) 
+        REFERENCES media_assets(id) 
+        ON DELETE CASCADE
 );
 
--- Approval Matrix Table
-CREATE TABLE approval_matrix (
-    id SERIAL PRIMARY KEY,
-    plm_stage VARCHAR(50),
-    approver_role VARCHAR(100),
-    approver_email VARCHAR(255),
-    approval_order INTEGER,
-    is_mandatory BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT NOW()
-);
+-- Create GIN indexes for JSONB columns
+CREATE INDEX IF NOT EXISTS idx_media_assets_metadata_gin ON media_assets USING gin (metadata);
+CREATE INDEX IF NOT EXISTS idx_media_assets_metadata_path ON media_assets USING gin (metadata jsonb_path_ops);
 
--- Create Indexes
-CREATE INDEX idx_media_assets_sku ON media_assets(sku);
-CREATE INDEX idx_media_assets_mcp ON media_assets(mcp_id);
-CREATE INDEX idx_media_assets_plm_stage ON media_assets(plm_stage);
-CREATE INDEX idx_media_assets_status ON media_assets(processing_status);
-CREATE INDEX idx_plm_transitions_asset ON plm_transitions(media_asset_id);
-CREATE INDEX idx_event_history_processed ON event_history(processed);
-CREATE INDEX idx_document_index_mcp ON document_index(mcp_id);</code></pre>
+-- Specific path indexes for common queries
+CREATE INDEX IF NOT EXISTS idx_media_assets_product ON media_assets USING gin ((metadata->'product'));
+CREATE INDEX IF NOT EXISTS idx_media_assets_plm ON media_assets USING gin ((metadata->'plm'));
+
+-- New GIN indexes for multilingual AI tags
+CREATE INDEX IF NOT EXISTS idx_media_assets_tags_en ON media_assets USING gin ((metadata->'ai'->'tags_en'));
+CREATE INDEX IF NOT EXISTS idx_media_assets_tags_ar ON media_assets USING gin ((metadata->'ai'->'tags_ar'));
+
+-- Trigram index for fuzzy matching on Arabic tags
+CREATE INDEX IF NOT EXISTS idx_media_assets_tags_ar_trgm
+  ON media_assets
+  USING gin (
+    (array_to_string((SELECT array_agg(elem->>0) FROM jsonb_array_elements(metadata->'ai'->'tags_ar') AS elem), ' '))
+    gin_trgm_ops
+  );
+
+-- Expression indexes for frequently queried fields
+CREATE INDEX IF NOT EXISTS idx_media_assets_sku ON media_assets ((metadata->'product'->>'sku'));
+CREATE INDEX IF NOT EXISTS idx_media_assets_product_name ON media_assets ((metadata->'product'->>'name'));
+CREATE INDEX IF NOT EXISTS idx_media_assets_plm_stage ON media_assets ((metadata->'plm'->>'stage'));
+
+-- Other JSONB indexes
+CREATE INDEX IF NOT EXISTS idx_processing_logs_metadata ON processing_logs USING gin (metadata);
+CREATE INDEX IF NOT EXISTS idx_approval_metadata ON approval_records USING gin (approval_metadata);
+CREATE INDEX IF NOT EXISTS idx_sync_metadata ON sync_status USING gin (sync_metadata);
+CREATE INDEX IF NOT EXISTS idx_plm_transition_data ON plm_transitions USING gin (transition_data);
+CREATE INDEX IF NOT EXISTS idx_event_payload ON event_history USING gin (payload);
+CREATE INDEX IF NOT EXISTS idx_sw_metadata ON solidworks_metadata USING gin (sw_metadata);
+CREATE INDEX IF NOT EXISTS idx_document_metadata ON document_index USING gin (document_metadata);
+
+-- Full-text search indexes for multilingual tags
+CREATE INDEX IF NOT EXISTS idx_media_assets_tsv_en ON media_assets USING gin(tsv_en);
+CREATE INDEX IF NOT EXISTS idx_media_assets_tsv_ar ON media_assets USING gin(tsv_ar);
+
+-- Original Full-text search index for document_index
+CREATE INDEX IF NOT EXISTS idx_document_search ON document_index USING gin (search_vector);
+
+-- Standard B-tree indexes
+CREATE INDEX IF NOT EXISTS idx_media_assets_drive_file_id ON media_assets(drive_file_id);
+CREATE INDEX IF NOT EXISTS idx_media_assets_mcp_id ON media_assets(mcp_id);
+CREATE INDEX IF NOT EXISTS idx_media_assets_processing_status ON media_assets(processing_status);
+CREATE INDEX IF NOT EXISTS idx_media_assets_created_at ON media_assets(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_media_assets_updated_at ON media_assets(updated_at DESC);
+
+-- Trigger to update search vector for document_index (from original schema)
+CREATE OR REPLACE FUNCTION update_search_vector()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.search_vector := 
+        setweight(to_tsvector('english', COALESCE(NEW.full_text, '')), 'A') ||
+        setweight(to_tsvector('english', COALESCE(NEW.document_metadata->>'key_terms', '')), 'B');
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS update_document_search_vector ON document_index;
+CREATE TRIGGER update_document_search_vector 
+    BEFORE INSERT OR UPDATE ON document_index
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_search_vector();
+
+-- Update timestamp trigger (from original schema)
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS update_media_assets_updated_at ON media_assets;
+CREATE TRIGGER update_media_assets_updated_at 
+    BEFORE UPDATE ON media_assets
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- Helper functions for JSONB queries (from original schema)
+CREATE OR REPLACE FUNCTION get_media_by_sku(sku_value TEXT)
+RETURNS SETOF media_assets AS $$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM media_assets
+    WHERE metadata->'product'->>'sku' = sku_value;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_media_by_plm_stage(stage_value TEXT)
+RETURNS SETOF media_assets AS $$
+BEGIN
+    RETURN QUERY
+    SELECT * FROM media_assets
+    WHERE metadata->'plm'->>'stage' = stage_value;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Sample multilingual tag queries (for reference)
+/*
+-- Find assets tagged "architecture" in English
+SELECT * FROM media_assets
+WHERE metadata->'ai'->'tags_en' @> '["architecture"]';
+
+-- Find assets tagged "هندسة" in Arabic
+SELECT * FROM media_assets
+WHERE metadata->'ai'->'tags_ar' @> '["هندسة"]';
+
+-- Search for English tags using full-text search
+SELECT * FROM media_assets
+WHERE tsv_en @@ to_tsquery('english', 'architecture & building');
+
+-- Search for Arabic tags using full-text search
+SELECT * FROM media_assets
+WHERE tsv_ar @@ to_tsquery('arabic', 'هندسة & بناء');
+
+-- Fuzzy search for Arabic tags using trigram
+SELECT * FROM media_assets
+WHERE array_to_string((SELECT array_agg(elem->>0) FROM jsonb_array_elements(metadata->'ai'->'tags_ar') AS elem), ' ') ILIKE '%هندس%';
+*/
+
+
+</code></pre>
                 </div>
             </div>
 
