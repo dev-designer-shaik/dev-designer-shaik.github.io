@@ -1404,28 +1404,95 @@ font-size: small;
 
 
 
+/* ===== COLLAPSIBLE CODE BLOCKS ===== */
 .code-block {
-
     background-color: var(--bg-tertiary);
-
     border: 1px solid var(--border-color);
-
     border-radius: var(--border-radius);
-
-    padding: 1.5rem;
-
-    font-family: var(--font-family-mono);
-
-    font-size: var(--font-size-sm);
-
-    line-height: 1.5;
-
-    overflow-x: auto;
-
     margin: 1rem 0;
-
     color: var(--text-primary);
+    overflow: hidden;
+}
 
+.code-block.collapsible {
+    border: 1px solid var(--border-color);
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.code-header:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.code-header span {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.code-toggle {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: var(--border-radius);
+    transition: all var(--transition-fast);
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-toggle:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.code-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.code-content.expanded {
+    max-height: 2000px;
+    transition: max-height 0.5s ease-in;
+}
+
+.code-content pre {
+    margin: 0;
+    padding: 1.5rem;
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    overflow-x: auto;
+    background-color: var(--bg-tertiary);
+}
+
+.code-content code {
+    font-family: var(--font-family-mono);
+    color: var(--text-primary);
+}
+
+/* Non-collapsible code blocks (legacy support) */
+.code-block:not(.collapsible) {
+    padding: 1.5rem;
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    overflow-x: auto;
 }
 
 
