@@ -303,7 +303,7 @@ erDiagram
         BIGINT file_size
         VARCHAR mime_type
         VARCHAR folder_path UK
-        VARCHAR parent_folder_id
+        VARCHAR parent_folder_id FK
         TEXT folder_name
         TIMESTAMP last_synced_at
         BOOLEAN is_monitored
@@ -322,6 +322,21 @@ erDiagram
         TIMESTAMP updated_at
         TIMESTAMP published_at
         TIMESTAMP archived_at
+    }
+
+    folder_structure {
+        SERIAL id PK
+        VARCHAR folder_id UK
+        VARCHAR folder_name
+        VARCHAR parent_id FK
+        VARCHAR folder_path UK
+        INTEGER level_depth
+        VARCHAR[] path_array
+        BOOLEAN is_monitored
+        TIMESTAMP last_synced_at
+        JSONB sync_configuration
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
 
     processing_logs {
@@ -424,6 +439,8 @@ erDiagram
     media_assets ||--o{ plm_transitions : "transitions"
     media_assets ||--o{ solidworks_metadata : "solidworks_data"
     media_assets ||--o{ document_index : "document_data"
+    folder_structure ||--o{ media_assets : "contains"
+    folder_structure ||--o{ folder_structure : "parent_child"
                 </div>
             </div>
 
@@ -696,6 +713,30 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Discover file path using parentID (folder_structure table)
+CREATE OR REPLACE FUNCTION get_folder_path_by_parent_id(parent_folder_id TEXT)
+RETURNS TABLE(
+    folder_name VARCHAR,
+    parent_id VARCHAR,
+    folder_path VARCHAR,
+    level_depth INTEGER,
+    current_folder VARCHAR,
+    path_array VARCHAR[]
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        fs.folder_name,
+        fs.parent_id,
+        fs.folder_path,
+        fs.level_depth,
+        fs.folder_name AS current_folder,
+        ARRAY[fs.folder_name]::VARCHAR[] AS path_array
+    FROM folder_structure fs
+    WHERE fs.folder_id = parent_folder_id;
+END;
+$$ LANGUAGE plpgsql;
+
 -- ================================
 --  Sample Queries
 -- ================================
@@ -745,6 +786,29 @@ EXPLAIN ANALYZE
 SELECT *
 FROM media_assets
 WHERE metadata @> '{"product":{"line":"Premium Series"}}';
+
+-- 8. Discover file path using parentID (folder_structure example)
+SELECT 
+  folder_name,
+  parent_id,
+  folder_path,
+  level_depth,
+  folder_name AS current_folder,
+  ARRAY[folder_name]::character varying(255)[] AS path_array
+FROM folder_structure
+WHERE folder_id = '{{ $json.parentFolderId }}';
+
+-- Example output:
+-- [
+--   {
+--     "folder_name": "00-Early-Design",
+--     "parent_id": "1oTz0i2ebqUHflEOOq774F3UGX-r1Uo3R",
+--     "folder_path": "DSI-Product-Repository/Palace-of-Fragrances/Classic-Range/Amber-Kroud/00-Early-Design",
+--     "level_depth": 4,
+--     "current_folder": "00-Early-Design",
+--     "path_array": ["00-Early-Design"]
+--   }
+-- ]
 */
 -- ----------------------------------------------------------------
 -- Helper to turn a JSONB array of strings into a real TEXT[]
@@ -1356,48 +1420,63 @@ LOG_LEVEL=INFO                                                   # Logging verbo
                 <div class="mermaid" id="weaviate-er-diagram">
 erDiagram
 
-    Image {
-        STRING    productName      "Product name from folder structure"
-        STRING    sku              "Stock keeping unit identifier"
-        TEXT      description      "AI-generated content description"
-        STRING[]  tags             "AI-generated semantic tags"
-        STRING[]  colors           "Detected color palette"
-        NUMBER    qualityScore     "AI-assessed quality rating (0-10)"
-        STRING    mcpId            "Model Context Protocol identifier"
-        STRING    resolution       "Image resolution (e.g., 1920x1080)"
-        STRING    fileFormat       "File format (e.g., JPG, PNG)"
+    MediaAsset {
+        STRING    fileId            "Google Drive file identifier"
+        STRING    mcpId             "Model Context Protocol identifier"
+        STRING    title             "Asset title from IPTC or filename"
+        TEXT      description       "AI-generated content description"
+        STRING[]  tags              "AI-generated semantic tags"
+        STRING    fileType          "File type category (image, video, document)"
+        STRING    sku               "Stock keeping unit identifier"
+        STRING    productName       "Product name from folder structure"
+        STRING    productLine       "Product line from folder hierarchy"
+        STRING    productRange      "Product range from folder hierarchy"
+        STRING    palaceName        "Palace name from folder hierarchy"
+        STRING    folderPath        "Full folder path for context"
+        NUMBER    qualityScore      "AI-assessed quality rating (0-10)"
+        TEXT      iptcCore          "IPTC metadata as concatenated text"
+        TEXT      dublinCore        "Dublin Core metadata as text"
+        TEXT      customProps       "Custom properties as text"
+        STRING    plmStage          "Product Lifecycle Management stage"
+        NUMBER    fileSize          "File size in bytes"
+        STRING    mimeType          "MIME type of the file"
+        NUMBER    ocrConfidence     "OCR confidence score (0-1)"
+        STRING    processingStatus  "Current processing status"
+        DATETIME  createdAt         "Asset creation timestamp"
     }
 
-    Video {
-        STRING    productName      "Product name from folder structure"
-        STRING    sku              "Stock keeping unit identifier"
-        TEXT      description      "AI-generated content description"
-        STRING[]  tags             "AI-generated semantic tags"
-        NUMBER    duration         "Video duration in seconds"
-        STRING    resolution       "Video resolution (e.g., 1920x1080)"
-        STRING    fileFormat       "File format (e.g., MP4, MOV)"
-        STRING    mcpId            "Model Context Protocol identifier"
+    DocumentAsset {
+        STRING    fileId            "Google Drive file identifier"
+        STRING    mcpId             "Model Context Protocol identifier"
+        STRING    title             "Document title or filename"
+        TEXT      fullText          "Chunked OCR or extracted text"
+        STRING[]  searchTags        "AI + IPTC + user tags combined"
+        STRING    docType           "Document type classification"
+        STRING    sku               "Associated product SKU"
+        STRING    productName       "Product name from folder structure"
+        STRING    productLine       "Product line from folder hierarchy"
+        STRING    productRange      "Product range from folder hierarchy"
+        STRING    palaceName        "Palace name from folder hierarchy"
+        STRING    folderPath        "Full folder path for context"
+        STRING    language          "Document language (default: en)"
+        NUMBER    ocrConfidence     "OCR confidence score (0-1)"
+        STRING    processingStatus  "Current processing status"
+        DATETIME  createdAt         "Document creation timestamp"
     }
 
-    Audio {
-        STRING    productName      "Product name from folder structure"
-        STRING    sku              "Stock keeping unit identifier"
-        TEXT      description      "AI-generated content description"
-        STRING[]  tags             "AI-generated semantic tags"
-        NUMBER    duration         "Audio duration in seconds"
-        STRING    fileFormat       "File format (e.g., MP3, WAV)"
-        STRING    mcpId            "Model Context Protocol identifier"
+    FolderStructure {
+        STRING    folderId          "Google Drive folder identifier"
+        STRING    folderName        "Folder name"
+        STRING    parentId          "Parent folder identifier"
+        STRING    folderPath        "Complete folder path"
+        NUMBER    levelDepth        "Depth level in hierarchy"
+        STRING[]  pathArray         "Array representation of path"
+        BOOLEAN   isMonitored       "Whether folder is actively monitored"
+        DATETIME  lastSyncedAt      "Last synchronization timestamp"
     }
 
-    Document {
-        STRING    productName      "Product name from folder structure"
-        STRING    sku              "Stock keeping unit identifier"
-        TEXT      description      "AI-generated content description"
-        STRING[]  tags             "AI-generated semantic tags"
-        STRING    fileFormat       "File format (e.g., PDF, DOCX)"
-        TEXT      fullText         "Extracted full text content"
-        STRING    mcpId            "Model Context Protocol identifier"
-    }
+    MediaAsset ||--o{ FolderStructure : "located_in"
+    DocumentAsset ||--o{ FolderStructure : "located_in"
 
     ThreeDModel {
         STRING    productName      "Product name from folder structure"
@@ -1999,13 +2078,13 @@ graph TB
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td data-label="Phase">Domain Workshop</td><td data-label="Description">Finalize vocabulary and define relationship cardinalities</td><td data-label="Timeline">Week 1-2</td><td data-label="Status">✅ Complete</td></tr>
-                    <tr><td data-label="Phase">PostgreSQL Migrations</td><td data-label="Description">Implement schema changes, new tables and JSONB indexes</td><td data-label="Timeline">Week 3-4</td><td data-label="Status">🚧 In Progress</td></tr>
-                    <tr><td data-label="Phase">Weaviate Cluster Deployment</td><td data-label="Description">Deploy 3-node HA cluster with multi-tenancy</td><td data-label="Timeline">Week 5-6</td><td data-label="Status">📋 Planned</td></tr>
-                    <tr><td data-label="Phase">ETL Backfill</td><td data-label="Description">Ingest existing Drive folders and OpenAI embedding batch</td><td data-label="Timeline">Week 7-8</td><td data-label="Status">📋 Planned</td></tr>
-                    <tr><td data-label="Phase">API Stitching</td><td data-label="Description">Develop n8n nodes for ERPNext v15, Cloudinary, Webflow</td><td data-label="Timeline">Week 9-10</td><td data-label="Status">📋 Planned</td></tr>
-                    <tr><td data-label="Phase">Governance Rollout</td><td data-label="Description">Enable certificate generation and audit dashboards</td><td data-label="Timeline">Week 11-12</td><td data-label="Status">📋 Planned</td></tr>
-                    <tr><td data-label="Phase">RAG Pilot</td><td data-label="Description">Launch semantic search in Designer Studio portal</td><td data-label="Timeline">Week 13-14</td><td data-label="Status">📋 Planned</td></tr>
+                    <tr><td data-label="Phase">Domain Workshop</td><td data-label="Description">Finalize vocabulary and define relationship cardinalities</td>><td data-label="Status">✅ Complete</td></tr>
+                    <tr><td data-label="Phase">PostgreSQL Migrations</td><td data-label="Description">Implement schema changes, new tables and JSONB indexes</td><<td data-label="Status">🚧 In Progress</td></tr>
+                    <tr><td data-label="Phase">Weaviate Cluster Deployment</td><td data-label="Description">Deploy 3-node HA cluster with multi-tenancy</td><td data-label="Status">📋 Planned</td></tr>
+                    <tr><td data-label="Phase">ETL Backfill</td><td data-label="Description">Ingest existing Drive folders and OpenAI embedding batch</td><td data-label="Status">📋 Planned</td></tr>
+                    <tr><td data-label="Phase">API Stitching</td><td data-label="Description">Develop n8n nodes for ERPNext v15, Cloudinary, Webflow</td><td data-label="Status">📋 Planned</td></tr>
+                    <tr><td data-label="Phase">Governance Rollout</td><td data-label="Description">Enable certificate generation and audit dashboards</td>td data-label="Status">📋 Planned</td></tr>
+                    <tr><td data-label="Phase">RAG Pilot</td><td data-label="Description">Launch semantic search in Designer Studio portal</td><td data-label="Status">📋 Planned</td></tr>
                 </tbody>
             </table>
 
@@ -2033,4 +2112,3 @@ graph TB
 <script src="script.js"></script>
 </body>
 </html>
-
