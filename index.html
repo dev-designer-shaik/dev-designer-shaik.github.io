@@ -1464,20 +1464,6 @@ erDiagram
         DATETIME  createdAt         "Document creation timestamp"
     }
 
-    FolderStructure {
-        STRING    folderId          "Google Drive folder identifier"
-        STRING    folderName        "Folder name"
-        STRING    parentId          "Parent folder identifier"
-        STRING    folderPath        "Complete folder path"
-        NUMBER    levelDepth        "Depth level in hierarchy"
-        STRING[]  pathArray         "Array representation of path"
-        BOOLEAN   isMonitored       "Whether folder is actively monitored"
-        DATETIME  lastSyncedAt      "Last synchronization timestamp"
-    }
-
-    MediaAsset ||--o{ FolderStructure : "located_in"
-    DocumentAsset ||--o{ FolderStructure : "located_in"
-
     ThreeDModel {
         STRING    productName      "Product name from folder structure"
         STRING    sku              "Stock keeping unit identifier"
