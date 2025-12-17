@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frappe MCP - DSI Developer Hub</title>
+    <meta name="description" content="Comprehensive guide to Frappe MCP - Model Context Protocol server for ERPNext with 22+ tools for analytics and reporting">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20251217.14">
+    <link rel="stylesheet" href="components.css?v=20251217.14">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header__content">
+            <div class="header__logo-container">
+                <a class="header__home" href="index.html" aria-label="Home">
+                    <img src="logo.webp" alt="DSI Logo" class="header__logo">
+                </a>
+                <button class="header__sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="header__text">
+                <h1 class="header__title">Frappe MCP</h1>
+                <p class="header__subtitle">ERPNext Model Context Protocol Server - Universal Query & Analytics</p>
+            </div>
+            <div class="header__actions">
+                <button class="header__search-btn" id="searchToggle" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="search-container" id="searchContainer">
+            <input type="text" class="search-input" placeholder="Search documentation..." id="searchInput">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </header>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav-header">
+            <button class="nav-collapse-btn" id="navCollapseBtn" aria-label="Collapse navigation">
+                <span class="nav-collapse-icon">◀</span>
+            </button>
+        </div>
+        <div class="nav-tree" id="navTree"></div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <nav class="page-tabs" id="pageTabs" aria-label="Repository sections"></nav>
+        <section id="overview" class="content-section">
+            <div class="section-header">
+                <h2>Frappe MCP Overview</h2>
+                <p class="section-description">
+                    A comprehensive Model Context Protocol (MCP) server that exposes ERPNext/Frappe data through 22+ intelligent tools
+                    for analytics, reporting, and read-only data operations.
+                </p>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number">22+</span>
+                    <span class="stat-label">MCP Tools</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Universal</span>
+                    <span class="stat-label">Query Engine</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Read-Only</span>
+                    <span class="stat-label">Safe Operations</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">JSON-RPC</span>
+                    <span class="stat-label">API Protocol</span>
+                </div>
+            </div>
+
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <div class="platform-icon">🔍</div>
+                    <h3>Universal Querying</h3>
+                    <p>Query any doctype with advanced filters, pagination, sorting, and aggregation capabilities.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Dynamic</span>
+                        <span class="tag">Flexible</span>
+                        <span class="tag">Powerful</span>
+                    </div>
+                    <a href="#query-tools" class="platform-link">Learn more →</a>
+                </div>
+
+                <div class="platform-card">
+                    <div class="platform-icon">🔗</div>
+                    <h3>Relationship Intelligence</h3>
+                    <p>Navigate complex data relationships, expand links, and perform reverse lookups across doctypes.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Graph Traversal</span>
+                        <span class="tag">Context-Aware</span>
+                        <span class="tag">Smart</span>
+                    </div>
+                    <a href="#relationship-tools" class="platform-link">Learn more →</a>
+                </div>
+
+                <div class="platform-card">
+                    <div class="platform-icon">📈</div>
+                    <h3>Analytics & Reporting</h3>
+                    <p>Generate time-series analysis, create custom reports, and export data in various formats.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Time Series</span>
+                        <span class="tag">Aggregations</span>
+                        <span class="tag">Exports</span>
+                    </div>
+                    <a href="#analytics-tools" class="platform-link">Learn more →</a>
+                </div>
+
+                <div class="platform-card">
+                    <div class="platform-icon">📁</div>
+                    <h3>File Management</h3>
+                    <p>Access and analyze file attachments, search documents, and retrieve file metadata.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Attachments</span>
+                        <span class="tag">Search</span>
+                        <span class="tag">Metadata</span>
+                    </div>
+                    <a href="#file-tools" class="platform-link">Learn more →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="content-section">
+            <div class="section-header">
+                <h2>System Architecture</h2>
+                <p class="section-description">
+                    The Frappe MCP server runs as server-side Python code within ERPNext, exposed through Frappe API endpoints
+                    with robust authentication and authorization.
+                </p>
+            </div>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+graph TB
+    subgraph "External Clients"
+        AIClient[AI Assistant]
+        WebUI[Open WebUI]
+        N8N[n8n Workflow]
+        CustomApp[Custom Application]
+    end
+
+    subgraph "Frappe MCP Layer"
+        API[ERPNext API<br/>/api/method/erpnext.mcp.handle_mcp]
+        Auth[Authentication Wrapper<br/>mcp_auth.handle_authenticated]
+        MCP[Main MCP Server<br/>mcp.py]
+    end
+
+    subgraph "Tool Categories"
+        Query[Query Tools<br/>12 tools]
+        Rel[Relationship Tools<br/>4 tools]
+        File[File Tools<br/>3 tools]
+        Report[Reporting Tools<br/>3 tools]
+    end
+
+    subgraph "ERPNext Core"
+        ORM[Frappe ORM]
+        DB[(MariaDB/PostgreSQL<br/>ERPNext Database)]
+        Files[File System<br/>/public/files/]
+    end
+
+    AIClient -->|JSON-RPC 2.0| API
+    WebUI -->|JSON-RPC 2.0| API
+    N8N -->|JSON-RPC 2.0| API
+    CustomApp -->|JSON-RPC 2.0| API
+
+    API --> Auth
+    Auth --> MCP
+
+    MCP --> Query
+    MCP --> Rel
+    MCP --> File
+    MCP --> Report
+
+    Query --> ORM
+    Rel --> ORM
+    Report --> ORM
+    File --> Files
+
+    ORM --> DB
+
+    classDef external fill:#e3f2fd
+    classDef mcp fill:#f3e5f5
+    classDef tools fill:#e8f5e8
+    classDef erp fill:#fff3e0
+
+    class AIClient,WebUI,N8N,CustomApp external
+    class API,Auth,MCP mcp
+    class Query,Rel,File,Report tools
+    class ORM,DB,Files erp
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="section-header">
+                <h2>Key Features</h2>
+            </div>
+
+            <div class="tech-stack-container">
+                <div class="tech-category">
+                    <h3><i class="fas fa-database"></i> Data Access</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-search"></i>
+                            <div>
+                                <strong>Universal Query Engine</strong>
+                                <p>Query any doctype with dynamic filters and aggregations</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-project-diagram"></i>
+                            <div>
+                                <strong>Relationship Traversal</strong>
+                                <p>Navigate parent-child and many-to-many relationships</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-filter"></i>
+                            <div>
+                                <strong>Advanced Filtering</strong>
+                                <p>Complex filters with OR conditions and nested queries</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3><i class="fas fa-chart-line"></i> Analytics</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Time Series Analysis</strong>
+                                <p>Analyze trends over time with grouping and aggregations</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-calculator"></i>
+                            <div>
+                                <strong>Aggregations</strong>
+                                <p>Sum, count, average, min, max operations</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-file-export"></i>
+                            <div>
+                                <strong>Export Capabilities</strong>
+                                <p>Export data to CSV, Excel, and JSON formats</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-key"></i>
+                            <div>
+                                <strong>Token Authentication</strong>
+                                <p>Secure API key and secret authentication</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-user-tag"></i>
+                            <div>
+                                <strong>Role-Based Access</strong>
+                                <p>Restrict access based on ERPNext roles</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-lock"></i>
+                            <div>
+                                <strong>Read-Only Operations</strong>
+                                <p>Safe operations that don't modify data</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="installation" class="content-section">
+            <div class="section-header">
+                <h2>Installation Guide</h2>
+                <p class="section-description">
+                    Deploy Frappe MCP to your ERPNext instance with these simple steps.
+                </p>
+            </div>
+
+            <div class="getting-started-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="prerequisites">Prerequisites</button>
+                    <button class="tab-btn" data-tab="deploy">Deployment</button>
+                    <button class="tab-btn" data-tab="configure">Configuration</button>
+                    <button class="tab-btn" data-tab="verify">Verification</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="prerequisites">
+                        <h3>Requirements</h3>
+                        <div class="requirements-grid">
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-server"></i> ERPNext Version</h4>
+                                <ul>
+                                    <li>ERPNext v13 or higher</li>
+                                    <li>Frappe Framework v13 or higher</li>
+                                    <li>Python 3.7+ (usually included)</li>
+                                </ul>
+                            </div>
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-user-shield"></i> Permissions</h4>
+                                <ul>
+                                    <li>System Manager access</li>
+                                    <li>File system access to bench</li>
+                                    <li>API key generation rights</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="deploy">
+                        <h3>Deploy Files</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Copy files to ERPNext</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code># From your workstation
+cd /home/mdad/Frappe\ MCP/frappe-mcp
+
+# Copy to server (replace with your server details)
+scp mcp.py frappe_mcp.py user@your-server:~/frappe-bench/apps/erpnext/erpnext/
+
+# SSH into server
+ssh user@your-server</code></pre>
+                        </div>
+
+                        <h3>Server Setup</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Install on server</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code># Navigate to bench directory
+cd ~/frappe-bench
+
+# Create API endpoint (server script)
+bench console
+
+# In console, create:
+frappe.reload_doc('core', 'doctype', 'server_script')
+script = frappe.new_doc('Server Script')
+script.script_name = 'MCP Handler'
+script.module = 'erpnext'
+script.script_type = 'API'
+script.method = 'erpnext.mcp.handle_mcp'
+script.save()
+frappe.db.commit()
+
+# Restart bench
+bench restart</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="configure">
+                        <h3>Create API Credentials</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Generate API Key</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code># Via ERPNext UI
+1. Go to: User > API Access
+2. Click "Generate API Key"
+3. Copy API Key and API Secret
+4. Assign appropriate roles (e.g., "System Manager")
+
+# Or via console
+user = frappe.get_doc('User', 'your@email.com')
+user.api_key = frappe.generate_hash(length=20)
+user.api_secret = frappe.generate_hash(length=40)
+user.save()
+frappe.db.commit()
+
+print(f"API Key: {user.api_key}")
+print(f"API Secret: {user.api_secret}")</code></pre>
+                        </div>
+
+                        <h3>Role Configuration</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Create MCP Role (Optional)</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code># Create custom role for MCP access
+role = frappe.new_doc('Role')
+role.role_name = 'MCP User'
+role.save()
+
+# Assign permissions to role
+for doctype in ['Customer', 'Supplier', 'Sales Order', 'Purchase Order']:
+    perm = frappe.new_doc('Custom DocPerm')
+    perm.parent = 'Role'
+    perm.parenttype = 'Role'
+    perm.parentfield = 'permissions'
+    perm.role = 'MCP User'
+    perm.document_type = doctype
+    perm.read = 1
+    perm.permlevel = 0
+    perm.append('permissions', perm)
+
+role.save()
+frappe.db.commit()</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="verify">
+                        <h3>Test Installation</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>List MCP Tools</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>curl -X POST "https://your-site.com/api/method/erpnext.mcp.handle_mcp" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: token YOUR_API_KEY:YOUR_API_SECRET" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/list",
+    "id": 1
+  }'</code></pre>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Query Test</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>curl -X POST "https://your-site.com/api/method/erpnext.mcp.handle_mcp" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: token YOUR_API_KEY:YOUR_API_SECRET" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "query_doctype",
+      "arguments": {
+        "doctype": "User",
+        "fields": ["email", "first_name", "enabled"],
+        "limit": 5
+      }
+    },
+    "id": 2
+  }'</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="content-section">
+            <div class="section-header">
+                <h2>MCP Tools Catalog</h2>
+                <p class="section-description">
+                    Comprehensive list of all 22+ tools available in Frappe MCP, organized by category.
+                </p>
+            </div>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    Host["MCP Host"] --> Call["tools/call"]
+    Call --> Router["Tool Router (mcp.py)"]
+
+    Router --> Q["Query"]
+    Router --> R["Relationships"]
+    Router --> F["Files"]
+    Router --> A["Analytics"]
+    Router --> D["Discovery"]
+
+    Q --> DB["ERP DB"]
+    R --> DB
+    A --> DB
+    D --> DB
+    F --> FS["File store"]
+                </div>
+            </div>
+
+            <div class="reference-grid" id="query-tools">
+                <div class="reference-card">
+                    <h3><i class="fas fa-search"></i> Query Tools</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td><code>query_doctype</code></td>
+                            <td>Universal query with filters, pagination, sorting</td>
+                        </tr>
+                        <tr>
+                            <td><code>query_with_aggregation</code></td>
+                            <td>Group by, sum, count, avg operations</td>
+                        </tr>
+                        <tr>
+                            <td><code>analyze_doctype</code></td>
+                            <td>Statistical analysis of doctype data</td>
+                        </tr>
+                        <tr>
+                            <td><code>advanced_query</code></td>
+                            <td>Complex queries with OR conditions</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="reference-card" id="relationship-tools">
+                    <h3><i class="fas fa-link"></i> Relationship Tools</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td><code>get_document_with_links</code></td>
+                            <td>Fetch document with all linked entities</td>
+                        </tr>
+                        <tr>
+                            <td><code>get_document_tree</code></td>
+                            <td>Recursive tree traversal</td>
+                        </tr>
+                        <tr>
+                            <td><code>get_linked_documents</code></td>
+                            <td>Get all documents linked to target</td>
+                        </tr>
+                        <tr>
+                            <td><code>relationship_traverse</code></td>
+                            <td>Custom relationship path traversal</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="reference-card" id="file-tools">
+                    <h3><i class="fas fa-file"></i> File Tools</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td><code>list_attachments</code></td>
+                            <td>List files attached to documents</td>
+                        </tr>
+                        <tr>
+                            <td><code>get_file_content</code></td>
+                            <td>Retrieve file content and metadata</td>
+                        </tr>
+                        <tr>
+                            <td><code>search_files</code></td>
+                            <td>Search files by name or content</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="reference-card" id="analytics-tools">
+                    <h3><i class="fas fa-chart-bar"></i> Reporting Tools</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td><code>time_series_analysis</code></td>
+                            <td>Analyze trends over time periods</td>
+                        </tr>
+                        <tr>
+                            <td><code>export_query_results</code></td>
+                            <td>Export to CSV, Excel, JSON</td>
+                        </tr>
+                        <tr>
+                            <td><code>list_reports</code></td>
+                            <td>Discover available reports</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="reference-card">
+                    <h3><i class="fas fa-compass"></i> Discovery Tools</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td><code>list_doctypes</code></td>
+                            <td>Get all available doctypes</td>
+                        </tr>
+                        <tr>
+                            <td><code>get_doctype_schema</code></td>
+                            <td>Retrieve doctype field definitions</td>
+                        </tr>
+                        <tr>
+                            <td><code>get_dashboard_info</code></td>
+                            <td>Dashboard charts and metrics</td>
+                        </tr>
+                        <tr>
+                            <td><code>list_print_formats</code></td>
+                            <td>Available print templates</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="api" class="content-section">
+            <div class="section-header">
+                <h2>API Usage</h2>
+                <p class="section-description">
+                    Learn how to interact with Frappe MCP through JSON-RPC API calls.
+                </p>
+            </div>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant Client as MCP Client
+    participant API as ERPNext API
+    participant Auth as Auth Layer
+    participant MCP as MCP Server
+    participant DB as Database
+
+    Client->>API: POST /api/method/erpnext.mcp.handle_mcp
+    Note over Client,API: Headers: Authorization: token KEY:SECRET
+
+    API->>Auth: Validate API Key
+    Auth-->>API: Auth Success
+
+    API->>MCP: Forward JSON-RPC request
+    MCP->>DB: Execute query
+    DB-->>MCP: Return data
+    MCP-->>API: JSON-RPC response
+    API-->>Client: HTTP 200 with MCP response
+                </div>
+            </div>
+
+            <h3>Authentication</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Authentication Header Format</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code># Format
+Authorization: token YOUR_API_KEY:YOUR_API_SECRET
+
+# Example in curl
+-H "Authorization: token a1b2c3d4:e5f6g7h8i9j0"</code></pre>
+            </div>
+
+            <h3>Request Format</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>JSON-RPC 2.0 Request</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "query_doctype",
+    "arguments": {
+      "doctype": "Sales Order",
+      "fields": ["name", "customer", "grand_total"],
+      "filters": {
+        "status": "To Deliver",
+        "transaction_date": [">", "2025-01-01"]
+      },
+      "limit": 10,
+      "order_by": "creation desc"
+    }
+  },
+  "id": 123
+}</code></pre>
+            </div>
+
+            <h3>Response Format</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>JSON-RPC 2.0 Response</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code>{
+  "jsonrpc": "2.0",
+  "result": {
+    "success": true,
+    "data": [
+      {
+        "name": "SO-2025-00123",
+        "customer": "Customer Name",
+        "grand_total": 15000.00
+      }
+    ],
+    "total_rows": 45,
+    "message": "Successfully retrieved 10 records"
+  },
+  "id": 123
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="security" class="content-section">
+            <div class="section-header">
+                <h2>Security Model</h2>
+                <p class="section-description">
+                    Understanding the security layers and best practices for Frappe MCP.
+                </p>
+            </div>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant Client as Client
+    participant API as ERPNext API endpoint
+    participant Auth as Auth wrapper
+    participant MCP as MCP tools
+
+    Client->>API: JSON-RPC + Authorization token
+    API->>Auth: Validate key + role
+    alt Allowed
+        Auth-->>API: OK
+        API->>MCP: Execute tool
+        MCP-->>API: Result
+        API-->>Client: Response
+    else Denied
+        Auth-->>API: Reject
+        API-->>Client: 401/403
+    end
+                </div>
+            </div>
+
+            <div class="troubleshooting-grid">
+                <div class="trouble-card">
+                    <h3><i class="fas fa-shield-alt"></i> Security Features</h3>
+                    <div class="issue-item">
+                        <h4>Authentication</h4>
+                        <p>API Key and Secret authentication</p>
+                        <ul>
+                            <li>Strong randomly generated keys</li>
+                            <li>Configurable expiration</li>
+                            <li>Revocation capability</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Authorization</h4>
+                        <p>Role-based access control</p>
+                        <ul>
+                            <li>Inherits ERPNext role system</li>
+                            <li>Doctype-level permissions</li>
+                            <li>Field-level restrictions</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Read-Only Operations</h4>
+                        <p>Safe by default design</p>
+                        <ul>
+                            <li>No write/delete operations</li>
+                            <li>Bypasses permissions for read only</li>
+                            <li>Audit logging capability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="trouble-card">
+                    <h3><i class="fas fa-lock"></i> Best Practices</h3>
+                    <div class="issue-item">
+                        <h4>Production Setup</h4>
+                        <p>Secure deployment recommendations</p>
+                        <ul>
+                            <li>Use HTTPS always</li>
+                            <li>Create dedicated MCP role</li>
+                            <li>Regular key rotation</li>
+                            <li>Monitor API usage</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Network Security</h4>
+                        <p>Protect API endpoints</p>
+                        <ul>
+                            <li>IP whitelisting</li>
+                            <li>Rate limiting</li>
+                            <li>VPN access for sensitive data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Security Configuration Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Restricted MCP Role Setup</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code># Create restricted MCP role
+role = frappe.new_doc('Role')
+role.role_name = 'MCP Analytics'
+role.desk_access = 0
+role.restrict_to_domains = 'Analytics'
+role.save()
+
+# Set read-only permissions for specific doctypes
+readonly_doctypes = ['Sales Order', 'Purchase Order', 'Customer', 'Supplier']
+for dt in readonly_doctypes:
+    role.append('permissions', {
+        'document_type': dt,
+        'read': 1,
+        'write': 0,
+        'create': 0,
+        'delete': 0,
+        'permlevel': 0,
+        'if_owner': 0
+    })
+
+role.save()
+frappe.db.commit()</code></pre>
+            </div>
+        </section>
+
+        <section id="examples" class="content-section">
+            <div class="section-header">
+                <h2>Usage Examples</h2>
+                <p class="section-description">
+                    Practical examples of using Frappe MCP for common business scenarios.
+                </p>
+            </div>
+
+            <div class="getting-started-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="basic">Basic Queries</button>
+                    <button class="tab-btn" data-tab="analytics">Analytics</button>
+                    <button class="tab-btn" data-tab="relationships">Relationships</button>
+                    <button class="tab-btn" data-tab="reports">Reports</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="basic">
+                        <h3>Simple Doctype Query</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>List Active Customers</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "query_doctype",
+    "arguments": {
+      "doctype": "Customer",
+      "fields": ["name", "customer_name", "customer_group", "territory"],
+      "filters": {
+        "disabled": 0,
+        "customer_group": ["!=", "Individual"]
+      },
+      "limit": 20,
+      "order_by": "modified desc"
+    }
+  },
+  "id": 1
+}</code></pre>
+                        </div>
+
+                        <h3>Complex Filters</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Sales Orders with Multiple Conditions</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "advanced_query",
+    "arguments": {
+      "doctype": "Sales Order",
+      "filters": [
+        ["status", "=", "To Deliver"],
+        ["transaction_date", ">", "2025-01-01"],
+        ["grand_total", ">", 10000],
+        ["customer", "in", ["CUST-001", "CUST-002", "CUST-003"]]
+      ],
+      "fields": ["name", "customer", "transaction_date", "grand_total"]
+    }
+  },
+  "id": 2
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="analytics">
+                        <h3>Time Series Analysis</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Monthly Sales Trend</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "time_series_analysis",
+    "arguments": {
+      "doctype": "Sales Invoice",
+      "date_field": "posting_date",
+      "value_field": "grand_total",
+      "group_by": "month",
+      "filters": {
+        "status": "Paid",
+        "posting_date": [">", "2024-01-01"]
+      },
+      "aggregations": ["sum", "count", "avg"]
+    }
+  },
+  "id": 3
+}</code></pre>
+                        </div>
+
+                        <h3>Aggregated Analysis</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Product Performance</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "query_with_aggregation",
+    "arguments": {
+      "doctype": "Sales Invoice Item",
+      "fields": ["item_code", "item_name"],
+      "aggregations": {
+        "total_qty": "sum(qty)",
+        "total_amount": "sum(amount)",
+        "avg_rate": "avg(rate)",
+        "invoice_count": "count(parent)"
+      },
+      "group_by": ["item_code", "item_name"],
+      "having": {
+        "total_qty": [">", 100]
+      },
+      "order_by": "total_amount desc"
+    }
+  },
+  "id": 4
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="relationships">
+                        <h3>Document with Links</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Sales Order with All Relations</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "get_document_with_links",
+    "arguments": {
+      "doctype": "Sales Order",
+      "name": "SO-2025-00123",
+      "include_children": true,
+      "max_depth": 2
+    }
+  },
+  "id": 5
+}</code></pre>
+                        </div>
+
+                        <h3>Reverse Lookups</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>All Documents Related to Customer</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "get_linked_documents",
+    "arguments": {
+      "doctype": "Customer",
+      "name": "CUST-001",
+      "linked_doctypes": ["Sales Order", "Delivery Note", "Sales Invoice"],
+      "filters": {
+        "docstatus": ["!=", 2]
+      }
+    }
+  },
+  "id": 6
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="reports">
+                        <h3>Export Data</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Export Sales Report to CSV</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "export_query_results",
+    "arguments": {
+      "doctype": "Sales Invoice",
+      "filters": {
+        "posting_date": [">", "2025-01-01"],
+        "status": "Paid"
+      },
+      "fields": ["name", "customer", "posting_date", "grand_total"],
+      "format": "csv",
+      "filename": "sales_report_2025.csv"
+    }
+  },
+  "id": 7
+}</code></pre>
+                        </div>
+
+                        <h3>Available Reports</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Discover Reports</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code>{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "list_reports",
+    "arguments": {
+      "module": "Selling",
+      "filters": {
+        "disabled": 0
+      }
+    }
+  },
+  "id": 8
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="troubleshooting" class="content-section">
+            <div class="section-header">
+                <h2>Troubleshooting</h2>
+                <p class="section-description">
+                    Common issues and their solutions.
+                </p>
+            </div>
+
+            <div class="troubleshooting-grid">
+                <div class="trouble-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Common Issues</h3>
+
+                    <div class="issue-item">
+                        <h4>Authentication Failed</h4>
+                        <p>API key or secret is invalid</p>
+                        <code>{"error": {"code": -32000, "message": "Authentication failed"}}</code>
+                        <ul>
+                            <li>Verify API key and secret are correct</li>
+                            <li>Check if user is active and enabled</li>
+                            <li>Ensure role assignments are correct</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Permission Denied</h4>
+                        <p>User lacks required permissions</p>
+                        <code>{"error": {"code": -32001, "message": "Permission denied for doctype"}}</code>
+                        <ul>
+                            <li>Assign appropriate role to user</li>
+                            <li>Check doctype permissions</li>
+                            <li>Verify permission level (permlevel)</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Doctype Not Found</h4>
+                        <p>Requested doctype doesn't exist</p>
+                        <code>{"error": {"code": -32002, "message": "DocType not found"}}</code>
+                        <ul>
+                            <li>Check doctype name spelling</li>
+                            <li>Verify doctype is installed</li>
+                            <li>Use list_doctypes to discover</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="trouble-card">
+                    <h3><i class="fas fa-tools"></i> Debugging Tools</h3>
+
+                    <div class="issue-item">
+                        <h4>Enable Debug Logging</h4>
+                        <p>Log MCP requests and responses</p>
+                        <ul>
+                            <li>Add to mcp.py: <code>frappe.logger('mcp').debug(message)</code></li>
+                            <li>Check bench logs: <code>bench logs</code></li>
+                            <li>Monitor in real-time: <code>tail -f logs/*.log</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Test Tools</h4>
+                        <p>Validate MCP installation</p>
+                        <ul>
+                            <li>Use frappe_mcp.py test functions</li>
+                            <li>Run with -test flag</li>
+                            <li>Check Frappe console output</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Performance Optimization</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Query Optimization Tips</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code># Use indexes in filters
+"filters": {
+  "creation": [">", "2025-01-01"],  # Indexed field
+  "status": "Submitted"             # Small set
+}
+
+# Limit fields returned
+"fields": ["name", "customer", "grand_total"]  # Only what you need
+
+# Use pagination for large datasets
+"limit": 100,
+"start": 0
+
+# Use aggregation instead of client-side processing
+"aggregations": {
+  "total": "sum(grand_total)"
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="development" class="content-section">
+            <div class="section-header">
+                <h2>Development Guide</h2>
+                <p class="section-description">
+                    Extend Frappe MCP with custom tools and functionality.
+                </p>
+            </div>
+
+            <h3>Adding Custom Tools</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Custom Tool Implementation</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code># Add to mcp.py tools dictionary
+
+def custom_analytics(arguments):
+    """Custom analytics tool example"""
+    doctype = arguments.get('doctype')
+
+    # Get data
+    data = frappe.db.get_all(doctype,
+        fields=['name', 'creation'],
+        filters={'docstatus': 1}
+    )
+
+    # Process
+    result = {
+        'total_records': len(data),
+        'first_record_date': data[0]['creation'] if data else None,
+        'last_record_date': data[-1]['creation'] if data else None
+    }
+
+    return result
+
+# Register tool
+mcp_tools['custom_analytics'] = {
+    'description': 'Custom analytics for any doctype',
+    'inputSchema': {
+        'type': 'object',
+        'properties': {
+            'doctype': {'type': 'string'}
+        },
+        'required': ['doctype']
+    }
+}</code></pre>
+            </div>
+
+            <div class="contribute-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Design Tool</h3>
+                    <p>Define functionality and input schema</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Implement Logic</h3>
+                    <p>Write Python function using Frappe APIs</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Register Tool</h3>
+                    <p>Add to tools dictionary with schema</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Test & Deploy</h3>
+                    <p>Test thoroughly and deploy to production</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Documentation</h4>
+                <ul>
+                    <li><a href="index.html">Developer Hub</a></li>
+                    <li><a href="docker-system.html">Docker System</a></li>
+                    <li><a href="ai-ecosystem.html">AI Ecosystem</a></li>
+                    <li><a href="frappe-mcp.html">Frappe MCP</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">GitHub Repository</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                    <li><a href="#">Community Forums</a></li>
+                    <li><a href="#">Support Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 DSI Platform. Built with <i class="fas fa-heart"></i> for the developer community.</p>
+            <p>Last updated: December 2025</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js?v=20251217.14"></script>
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.dataset.tab;
+
+                // Update active button
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Update active content
+                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

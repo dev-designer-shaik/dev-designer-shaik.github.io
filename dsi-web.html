@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DSI Documentation – DSI WEB N</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20251217.14" />
+  <link rel="stylesheet" href="components.css?v=20251217.14" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header__content">
+      <div class="header__logo-container">
+        <a class="header__home" href="index.html" aria-label="Home">
+          <img src="logo.webp" alt="DSI Logo" class="header__logo" />
+        </a>
+        <button class="header__sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">Menu</button>
+      </div>
+      <div class="header__text">
+        <h1 class="header__title">DSI WEB N</h1>
+        <p class="header__subtitle">Next.js 16 Luxury E-commerce Platform</p>
+      </div>
+      <div class="header__actions">
+        <button class="header__search-btn" id="searchBtn" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">☀️</button>
+      </div>
+    </div>
+    <div class="search-container" id="searchContainer">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search documentation...">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </header>
+
+  <nav class="sidebar-nav" id="sidebarNav">
+    <div class="nav-header">
+      <button class="nav-collapse-btn" id="navCollapseBtn" aria-label="Collapse navigation">
+        <span class="nav-collapse-icon">◀</span>
+        Collapse All
+      </button>
+    </div>
+    <div class="nav-tree" id="navTree"></div>
+  </nav>
+
+  <main class="main-content" id="main-content">
+    <nav class="page-tabs" id="pageTabs" aria-label="Repository sections"></nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h2 class="hero-title">DSI WEB N</h2>
+        <p class="hero-subtitle">Next.js 16 Luxury E-commerce Platform with Decap CMS</p>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-number">40+</span>
+            <span class="stat-label">UI Components</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">16</span>
+            <span class="stat-label">Next.js Version</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">SSR</span>
+            <span class="stat-label">Rendering</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Repo Content (switched via top page tabs + hash) -->
+    <div class="tab-content repo-tab-content">
+        <!-- Overview Tab -->
+        <div class="tab-pane active" id="overview">
+          <h2>Platform Overview</h2>
+          <p class="section-description">
+            DSI WEB N is a sophisticated Next.js 16 luxury e-commerce platform that combines modern web technologies
+            with an intuitive content management system. Built for performance and scalability, it serves as the
+            digital storefront for DSI's premium offerings.
+          </p>
+
+          <div class="platform-grid">
+            <div class="platform-card">
+              <div class="platform-icon">⚡</div>
+              <h3>Next.js 16</h3>
+              <p>Latest version with App Router, Server Components, and enhanced performance optimizations</p>
+              <div class="platform-tags">
+                <span class="tag">SSR</span>
+                <span class="tag">App Router</span>
+                <span class="tag">Server Actions</span>
+              </div>
+              <a href="#architecture" class="platform-link">Learn more →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">🎨</div>
+              <h3>Tailwind CSS v4</h3>
+              <p>Utility-first CSS framework with custom design system and responsive breakpoints</p>
+              <div class="platform-tags">
+                <span class="tag">Responsive</span>
+                <span class="tag">Dark Mode</span>
+                <span class="tag">Custom Theme</span>
+              </div>
+              <a href="#components" class="platform-link">Explore components →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">🧩</div>
+              <h3>Radix UI</h3>
+              <p>Accessible component primitives with comprehensive keyboard navigation and ARIA support</p>
+              <div class="platform-tags">
+                <span class="tag">Accessible</span>
+                <span class="tag">Unstyled</span>
+                <span class="tag">Customizable</span>
+              </div>
+              <a href="#components" class="platform-link">View components →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">📝</div>
+              <h3>Decap CMS</h3>
+              <p>Git-based CMS with intuitive editing interface and workflow management</p>
+              <div class="platform-tags">
+                <span class="tag">Git-Based</span>
+                <span class="tag">Preview</span>
+                <span class="tag">Workflow</span>
+              </div>
+              <a href="#cms-guide" class="platform-link">CMS guide →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">☁️</div>
+              <h3>Cloudinary</h3>
+              <p>Cloud-based image and video optimization with CDN delivery and transformations</p>
+              <div class="platform-tags">
+                <span class="tag">CDN</span>
+                <span class="tag">Optimization</span>
+                <span class="tag">Transformations</span>
+              </div>
+              <a href="#deployment" class="platform-link">Deployment info →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">🚀</div>
+              <h3>Netlify SSR</h3>
+              <p>Server-Side Rendering deployment with edge functions and automatic optimization</p>
+              <div class="platform-tags">
+                <span class="tag">Edge Functions</span>
+                <span class="tag">CDN</span>
+                <span class="tag">Auto HTTPS</span>
+              </div>
+              <a href="#deployment" class="platform-link">Deploy details →</a>
+            </div>
+          </div>
+
+          <!-- Tech Stack -->
+          <h3>Technology Stack</h3>
+          <div class="tech-stack-container">
+            <div class="tech-category">
+              <h3><i class="fas fa-layer-group"></i> Frontend</h3>
+              <div class="tech-items">
+                <div class="tech-item">
+                  <i class="fab fa-react"></i>
+                  <div>
+                    <strong>Next.js 16</strong>
+                    <p>React framework with SSR/SSG</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fab fa-css3-alt"></i>
+                  <div>
+                    <strong>Tailwind CSS v4</strong>
+                    <p>Utility-first CSS framework</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-cube"></i>
+                  <div>
+                    <strong>Radix UI</strong>
+                    <p>Accessible component library</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-magic"></i>
+                  <div>
+                    <strong>Framer Motion</strong>
+                    <p>Animation library</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3><i class="fas fa-server"></i> Backend & CMS</h3>
+              <div class="tech-items">
+                <div class="tech-item">
+                  <i class="fas fa-edit"></i>
+                  <div>
+                    <strong>Decap CMS</strong>
+                    <p>Git-based content management</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-cloud"></i>
+                  <div>
+                    <strong>Cloudinary</strong>
+                    <p>Media management & CDN</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-code-branch"></i>
+                  <div>
+                    <strong>Git Workflow</strong>
+                    <p>Version-controlled content</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3><i class="fas fa-rocket"></i> Deployment</h3>
+              <div class="tech-items">
+                <div class="tech-item">
+                  <i class="fas fa-globe"></i>
+                  <div>
+                    <strong>Netlify</strong>
+                    <p>SSR hosting & edge functions</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-amazon"></i>
+                  <div>
+                    <strong>AWS Amplify</strong>
+                    <p>Alternative deployment option</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-shield-alt"></i>
+                  <div>
+                    <strong>SSL/HTTPS</strong>
+                    <p>Automatic security certificates</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture Tab -->
+        <div class="tab-pane" id="architecture">
+          <h2>System Architecture</h2>
+          <p class="section-description">
+            Understanding the architecture of DSI WEB N is crucial for effective development and maintenance.
+            The platform follows Next.js 16 best practices with a focus on performance, SEO, and user experience.
+          </p>
+
+          <!-- Application Structure Diagram -->
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Next.js Application Structure</span>
+
+            </div>
+            <div class="mermaid">
+graph TB
+    subgraph "Browser Layer"
+        UI[UI Components]
+        Interactions[User Interactions]
+    end
+
+    subgraph "Next.js 16 Runtime"
+        AppRouter[App Router]
+        ServerComp[Server Components]
+        ClientComp[Client Components]
+        API[API Routes]
+    end
+
+    subgraph "Data Layer"
+        Content[Content Files]
+        Cloudinary[Cloudinary CDN]
+        Cache[Next.js Cache]
+    end
+
+    subgraph "Build & Deploy"
+        Git[Git Repository]
+        Netlify[Netlify Platform]
+        Edge[Edge Functions]
+    end
+
+    UI --> AppRouter
+    Interactions --> ClientComp
+    AppRouter --> ServerComp
+    AppRouter --> API
+    ServerComp --> Content
+    ClientComp --> Cloudinary
+    API --> Cache
+
+    Git --> Netlify
+    Netlify --> Edge
+    Edge --> ServerComp
+
+    style UI fill:#e1f5fe
+    style ServerComp fill:#f3e5f5
+    style Content fill:#e8f5e9
+    style Netlify fill:#fff3e0
+            </div>
+          </div>
+
+          <!-- Component Hierarchy -->
+          <h3>Component Architecture</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Component Hierarchy & Data Flow</span>
+
+            </div>
+            <div class="mermaid">
+sequenceDiagram
+    participant User as User
+    participant Page as Page Component
+    participant Layout as Layout
+    participant Server as Server Component
+    participant Client as Client Component
+    participant Data as Data Layer
+
+    User->>Page: Visit route
+    Page->>Layout: Wrap with layout
+    Layout->>Server: Fetch server data
+    Server->>Data: Load content/markdown
+    Data-->>Server: Return data
+    Server->>Layout: Render server components
+    Layout->>Client: Hydrate client components
+    Client->>User: Interactive UI
+
+    Note over Server,Data: Server-side rendering
+    Note over Client,User: Client-side interactivity
+            </div>
+          </div>
+
+          <!-- Rendering Strategy -->
+          <h3>Rendering Strategy</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Hybrid Rendering Approach</span>
+
+            </div>
+            <div class="mermaid">
+flowchart LR
+    subgraph "Static Generation"
+        Markdown[Markdown Files]
+        --> Build[Build Time]
+        --> HTML[Static HTML]
+    end
+
+    subgraph "Server-Side Rendering"
+        Request[Page Request]
+        --> NextJS[Next.js Server]
+        --> Dynamic[Dynamic Content]
+    end
+
+    subgraph "Client-Side Rendering"
+        Hydrate[Hydration]
+        --> State[React State]
+        --> Interactive[Interactive Features]
+    end
+
+    Markdown --> Shared
+    Dynamic --> Shared
+    Shared --> Hydrate
+
+    style Markdown fill:#e3f2fd
+    style Request fill:#fff3e0
+    style Hydrate fill:#f3e5f5
+            </div>
+          </div>
+
+          <!-- Data Flow -->
+          <h3>Data Flow Architecture</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Content + Headless Commerce Data Flow</span>
+
+            </div>
+            <div class="mermaid">
+flowchart TB
+    subgraph Content["Content Sources (Git-based)"]
+        CMS[Decap CMS]
+        Markdown[Markdown + Frontmatter]
+        JSON[JSON Settings]
+    end
+
+    subgraph Commerce["Commerce (Production APIs)"]
+        WP[Headless WordPress]
+        WOO[WooCommerce Store API]
+    end
+
+    subgraph Backoffice["Backoffice (Source of truth)"]
+        ERP[ERPNext]
+    end
+
+    subgraph Next["DSI WEB N (Next.js 16)"]
+        Server[Server Components<br/>SSR/ISR]
+        Routes[API Routes]
+        Cache[Next.js Cache]
+        Rules[Business Rules<br/>shipping, payment, taxes]
+        SEO[SEO + Schema.org]
+    end
+
+    subgraph External["External Providers"]
+        Pay[Payment Gateway]
+        Ship[Shipping Provider]
+    end
+
+    CMS --> Cache
+    Markdown --> Cache
+    JSON --> Cache
+
+    %% Runtime (direct) path for DP/SPP
+    Routes -->|Fetch products/pages| WOO
+    Routes -->|Fetch content| WP
+    WOO --> Routes
+    WP --> Routes
+
+    Routes --> Rules
+    Rules --> Pay
+    Rules --> Ship
+    Rules --> Cache
+
+    Cache --> Server
+    Routes --> Server
+    Server --> SEO
+
+    style ERP fill:#e8f5e9
+    style WOO fill:#fff3e0
+    style WP fill:#f3e5f5
+    style Server fill:#e1f5fe
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <strong>Direct runtime path (DP/SPP):</strong> Dynamic pages and single product pages fetch production content directly from <code>WooCommerce Store API</code> and <code>Headless WordPress</code>.<br>
+            <strong>Backoffice master data:</strong> <code>ERPNext</code> is the source of truth for product, pricing, and inventory data (sync mechanism documented separately).<br>
+            <strong>Business logic:</strong> Shipping/payment rules run in the Next.js/API layer and call external providers as needed.
+          </div>
+
+          <!-- File Structure Details -->
+          <h3>Project Structure</h3>
+          <div class="code-block">
+            <div class="code-header">
+              <span>Key Directory Structure</span>
+
+            </div>
+            <pre><code class="language-bash">DSI-WEB-N/
+├── app/                     # Next.js 16 App Router
+│   ├── (auth)/            # Route groups
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── components/             # Reusable UI components
+│   ├── ui/               # Radix UI primitives
+│   ├── forms/            # Form components
+│   └── layout/           # Layout components
+├── content/               # Site content (Git-based)
+│   ├── pages/            # Static pages
+│   ├── products/         # Product data
+│   └── settings/         # Site configuration
+├── lib/                   # Utility functions
+│   ├── content.ts        # Content loaders
+│   └── utils.ts          # Helper functions
+├── public/                # Static assets
+│   └── admin/           # Decap CMS config
+└── styles/               # Additional styles</code></pre>
+          </div>
+        </div>
+
+        <!-- Components Tab -->
+        <div class="tab-pane" id="components">
+          <h2>UI Component Library</h2>
+          <p class="section-description">
+            DSI WEB N features a comprehensive component library built with Radix UI primitives and styled with Tailwind CSS.
+            Each component is designed for accessibility, performance, and customization.
+          </p>
+
+          <!-- Component Categories -->
+          <div class="component-categories">
+            <div class="category-section">
+              <h3>Layout Components</h3>
+              <div class="component-grid">
+                <div class="component-card">
+                  <h4>Header</h4>
+                  <p>Site navigation with responsive menu and search functionality</p>
+                  <div class="component-features">
+                    <span class="tag">Responsive</span>
+                    <span class="tag">Dark Mode</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Footer</h4>
+                  <p>Multi-column footer with links and social media integration</p>
+                  <div class="component-features">
+                    <span class="tag">Configurable</span>
+                    <span class="tag">CMS-driven</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Sidebar</h4>
+                  <p>Collapsible navigation sidebar with multi-level support</p>
+                  <div class="component-features">
+                    <span class="tag">Animated</span>
+                    <span class="tag">Persistent</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Hero Section</h4>
+                  <p>Full-width hero with background images and CTAs</p>
+                  <div class="component-features">
+                    <span class="tag">Dynamic</span>
+                    <span class="tag">Animated</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <h3>Navigation Components</h3>
+              <div class="component-grid">
+                <div class="component-card">
+                  <h4>Navbar</h4>
+                  <p>Main navigation with dropdown menus and mobile toggle</p>
+                  <div class="component-features">
+                    <span class="tag">Keyboard Nav</span>
+                    <span class="tag">ARIA</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Breadcrumbs</h4>
+                  <p>Breadcrumb trail for page hierarchy navigation</p>
+                  <div class="component-features">
+                    <span class="tag">Schema.org</span>
+                    <span class="tag">SEO</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Pagination</h4>
+                  <p>Ajax-enabled pagination for content listings</p>
+                  <div class="component-features">
+                    <span class="tag">Accessible</span>
+                    <span class="tag">URL-based</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <h3>Content Components</h3>
+              <div class="component-grid">
+                <div class="component-card">
+                  <h4>Product Card</h4>
+                  <p>E-commerce product display with images and pricing</p>
+                  <div class="component-features">
+                    <span class="tag">Lazy Load</span>
+                    <span class="tag">Variant</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Content Block</h4>
+                  <p>Rich content block with markdown support</p>
+                  <div class="component-features">
+                    <span class="tag">MDX</span>
+                    <span class="tag">Syntax</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Gallery</h4>
+                  <p>Image gallery with lightbox and zoom functionality</p>
+                  <div class="component-features">
+                    <span class="tag">Cloudinary</span>
+                    <span class="tag">Touch</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Testimonial</h4>
+                  <p>Customer testimonial cards with ratings</p>
+                  <div class="component-features">
+                    <span class="tag">Carousel</span>
+                    <span class="tag">Schema</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <h3>Form Components</h3>
+              <div class="component-grid">
+                <div class="component-card">
+                  <h4>Contact Form</h4>
+                  <p>Multi-field contact form with validation</p>
+                  <div class="component-features">
+                    <span class="tag">Validation</span>
+                    <span class="tag">API</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Search Bar</h4>
+                  <p>Site-wide search with autocomplete</p>
+                  <div class="component-features">
+                    <span class="tag">Real-time</span>
+                    <span class="tag">Debounce</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Newsletter</h4>
+                  <p>Email subscription form integration</p>
+                  <div class="component-features">
+                    <span class="tag">GDPR</span>
+                    <span class="tag">API</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <h3>Interactive Components</h3>
+              <div class="component-grid">
+                <div class="component-card">
+                  <h4>Modal</h4>
+                  <p>Accessible modal dialog with focus management</p>
+                  <div class="component-features">
+                    <span class="tag">ARIA</span>
+                    <span class="tag">Focus Trap</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Accordion</h4>
+                  <p>Collapsible content sections with animation</p>
+                  <div class="component-features">
+                    <span class="tag">Animated</span>
+                    <span class="tag">Multiple</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Tabs</h4>
+                  <p>Tabbed content interface with keyboard nav</p>
+                  <div class="component-features">
+                    <span class="tag">Dynamic</span>
+                    <span class="tag">URL Sync</span>
+                  </div>
+                </div>
+
+                <div class="component-card">
+                  <h4>Tooltip</h4>
+                  <p>Contextual help tooltips with positioning</p>
+                  <div class="component-features">
+                    <span class="tag">Hover</span>
+                    <span class="tag">Focus</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Component Architecture Diagram -->
+          <h3>Component Architecture</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Component Hierarchy & Relationships</span>
+
+            </div>
+            <div class="mermaid">
+graph TD
+    subgraph "Layout Components"
+        RootLayout[Root Layout]
+        PageLayout[Page Layout]
+        Section[Section]
+    end
+
+    subgraph "UI Primitives (Radix)"
+        Button[Button]
+        Dialog[Dialog]
+        Dropdown[Dropdown]
+        Tabs[Tabs]
+        Tooltip[Tooltip]
+    end
+
+    subgraph "Business Components"
+        ProductCard[Product Card]
+        NavBar[Navigation]
+        SearchBar[Search]
+        Hero[Hero Section]
+        Gallery[Gallery]
+    end
+
+    subgraph "Composite Components"
+        Header[Header]
+        Footer[Footer]
+        Sidebar[Sidebar]
+        Modal[Modal]
+        Form[Form]
+    end
+
+    RootLayout --> Header
+    RootLayout --> PageLayout
+    RootLayout --> Footer
+
+    Header --> NavBar
+    Header --> SearchBar
+
+    PageLayout --> Hero
+    PageLayout --> Section
+    PageLayout --> Sidebar
+
+    Section --> ProductCard
+    Section --> Gallery
+
+    Button --> ProductCard
+    Button --> NavBar
+    Dialog --> Modal
+    Dropdown --> NavBar
+    Tabs --> Section
+    Tooltip --> ProductCard
+            </div>
+          </div>
+
+          <!-- Styling System -->
+          <h3>Styling System</h3>
+          <div class="code-block">
+            <div class="code-header">
+              <span>Tailwind Configuration Example</span>
+
+            </div>
+            <pre><code class="language-javascript">// tailwind.config.js
+module.exports = {
+  content: ['./app/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#eff6ff',
+          500: '#3b82f6',
+          900: '#1e3a8a',
+        },
+        secondary: {
+          50: '#f8fafc',
+          500: '#64748b',
+          900: '#0f172a',
+        }
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.3s ease-out',
+      }
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- Deployment Tab -->
+        <div class="tab-pane" id="deployment">
+          <h2>Deployment & Operations</h2>
+          <p class="section-description">
+            DSI WEB N is designed for modern deployment platforms with support for server-side rendering,
+            edge functions, and continuous deployment workflows.
+          </p>
+
+          <!-- Deployment Architecture -->
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Deployment Architecture</span>
+
+            </div>
+            <div class="mermaid">
+flowchart LR
+    subgraph "Development"
+        Dev[Local Dev]
+        Git[Git Push]
+    end
+
+    subgraph "CI/CD Pipeline"
+        Trigger[Webhook Trigger]
+        Build[Next.js Build]
+        Test[Tests & Lint]
+        Deploy[Deploy to Netlify]
+    end
+
+    subgraph "Production"
+        Edge[Edge Functions]
+        CDN[Global CDN]
+        Cache[Build Cache]
+    end
+
+    Dev --> Git
+    Git --> Trigger
+    Trigger --> Build
+    Build --> Test
+    Test --> Deploy
+    Deploy --> Edge
+    Deploy --> CDN
+    Deploy --> Cache
+
+    style Edge fill:#4caf50
+    style CDN fill:#2196f3
+    style Cache fill:#ff9800
+            </div>
+          </div>
+
+          <!-- Deployment Options -->
+          <div class="deployment-options">
+            <h3>Deployment Platforms</h3>
+
+            <div class="platform-card">
+              <div class="platform-icon">🌐</div>
+              <h3>Netlify (Primary)</h3>
+              <p>Server-Side Rendering with Next.js plugin and edge functions</p>
+
+              <div class="config-grid">
+                <div class="config-card">
+                  <h4>Configuration</h4>
+                  <ul>
+                    <li>Build Command: <code>npm run build</code></li>
+                    <li>Publish Directory: <code>.next</code></li>
+                    <li>Functions Directory: <code>.netlify/functions</code></li>
+                    <li>Node Version: <code>18.x</code></li>
+                  </ul>
+                </div>
+
+                <div class="config-card">
+                  <h4>Features</h4>
+                  <ul>
+                    <li>Automatic SSL certificates</li>
+                    <li>Global CDN distribution</li>
+                    <li>Edge functions support</li>
+                    <li>Form handling</li>
+                    <li>Split testing</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">☁️</div>
+              <h3>AWS Amplify (Alternative)</h3>
+              <p>Full-stack deployment with AWS integration</p>
+
+              <div class="config-grid">
+                <div class="config-card">
+                  <h4>Configuration</h4>
+                  <ul>
+                    <li>Build Settings: <code>amplify.yml</code></li>
+                    <li>Framework: <code>Next.js - SSR</code></li>
+                    <li>Region: <code>us-east-1</code></li>
+                    <li>Branching: Automatic</li>
+                  </ul>
+                </div>
+
+                <div class="config-card">
+                  <h4>Features</h4>
+                  <ul>
+                    <li>AWS infrastructure</li>
+                    <li>Custom domains</li>
+                    <li>Feature flags</li>
+                    <li>Analytics</li>
+                    <li>Backend integration</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Build Process -->
+          <h3>Build Process</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Next.js Build Pipeline</span>
+
+            </div>
+            <div class="mermaid">
+sequenceDiagram
+    participant CI as CI/CD
+    participant Next as Next.js
+    participant Compiler as Compiler
+    participant Bundle as Bundler
+    participant Optimizer as Optimizer
+    participant Deploy as Deploy Platform
+
+    CI->>Next: npm run build
+    Next->>Compiler: Create pages
+    Compiler->>Bundle: Bundle assets
+    Bundle->>Optimizer: Optimize
+    Optimizer->>Deploy: Deploy artifacts
+
+    Note over Compiler: Route generation
+    Note over Optimizer: Image/Code optimization
+            </div>
+          </div>
+
+          <!-- Environment Variables -->
+          <div class="config-grid">
+            <h3>Environment Configuration</h3>
+
+            <div class="config-card">
+              <h4>Development (.env.local)</h4>
+              <ul>
+                <li><code>NEXT_PUBLIC_SITE_URL=http://localhost:3000</code></li>
+                <li><code>CONTENT_PATH=./content</code></li>
+                <li><code>CMS_LOCAL_BACKEND=true</code></li>
+              </ul>
+            </div>
+
+            <div class="config-card">
+              <h4>Production (Netlify)</h4>
+              <ul>
+                <li><code>NEXT_PUBLIC_SITE_URL=https://dsi-web.netlify.app</code></li>
+                <li><code>NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dsi-cloud</code></li>
+                <li><code>ANALYTICS_ID=analytics-token</code></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Performance Optimization -->
+          <h3>Performance Optimization</h3>
+          <div class="optimization-list">
+            <div class="optimization-item">
+              <h4>Code Splitting</h4>
+              <p>Automatic code splitting at the route level with dynamic imports for heavy components</p>
+            </div>
+
+            <div class="optimization-item">
+              <h4>Image Optimization</h4>
+              <p>Next.js Image component with WebP conversion, lazy loading, and responsive sizing</p>
+            </div>
+
+            <div class="optimization-item">
+              <h4>Caching Strategy</h4>
+              <p>Multi-level caching with ISR for static content and CDN caching for assets</p>
+            </div>
+
+            <div class="optimization-item">
+              <h4>Bundle Analysis</h4>
+              <p>Regular bundle analysis with webpack-bundle-analyzer to optimize dependencies</p>
+            </div>
+          </div>
+
+          <!-- Monitoring -->
+          <h3>Monitoring & Analytics</h3>
+          <div class="code-block">
+            <div class="code-header">
+              <span>Next.js Analytics Configuration</span>
+
+            </div>
+            <pre><code class="language-javascript">// next.config.js
+module.exports = {
+  experimental: {
+    instrumentationHook: true
+  },
+  images: {
+    domains: ['res.cloudinary.com'],
+    formats: ['image/webp', 'image/avif']
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production'
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback.fs = false
+    }
+    return config
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- CMS Guide Tab -->
+        <div class="tab-pane" id="cms-guide">
+          <h2>Decap CMS Guide</h2>
+          <p class="section-description">
+            Decap CMS provides a user-friendly interface for content management, allowing non-technical users
+            to update website content through a Git-based workflow.
+          </p>
+
+          <!-- CMS Workflow -->
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Content Management Workflow</span>
+
+            </div>
+            <div class="mermaid">
+sequenceDiagram
+    participant Editor as Content Editor
+    participant CMS as Decap CMS
+    participant Git as Git Repository
+    participant CI as CI/CD Pipeline
+    participant Site as Live Site
+
+    Editor->>CMS: Login via OAuth
+    Editor->>CMS: Edit content
+    CMS->>Editor: Show preview
+    Editor->>CMS: Save changes
+    CMS->>Git: Commit to repo
+    Git->>CI: Trigger build
+    CI->>Site: Deploy updates
+    Site->>Editor: Notify of deployment
+            </div>
+          </div>
+
+          <!-- CMS Configuration -->
+          <h3>CMS Configuration</h3>
+          <div class="code-block">
+            <div class="code-header">
+              <span>Decap CMS Config (public/admin/config.yml)</span>
+
+            </div>
+            <pre><code class="language-yaml">backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/media
+public_folder: /media
+
+collections:
+  - name: pages
+    label: Pages
+    folder: content/pages
+    create: true
+    fields:
+      - { name: title, label: Title }
+      - { name: slug, label: Slug }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: products
+    label: Products
+    folder: content/products
+    create: true
+    fields:
+      - { name: title, label: Title }
+      - { name: price, label: Price, widget: number }
+      - { name: image, label: Image, widget: image }
+      - { name: description, label: Description, widget: markdown }</code></pre>
+          </div>
+
+          <!-- Content Types -->
+          <div class="content-types">
+            <h3>Content Types</h3>
+
+            <div class="content-type-card">
+              <h4>📄 Pages</h4>
+              <p>Static site pages with markdown content and frontmatter</p>
+
+              <div class="content-structure">
+                <h5>Structure:</h5>
+                <ul>
+                  <li>File location: <code>content/pages/</code></li>
+                  <li>Format: Markdown with YAML frontmatter</li>
+                  <li>Fields: title, slug, date, author, tags, body</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="content-type-card">
+              <h4>🛍️ Products</h4>
+              <p>E-commerce product catalog with variants and media</p>
+
+              <div class="content-structure">
+                <h5>Structure:</h5>
+                <ul>
+                  <li>File location: <code>content/products/</code></li>
+                  <li>Format: Markdown with product metadata</li>
+                  <li>Fields: name, price, sku, category, images, description</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="content-type-card">
+              <h4>⚙️ Settings</h4>
+              <p>Site-wide configuration and navigation</p>
+
+              <div class="content-structure">
+                <h5>Structure:</h5>
+                <ul>
+                  <li>File location: <code>content/settings/</code></li>
+                  <li>Format: JSON configuration files</li>
+                  <li>Files: config.json, navigation.json, social.json</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Roles -->
+          <div class="role-management">
+            <h3>User Role Management</h3>
+
+            <div class="role-grid">
+              <div class="role-card">
+                <h4>Admin</h4>
+                <p>Full access to all content and settings</p>
+                <div class="role-permissions">
+                  <span class="permission granted">Create</span>
+                  <span class="permission granted">Edit</span>
+                  <span class="permission granted">Delete</span>
+                  <span class="permission granted">Publish</span>
+                  <span class="permission granted">Settings</span>
+                </div>
+              </div>
+
+              <div class="role-card">
+                <h4>Editor</h4>
+                <p>Create and edit content, no publishing</p>
+                <div class="role-permissions">
+                  <span class="permission granted">Create</span>
+                  <span class="permission granted">Edit</span>
+                  <span class="permission denied">Delete</span>
+                  <span class="permission denied">Publish</span>
+                  <span class="permission denied">Settings</span>
+                </div>
+              </div>
+
+              <div class="role-card">
+                <h4>Author</h4>
+                <p>Create and edit own content only</p>
+                <div class="role-permissions">
+                  <span class="permission granted">Create</span>
+                  <span class="permission granted">Edit (Own)</span>
+                  <span class="permission denied">Delete</span>
+                  <span class="permission denied">Publish</span>
+                  <span class="permission denied">Settings</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Best Practices -->
+          <h3>CMS Best Practices</h3>
+          <div class="best-practices">
+            <div class="practice-item">
+              <h4>📝 Content Organization</h4>
+              <ul>
+                <li>Use clear, descriptive filenames</li>
+                <li>Organize content in logical folders</li>
+                <li>Use consistent frontmatter structure</li>
+                <li>Add alt text for all images</li>
+              </ul>
+            </div>
+
+            <div class="practice-item">
+              <h4>🔄 Workflow Management</h4>
+              <ul>
+                <li>Use draft status for work in progress</li>
+                <li>Review content before publishing</li>
+                <li>Use descriptive commit messages</li>
+                <li>Test changes in preview mode</li>
+              </ul>
+            </div>
+
+            <div class="practice-item">
+              <h4>🖼️ Media Management</h4>
+              <ul>
+                <li>Optimize images before upload</li>
+                <li>Use consistent naming conventions</li>
+                <li>Organize media in folders</li>
+                <li>Use WebP format when possible</li>
+              </ul>
+            </div>
+
+            <div class="practice-item">
+              <h4>🔒 Security</h4>
+              <ul>
+                <li>Enable two-factor authentication</li>
+                <li>Review user access regularly</li>
+                <li>Use OAuth for authentication</li>
+                <li>Limit admin user count</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Local Development -->
+          <h3>Local Development with CMS</h3>
+          <div class="code-block">
+            <div class="code-header">
+              <span>Start CMS in Development Mode</span>
+
+            </div>
+            <pre><code class="language-bash"># Install dependencies
+npm install
+
+# Start with local CMS backend
+npm run dev:cms
+
+# Or start normally and access CMS at /admin
+npm run dev</code></pre>
+          </div>
+
+          <p class="note">
+            The CMS will be available at <code>/admin</code> in development. For production,
+            configure your Git provider OAuth credentials in Netlify.
+          </p>
+        </div>
+      </div>
+    <!-- Quick Reference Section -->
+    <section class="quick-reference">
+      <h2>Quick Reference</h2>
+      <div class="reference-grid">
+        <div class="reference-card">
+          <h3><i class="fas fa-terminal"></i> Essential Commands</h3>
+          <table class="reference-table">
+            <tr>
+              <td>Install</td>
+              <td><code>npm install</code></td>
+            </tr>
+            <tr>
+              <td>Development</td>
+              <td><code>npm run dev</code></td>
+            </tr>
+            <tr>
+              <td>Build</td>
+              <td><code>npm run build</code></td>
+            </tr>
+            <tr>
+              <td>Start</td>
+              <td><code>npm run start</code></td>
+            </tr>
+            <tr>
+              <td>CMS Mode</td>
+              <td><code>npm run dev:cms</code></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="reference-card">
+          <h3><i class="fas fa-folder"></i> Key Directories</h3>
+          <table class="reference-table">
+            <tr>
+              <td>Pages</td>
+              <td><code>app/</code></td>
+            </tr>
+            <tr>
+              <td>Components</td>
+              <td><code>components/</code></td>
+            </tr>
+            <tr>
+              <td>Content</td>
+              <td><code>content/</code></td>
+            </tr>
+            <tr>
+              <td>Styles</td>
+              <td><code>styles/</code></td>
+            </tr>
+            <tr>
+              <td>Public</td>
+              <td><code>public/</code></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="reference-card">
+          <h3><i class="fas fa-link"></i> Important URLs</h3>
+          <table class="reference-table">
+            <tr>
+              <td>Website</td>
+              <td><code>https://dsi-web.netlify.app</code></td>
+            </tr>
+            <tr>
+              <td>CMS Admin</td>
+              <td><code>/admin</code></td>
+            </tr>
+            <tr>
+              <td>Netlify</td>
+              <td><code>app.netlify.com</code></td>
+            </tr>
+            <tr>
+              <td>Repository</td>
+              <td><code>github.com/DSI/web-n</code></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Documentation</h4>
+        <ul>
+          <li><a href="index.html">Platform Overview</a></li>
+          <li><a href="docker-system.html">Docker System</a></li>
+          <li><a href="ai-ecosystem.html">AI Ecosystem</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>MCP Servers</h4>
+        <ul>
+          <li><a href="idempiere-mcp.html">iDempiere MCP</a></li>
+          <li><a href="idempiere-mcp.html">iDempiere MCP</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://nextjs.org/docs" target="_blank">Next.js Docs</a></li>
+          <li><a href="https://tailwindcss.com/docs" target="_blank">Tailwind CSS</a></li>
+          <li><a href="https://www.decapcms.org/docs/" target="_blank">Decap CMS</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 DSI Platform. Built with Next.js 16</p>
+      <p><i class="fas fa-heart"></i> Powered by modern web technologies</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <script src="script.js?v=20251217.14"></script>
+</body>
+</html>

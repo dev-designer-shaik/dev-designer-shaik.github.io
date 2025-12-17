@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Docker System Documentation - DSI Developer Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Complete documentation for the DSI Docker System - container orchestration platform managing 13+ services" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20251217.14" />
+  <link rel="stylesheet" href="components.css?v=20251217.14" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header__content">
+      <div class="header__logo-container">
+        <a class="header__home" href="index.html" aria-label="Home">
+          <img src="logo.webp" alt="DSI Logo" class="header__logo" />
+        </a>
+        <button class="header__sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">Menu</button>
+      </div>
+      <div class="header__text">
+        <h1 class="header__title">Docker System</h1>
+        <p class="header__subtitle">Container Orchestration & Service Management</p>
+      </div>
+      <div class="header__actions">
+        <button class="header__search-btn" id="searchBtn" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">☀️</button>
+      </div>
+    </div>
+    <div class="search-container" id="searchContainer">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search documentation...">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </header>
+
+  <nav class="sidebar-nav" id="sidebarNav">
+    <div class="nav-header">
+      <button class="nav-collapse-btn" id="navCollapseBtn" aria-label="Collapse navigation">
+        <span class="nav-collapse-icon">◀</span>
+        Collapse All
+      </button>
+    </div>
+    <div class="nav-tree" id="navTree"></div>
+  </nav>
+
+  <main class="main-content" id="main-content">
+    <nav class="page-tabs" id="pageTabs" aria-label="Repository sections"></nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h2 class="hero-title">Docker System</h2>
+        <p class="hero-subtitle">Container Orchestration Platform Managing 13+ Services</p>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-number">13+</span>
+            <span class="stat-label">Services</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Database Types</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Uptime SLA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Repo Content (switched via top page tabs + hash) -->
+    <div class="tab-content repo-tab-content">
+        <!-- Overview Tab -->
+        <div class="tab-pane active" id="overview">
+          <h2>System Overview</h2>
+          <p class="section-description">
+            The Docker System is the core infrastructure of the DSI platform, providing container orchestration
+            for 13+ interconnected services. It serves as the foundation for data processing, workflow automation,
+            vector search, and enterprise messaging.
+          </p>
+
+          <div class="platform-grid">
+            <div class="platform-card">
+              <div class="platform-icon">🐳</div>
+              <h3>Container Orchestration</h3>
+              <p>Manages 13+ services with automatic restart, health checks, and dependency management</p>
+              <div class="platform-tags">
+                <span class="tag">Docker Compose</span>
+                <span class="tag">Auto-restart</span>
+                <span class="tag">Health Checks</span>
+              </div>
+              <a href="#services" class="platform-link">View services →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">🌐</div>
+              <h3>Service Networking</h3>
+              <p>Isolated Docker network with secure inter-service communication and port mapping</p>
+              <div class="platform-tags">
+                <span class="tag">Isolated Networks</span>
+                <span class="tag">Load Balancing</span>
+                <span class="tag">SSL/TLS</span>
+              </div>
+              <a href="#architecture" class="platform-link">Learn more →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">💾</div>
+              <h3>Data Persistence</h3>
+              <p>Managed volumes for PostgreSQL, Redis, RabbitMQ, and application data</p>
+              <div class="platform-tags">
+                <span class="tag">Persistent Storage</span>
+                <span class="tag">Backups</span>
+                <span class="tag">Data Integrity</span>
+              </div>
+              <a href="#operations" class="platform-link">Backup guide →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">⚡</div>
+              <h3>Workflow Automation</h3>
+              <p>Integrated n8n for complex workflow automation and system integration</p>
+              <div class="platform-tags">
+                <span class="tag">n8n</span>
+                <span class="tag">Visual Editor</span>
+                <span class="tag">API Integration</span>
+              </div>
+              <a href="#workflows" class="platform-link">Explore workflows →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">📊</div>
+              <h3>Monitoring Stack</h3>
+              <p>Comprehensive monitoring with Prometheus, Grafana, and custom health checks</p>
+              <div class="platform-tags">
+                <span class="tag">Prometheus</span>
+                <span class="tag">Grafana</span>
+                <span class="tag">Alerts</span>
+              </div>
+              <a href="#operations" class="platform-link">View metrics →</a>
+            </div>
+
+            <div class="platform-card">
+              <div class="platform-icon">🔒</div>
+              <h3>Security</h3>
+              <p>Container isolation, network security, and encrypted communication between services</p>
+              <div class="platform-tags">
+                <span class="tag">Network Isolation</span>
+                <span class="tag">Secrets Management</span>
+                <span class="tag">Access Control</span>
+              </div>
+              <a href="#operations" class="platform-link">Security guide →</a>
+            </div>
+          </div>
+
+          <!-- System Statistics -->
+          <h3>Platform Statistics</h3>
+          <div class="tech-stack-container">
+            <div class="tech-category">
+              <h3><i class="fas fa-cubes"></i> Container Metrics</h3>
+              <div class="tech-items">
+                <div class="tech-item">
+                  <i class="fas fa-server"></i>
+                  <div>
+                    <strong>Total Services</strong>
+                    <p>13+ orchestrated containers</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-network-wired"></i>
+                  <div>
+                    <strong>Networks</strong>
+                    <p>3 isolated networks</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-hdd"></i>
+                  <div>
+                    <strong>Persistent Volumes</strong>
+                    <p>7 managed volumes</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-memory"></i>
+                  <div>
+                    <strong>Memory Allocation</strong>
+                    <p>16GB+ total</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3><i class="fas fa-database"></i> Data Stores</h3>
+              <div class="tech-items">
+                <div class="tech-item">
+                  <i class="fas fa-elephant"></i>
+                  <div>
+                    <strong>PostgreSQL</strong>
+                    <p>2 database instances</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-bolt"></i>
+                  <div>
+                    <strong>Redis</strong>
+                    <p>Caching & sessions</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-rocket"></i>
+                  <div>
+                    <strong>RabbitMQ</strong>
+                    <p>Message broker</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-brain"></i>
+                  <div>
+                    <strong>Weaviate</strong>
+                    <p>Vector database</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3><i class="fas fa-chart-line"></i> Performance</h3>
+              <div class="tech-items">
+                <div class="tech-item">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <div>
+                    <strong>Response Time</strong>
+                    <p>&lt;100ms average</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-exchange-alt"></i>
+                  <div>
+                    <strong>Message Throughput</strong>
+                    <p>10K msg/sec</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-database"></i>
+                  <div>
+                    <strong>DB Connections</strong>
+                    <p>100+ concurrent</p>
+                  </div>
+                </div>
+                <div class="tech-item">
+                  <i class="fas fa-shield-alt"></i>
+                  <div>
+                    <strong>Uptime</strong>
+                    <p>99.9% SLA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture Tab -->
+        <div class="tab-pane" id="architecture">
+          <h2>System Architecture</h2>
+          <p class="section-description">
+            Understanding the Docker System architecture is crucial for effective deployment and management.
+            The system follows a layered approach with clear separation of concerns.
+          </p>
+
+          <!-- Architecture Overview Diagram -->
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Complete System Architecture</span>
+
+            </div>
+            <div class="mermaid">
+graph TB
+    subgraph "External Layer"
+        WEB[Web Clients]
+        API[API Consumers]
+        DEV[Developers]
+    end
+
+    subgraph "Docker Host: docker-system"
+        subgraph "Load Balancer Layer"
+            NGINX[Nginx Proxy<br/>Port 80/443]
+        end
+
+        subgraph "Application Layer"
+            MCP[MCP Server<br/>Port 3000]
+            N8N[n8n Workflow<br/>Port 5678]
+            MEDIA[Media Resize<br/>Port 5000]
+            CHAT[Chatwoot<br/>Port 3000]
+            PORT[Portainer<br/>Port 9443]
+        end
+
+        subgraph "Message & Cache Layer"
+            RMQ[RabbitMQ<br/>Port 5672/15672]
+            REDIS[Redis<br/>Port 6379]
+        end
+
+        subgraph "Database Layer"
+            PG_MAIN[PostgreSQL<br/>Port 5432]
+            PG_ERP[ERP PostgreSQL<br/>Port 5433]
+            WV[Weaviate<br/>Port 8080]
+        end
+
+        subgraph "Monitoring Layer"
+            PROM[Prometheus<br/>Port 9090]
+            GRAF[Grafana<br/>Port 3001]
+        end
+
+        subgraph "Docker Networks"
+            WEB_NET[web-network]
+            APP_NET[app-network]
+            DB_NET[db-network]
+        end
+    end
+
+    %% Connections
+    WEB --> NGINX
+    API --> NGINX
+    DEV --> PORT
+
+    NGINX --> MCP
+    NGINX --> CHAT
+    NGINX --> N8N
+
+    MCP --> REDIS
+    MCP --> PG_MAIN
+    MCP --> RMQ
+    MCP --> WV
+
+    N8N --> PG_ERP
+    N8N --> RMQ
+
+    MEDIA --> REDIS
+    CHAT --> PG_MAIN
+
+    PROM --> PG_MAIN
+    GRAF --> PROM
+
+    %% Network associations
+    NGINX -.-> WEB_NET
+    MCP -.-> APP_NET
+    PG_MAIN -.-> DB_NET
+    PG_ERP -.-> DB_NET
+    WV -.-> DB_NET
+    RMQ -.-> DB_NET
+    REDIS -.-> DB_NET
+
+    style NGINX fill:#e1f5fe
+    style MCP fill:#f3e5f5
+    style PG_MAIN fill:#e8f5e9
+    style RMQ fill:#fff3e0
+            </div>
+          </div>
+
+          <!-- Network Architecture -->
+          <h3>Network Architecture</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Docker Network Isolation</span>
+
+            </div>
+            <div class="mermaid">
+flowchart TD
+    subgraph "Docker Networks"
+        subgraph "web-network (Public)"
+            NGINX[Nginx Proxy]
+            EXT[External Access]
+        end
+
+        subgraph "app-network (Internal)"
+            MCP[MCP Server]
+            N8N[n8n]
+            CHAT[Chatwoot]
+            MEDIA[Media Service]
+        end
+
+        subgraph "db-network (Database)"
+            PG1[PostgreSQL Main]
+            PG2[PostgreSQL ERP]
+            REDIS[Redis]
+            RMQ[RabbitMQ]
+            WV[Weaviate]
+        end
+    end
+
+    %% Network connections
+    NGINX -->|Proxy| MCP
+    NGINX -->|Proxy| N8N
+    NGINX -->|Proxy| CHAT
+
+    MCP --> PG1
+    MCP --> REDIS
+    MCP --> RMQ
+    MCP --> WV
+
+    N8N --> PG2
+    N8N --> RMQ
+
+    CHAT --> PG1
+    MEDIA --> REDIS
+
+    %% Security boundaries
+    WEB_BOUNDARY["🔒 DMZ"]
+    APP_BOUNDARY["🔒 Application"]
+    DB_BOUNDARY["🔒 Database"]
+
+    style WEB_BOUNDARY fill:#ffebee
+    style APP_BOUNDARY fill:#e8f5e9
+    style DB_BOUNDARY fill:#fff3e0
+            </div>
+          </div>
+
+          <!-- Service Dependencies -->
+          <h3>Service Dependencies</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Service Startup Dependencies</span>
+
+            </div>
+            <div class="mermaid">
+graph TD
+    %% Level 0 - Infrastructure
+    subgraph "Infrastructure Services"
+        PG1[(PostgreSQL)]
+        PG2[(PostgreSQL ERP)]
+        REDIS[(Redis)]
+        RMQ[RabbitMQ]
+        WV[(Weaviate)]
+    end
+
+    %% Level 1 - Core Applications
+    subgraph "Core Services"
+        MCP[MCP Server]
+        N8N[n8n]
+    end
+
+    %% Level 2 - Supporting Services
+    subgraph "Supporting Services"
+        MEDIA[Media Resize]
+        CHAT[Chatwoot]
+    end
+
+    %% Level 3 - Management
+    subgraph "Management"
+        PROM[Prometheus]
+        GRAF[Grafana]
+        PORT[Portainer]
+        NGINX[Nginx]
+    end
+
+    %% Dependencies
+    MCP --> PG1
+    MCP --> REDIS
+    MCP --> RMQ
+    MCP --> WV
+
+    N8N --> PG2
+    N8N --> RMQ
+    N8N --> REDIS
+
+    MEDIA --> REDIS
+    CHAT --> PG1
+
+    GRAF --> PROM
+    PROM --> PG1
+
+    NGINX --> MCP
+    NGINX --> N8N
+    NGINX --> CHAT
+    PORT --> PG1
+    PORT --> NGINX
+
+    %% Styling
+    style PG1 fill:#e8f5e9
+    style PG2 fill:#e8f5e9
+    style REDIS fill:#fff3e0
+    style RMQ fill:#fff3e0
+    style WV fill:#e8f5e9
+            </div>
+          </div>
+
+          <!-- Data Flow Architecture -->
+          <h3>Data Flow Architecture</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Data Flow Between Services</span>
+
+            </div>
+            <div class="mermaid">
+sequenceDiagram
+    participant Client as Client Request
+    participant Nginx as Nginx Proxy
+    participant MCP as MCP Server
+    participant DB as PostgreSQL
+    participant Cache as Redis
+    participant Queue as RabbitMQ
+    participant Vector as Weaviate
+    participant N8n as n8n Workflow
+    participant ERP as ERP DB
+
+    Client->>Nginx: HTTPS Request
+    Nginx->>MCP: HTTP Forward
+
+    MCP->>Cache: Check Cache
+    alt Cache Hit
+        Cache-->>MCP: Cached Data
+    else Cache Miss
+        MCP->>DB: Query Database
+        DB-->>MCP: Query Results
+        MCP->>Cache: Store in Cache
+    end
+
+    MCP->>Queue: Publish Message
+    Queue->>N8n: Trigger Workflow
+    N8n->>ERP: ERP Operations
+    ERP-->>N8n: Response
+
+    MCP->>Vector: Vector Search
+    Vector-->>MCP: Search Results
+
+    MCP-->>Nginx: Response
+    Nginx-->>Client: HTTPS Response
+            </div>
+          </div>
+
+          <!-- High Availability Setup -->
+          <h3>High Availability Architecture</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>HA Configuration Pattern</span>
+
+            </div>
+            <div class="mermaid">
+graph TB
+    subgraph "Primary Node"
+        P_DOCKER[Docker Engine]
+        P_SERVICES[All Services]
+        P_VOLUMES[Primary Volumes]
+    end
+
+    subgraph "Secondary Node"
+        S_DOCKER[Docker Engine]
+        S_SERVICES[Critical Services]
+        S_VOLUMES[Replicated Volumes]
+    end
+
+    subgraph "Shared Infrastructure"
+        LB[Load Balancer]
+        SHARE[Shared Storage]
+        MON[Monitoring Cluster]
+    end
+
+    %% Replication
+    P_DOCKER -.->|Heartbeat| S_DOCKER
+    P_VOLUMES -.->|Replication| S_VOLUMES
+    P_VOLUMES -.->|Backup| SHARE
+
+    %% Failover
+    LB --> P_DOCKER
+    LB -.->|Failover| S_DOCKER
+    MON --> P_DOCKER
+    MON --> S_DOCKER
+
+    style P_DOCKER fill:#4caf50
+    style S_DOCKER fill:#ff9800
+    style LB fill:#2196f3
+            </div>
+          </div>
+        </div>
+
+        <!-- Services Tab -->
+        <div class="tab-pane" id="services">
+          <h2>Service Details</h2>
+          <p class="section-description">
+            The Docker System orchestrates 13+ services, each with specific roles in the platform.
+            Below is a comprehensive breakdown of all services, their configurations, and interconnections.
+          </p>
+
+          <!-- Services Overview -->
+          <div class="services-table-container">
+            <table class="services-table">
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Port</th>
+                  <th>Purpose</th>
+                  <th>Dependencies</th>
+                  <th>Health Check</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>MCP Server</strong></td>
+                  <td>3000</td>
+                  <td>Central API and WebSocket server</td>
+                  <td>PostgreSQL, Redis, RabbitMQ, Weaviate</td>
+                  <td>/health</td>
+                </tr>
+                <tr>
+                  <td><strong>n8n</strong></td>
+                  <td>5678</td>
+                  <td>Workflow automation platform</td>
+                  <td>PostgreSQL, Redis, RabbitMQ</td>
+                  <td>/healthz</td>
+                </tr>
+                <tr>
+                  <td><strong>RabbitMQ</strong></td>
+                  <td>5672/15672</td>
+                  <td>Message queue broker</td>
+                  <td>None</td>
+                  <td>Management UI</td>
+                </tr>
+                <tr>
+                  <td><strong>Redis</strong></td>
+                  <td>6379</td>
+                  <td>Cache and session store</td>
+                  <td>None</td>
+                  <td>PING command</td>
+                </tr>
+                <tr>
+                  <td><strong>PostgreSQL</strong></td>
+                  <td>5432</td>
+                  <td>Main application database</td>
+                  <td>None</td>
+                  <td>Connection test</td>
+                </tr>
+                <tr>
+                  <td><strong>ERP PostgreSQL</strong></td>
+                  <td>5433</td>
+                  <td>Dedicated ERP database</td>
+                  <td>None</td>
+                  <td>Connection test</td>
+                </tr>
+                <tr>
+                  <td><strong>Weaviate</strong></td>
+                  <td>8080</td>
+                  <td>Vector search database</td>
+                  <td>None</td>
+                  <td>/v1/.well-known/ready</td>
+                </tr>
+                <tr>
+                  <td><strong>Media Resize</strong></td>
+                  <td>5000</td>
+                  <td>Image/video processing</td>
+                  <td>Redis</td>
+                  <td>/ping</td>
+                </tr>
+                <tr>
+                  <td><strong>Chatwoot</strong></td>
+                  <td>3000</td>
+                  <td>Customer support platform</td>
+                  <td>PostgreSQL, Redis</td>
+                  <td>/health</td>
+                </tr>
+                <tr>
+                  <td><strong>Nginx</strong></td>
+                  <td>80/443</td>
+                  <td>Reverse proxy and load balancer</td>
+                  <td>All services</td>
+                  <td>Port check</td>
+                </tr>
+                <tr>
+                  <td><strong>Prometheus</strong></td>
+                  <td>9090</td>
+                  <td>Metrics collection</td>
+                  <td>None</td>
+                  <td>/-/ready</td>
+                </tr>
+                <tr>
+                  <td><strong>Grafana</strong></td>
+                  <td>3001</td>
+                  <td>Metrics visualization</td>
+                  <td>Prometheus</td>
+                  <td>/api/health</td>
+                </tr>
+                <tr>
+                  <td><strong>Portainer</strong></td>
+                  <td>9443</td>
+                  <td>Container management UI</td>
+                  <td>Docker socket</td>
+                  <td>Web UI</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Service Categories -->
+          <h3>Service Categories</h3>
+          <div class="service-categories">
+            <div class="category-section">
+              <h4>Core Application Services</h4>
+              <div class="service-cards">
+                <div class="service-card">
+                  <h5>MCP Server</h5>
+                  <p>Central API gateway handling authentication, routing, and core business logic</p>
+                  <div class="service-details">
+                    <span class="detail">🔑 JWT Auth</span>
+                    <span class="detail">🌐 WebSocket Support</span>
+                    <span class="detail">📊 Metrics Enabled</span>
+                  </div>
+                </div>
+                <div class="service-card">
+                  <h5>n8n</h5>
+                  <p>Visual workflow automation platform for integrating systems and processes</p>
+                  <div class="service-details">
+                    <span class="detail">🔄 200+ Integrations</span>
+                    <span class="detail">👥 Multi-user</span>
+                    <span class="detail">⏱️ Scheduling</span>
+                  </div>
+                </div>
+                <div class="service-card">
+                  <h5>Chatwoot</h5>
+                  <p>Customer support platform with live chat, email, and social integration</p>
+                  <div class="service-details">
+                    <span class="detail">💬 Live Chat</span>
+                    <span class="detail">📧 Email Support</span>
+                    <span class="detail">🤖 Bot Integration</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <h4>Data Management Services</h4>
+              <div class="service-cards">
+                <div class="service-card">
+                  <h5>PostgreSQL (Primary)</h5>
+                  <p>Main relational database for application data and user management</p>
+                  <div class="service-details">
+                    <span class="detail">📊 ACID Compliant</span>
+                    <span class="detail">🔄 Replication</span>
+                    <span class="detail">💾 Point-in-time Recovery</span>
+                  </div>
+                </div>
+                <div class="service-card">
+                  <h5>PostgreSQL (ERP)</h5>
+                  <p>Dedicated database instance for ERP operations and business data</p>
+                  <div class="service-details">
+                    <span class="detail">🏭 ERP Schema</span>
+                    <span class="detail">📈 Analytics</span>
+                    <span class="detail">🔒 Isolated</span>
+                  </div>
+                </div>
+                <div class="service-card">
+                  <h5>Weaviate</h5>
+                  <p>Vector database for semantic search and AI-powered recommendations</p>
+                  <div class="service-details">
+                    <span class="detail">🧠 Vector Search</span>
+                    <span class="detail">🔍 Semantic</span>
+                    <span class="detail">⚡ GraphQL API</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <h4>Infrastructure Services</h4>
+              <div class="service-cards">
+                <div class="service-card">
+                  <h5>RabbitMQ</h5>
+                  <p>Message broker for asynchronous communication and event streaming</p>
+                  <div class="service-details">
+                    <span class="detail">📨 Message Queuing</span>
+                    <span class="detail">🔄 Pub/Sub</span>
+                    <span class="detail">🎛️ Management UI</span>
+                  </div>
+                </div>
+                <div class="service-card">
+                  <h5>Redis</h5>
+                  <p>In-memory data store for caching, sessions, and real-time data</p>
+                  <div class="service-details">
+                    <span class="detail">⚡ Sub-millisecond</span>
+                    <span class="detail">💾 Persistence</span>
+                    <span class="detail">📦 Data Structures</span>
+                  </div>
+                </div>
+                <div class="service-card">
+                  <h5>Nginx</h5>
+                  <p>High-performance reverse proxy and load balancer</p>
+                  <div class="service-details">
+                    <span class="detail">⚖️ Load Balancing</span>
+                    <span class="detail">🔒 SSL Termination</span>
+                    <span class="detail">📊 Rate Limiting</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <h4>Monitoring & Management</h4>
+              <div class="service-cards">
+                <div class="service-card">
+                  <h5>Prometheus</h5>
+                  <p>Time-series database and monitoring system for metrics collection</p>
+                  <div class="service-details">
+                    <span class="detail">📈 Metrics</span>
+                    <span class="detail">🚨 Alerting</span>
+                    <span class="detail">🔍 Service Discovery</span>
+                  </div>
+                </div>
+                <div class="service-card">
+                  <h5>Grafana</h5>
+                  <p>Analytics and visualization platform for monitoring data</p>
+                  <div class="service-details">
+                    <span class="detail">📊 Dashboards</span>
+                    <span class="detail">📈 Visualization</span>
+                    <span class="detail">📧 Notifications</span>
+                  </div>
+                </div>
+                <div class="service-card">
+                  <h5>Portainer</h5>
+                  <p>Container management interface with UI for Docker operations</p>
+                  <div class="service-details">
+                    <span class="detail">🎛️ Web UI</span>
+                    <span class="detail">👥 User Management</span>
+                    <span class="detail">📊 Monitoring</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Interactions -->
+          <h3>Service Interaction Patterns</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Service Communication Patterns</span>
+
+            </div>
+            <div class="mermaid">
+graph LR
+    subgraph "Request Patterns"
+        SYNC[Synchronous API Calls]
+        ASYNC[Asynchronous Messages]
+        CACHE[Cache Lookups]
+        STREAM[Streaming Data]
+    end
+
+    subgraph "Services"
+        MCP[MCP Server]
+        API[External APIs]
+        DB[(Databases)]
+        MQ[RabbitMQ]
+        REDIS[Redis]
+    end
+
+    MCP -- REST/gRPC --> API
+    MCP -- Query --> DB
+    MCP -- Get/Set --> REDIS
+    MCP -- Publish/Subscribe --> MQ
+
+    style SYNC fill:#e1f5fe
+    style ASYNC fill:#fff3e0
+    style CACHE fill:#e8f5e9
+    style STREAM fill:#f3e5f5
+            </div>
+          </div>
+        </div>
+
+        <!-- Workflows Tab -->
+        <div class="tab-pane" id="workflows">
+          <h2>n8n Workflow Automation</h2>
+          <p class="section-description">
+            The Docker System includes n8n, a powerful workflow automation tool that enables visual creation
+            of complex business processes. Workflows integrate all platform services and external systems.
+          </p>
+
+          <!-- Workflow Architecture -->
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>n8n Integration Architecture</span>
+
+            </div>
+            <div class="mermaid">
+graph TB
+    subgraph "Triggers"
+        WEB[Webhook]
+        SCHED[Schedule]
+        MANUAL[Manual]
+        MQ_MSG[Queue Message]
+    end
+
+    subgraph "n8n Engine"
+        EDITOR[Workflow Editor]
+        EXEC[Execution Engine]
+        QUEUE[Job Queue]
+        WORKERS[Worker Nodes]
+    end
+
+    subgraph "Connections"
+        MCP[MCP API]
+        DB[(PostgreSQL)]
+        REDIS[(Redis)]
+        RABBITMQ[RabbitMQ]
+        EXT[External APIs]
+    end
+
+    subgraph "Actions"
+        NOTIFY[Notifications]
+        TRANSFORM[Data Transform]
+        STORE[Data Storage]
+        PROCESS[Business Logic]
+    end
+
+    %% Trigger flow
+    WEB --> EXEC
+    SCHED --> EXEC
+    MANUAL --> EXEC
+    MQ_MSG --> EXEC
+
+    %% Execution flow
+    EXEC --> QUEUE
+    QUEUE --> WORKERS
+    WORKERS --> MCP
+    WORKERS --> DB
+    WORKERS --> REDIS
+    WORKERS --> RABBITMQ
+    WORKERS --> EXT
+
+    %% Action results
+    MCP --> NOTIFY
+    DB --> TRANSFORM
+    EXT --> PROCESS
+    WORKERS --> STORE
+
+    style EXEC fill:#e1f5fe
+    style QUEUE fill:#fff3e0
+    style WORKERS fill:#e8f5e9
+            </div>
+          </div>
+
+          <!-- Common Workflows -->
+          <h3>Common Workflow Patterns</h3>
+          <div class="workflow-patterns">
+            <div class="pattern-card">
+              <h4>🔄 Data Synchronization</h4>
+              <p>Synchronize data between external systems and internal databases</p>
+              <div class="pattern-steps">
+                <div class="step">1. Trigger: Schedule or webhook</div>
+                <div class="step">2. Fetch: External API data</div>
+                <div class="step">3. Transform: Format for internal use</div>
+                <div class="step">4. Validate: Data quality checks</div>
+                <div class="step">5. Store: Update database</div>
+                <div class="step">6. Notify: Status update</div>
+              </div>
+            </div>
+
+            <div class="pattern-card">
+              <h4>📧 Notification Pipeline</h4>
+              <p>Process events and send notifications through multiple channels</p>
+              <div class="pattern-steps">
+                <div class="step">1. Trigger: System event</div>
+                <div class="step">2. Route: Determine recipients</div>
+                <div class="step">3. Personalize: Customize message</div>
+                <div class="step">4. Send: Email/SMS/Push</div>
+                <div class="step">5. Track: Delivery status</div>
+                <div class="step">6. Retry: Failed deliveries</div>
+              </div>
+            </div>
+
+            <div class="pattern-card">
+              <h4>🔍 AI-Powered Processing</h4>
+              <p>Leverage AI services for content analysis and decision making</p>
+              <div class="pattern-steps">
+                <div class="step">1. Input: User content</div>
+                <div class="step">2. Analyze: AI service call</div>
+                <div class="step">3. Extract: Key information</div>
+                <div class="step">4. Classify: Category assignment</div>
+                <div class="step">5. Store: Structured data</div>
+                <div class="step">6. Index: Vector search</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example Workflows -->
+          <h3>Example Workflow Implementations</h3>
+          <div class="workflow-examples">
+            <div class="example-workflow">
+              <h4>Customer Onboarding</h4>
+              <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TD
+    START([Customer Signup])
+    VALIDATE{Validate Data}
+    CREATE_ACC[Create Account]
+    SEND_WELCOME[Send Welcome Email]
+    SETUP_PROFILE[Create Profile]
+    NOTIFY_SALES[Notify Sales Team]
+    SCHEDULE[Schedule Onboarding Call]
+    ERROR[Handle Error]
+    SUCCESS[Onboarding Complete]
+
+    START --> VALIDATE
+    VALIDATE -->|Valid| CREATE_ACC
+    VALIDATE -->|Invalid| ERROR
+    CREATE_ACC --> SEND_WELCOME
+    SEND_WELCOME --> SETUP_PROFILE
+    SETUP_PROFILE --> NOTIFY_SALES
+    NOTIFY_SALES --> SCHEDULE
+    SCHEDULE --> SUCCESS
+
+    ERROR --> START
+                </div>
+              </div>
+            </div>
+
+            <div class="example-workflow">
+              <h4>Inventory Management</h4>
+              <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TD
+    TRIGGER([Low Stock Alert])
+    CHECK_INVENTORY{Check Multiple Sources}
+    CALCULATE[Calculate Reorder Quantity]
+    FIND_SUPPLIERS[Find Suppliers]
+    COMPARE_PRICES[Compare Prices]
+    GENERATE_PO[Generate Purchase Order]
+    APPROVE{Manager Approval}
+    SEND_PO[Send Order]
+    TRACK[Track Delivery]
+    UPDATE_STOCK[Update Inventory]
+
+    TRIGGER --> CHECK_INVENTORY
+    CHECK_INVENTORY --> CALCULATE
+    CALCULATE --> FIND_SUPPLIERS
+    FIND_SUPPLIERS --> COMPARE_PRICES
+    COMPARE_PRICES --> GENERATE_PO
+    GENERATE_PO --> APPROVE
+    APPROVE -->|Approved| SEND_PO
+    APPROVE -->|Rejected| CALCULATE
+    SEND_PO --> TRACK
+    TRACK --> UPDATE_STOCK
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workflow Development Guide -->
+          <h3>Workflow Development Guide</h3>
+          <div class="dev-guide">
+            <div class="guide-section">
+              <h4>Best Practices</h4>
+              <ul>
+                <li><strong>Modular Design:</strong> Break complex workflows into reusable sub-workflows</li>
+                <li><strong>Error Handling:</strong> Always include error paths and retry mechanisms</li>
+                <li><strong>Logging:</strong> Add comprehensive logging for debugging and monitoring</li>
+                <li><strong>Testing:</strong> Test workflows with sample data before production deployment</li>
+                <li><strong>Documentation:</strong> Document workflow purpose, inputs, and outputs</li>
+              </ul>
+            </div>
+
+            <div class="guide-section">
+              <h4>Performance Optimization</h4>
+              <ul>
+                <li>Batch API requests when possible</li>
+                <li>Use parallel execution for independent tasks</li>
+                <li>Implement caching for frequently accessed data</li>
+                <li>Set appropriate timeouts for external calls</li>
+                <li>Monitor execution times and optimize bottlenecks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Operations Tab -->
+        <div class="tab-pane" id="operations">
+          <h2>Deployment & Operations</h2>
+          <p class="section-description">
+            Comprehensive guide for deploying, managing, and maintaining the Docker System in production
+            environments. Includes monitoring, scaling, backup strategies, and troubleshooting.
+          </p>
+
+          <!-- Deployment Architecture -->
+          <h3>Production Deployment Architecture</h3>
+          <div class="mermaid-container">
+            <div class="code-header">
+              <span>Production Deployment Pattern</span>
+
+            </div>
+            <div class="mermaid">
+flowchart TB
+    subgraph "Load Balancer Layer"
+        LB[External Load Balancer]
+        SSL[SSL/TLS Termination]
+    end
+
+    subgraph "Application Servers"
+        subgraph "Node 1"
+            D1[Docker Engine]
+            C1[Container Set]
+        end
+        subgraph "Node 2"
+            D2[Docker Engine]
+            C2[Container Set]
+        end
+        subgraph "Node 3"
+            D3[Docker Engine]
+            C3[Container Set]
+        end
+    end
+
+    subgraph "Database Cluster"
+        DB_PRIMARY[(Primary DB)]
+        DB_REPLICA1[(Replica 1)]
+        DB_REPLICA2[(Replica 2)]
+    end
+
+    subgraph "Storage"
+        NFS[NFS Shared Storage]
+        BACKUP[Backup Storage]
+    end
+
+    subgraph "Monitoring"
+        PROM_CLUSTER[Prometheus Cluster]
+        GRAFANA_CLUSTER[Grafana Cluster]
+        ALERTMANAGER[AlertManager]
+    end
+
+    %% Connections
+    LB --> SSL
+    SSL --> D1
+    SSL --> D2
+    SSL --> D3
+
+    DB_PRIMARY --> DB_REPLICA1
+    DB_PRIMARY --> DB_REPLICA2
+
+    C1 --> DB_PRIMARY
+    C2 --> DB_PRIMARY
+    C3 --> DB_PRIMARY
+
+    C1 -.-> NFS
+    C2 -.-> NFS
+    C3 -.-> NFS
+
+    DB_PRIMARY --> BACKUP
+    NFS --> BACKUP
+
+    PROM_CLUSTER --> D1
+    PROM_CLUSTER --> D2
+    PROM_CLUSTER --> D3
+    GRAFANA_CLUSTER --> PROM_CLUSTER
+    PROM_CLUSTER --> ALERTMANAGER
+
+    style LB fill:#2196f3
+    style DB_PRIMARY fill:#4caf50
+    style PROM_CLUSTER fill:#ff9800
+            </div>
+          </div>
+
+          <!-- Installation Guide -->
+          <h3>Installation & Setup</h3>
+          <div class="installation-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>System Requirements</h3>
+                <div class="requirements-grid">
+                  <div class="requirement-card">
+                    <h4>Minimum Requirements</h4>
+                    <ul>
+                      <li>CPU: 8 cores</li>
+                      <li>RAM: 16GB</li>
+                      <li>Storage: 100GB SSD</li>
+                      <li>Network: 1Gbps</li>
+                    </ul>
+                  </div>
+                  <div class="requirement-card">
+                    <h4>Recommended</h4>
+                    <ul>
+                      <li>CPU: 16+ cores</li>
+                      <li>RAM: 32GB+</li>
+                      <li>Storage: 500GB NVMe</li>
+                      <li>Network: 10Gbps</li>
+                    </ul>
+                  </div>
+                  <div class="requirement-card">
+                    <h4>Software</h4>
+                    <ul>
+                      <li>Docker Engine 20.10+</li>
+                      <li>Docker Compose 2.0+</li>
+                      <li>Linux Kernel 5.4+</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>Quick Deployment</h3>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Deploy with Single Command</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                      <i class="fas fa-copy"></i> Copy
+                    </button>
+                  </div>
+                  <pre><code class="language-bash"># Clone the repository
+git clone https://github.com/DSI/docker-system.git
+cd docker-system
+
+# Copy environment template
+cp .env.example .env
+
+# Edit environment variables
+nano .env
+
+# Deploy all services
+docker-compose up -d</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Post-Deployment Configuration</h3>
+                <div class="config-list">
+                  <div class="config-item">
+                    <h4>Database Initialization</h4>
+                    <div class="code-block">
+                      <pre><code class="language-bash"># Run database migrations
+docker-compose exec mcp-server npm run migrate
+
+# Create admin user
+docker-compose exec mcp-server npm run seed</code></pre>
+                    </div>
+                  </div>
+                  <div class="config-item">
+                    <h4>SSL Certificate Setup</h4>
+                    <div class="code-block">
+                      <pre><code class="language-bash"># Generate self-signed cert (dev)
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout nginx/ssl/private.key -out nginx/ssl/certificate.crt
+
+# Or use Let's Encrypt (prod)
+certbot certonly --webroot -w /var/www/html -d yourdomain.com</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monitoring & Alerting -->
+          <h3>Monitoring & Alerting</h3>
+          <div class="monitoring-grid">
+            <div class="monitor-card">
+              <h4>📊 Prometheus Metrics</h4>
+              <ul>
+                <li>Container CPU/Memory usage</li>
+                <li>Service response times</li>
+                <li>Database connection pools</li>
+                <li>Queue depths</li>
+                <li>Error rates</li>
+              </ul>
+            </div>
+            <div class="monitor-card">
+              <h4>📈 Grafana Dashboards</h4>
+              <ul>
+                <li>System Overview</li>
+                <li>Service Health</li>
+                <li>Database Performance</li>
+                <li>Custom Business Metrics</li>
+                <li>Alert Rules</li>
+              </ul>
+            </div>
+            <div class="monitor-card">
+              <h4>🚨 Alerting Rules</h4>
+              <ul>
+                <li>Service downtime</li>
+                <li>High resource usage</li>
+                <li>Database connection errors</li>
+                <li>Queue backup</li>
+                <li>Disk space low</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Backup Strategy -->
+          <h3>Backup & Disaster Recovery</h3>
+          <div class="backup-strategy">
+            <div class="mermaid-container">
+              <div class="code-header">
+                <span>Backup Workflow</span>
+
+              </div>
+              <div class="mermaid">
+sequenceDiagram
+    participant Scheduler as Cron Job
+    participant Backup as Backup Script
+    participant DB as PostgreSQL
+    participant Storage as S3/NFS
+    participant Monitor as Monitoring
+
+    Scheduler->>Backup: Trigger backup
+    Backup->>DB: pg_dump
+    DB-->>Backup: Database dump
+    Backup->>Storage: Upload backup
+    Storage-->>Backup: Confirmation
+
+    Backup->>Monitor: Backup status
+    alt Backup failed
+        Monitor->>Alert: Send alert
+    else Backup success
+        Monitor->>Cleanup: Remove old backups
+    end
+              </div>
+            </div>
+
+            <div class="backup-procedures">
+              <h4>Automated Backup Procedures</h4>
+              <div class="procedure-grid">
+                <div class="procedure-card">
+                  <h5>Daily Backups</h5>
+                  <ul>
+                    <li>Full database dump</li>
+                    <li>Configuration files</li>
+                    <li>Application data</li>
+                    <li>Retention: 30 days</li>
+                  </ul>
+                </div>
+                <div class="procedure-card">
+                  <h5>Weekly Backups</h5>
+                  <ul>
+                    <li>All Docker volumes</li>
+                    <li>Complete system state</li>
+                    <li>Offsite replication</li>
+                    <li>Retention: 12 weeks</li>
+                  </ul>
+                </div>
+                <div class="procedure-card">
+                  <h5>Monthly Backups</h5>
+                  <ul>
+                    <li>Long-term archive</li>
+                    <li>Compliance requirements</li>
+                    <li>Cold storage</li>
+                    <li>Retention: 7 years</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scaling Guide -->
+          <h3>Scaling Strategies</h3>
+          <div class="scaling-sections">
+            <div class="scaling-strategy">
+              <h4>Vertical Scaling</h4>
+              <p>Increase resources per node for improved performance</p>
+              <div class="code-block">
+                <pre><code class="language-yaml"># Update docker-compose.yml for resource limits
+services:
+  mcp-server:
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G</code></pre>
+              </div>
+            </div>
+
+            <div class="scaling-strategy">
+              <h4>Horizontal Scaling</h4>
+              <p>Add more nodes to distribute load</p>
+              <div class="code-block">
+                <pre><code class="language-bash"># Use Docker Swarm for multi-node deployment
+docker swarm init
+docker stack deploy -c docker-compose.yml dsi-platform</code></pre>
+              </div>
+            </div>
+
+            <div class="scaling-strategy">
+              <h4>Database Scaling</h4>
+              <p>Implement read replicas and sharding</p>
+              <div class="code-block">
+                <pre><code class="language-bash"># Configure read replica in PostgreSQL
+primary_conninfo = 'host=primary-db port=5432 user=replicator'
+standby_mode = 'on'</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Troubleshooting -->
+          <h3>Troubleshooting Guide</h3>
+          <div class="troubleshooting-grid">
+            <div class="trouble-card">
+              <h4>🔍 Common Issues</h4>
+              <div class="issue-list">
+                <div class="issue">
+                  <h5>Service won't start</h5>
+                  <div class="solution">
+                    <code>docker-compose logs [service-name]</code>
+                    <p>Check for port conflicts, missing volumes, or configuration errors</p>
+                  </div>
+                </div>
+                <div class="issue">
+                  <h5>High memory usage</h5>
+                  <div class="solution">
+                    <code>docker stats</code>
+                    <p>Monitor container resource usage and adjust limits</p>
+                  </div>
+                </div>
+                <div class="issue">
+                  <h5>Database connection refused</h5>
+                  <div class="solution">
+                    <code>docker-compose exec postgres pg_isready</code>
+                    <p>Verify database is healthy and network connectivity</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="trouble-card">
+              <h4>🚨 Emergency Procedures</h4>
+              <div class="emergency-procedures">
+                <div class="procedure">
+                  <h5>Complete System Restart</h5>
+                  <code>docker-compose down && docker-compose up -d</code>
+                </div>
+                <div class="procedure">
+                  <h5>Force Recreate All Containers</h5>
+                  <code>docker-compose up -d --force-recreate</code>
+                </div>
+                <div class="procedure">
+                  <h5>Emergency Database Restore</h5>
+                  <code>docker-compose exec postgres psql -U postgres -d dbname < backup.sql</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Quick Reference -->
+    <section class="quick-reference">
+      <h2>Quick Reference</h2>
+      <div class="reference-grid">
+        <div class="reference-card">
+          <h3><i class="fas fa-terminal"></i> Essential Commands</h3>
+          <table class="reference-table">
+            <tr>
+              <td>Start Services</td>
+              <td><code>docker-compose up -d</code></td>
+            </tr>
+            <tr>
+              <td>View Logs</td>
+              <td><code>docker-compose logs -f</code></td>
+            </tr>
+            <tr>
+              <td>Stop Services</td>
+              <td><code>docker-compose down</code></td>
+            </tr>
+            <tr>
+              <td>Update Images</td>
+              <td><code>docker-compose pull && docker-compose up -d</code></td>
+            </tr>
+            <tr>
+              <td>Health Check</td>
+              <td><code>docker-compose ps</code></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="reference-card">
+          <h3><i class="fas fa-link"></i> Service URLs</h3>
+          <table class="reference-table">
+            <tr>
+              <td>MCP API</td>
+              <td><code>http://localhost:3000</code></td>
+            </tr>
+            <tr>
+              <td>n8n</td>
+              <td><code>http://localhost:5678</code></td>
+            </tr>
+            <tr>
+              <td>Grafana</td>
+              <td><code>http://localhost:3001</code></td>
+            </tr>
+            <tr>
+              <td>Prometheus</td>
+              <td><code>http://localhost:9090</code></td>
+            </tr>
+            <tr>
+              <td>Portainer</td>
+              <td><code>https://localhost:9443</code></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="reference-card">
+          <h3><i class="fas fa-folder"></i> Important Paths</h3>
+          <table class="reference-table">
+            <tr>
+              <td>Config</td>
+              <td><code>./docker-compose.yml</code></td>
+            </tr>
+            <tr>
+              <td>Environment</td>
+              <td><code>./.env</code></td>
+            </tr>
+            <tr>
+              <td>Nginx Config</td>
+              <td><code>./nginx/nginx.conf</code></td>
+            </tr>
+            <tr>
+              <td>SSL Certs</td>
+              <td><code>./nginx/ssl/</code></td>
+            </tr>
+            <tr>
+              <td>Backups</td>
+              <td><code>./backups/</code></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Documentation</h4>
+        <ul>
+          <li><a href="index.html">Platform Overview</a></li>
+          <li><a href="ai-ecosystem.html">AI Ecosystem</a></li>
+          <li><a href="dsi-web.html">DSI WEB N</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>MCP Servers</h4>
+        <ul>
+          <li><a href="frappe-mcp.html">Frappe MCP</a></li>
+          <li><a href="idempiere-mcp.html">iDempiere MCP</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://docs.docker.com" target="_blank">Docker Docs</a></li>
+          <li><a href="https://n8n.io" target="_blank">n8n Docs</a></li>
+          <li><a href="https://prometheus.io" target="_blank">Prometheus</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="Docker Hub"><i class="fab fa-docker"></i></a>
+          <a href="#" aria-label="Slack"><i class="fab fa-slack"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 DSI Platform. Containerized with ❤️</p>
+      <p><i class="fas fa-ship"></i> Powered by Docker</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <script src="script.js?v=20251217.14"></script>
+</body>
+</html>

@@ -2,27 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DSI Documentation – Media Repository Architecture Guide</title>
+    <title>DSI Developer Hub – Complete Platform Architecture Guide</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive documentation for DSI's integrated platform: Docker-system, AI-Ecosystem, Frappe MCP, iDempiere MCP, and DSI WEB N">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="style.css?v=20251217.14">
+    <link rel="stylesheet" href="components.css?v=20251217.14">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-<header class="header">
+    <header class="header">
         <div class="header__content">
             <div class="header__logo-container">
                 <img src="logo.webp" alt="DSI Logo" class="header__logo">
-                <button class="header__sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">Menu</button>
+                <button class="header__sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
             <div class="header__text">
-                <h1 class="header__title">DSI IT Documentation</h1>
-                <p class="header__subtitle">Media Repository Architecture &amp; Workflow Guide</p>
+                <h1 class="header__title">DSI Developer Hub</h1>
+                <p class="header__subtitle">Integrated Platform Architecture & Development Guide</p>
             </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">☀️</button>
+            <div class="header__actions">
+                <button class="header__search-btn" id="searchToggle" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Bar (Hidden by default) -->
+        <div class="search-container" id="searchContainer">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search documentation...">
+            <div class="search-results" id="searchResults"></div>
         </div>
     </header>
 
@@ -32,2074 +51,618 @@
                 <span class="nav-collapse-icon">◀</span>
             </button>
         </div>
-        <ul class="nav-links">
-            <li class="nav-section-header"><a href="#executive-summary">Executive Summary</a></li>
-            
-            <li class="nav-section-header"><a href="#system-architecture">System Architecture</a></li>
-            
-            <li class="nav-section-header"><a href="#data-management">Data Management</a></li>
-
-            
-            <li class="nav-section-header"><a href="#plm-stages">PLM Stages</a></li>
-
-            
-            <li class="nav-section-header"><a href="#mcp-configuration">MCP & Intellegence</a></li>
-            
-            <li class="nav-section-header"><a href="#deployment-operations">Deployment & Operations</a></li>
-
-        </ul>
+        <div class="nav-tree" id="navTree"></div>
     </nav>
 
     <main class="main-content" id="main-content">
+        <nav class="page-tabs" id="pageTabs" aria-label="Page sections"></nav>
 
-        <section id="executive-summary" class="content-section">
-            <h2 class="content-section__title">Executive Summary</h2>
-            
-            <h3 class="content-section__subtitle">Project Status</h3>
-            <div class="highlight-box">
-                <strong>Current Phase:</strong> Infrastructure Implementation & Testing<br>
-                <strong>Completion Status:</strong> 40% of core workflows validated and operational<br>
-                <strong>Next Milestone:</strong> Complete Weaviate Integration and End-to-End Testing
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2 class="hero-title">Welcome to the DSI Developer Hub</h2>
+                <p class="hero-subtitle">
+                    Your comprehensive guide to the integrated DSI platform -
+                    combining containerized infrastructure, AI capabilities,
+                    ERP connectors, and modern web technologies.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Integrated Systems</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">22+</span>
+                        <span class="stat-label">MCP Tools</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">13</span>
+                        <span class="stat-label">Docker Services</span>
+                    </div>
+                </div>
             </div>
-
-            <h3 class="content-section__subtitle">Architecture Highlights</h3>
-            <p>The DSI Media Repository Integration Architecture implements a comprehensive AI-powered digital asset management ecosystem. The system unifies media processing, approval workflows, and distribution channels using event-driven architecture with RabbitMQ, semantic search with Weaviate, and intelligent automation through MCP agents. This unified system consolidates all media processing, approval workflows, and distribution channels into a single, intelligent platform.</p>
         </section>
 
-        <section id="system-architecture" class="content-section">
-            <h2 class="content-section__title">System Architecture & Core Components</h2>
-            
-            <h3 class="content-section__subtitle">System Overview</h3>
-            <p>The DSI Media Repository Integration Architecture is a comprehensive, AI-powered digital asset management ecosystem that automates the complete lifecycle of luxury product media from initial design concepts through production-ready marketing assets. This unified system consolidates all media processing, approval workflows, and distribution channels into a single, intelligent platform.</p>
+        <!-- Platform Overview -->
+        <section id="platform-overview" class="content-section">
+            <h2 class="content-section__title">Platform Overview</h2>
 
-            <h3 class="content-section__subtitle">Core Architecture Overview</h3>
-            <div class="mermaid-container2">
+            <div class="platform-grid">
+                <div class="platform-card" data-system="docker-system">
+                    <div class="platform-icon">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <h3>Docker System</h3>
+                    <p>Container orchestration platform managing 13+ services including databases, message queues, and workflow automation.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">RabbitMQ</span>
+                    </div>
+                    <a href="docker-system.html" class="platform-link">Learn More →</a>
+                </div>
+
+                <div class="platform-card" data-system="ai-ecosystem">
+                    <div class="platform-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Ecosystem</h3>
+                    <p>Multi-user AI platform with GPU acceleration, featuring Open WebUI and NVIDIA NIM for LLM inference.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Open WebUI</span>
+                        <span class="tag">NVIDIA NIM</span>
+                        <span class="tag">RAG</span>
+                    </div>
+                    <a href="ai-ecosystem.html" class="platform-link">Learn More →</a>
+                </div>
+
+                <div class="platform-card" data-system="frappe-mcp">
+                    <div class="platform-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Frappe MCP</h3>
+                    <p>Universal Model Context Protocol server for ERPNext with 22 powerful tools for comprehensive ERP data access.</p>
+                    <div class="platform-tags">
+                        <span class="tag">ERPNext</span>
+                        <span class="tag">MCP</span>
+                        <span class="tag">22 Tools</span>
+                    </div>
+                    <a href="frappe-mcp.html" class="platform-link">Learn More →</a>
+                </div>
+
+                <div class="platform-card" data-system="idempiere-mcp">
+                    <div class="platform-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>iDempiere MCP</h3>
+                    <p>Production-ready MCP server for querying iDempiere database with enterprise security and 6 built-in tools.</p>
+                    <div class="platform-tags">
+                        <span class="tag">iDempiere</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">PostgreSQL</span>
+                    </div>
+                    <a href="idempiere-mcp.html" class="platform-link">Learn More →</a>
+                </div>
+
+                <div class="platform-card" data-system="dsi-web">
+                    <div class="platform-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>DSI WEB N</h3>
+                    <p>Modern e-commerce website built with Next.js 16, featuring luxury fragrance and jewelry products.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Tailwind CSS</span>
+                    </div>
+                    <a href="dsi-web.html" class="platform-link">Learn More →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ecosystem Architecture -->
+        <section id="ecosystem-architecture" class="content-section">
+            <h2 class="content-section__title">Ecosystem Architecture</h2>
+            <p class="section-description">
+                The DSI platform is built on a microservices architecture with clear separation of concerns,
+                enabling scalability, maintainability, and independent deployment of components.
+            </p>
+
+            <div class="mermaid-container">
                 <div class="mermaid">
 graph TB
-    subgraph DL["Data Layer"]
-        GD["🗂️ Google Drive<br>Primary Source"]
-        QNAP["💾 QNAP NAS<br>Local Backup"]
-        S3["☁️ AWS S3/GCS<br>Cold Storage"]
+    subgraph "AI & Intelligence Layer"
+        AI[AI-Ecosystem<br/>Open WebUI + NVIDIA NIM]
+        AI_DB[(Vector DB<br/>Weaviate)]
+        AI_GPU[GPU Acceleration<br/>RTX 3070 Ti]
     end
 
-    subgraph PL["Processing Layer"]
-        N8N["⚙️ n8n<br>Workflow Engine"]
-        OAI["🤖 OpenAI<br>AI Analysis"]
-        PS["📡 Google Pub/Sub<br>Event Transport"]
-        SA["🎯 MCP Agents<br>K8s Orchestration"]
+    subgraph "Orchestration Layer"
+        DOCKER[Docker-system<br/>Container Orchestration]
+        N8N[n8n<br/>Workflow Automation]
+        RMQ[RabbitMQ<br/>Message Broker]
+        REDIS[Redis<br/>Cache Layer]
     end
 
-    subgraph ST["Storage"]
-        WV["🔍 Weaviate<br>Vector Search"]
-        PG["🗄️ PostgreSQL<br>Metadata & Logs"]
-    end
-    
-    subgraph DT["Distribution"]
-        CDN["🌐 Cloudinary<br>Media Optimization"]
-        VJ["📹 Vidjet<br>Video Hosting"]
-        GC["💬 Google Chat<br>Notifications"]
-    end
-    
-    subgraph BS["Business Systems"]
-        ERP["📊 ERPNext<br>Product Management"]
-        WC["🛒 WooCommerce<br>eCommerce"]
-        WF["🎨 Webflow<br>Marketing"]
+    subgraph "Data Layer"
+        PG_MAIN[(PostgreSQL<br/>Primary DB)]
+        PG_ERP[(PostgreSQL<br/>ERP Databases)]
+        FILES[File Storage<br/>QNAP NAS]
     end
 
-    GD --> PS
-    PS --> N8N
-    N8N --> SA
-    N8N --> OAI
-    OAI --> WV
-    N8N --> PG
-    N8N --> CDN
-    WV --> ERP
-    CDN --> WC
-    CDN --> WF
+    subgraph "Integration Layer"
+        FRAPPE_MCP[Frappe MCP<br/>22 Tools]
+        IDEMPIERE_MCP[iDempiere MCP<br/>6 Tools]
+        API_GATEWAY[API Gateway<br/>Port 3000]
+    end
+
+    subgraph "Application Layer"
+        WEB[DSI WEB N<br/>E-commerce Site]
+        CMS[Decap CMS<br/>Content Management]
+        CHAT[Chatwoot<br/>Customer Service]
+    end
+
+    %% Connections
+    AI --> AI_DB
+    AI --> AI_GPU
+
+    DOCKER --> N8N
+    DOCKER --> RMQ
+    DOCKER --> REDIS
+    DOCKER --> PG_MAIN
+
+    N8N --> FRAPPE_MCP
+    N8N --> IDEMPIERE_MCP
+
+    FRAPPE_MCP --> PG_ERP
+    IDEMPIERE_MCP --> PG_ERP
+
+    WEB --> API_GATEWAY
+    CMS --> API_GATEWAY
+    API_GATEWAY --> PG_MAIN
+
+    AI --> RMQ
+    FILES --> AI
+
+    style AI fill:#e1f5fe
+    style DOCKER fill:#f3e5f5
+    style FRAPPE_MCP fill:#e8f5e9
+    style IDEMPIERE_MCP fill:#fff3e0
+    style WEB fill:#fce4ec
                 </div>
             </div>
 
-            <h3 class="content-section__subtitle" id="core-components">Technology Stack Matrix</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Category</th>
-                        <th scope="col">Technology</th>
-                        <th scope="col">Primary Function</th>
-                        <th scope="col">Integration Points</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Category">Container Orchestration</td><td data-label="Technology">Kubernetes</td><td data-label="Primary Function">Service orchestration & scaling</td><td data-label="Integration Points">MCP agents, auto-scaling</td></tr>
-                    <tr><td data-label="Category">Source Control</td><td data-label="Technology">Google Drive</td><td data-label="Primary Function">Primary media repository</td><td data-label="Integration Points">n8n triggers, AI processing</td></tr>
-                    <tr><td data-label="Category">Message Broker</td><td data-label="Technology">RabbitMQ</td><td data-label="Primary Function">Event-driven workflow orchestration</td><td data-label="Integration Points">Queue management, workflow triggers</td></tr>
-                    <tr><td data-label="Category">Orchestration</td><td data-label="Technology">n8n</td><td data-label="Primary Function">Workflow automation engine</td><td data-label="Integration Points">All systems integration hub</td></tr>
-                    <tr><td data-label="Category">Vector Database</td><td data-label="Technology">Weaviate</td><td data-label="Primary Function">AI-powered semantic search</td><td data-label="Integration Points">OpenAI embeddings, metadata</td></tr>
-                    <tr><td data-label="Category">Relational DB</td><td data-label="Technology">PostgreSQL</td><td data-label="Primary Function">Structured metadata storage</td><td data-label="Integration Points">Audit logs, processing status</td></tr>
-                    <tr><td data-label="Category">AI Processing</td><td data-label="Technology">OpenAI</td><td data-label="Primary Function">Content analysis & tagging</td><td data-label="Integration Points">Weaviate vectors, metadata</td></tr>
-                    <tr><td data-label="Category">CDN & Optimization</td><td data-label="Technology">Cloudinary</td><td data-label="Primary Function">Media transformation & delivery</td><td data-label="Integration Points">URL generation, format optimization</td></tr>
-                    <tr><td data-label="Category">ERP</td><td data-label="Technology">ERPNext</td><td data-label="Primary Function">Product & inventory management</td><td data-label="Integration Points">SKU, pricing, BOM tracking</td></tr>
-                    <tr><td data-label="Category">eCommerce</td><td data-label="Technology">WooCommerce</td><td data-label="Primary Function">Online product sales</td><td data-label="Integration Points">Product listings, media sync</td></tr>
-                    <tr><td data-label="Category">Marketing</td><td data-label="Technology">Webflow</td><td data-label="Primary Function">Marketing websites</td><td data-label="Integration Points">Content management, CDN</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle">Automation Capabilities Matrix</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Function Area</th>
-                        <th scope="col">Tool / Agent</th>
-                        <th scope="col">Automation Level</th>
-                        <th scope="col">Key Use Case</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Function Area">Media Ingestion</td><td data-label="Tool / Agent">n8n + RabbitMQ</td><td data-label="Automation Level">Fully Automated</td><td data-label="Key Use Case">Google Drive to processing pipeline</td></tr>
-                    <tr><td data-label="Function Area">AI Tagging</td><td data-label="Tool / Agent">OpenAI + Weaviate</td><td data-label="Automation Level">Fully Automated</td><td data-label="Key Use Case">Automatic metadata generation</td></tr>
-                    <tr><td data-label="Function Area">Approval Management</td><td data-label="Tool / Agent">Multi-channel Approval</td><td data-label="Automation Level">Semi-Automated</td><td data-label="Key Use Case">Chat, Sheets, Forms integration</td></tr>
-                    <tr><td data-label="Function Area">CDN Optimization</td><td data-label="Tool / Agent">Cloudinary</td><td data-label="Automation Level">Fully Automated</td><td data-label="Key Use Case">Format conversion & delivery</td></tr>
-                    <tr><td data-label="Function Area">ERP Integration</td><td data-label="Tool / Agent">n8n Scheduled Sync</td><td data-label="Automation Level">Fully Automated</td><td data-label="Key Use Case">Product data synchronization</td></tr>
-                    <tr><td data-label="Function Area">Document Processing</td><td data-label="Tool / Agent">Dual OCR Engine</td><td data-label="Automation Level">Fully Automated</td><td data-label="Key Use Case">Text extraction & indexing</td></tr>
-                    <tr><td data-label="Function Area">Quality Control</td><td data-label="Tool / Agent">AI Quality Assessment</td><td data-label="Automation Level">Fully Automated</td><td data-label="Key Use Case">Automated quality scoring</td></tr>
-                    <tr><td data-label="Function Area">Publication</td><td data-label="Tool / Agent">Multi-platform Sync</td><td data-label="Automation Level">Fully Automated</td><td data-label="Key Use Case">Cross-platform distribution</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle" id="event-processing">Event-Driven Processing Pipeline</h3>
-            <p>The system implements a sophisticated event-driven architecture that ensures reliable processing and scalability. The processing pipeline follows these key stages:</p>
-            
-            <ol>
-                <li><strong>File Upload → Google Drive:</strong> Users upload files to structured Google Drive folders following the established hierarchy</li>
-                <li><strong>Drive API → Webhook Notification:</strong> Google Drive API triggers webhook notifications upon file changes, deletions, or modifications</li>
-                <li><strong>Cloud Function → Pub/Sub Message:</strong> Webhook notifications are processed by Cloud Functions and published to Google Pub/Sub topics</li>
-                <li><strong>RabbitMQ → Queue Routing:</strong> Messages are consumed from Pub/Sub and published to appropriate RabbitMQ exchanges based on content type and processing requirements</li>
-                <li><strong>MCP Agent Trigger → Workflow Execution:</strong> MCP agents and n8n workflows are triggered by RabbitMQ messages, enabling parallel processing</li>
-                <li><strong>AI Processing → Metadata Extraction:</strong> OpenAI Vision API and other AI services analyze content for automatic metadata generation and quality assessment</li>
-                <li><strong>Database Storage → PostgreSQL + Weaviate:</strong> Structured metadata is stored in PostgreSQL while semantic vectors are indexed in Weaviate</li>
-                <li><strong>CDN Optimization → Cloudinary:</strong> Media assets are optimized, transformed, and distributed through Cloudinary's global CDN</li>
-                <li><strong>System Sync → Business Platforms:</strong> Approved assets are synchronized with ERPNext, WooCommerce, and Webflow for business operations</li>
-            </ol>
-
-            <h3 class="content-section__subtitle">Event Flow Architecture</h3>
-            <div class="mermaid-container1">
+            <h3>Platform Request Flow</h3>
+            <div class="mermaid-container">
                 <div class="mermaid">
 sequenceDiagram
-    participant GD as Google Drive
-    participant CF as Cloud Function
-    participant PS as Pub/Sub
-    participant RMQ as RabbitMQ
-    participant MCP as MCP Agent
-    participant N8N as n8n Workflow
-    participant PG as PostgreSQL
-    participant WV as Weaviate
+    participant User as User
+    participant WebUI as Open WebUI
+    participant NIM as NVIDIA NIM
+    participant MCP as MCP Servers
+    participant Data as Data Stores
 
-    GD->>CF: File Upload Event
-    CF->>PS: Publish Message
-    PS->>RMQ: Route to Exchange
-    RMQ->>MCP: Queue Message
-    MCP->>N8N: Trigger Workflow
-    N8N->>PG: Store Metadata
-    N8N->>WV: Create Vector
-    WV-->>N8N: Confirm Storage
-    PG-->>N8N: Confirm Storage
-    N8N-->>MCP: Processing Complete
+    User->>WebUI: Ask question
+    WebUI->>NIM: /v1 chat completion
+    alt Needs tools
+        NIM-->>WebUI: Tool call intent
+        WebUI->>MCP: tools/call
+        MCP->>Data: Query (ERP/PLM/DB)
+        Data-->>MCP: Results
+        MCP-->>WebUI: Tool results
+        WebUI->>NIM: Continue completion with results
+    end
+    NIM-->>WebUI: Final answer
+    WebUI-->>User: Response
                 </div>
             </div>
 
-            <h3 class="content-section__subtitle" id="queue-management">RabbitMQ Exchange and Queue Architecture</h3>
-            <p>The message broker system implements intelligent routing based on file types, processing status, and PLM stages. This design ensures appropriate quality control while maintaining processing efficiency for different asset types.</p>
-
+            <h3>MCP Surface Map</h3>
             <div class="mermaid-container">
                 <div class="mermaid">
 flowchart LR
-  subgraph "RabbitMQ Exchanges & Queues"
-    E1[(asset.events<br/>EXCHANGE)]
-    E2[(plm.transitions<br/>EXCHANGE)]
-    E3[(system.notifications<br/>EXCHANGE)]
-    
-    Q1[(draft.processor)]
-    Q2[(gateA.reviewer)]
-    Q3[(prototype.manager)]
-    Q4[(ppap.quality)]
-    Q5[(production.publisher)]
-    Q6[(notifications.googlechat)]
-    
-    E1 -->|asset.*.*.created| Q1
-    E1 -->|asset.*.*.approved| Q2
-    E1 -->|asset.solidworks.*| Q3
-    E2 -->|plm.stage.*| Q2
-    E2 -->|plm.stage.*| Q3
-    E2 -->|plm.stage.*| Q4
-    E3 -->|#| Q6
-  end
-  
-  subgraph "MCP Agents"
-    A1[MediaProcessor]
-    A2[PLMOrchestrator]
-    A3[QualityGuardian]
-    A4[IntegrationManager]
-  end
-  
-  Q1 --> A1
-  Q2 --> A2
-  Q3 --> A2
-  Q4 --> A3
-  Q5 --> A4
-  Q6 --> A4
+    Host["MCP Hosts\n(Open WebUI / n8n / agents)"]
+    Host --> PLM["PLM MCP\n(Docker-system)"]
+    Host --> FRP["Frappe MCP\n(ERPNext)"]
+    Host --> IDM["iDempiere MCP\n(FastAPI)"]
+    PLM --> PG["PostgreSQL"]
+    PLM --> WV["Weaviate"]
                 </div>
             </div>
-
-            <h3 class="content-section__subtitle">Queue Management Configuration</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Queue Name</th>
-                        <th scope="col">Routing Key Pattern</th>
-                        <th scope="col">Processing Type</th>
-                        <th scope="col">Approval Required</th>
-                        <th scope="col">Priority Level</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Queue Name">draft.processor</td><td data-label="Routing Key Pattern">asset.*.*.created</td><td data-label="Processing Type">Initial registration & validation</td><td data-label="Approval Required">No</td><td data-label="Priority Level">Normal (5)</td></tr>
-                    <tr><td data-label="Queue Name">gateA.reviewer</td><td data-label="Routing Key Pattern">asset.*.*.approved</td><td data-label="Processing Type">Gate-A approval processing</td><td data-label="Approval Required">Yes</td><td data-label="Priority Level">High (8)</td></tr>
-                    <tr><td data-label="Queue Name">prototype.manager</td><td data-label="Routing Key Pattern">asset.solidworks.*</td><td data-label="Processing Type">SOLIDWORKS metadata extraction</td><td data-label="Approval Required">Yes</td><td data-label="Priority Level">Normal (5)</td></tr>
-                    <tr><td data-label="Queue Name">ppap.quality</td><td data-label="Routing Key Pattern">asset.*.*.stage.ppap</td><td data-label="Processing Type">Quality assurance validation</td><td data-label="Approval Required">Yes</td><td data-label="Priority Level">High (8)</td></tr>
-                    <tr><td data-label="Queue Name">production.publisher</td><td data-label="Routing Key Pattern">asset.*.*.stage.production</td><td data-label="Processing Type">Final publication & distribution</td><td data-label="Approval Required">No</td><td data-label="Priority Level">Critical (10)</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle">Scalability and Performance</h3>
-            <p>The architecture is designed for horizontal scaling with the following key features:</p>
-            <ul>
-                <li><strong>RabbitMQ Clustering:</strong> High availability message processing with automatic failover and load distribution</li>
-                <li><strong>PostgreSQL Read Replicas:</strong> Query performance optimization with streaming replication and connection pooling</li>
-                <li><strong>Weaviate Distributed Deployment:</strong> Vector search scalability with Product Quantization (PQ) for handling millions of embeddings</li>
-                <li><strong>Kubernetes Auto-scaling:</strong> Horizontal Pod Autoscaler (HPA) based on CPU usage and RabbitMQ queue depth</li>
-                <li><strong>Cloudinary Global CDN:</strong> Automatic scaling based on demand with intelligent caching and optimization</li>
-            </ul>
         </section>
 
-        <section id="data-management" class="content-section">
-            <h2 class="content-section__title">Data Management & Storage</h2>
-            
-            <h3 class="content-section__subtitle" id="database-design">PostgreSQL Schema Overview</h3>
-            <p>The PostgreSQL 17 database serves as the authoritative source for all metadata, audit trails, and structured data. The schema is designed with JSONB support for flexible metadata storage while maintaining relational integrity for critical business data.</p>
+        <!-- Technology Stack -->
+        <section id="technology-stack" class="content-section">
+            <h2 class="content-section__title">Technology Stack</h2>
 
-            <div class="mermaid-container1">
-                <div class="mermaid">
-erDiagram
-    media_assets {
-        SERIAL id PK
-        VARCHAR drive_file_id UK
-        UUID weaviate_object_id
-        VARCHAR mcp_id
-        VARCHAR product_name
-        VARCHAR product_line
-        VARCHAR product_range
-        VARCHAR sku
-        VARCHAR file_name
-        BIGINT file_size
-        VARCHAR mime_type
-        VARCHAR folder_path UK
-        VARCHAR parent_folder_id FK
-        TEXT folder_name
-        TIMESTAMP last_synced_at
-        BOOLEAN is_monitored
-        JSONB sync_configuration
-        TEXT cloudinary_url
-        TEXT drive_webview_url
-        VARCHAR processing_status
-        VARCHAR plm_stage
-        VARCHAR designer_id
-        VARCHAR revision
-        VARCHAR linked_bom
-        VARCHAR linked_eco
-        TEXT ai_description
-        TEXT ai_tags
-        DECIMAL quality_score
-        TIMESTAMP created_at
-        TIMESTAMP updated_at
-        TIMESTAMP published_at
-        TIMESTAMP archived_at
-    }
+            <div class="tech-stack-container">
+                <div class="tech-category">
+                    <h3>Infrastructure & Orchestration</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-docker"></i>
+                            <span>Docker & Docker Compose</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-linux"></i>
+                            <span>Linux</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-server"></i>
+                            <span>Nginx</span>
+                        </div>
+                    </div>
+                </div>
 
-    folder_structure {
-        SERIAL id PK
-        VARCHAR folder_id UK
-        VARCHAR folder_name
-        VARCHAR parent_id FK
-        VARCHAR folder_path UK
-        INTEGER level_depth
-        VARCHAR[] path_array
-        BOOLEAN is_monitored
-        TIMESTAMP last_synced_at
-        JSONB sync_configuration
-        TIMESTAMP created_at
-        TIMESTAMP updated_at
-    }
+                <div class="tech-category">
+                    <h3>Databases & Storage</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-database"></i>
+                            <span>PostgreSQL 17</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-search"></i>
+                            <span>Weaviate Vector DB</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-memory"></i>
+                            <span>Redis Cache</span>
+                        </div>
+                    </div>
+                </div>
 
-    processing_logs {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR workflow_id
-        VARCHAR step_name
-        VARCHAR status
-        TEXT message
-        JSONB metadata
-        TIMESTAMP created_at
-    }
+                <div class="tech-category">
+                    <h3>AI & Machine Learning</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-brain"></i>
+                            <span>NVIDIA NIM</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-robot"></i>
+                            <span>OpenAI APIs</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-language"></i>
+                            <span>Mistral 7B</span>
+                        </div>
+                    </div>
+                </div>
 
-    approval_records {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR approver_email
-        VARCHAR approval_status
-        TEXT comments
-        TIMESTAMP approved_at
-        TIMESTAMP created_at
-    }
+                <div class="tech-category">
+                    <h3>Programming Languages</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript/Node.js</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-code"></i>
+                            <span>TypeScript</span>
+                        </div>
+                    </div>
+                </div>
 
-    sync_status {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR target_system
-        VARCHAR sync_status
-        TIMESTAMP last_sync_at
-        TEXT error_message
-        INTEGER retry_count
-    }
-
-    plm_transitions {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR from_stage
-        VARCHAR to_stage
-        VARCHAR triggered_by
-        VARCHAR transition_type
-        VARCHAR approval_by
-        TEXT comments
-        VARCHAR rabbitmq_message_id
-        TIMESTAMP created_at
-    }
-
-    event_history {
-        SERIAL id PK
-        VARCHAR event_id UK
-        VARCHAR exchange
-        VARCHAR routing_key
-        JSONB payload
-        BOOLEAN processed
-        TIMESTAMP processed_at
-        TEXT error_message
-        INTEGER retry_count
-        TIMESTAMP created_at
-    }
-
-    solidworks_metadata {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR part_number
-        VARCHAR material
-        DECIMAL weight
-        JSONB dimensions
-        JSONB custom_properties
-        JSONB bom_data
-        TIMESTAMP extracted_at
-    }
-
-    document_index {
-        SERIAL id PK
-        INTEGER media_asset_id FK
-        VARCHAR mcp_id
-        VARCHAR doc_type
-        VARCHAR language
-        TEXT full_text
-        TEXT[] key_terms
-        JSONB extracted_data
-        DECIMAL ocr_confidence
-        TEXT drive_url
-        TEXT cloudinary_url
-        TIMESTAMP created_at
-    }
-
-    approval_matrix {
-        SERIAL id PK
-        VARCHAR plm_stage
-        VARCHAR approver_role
-        VARCHAR approver_email
-        INTEGER approval_order
-        BOOLEAN is_mandatory
-        TIMESTAMP created_at
-    }
-
-    media_assets ||--o{ processing_logs : "logs"
-    media_assets ||--o{ approval_records : "approvals"
-    media_assets ||--o{ sync_status : "sync"
-    media_assets ||--o{ plm_transitions : "transitions"
-    media_assets ||--o{ solidworks_metadata : "solidworks_data"
-    media_assets ||--o{ document_index : "document_data"
-    folder_structure ||--o{ media_assets : "contains"
-    folder_structure ||--o{ folder_structure : "parent_child"
+                <div class="tech-category">
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-react"></i>
+                            <span>Next.js 16</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-wind"></i>
+                            <span>Tailwind CSS 4</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-bolt"></i>
+                            <span>FastAPI</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <h3 class="content-section__subtitle">Database Schema Implementation</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Database Schema SQL</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code>-- Media Assets Table
-
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "pg_trgm";
-CREATE EXTENSION IF NOT EXISTS unaccent;  
-
-
-CREATE TABLE media_assets (
-    id                   BIGSERIAL PRIMARY KEY,
-    drive_file_id        VARCHAR(255) UNIQUE NOT NULL,
-    weaviate_object_id   UUID DEFAULT uuid_generate_v4(),
-    mcp_id               VARCHAR(255) UNIQUE NOT NULL,
-  
-    file_name            VARCHAR(500) NOT NULL,
-    mime_type            VARCHAR(100),
-    file_size            BIGINT,
-  
-    metadata             JSONB NOT NULL DEFAULT '{
-        "product": {},
-        "file": {},
-        "folder": {},
-        "plm": {},
-        "ai": {},
-        "custom": {}
-    }'::jsonb,
-  
-    sync_configuration   JSONB NOT NULL DEFAULT '{
-        "drive":     {"enabled": true,  "interval": 3600},
-        "weaviate":  {"enabled": false},
-        "cloudinary":{"enabled": false}
-    }'::jsonb,
-  
-    processing_status    VARCHAR(50)   NOT NULL DEFAULT 'pending'
-        CHECK (processing_status IN ('pending','processing','completed','failed','archived')),
-  
-    created_at           TIMESTAMPTZ   NOT NULL DEFAULT NOW(),
-    updated_at           TIMESTAMPTZ   NOT NULL DEFAULT NOW(),
-    last_synced_at       TIMESTAMPTZ,
-    published_at         TIMESTAMPTZ,
-    archived_at          TIMESTAMPTZ
-);
-
--- 2. Processing logs
-CREATE TABLE processing_logs (
-    id                   BIGSERIAL PRIMARY KEY,
-    media_asset_id       BIGINT      NOT NULL REFERENCES media_assets(id) ON DELETE CASCADE,
-    workflow_id          VARCHAR(255),
-    step_name            VARCHAR(255),
-    status               VARCHAR(50) NOT NULL
-        CHECK (status IN ('started','in_progress','completed','failed','skipped')),
-    message              TEXT,
-    metadata             JSONB       NOT NULL DEFAULT '{}',
-    context              JSONB       NOT NULL DEFAULT '{}',
-    created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
--- 3. Approval records
-CREATE TABLE approval_records (
-    id                   BIGSERIAL PRIMARY KEY,
-    media_asset_id       BIGINT      NOT NULL REFERENCES media_assets(id) ON DELETE CASCADE,
-    approver_email       VARCHAR(255) NOT NULL,
-    approval_status      VARCHAR(50)  NOT NULL DEFAULT 'pending'
-        CHECK (approval_status IN ('pending','approved','rejected','revoked')),
-    approval_metadata    JSONB        NOT NULL DEFAULT '{
-        "comments":    null,
-        "conditions":  [],
-        "attachments": [],
-        "delegation":  null
-    }'::jsonb,
-    approved_at          TIMESTAMPTZ,
-    created_at           TIMESTAMPTZ  NOT NULL DEFAULT NOW()
-);
-
--- 4. Sync status per external system
-CREATE TABLE sync_status (
-    id                   BIGSERIAL PRIMARY KEY,
-    media_asset_id       BIGINT       NOT NULL REFERENCES media_assets(id) ON DELETE CASCADE,
-    target_system        VARCHAR(100) NOT NULL,
-    sync_status          VARCHAR(50)  NOT NULL DEFAULT 'pending'
-        CHECK (sync_status IN ('pending','syncing','success','failed','retry')),
-    sync_metadata        JSONB        NOT NULL DEFAULT '{
-        "last_error":        null,
-        "retry_count":       0,
-        "sync_details":      {},
-        "performance_metrics":{}
-    }'::jsonb,
-    last_sync_at         TIMESTAMPTZ,
-    created_at           TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
-    UNIQUE (media_asset_id, target_system)
-);
-
--- 5. PLM transitions
-CREATE TABLE plm_transitions (
-    id                   BIGSERIAL PRIMARY KEY,
-    media_asset_id       BIGINT       NOT NULL REFERENCES media_assets(id) ON DELETE CASCADE,
-    transition_data      JSONB        NOT NULL DEFAULT '{
-        "from_stage":    null,
-        "to_stage":      null,
-        "triggered_by":  null,
-        "transition_type":null,
-        "approval_by":   null,
-        "comments":      null,
-        "conditions":    [],
-        "metadata":      {}
-    }'::jsonb,
-    rabbitmq_message_id  VARCHAR(255),
-    created_at           TIMESTAMPTZ  NOT NULL DEFAULT NOW()
-);
-
--- 6. Event history
-CREATE TABLE event_history (
-    id                   BIGSERIAL PRIMARY KEY,
-    event_id             VARCHAR(255) UNIQUE NOT NULL,
-    event_type           VARCHAR(100),
-    exchange             VARCHAR(255),
-    routing_key          VARCHAR(255),
-    payload              JSONB       NOT NULL,
-    processing_metadata  JSONB       NOT NULL DEFAULT '{
-        "processed":         false,
-        "processed_at":      null,
-        "error_message":     null,
-        "retry_count":       0,
-        "processing_time_ms":null
-    }'::jsonb,
-    created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
--- 7. SolidWorks metadata
-CREATE TABLE solidworks_metadata (
-    id                   BIGSERIAL PRIMARY KEY,
-    media_asset_id       BIGINT       NOT NULL UNIQUE REFERENCES media_assets(id) ON DELETE CASCADE,
-    sw_metadata          JSONB        NOT NULL DEFAULT '{
-        "part_number":      null,
-        "material":         null,
-        "weight":           null,
-        "dimensions":       {},
-        "custom_properties":{},
-        "bom_data":         [],
-        "features":         [],
-        "configurations":   [],
-        "references":       []
-    }'::jsonb,
-    extracted_at         TIMESTAMPTZ  NOT NULL DEFAULT NOW()
-);
-
--- 8. Document index
-CREATE TABLE document_index (
-    id                   BIGSERIAL PRIMARY KEY,
-    media_asset_id       BIGINT       NOT NULL REFERENCES media_assets(id) ON DELETE CASCADE,
-    mcp_id               VARCHAR(255),
-    doc_type             VARCHAR(100),
-    language             VARCHAR(10)  NOT NULL DEFAULT 'en',
-    full_text            TEXT,
-    search_vector        TSVECTOR,
-    document_metadata    JSONB        NOT NULL DEFAULT '{
-        "key_terms":        [],
-        "entities":         {},
-        "extracted_data":   {},
-        "ocr_data":         {},
-        "urls":             {},
-        "confidence_scores":{}
-    }'::jsonb,
-    created_at           TIMESTAMPTZ  NOT NULL DEFAULT NOW()
-);
-
--- ================================
---  Indexes
--- ================================
-
--- GIN indexes on JSONB for fast containment/path queries
-CREATE INDEX idx_media_assets_metadata_gin     ON media_assets USING gin (metadata);
-CREATE INDEX idx_processing_logs_metadata     ON processing_logs USING gin (metadata);
-CREATE INDEX idx_approval_records_metadata    ON approval_records USING gin (approval_metadata);
-CREATE INDEX idx_sync_status_metadata         ON sync_status USING gin (sync_metadata);
-CREATE INDEX idx_plm_transitions_data         ON plm_transitions USING gin (transition_data);
-CREATE INDEX idx_event_history_payload        ON event_history USING gin (payload);
-CREATE INDEX idx_sw_metadata                  ON solidworks_metadata USING gin (sw_metadata);
-CREATE INDEX idx_document_metadata            ON document_index USING gin (document_metadata);
-
--- Path-based and expression indexes on metadata
-CREATE INDEX idx_media_assets_product_line     ON media_assets USING gin ((metadata->'product'));
-CREATE INDEX idx_media_assets_plm_stage       ON media_assets ((metadata->'plm'->>'stage'));
-CREATE INDEX idx_media_assets_ai_tags         ON media_assets USING gin ((metadata->'ai'->'tags'));
-CREATE INDEX idx_media_assets_iptc_keywords   ON media_assets USING gin ((metadata->'file'->'iptc_keywords'));
-CREATE INDEX idx_media_assets_sku             ON media_assets ((metadata->'product'->>'sku'));
-CREATE INDEX idx_media_assets_name            ON media_assets ((metadata->'product'->>'name'));
-
--- Full-text search on document contents
-CREATE INDEX idx_document_fulltext            ON document_index USING gin (search_vector);
-
--- B-tree indexes for common lookups
-CREATE INDEX idx_media_assets_drive_file_id    ON media_assets(drive_file_id);
-CREATE INDEX idx_media_assets_mcp_id           ON media_assets(mcp_id);
-CREATE INDEX idx_media_assets_status           ON media_assets(processing_status);
-CREATE INDEX idx_media_assets_created_at_desc  ON media_assets(created_at DESC);
-CREATE INDEX idx_media_assets_updated_at_desc  ON media_assets(updated_at DESC);
-
--- pg_trgm index for fuzzy matching on tags
-CREATE INDEX idx_media_assets_ai_tags_trgm
-  ON media_assets USING gin (
-    array_to_string((metadata->'ai'->'tags')::text[], ' ')
-    gin_trgm_ops
-);
-
--- ================================
---  Triggers & Functions
--- ================================
-
--- 1. Auto-update updated_at on media_assets
-CREATE OR REPLACE FUNCTION fn_update_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at := NOW();
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_media_assets_updated_at
-    BEFORE UPDATE ON media_assets
-    FOR EACH ROW
-    EXECUTE FUNCTION fn_update_updated_at();
-
--- 2. Populate search_vector on document_index
-CREATE OR REPLACE FUNCTION fn_update_search_vector()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.search_vector :=
-        setweight(to_tsvector('english', COALESCE(NEW.full_text, '')), 'A')
-      || setweight(to_tsvector('english', COALESCE(NEW.document_metadata->>'key_terms', '')), 'B');
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_document_search_vector
-    BEFORE INSERT OR UPDATE ON document_index
-    FOR EACH ROW
-    EXECUTE FUNCTION fn_update_search_vector();
-
--- ================================
---  Helper Functions
--- ================================
-
--- Fetch assets by SKU
-CREATE OR REPLACE FUNCTION get_media_by_sku(sku TEXT)
-RETURNS SETOF media_assets AS $$
-BEGIN
-    RETURN QUERY
-    SELECT * FROM media_assets
-     WHERE metadata->'product'->>'sku' = sku;
-END;
-$$ LANGUAGE plpgsql;
-
--- Fetch assets by PLM stage
-CREATE OR REPLACE FUNCTION get_media_by_plm_stage(stage TEXT)
-RETURNS SETOF media_assets AS $$
-BEGIN
-    RETURN QUERY
-    SELECT * FROM media_assets
-     WHERE metadata->'plm'->>'stage' = stage;
-END;
-$$ LANGUAGE plpgsql;
-
--- Discover file path using parentID (folder_structure table)
-CREATE OR REPLACE FUNCTION get_folder_path_by_parent_id(parent_folder_id TEXT)
-RETURNS TABLE(
-    folder_name VARCHAR,
-    parent_id VARCHAR,
-    folder_path VARCHAR,
-    level_depth INTEGER,
-    current_folder VARCHAR,
-    path_array VARCHAR[]
-) AS $$
-BEGIN
-    RETURN QUERY
-    SELECT 
-        fs.folder_name,
-        fs.parent_id,
-        fs.folder_path,
-        fs.level_depth,
-        fs.folder_name AS current_folder,
-        ARRAY[fs.folder_name]::VARCHAR[] AS path_array
-    FROM folder_structure fs
-    WHERE fs.folder_id = parent_folder_id;
-END;
-$$ LANGUAGE plpgsql;
-
--- ================================
---  Sample Queries
--- ================================
-/*
--- 1. Assets in a given product line
-SELECT * 
-FROM media_assets
-WHERE metadata->'product'->>'line' = 'Premium Series';
-
--- 2. Assets tagged via AI
-SELECT *
-FROM media_assets
-WHERE metadata->'ai'->'tags' @> '["3d-model","cad"]';
-
--- 3. Production-ready assets with high AI score
-SELECT *
-FROM media_assets
-WHERE metadata->'plm'->>'stage' = 'production'
-  AND (metadata->'ai'->>'quality_score')::numeric > 0.8
-  AND metadata->'file'->'iptc_keywords' @> '["approved"]';
-
--- 4. Update a nested JSONB field
-UPDATE media_assets
-SET metadata = jsonb_set(
-      metadata,
-      '{product,revision}',
-      '"v2.1"'
-    )
-WHERE mcp_id = 'MCP123';
-
--- 5. Append a new AI tag
-UPDATE media_assets
-SET metadata = jsonb_set(
-      metadata,
-      '{ai,tags}',
-      (metadata->'ai'->'tags')::jsonb || '["new-tag"]'
-    )
-WHERE id = 1;
-
--- 6. Check for custom field existence
-SELECT *
-FROM media_assets
-WHERE metadata->'custom' ? 'client_specific_field';
-
--- 7. Performance check using GIN index
-EXPLAIN ANALYZE
-SELECT *
-FROM media_assets
-WHERE metadata @> '{"product":{"line":"Premium Series"}}';
-
--- 8. Discover file path using parentID (folder_structure example)
-SELECT 
-  folder_name,
-  parent_id,
-  folder_path,
-  level_depth,
-  folder_name AS current_folder,
-  ARRAY[folder_name]::character varying(255)[] AS path_array
-FROM folder_structure
-WHERE folder_id = '{{ $json.parentFolderId }}';
-
--- Example output:
--- [
---   {
---     "folder_name": "00-Early-Design",
---     "parent_id": "1oTz0i2ebqUHflEOOq774F3UGX-r1Uo3R",
---     "folder_path": "DSI-Product-Repository/Palace-of-Fragrances/Classic-Range/Amber-Kroud/00-Early-Design",
---     "level_depth": 4,
---     "current_folder": "00-Early-Design",
---     "path_array": ["00-Early-Design"]
---   }
--- ]
-*/
--- ----------------------------------------------------------------
--- Helper to turn a JSONB array of strings into a real TEXT[]
--- ----------------------------------------------------------------
--- 1) (Optional) Drop any old, bad index
--- 1) Helper: JSONB → TEXT[]
-CREATE OR REPLACE FUNCTION jsonb_to_text_array(js JSONB)
-  RETURNS TEXT[]
-  LANGUAGE SQL
-  IMMUTABLE
-AS $$
-  SELECT ARRAY(
-    SELECT jsonb_array_elements_text(js)
-  );
-$$;
--- 1) Drop any old version
-DROP INDEX IF EXISTS idx_media_assets_ai_tags_trgm;
-
--- 2) GIN+pg_trgm on the JSONB “ai” tags, cast straight to text
-CREATE INDEX idx_media_assets_ai_tags_trgm
-  ON media_assets
-  USING gin (
-    ((metadata->'ai'->'tags')::text)
-      gin_trgm_ops
-  );
-
-
-</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">JSONB Metadata Storage & Indexing</h3>
-            <p>The system leverages PostgreSQL's JSONB capabilities for flexible metadata storage that supports multiple standards including Dublin Core, IPTC Core, and Schema.org. GIN indexes provide fast querying capabilities for complex metadata searches.</p>
-
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>JSONB Metadata Implementation</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code>-- JSONB metadata storage with GIN indexing
-CREATE TABLE media_assets (
-    id BIGSERIAL PRIMARY KEY,
-    mcp_id VARCHAR NOT NULL UNIQUE,
-    metadata JSONB NOT NULL DEFAULT '{}',
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- GIN indexes for fast JSONB queries
-CREATE INDEX idx_metadata_gin ON media_assets 
-    USING gin (metadata jsonb_path_ops);
-
-CREATE INDEX idx_metadata_iptc ON media_assets 
-    USING gin ((metadata->'iptc_keywords'));
-
--- Query examples
--- Find assets with specific IPTC keywords
-SELECT * FROM media_assets 
-WHERE metadata @> '{"iptc_keywords": ["fragrance", "luxury"]}';
-
--- Find assets by Dublin Core subject
-SELECT * FROM media_assets 
-WHERE metadata->'dublin_core'->>'dc:subject' = 'Perfume Collection';</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle" id="semantic-modeling">Semantic Data Modeling</h3>
-            <p>The semantic data modeling strategy transforms the event-driven architecture into a fully governed knowledge graph, backed by PostgreSQL + JSONB for authoritative records and Weaviate for AI-ready vector search. This approach ensures data interoperability and standards compliance while enabling advanced AI capabilities.</p>
-
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Principle</th>
-                        <th scope="col">Implementation</th>
-                        <th scope="col">Benefits</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Principle">Open Vocabularies First</td><td data-label="Implementation">Dublin Core, IPTC, Schema.org</td><td data-label="Benefits">Interoperability, standards compliance</td></tr>
-                    <tr><td data-label="Principle">Dual Store Pattern</td><td data-label="Implementation">PostgreSQL (authoritative) + Weaviate (vectors)</td><td data-label="Benefits">Transactional integrity + fast search</td></tr>
-                    <tr><td data-label="Principle">Event-Driven IDs</td><td data-label="Implementation">MCP IDs as primary keys</td><td data-label="Benefits">Consistent referencing across systems</td></tr>
-                    <tr><td data-label="Principle">API-Centric</td><td data-label="Implementation">ERPNext REST resource mapping</td><td data-label="Benefits">Seamless business system integration</td></tr>
-                    <tr><td data-label="Principle">Scalable Vectors</td><td data-label="Implementation">Weaviate HA + multi-tenancy + PQ</td><td data-label="Benefits">Handles millions of embeddings efficiently</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle">Metadata Standards Mapping</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Domain</th>
-                        <th scope="col">Standard</th>
-                        <th scope="col">Field Examples</th>
-                        <th scope="col">Implementation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Domain">Image Assets</td><td data-label="Standard">IPTC Photo Metadata 2024.1</td><td data-label="Field Examples">Creator, Rights, Location</td><td data-label="Implementation">JSONB metadata field</td></tr>
-                    <tr><td data-label="Domain">Documents</td><td data-label="Standard">Dublin Core v2</td><td data-label="Field Examples">dc:title, dc:subject, dc:format</td><td data-label="Implementation">Weaviate properties</td></tr>
-                    <tr><td data-label="Domain">Products</td><td data-label="Standard">Schema.org/Product</td><td data-label="Field Examples">brand, color, gtin, offers.price</td><td data-label="Implementation">ERPNext fields</td></tr>
-                    <tr><td data-label="Domain">Certificates</td><td data-label="Standard">Custom DSI + Dublin Core</td><td data-label="Field Examples">dsi:certificateType, dsi:stage</td><td data-label="Implementation">PostgreSQL + PDF</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle" id="repository-structure">Google Drive Repository Structure</h3>
-            <p>The Google Drive repository follows a structured hierarchy that aligns with Product Lifecycle Management (PLM) stages and business organization. This structure ensures consistent organization, automated processing, and clear audit trails throughout the product development lifecycle.</p>
-
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Repository Structure</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code>/DSI-Product-Repository/
-├── Palace-of-Fragrances/
-│   ├── Classic-Range/
-│   │   └── [Product-Name]/
-│   │       ├── 00-Early-Design/         # Concept Stage
-│   │       │   ├── Research/
-│   │       │   ├── Sketches/
-│   │       │   └── Concept-CAD/
-│   │       ├── 01-Design-Review/        # Gate-A Stage
-│   │       │   ├── Feasibility/
-│   │       │   └── Approvals/
-│   │       ├── 02-Prototype/            # Prototype Stage
-│   │       │   ├── SOLIDWORKS/
-│   │       │   ├── 3D-Prints/
-│   │       │   └── BOM/
-│   │       ├── 03-Quality/              # PPAP Stage
-│   │       │   ├── Testing/
-│   │       │   └── Certifications/
-│   │       ├── 04-Production/           # Production Stage
-│   │       │   ├── Final-Media/
-│   │       │   └── Marketing-Assets/
-│   │       └── Metadata/
-│   │           ├── MCP-Registry/        # JSON-LD profiles
-│   │           └── Event-History/       # Audit logs
-│   └── Precious-Range/
-├── Palace-of-Precision/
-└── Palace-of-Style/</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">File Naming Convention & MCP ID Structure</h3>
-            <p>The system implements a standardized naming convention that enables automatic metadata extraction and processing routing. Each file receives a Model Context Protocol (MCP) ID that provides unique identification and context tracking throughout the processing pipeline.</p>
-            
-            <div class="highlight-box">
-                <strong>File Naming Pattern:</strong> <code>{ProductName}_{SKU}_{descriptor}_{timestamp}.{extension}</code><br>
-                <strong>MCP ID Pattern:</strong> <code>[ProductName]_[Version]_[Status]_[Timestamp]</code>
-            </div>
-
-            <p><strong>Examples:</strong></p>
-            <ul>
-                <li>File: <code>Opulent-Shaik-Amethyst_OSA-GE-100_hero_20250703.jpg</code></li>
-                <li>MCP ID: <code>Opulent-Shaik-Amethyst_v1.2_approved_20250719143022</code></li>
-                <li>File: <code>AstroTime-MK1_ATM-IG-001_3d_render.blend</code></li>
-                <li>MCP ID: <code>AstroTime-MK1_v2.0_prototype_20250720091500</code></li>
-            </ul>
-
-            <h3 class="content-section__subtitle">Processed Media Structure</h3>
-            <div class="mermaid-container1">
-                <div class="mermaid">
-%%{init: {
-  "theme": "base",
-  "themeCSS": ".edgePath marker path { fill: #808080 !important; stroke: #536277 !important; }\n.marker { fill: #808080 !important; }\n.text-item-align { fill: #808080 !important; }\n.subgraph .title { fill: #808080 !important; }"
-}}%%
-graph TB
-    PM["📁 Processed-Media"]
-    
-    subgraph ERP["ERP-Integrated"]
-        SKU_Prod["[SKU]_[ProductName]_[Version]"]
-    end
-    
-    subgraph Web["Web-Optimized"]
-        Cloudinary["Cloudinary-URLs"]
-        CDN["CDN-Manifests"]
-    end
-    
-    subgraph Social["Social-Media-Posts"]
-        Platform_Prod["[Platform]_[ProductName]_[Date]"]
-    end
-    
-    PM --> ERP
-    PM --> Web
-    PM --> Social
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Performance Optimization</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Optimization Type</th>
-                        <th scope="col">Implementation</th>
-                        <th scope="col">Performance Impact</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Optimization Type">JSONB Storage</td><td data-label="Implementation">Flexible metadata without schema changes</td><td data-label="Performance Impact">Sub-millisecond queries with GIN indexes</td></tr>
-                    <tr><td data-label="Optimization Type">Read Replicas</td><td data-label="Implementation">PostgreSQL streaming replication</td><td data-label="Performance Impact">5x read throughput increase</td></tr>
-                    <tr><td data-label="Optimization Type">Connection Pooling</td><td data-label="Implementation">PgBouncer with 100 connections</td><td data-label="Performance Impact">Reduced connection overhead</td></tr>
-                    <tr><td data-label="Optimization Type">Partitioning</td><td data-label="Implementation">Monthly partitions for event_history</td><td data-label="Performance Impact">10x query speed for recent data</td></tr>
-                </tbody>
-            </table>
         </section>
 
-        <section id="workflow-processing" class="content-section">
-            <h2 class="content-section__title">Workflow Processing & PLM</h2>
-            
-            <h3 class="content-section__subtitle" id="plm-stages">Product Lifecycle Management Flow</h3>
-            <div class="mermaid-container5">
-                <div class="mermaid">
-stateDiagram-v2
-    [*] --> Draft: File Upload
-    Draft --> GateA: Concept Approval
-    GateA --> Prototype: Design Approved
-    Prototype --> PPAP: Prototype Complete
-    PPAP --> Production: Quality Approved
-    Production --> [*]: Published
-    
-    Draft --> [*]: Rejected
-    GateA --> [*]: Rejected
-    Prototype --> GateA: Revision Required
-    PPAP --> Prototype: Quality Failed
+        <!-- Getting Started -->
+        <section id="getting-started" class="content-section">
+            <h2 class="content-section__title">Getting Started</h2>
+
+            <div class="getting-started-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="prerequisites">Prerequisites</button>
+                    <button class="tab-btn" data-tab="installation">Installation</button>
+                    <button class="tab-btn" data-tab="configuration">Configuration</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="prerequisites">
+                        <h3>System Requirements</h3>
+                        <div class="requirements-grid">
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-microchip"></i> Hardware</h4>
+                                <ul>
+                                    <li>RAM: 16GB minimum, 32GB recommended</li>
+                                    <li>Storage: 100GB SSD free space</li>
+                                    <li>GPU: RTX 3070 Ti or better (for AI)</li>
+                                    <li>CPU: 8+ cores recommended</li>
+                                </ul>
+                            </div>
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-software"></i> Software</h4>
+                                <ul>
+                                    <li>Docker 20.10+ & Docker Compose</li>
+                                    <li>Node.js 18+ & npm</li>
+                                    <li>Python 3.10+</li>
+                                    <li>Git 2.30+</li>
+                                    <li>NVIDIA CUDA Toolkit (GPU users)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="installation">
+                        <h3>Quick Start</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Clone and Setup All Repositories</span>
+                                <button class="copy-btn" data-clipboard-text="# Clone all repositories
+git clone https://github.com/your-org/Docker-system.git
+git clone https://github.com/your-org/AI-Ecosystem.git
+git clone https://github.com/your-org/Frappe-MCP.git
+git clone https://github.com/your-org/idempiere-mcp.git
+git clone https://github.com/your-org/DSI-WEB-N.git
+git clone https://github.com/your-org/dev-designer-shaik.github.io.git
+
+# Navigate to Docker-system and start services
+cd Docker-system
+docker-compose up -d
+
+# Setup AI Ecosystem
+cd ../AI-Ecosystem
+./setup.sh
+
+# Install MCP servers
+cd ../Frappe-MCP
+pip install -r requirements.txt
+python mcp.py
+
+cd ../idempiere-mcp
+pip install -r requirements.txt
+python server.py">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <pre><code># Clone all repositories
+git clone https://github.com/your-org/Docker-system.git
+git clone https://github.com/your-org/AI-Ecosystem.git
+git clone https://github.com/your-org/Frappe-MCP.git
+git clone https://github.com/your-org/idempiere-mcp.git
+git clone https://github.com/your-org/DSI-WEB-N.git
+git clone https://github.com/your-org/dev-designer-shaik.github.io.git
+
+# Navigate to Docker-system and start services
+cd Docker-system
+docker-compose up -d
+
+# Setup AI Ecosystem
+cd ../AI-Ecosystem
+./setup.sh
+
+# Install MCP servers
+cd ../Frappe-MCP
+pip install -r requirements.txt
+python mcp.py
+
+cd ../idempiere-mcp
+pip install -r requirements.txt
+python server.py</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="configuration">
+                        <h3>Environment Configuration</h3>
+                        <p>Create a <code>.env</code> file in each repository with the following variables:</p>
+                        <div class="config-grid">
+                            <div class="config-card">
+                                <h4>Docker-system</h4>
+                                <ul>
+                                    <li><code>POSTGRES_PASSWORD</code></li>
+                                    <li><code>RABBITMQ_USER</code></li>
+                                    <li><code>REDIS_PASSWORD</code></li>
+                                    <li><code>OPENAI_API_KEY</code></li>
+                                </ul>
+                            </div>
+                            <div class="config-card">
+                                <h4>AI-Ecosystem</h4>
+                                <ul>
+                                    <li><code>NVIDIA_API_KEY</code></li>
+                                    <li><code>MODEL_NAME</code></li>
+                                    <li><code>GPU_ENABLED</code></li>
+                                    <li><code>WEBUI_PORT</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <h3 class="content-section__subtitle">PLM Stage Descriptions</h3>
-            
-            <h4 class="content-section__subtitle">1. Draft Stage (Concept)</h4>
-            <p>The Draft stage is the initial phase where new product ideas and concepts are captured. Any new file uploaded to the product folder is automatically considered a draft. This stage focuses on early design intelligence, including research, sketches, and concept CAD.</p>
-            
-            <div class="highlight-box">
-                <strong>Trigger Event:</strong> <code>asset.*.*.created</code><br>
-                <strong>Producer:</strong> Google Drive Webhook → RabbitMQ<br>
-                <strong>Consumer:</strong> draft.processor queue
-            </div>
-
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Draft Stage Implementation</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code><b>Event:</b> asset.*.*.created
-<b>Producer:</b> Google Drive Webhook → RabbitMQ
-<b>Consumer:</b> draft.processor queue
-<b>Actions:</b>
-1. Insert Product Draft record in PostgreSQL (media_assets table), setting plm_stage='Draft'.
-2. Call ERPNext API to create a Concept ECO.
-3. Send Google Chat notification: "New draft asset uploaded: &lt;filename&gt; (ECO #…)".</code></pre>
-                </div>
-            </div>
-
-            <h4 class="content-section__subtitle">2. Gate-A Approval (Feasibility Review)</h4>
-            <p>The Gate-A stage automates the submission of concept deliverables for review and captures approval/rejection status. Once an ECO is approved in ERPNext, the asset transitions to this stage. Upon approval, an Approval Certificate is generated with SHA-256 hash for immutability.</p>
-            
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Gate-A Stage Implementation</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code><b>Event:</b> asset.*.*.approved
-<b>Trigger:</b> ERPNext ECO transitions to "Approved" → MCP server publishes asset.*.*.approved.
-<b>Consumer:</b> gateA.reviewer queue
-<b>Actions:</b>
-1. Update media_assets.plm_stage='Gate-A'.
-2. Generate an Approval Document (PDF) with approver name, timestamp, and approval data.
-3. Store document link in ERPNext ECO as an attachment.
-4. Notify stakeholders via Google Chat.</code></pre>
-                </div>
-            </div>
-
-            <h4 class="content-section__subtitle">3. Prototype Stage</h4>
-            <p>Following Gate-A approval, the Prototype stage initiates the physical prototyping process. This includes Bill of Material (BOM) generation in ERPNext and tracking of prototype assets. For SOLIDWORKS files, the system automatically extracts metadata using the SOLIDWORKS API.</p>
-            
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Prototype Stage Implementation</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code><b>Event:</b> asset.solidworks.*.created
-<b>Producer:</b> Designer uploads .SLDPRT or .SLDASM → RabbitMQ
-<b>Consumer:</b> prototype.manager queue
-<b>Actions:</b>
-1. Extract custom properties (part number, material) using SOLIDWORKS API and push to PostgreSQL.
-2. Call ERPNext to auto-generate a Prototype Work Order with BOM.
-3. Update media_assets with plm_stage='Prototype'.
-4. Generate an Approval Certificate for prototype readiness.</code></pre>
-                </div>
-            </div>
-
-            <h4 class="content-section__subtitle">4. PPAP (Production Part Approval Process) Stage</h4>
-            <p>The PPAP stage validates production readiness through quality checks, supplier sign-offs, and sample approvals. Upon successful completion, a signed PPAP Certificate PDF is generated, confirming material readiness and quality compliance.</p>
-            
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>PPAP Stage Implementation</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code><b>Event:</b> asset.*.*.stage.ppap
-<b>Trigger:</b> ERPNext QC Inspection "Accepted" → MCP publishes asset.*.*.stage.ppap.
-<b>Consumer:</b> ppap.quality queue
-<b>Actions:</b>
-1. Create/Update ERPNext Quality Inspection records.
-2. Upon pass, mark plm_stage='PPAP'.
-3. Generate a signed PPAP Certificate PDF with quality data and approver details.
-4. Notify procurement and operations.</code></pre>
-                </div>
-            </div>
-
-            <h4 class="content-section__subtitle">5. Production & Publishing Stage</h4>
-            <p>The final stage is triggered when ERPNext signals "Material Ready". The final SKU is generated using n8n automation pipelines, and the product is published live on WooCommerce and Webflow. All finalized media is archived with a final Approval Certificate.</p>
-            
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Production Stage Implementation</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code><b>Event:</b> asset.*.*.stage.production
-<b>Trigger:</b> ERPNext Material Ready webhook → MCP publishes asset.*.*.stage.production.
-<b>Consumer:</b> production.publisher queue
-<b>Actions:</b>
-1. Generate final SKU in ERPNext via n8n automation (parsing Drive metadata and file name).
-2. Push SKU, pricing, stock levels to WooCommerce via its REST API.
-3. Create or update the Webflow CMS item and trigger a site publish via Webflow API.
-4. Archive media under /Processed-Media/ERP-Integrated/ and confirm backup.
-5. Generate a final Approval Certificate for production readiness and publishing details.
-6. Broadcast "Product &lt;SKU&gt; is live" to Google Chat.</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle" id="approval-workflows">Multi-Channel Approval System</h3>
-            <p>The approval system implements a sophisticated multi-channel approach that accommodates different team preferences and workflows. Team members can approve or reject media assets through Google Chat interactive cards, Google Sheets collaborative editing, or Google Forms structured submissions.</p>
-
-            <div class="mermaid-container1">
-                <div class="mermaid">
-flowchart TB
-    subgraph "Approval Request Creation"
-        B[RabbitMQ Trigger]
-        C[Parse Drive Event]
-        D[Post Google Chat Card]
-        E[Append to Google Sheet]
-        F[Create Approval Record]
-    end
-    
-    subgraph "Approval Channels"
-        G1[Google Chat Interactive Cards]
-        G2[Google Sheets Collaboration]
-        G3[Google Forms Submission]
-        G4[System Auto-Approval]
-    end
-    
-    subgraph "Decision Processing"
-        H[Consolidate Decisions]
-        I{Approved?}
-        J[Publish approved event]
-        K[Publish rejected event]
-        L[Generate Certificate]
-    end
-    
-    B --> C
-    C --> D
-    C --> E
-    C --> F
-    
-    D --> G1
-    E --> G2
-    F --> G3
-    F --> G4
-    
-    G1 --> H
-    G2 --> H
-    G3 --> H
-    G4 --> H
-    
-    H --> I
-    I -->|Yes| J
-    I -->|Yes| L
-    I -->|No| K
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Approval Request Creation Flow</h3>
-            <div class="mermaid-container1">
-                <div class="mermaid">
-flowchart TB
-  subgraph "Create Approval Request"
-    B[🐰 RabbitMQ Trigger]
-    B --> C[🛠️ Parse Drive Event]
-    C --> D[💬 Post Google Chat Card]
-    C --> E[📄 Append to Google Sheet]
-    
-    D --> F[🌐 HTTP Webhook<br/>await button click]
-
-  end
-
-  H[🛠️ Parse Chat-Callback/Sheet Update]
-
-  H --> I{✅ Approved?}
-  I -->|Yes| J[📤 Publish `approved.file.media.`]
-  I -->|No| K[📤 Publish `rejected.file.media.`]
-
-  J --> L[🚀 Media Ingest Workflow]
-  K --> M[❌ Rejection Handler]
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Approval Status Tracking</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Approval Channel</th>
-                        <th scope="col">Response Time</th>
-                        <th scope="col">Automation Level</th>
-                        <th scope="col">Audit Trail</th>
-                        <th scope="col">Integration Method</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Approval Channel">Google Chat Cards</td><td data-label="Response Time">Real-time</td><td data-label="Automation Level">Fully Automated</td><td data-label="Audit Trail">Complete</td><td data-label="Integration Method">Webhook callbacks</td></tr>
-                    <tr><td data-label="Approval Channel">Google Sheets</td><td data-label="Response Time">Near Real-time</td><td data-label="Automation Level">Semi-Automated</td><td data-label="Audit Trail">Complete</td><td data-label="Integration Method">API polling</td></tr>
-                    <tr><td data-label="Approval Channel">Google Forms</td><td data-label="Response Time">Batch Processing</td><td data-label="Automation Level">Manual Entry</td><td data-label="Audit Trail">Complete</td><td data-label="Integration Method">Form submissions</td></tr>
-                    <tr><td data-label="Approval Channel">System Auto-Approval</td><td data-label="Response Time">Immediate</td><td data-label="Automation Level">Fully Automated</td><td data-label="Audit Trail">System Generated</td><td data-label="Integration Method">Rule-based logic</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle" id="media-processing">AI-Powered Media Processing</h3>
-            <p>Media assets undergo comprehensive AI analysis using OpenAI Vision API for content understanding and automatic tagging. The system generates detailed metadata including product type identification, color palette extraction, material recognition, style classification, and quality assessment scoring.</p>
-
-            <div class="mermaid-container">
-                <div class="mermaid">
-graph TB
-    subgraph "Document Input"
-        PDF["PDF Documents"]
-        IMG["Scanned Images"]
-    end
-    
-    subgraph "OCR Engines"
-        AWS["AWS Textract<br>Forms & Tables"]
-        MIS["Mistral AI<br>Advanced OCR"]
-        OAI["OpenAI Vision<br>Document Analysis"]
-    end
-    
-    subgraph "Processing"
-        MRG["Result Merger"]
-        VAL["Validation Engine"]
-        ENR["Enrichment Service"]
-    end
-    
-    subgraph "Output"
-        PG["PostgreSQL<br>document_index"]
-        WV["Weaviate<br>DocumentAsset"]
-    end
-    
-    PDF --> AWS
-    PDF --> MIS
-    IMG --> OAI
-    
-    AWS --> MRG
-    MIS --> MRG
-    OAI --> MRG
-    
-    MRG --> VAL
-    VAL --> ENR
-    
-    ENR --> PG
-    ENR --> WV
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Processing Status Tracking</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Processing Stage</th>
-                        <th scope="col">Status Code</th>
-                        <th scope="col">Average Duration</th>
-                        <th scope="col">Success Rate</th>
-                        <th scope="col">Error Handling</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Processing Stage">Initial Upload</td><td data-label="Status Code">PENDING</td><td data-label="Average Duration">&lt; 1 second</td><td data-label="Success Rate">99.9%</td><td data-label="Error Handling">Automatic retry</td></tr>
-                    <tr><td data-label="Processing Stage">AI Analysis</td><td data-label="Status Code">ANALYZING</td><td data-label="Average Duration">15-30 seconds</td><td data-label="Success Rate">98.5%</td><td data-label="Error Handling">Fallback to basic metadata</td></tr>
-                    <tr><td data-label="Processing Stage">Vector Storage</td><td data-label="Status Code">INDEXING</td><td data-label="Average Duration">5-10 seconds</td><td data-label="Success Rate">99.2%</td><td data-label="Error Handling">Queue retry with backoff</td></tr>
-                    <tr><td data-label="Processing Stage">CDN Upload</td><td data-label="Status Code">OPTIMIZING</td><td data-label="Average Duration">10-20 seconds</td><td data-label="Success Rate">99.7%</td><td data-label="Error Handling">Multiple CDN endpoints</td></tr>
-                    <tr><td data-label="Processing Stage">Format Generation</td><td data-label="Status Code">TRANSFORMING</td><td data-label="Average Duration">20-45 seconds</td><td data-label="Success Rate">99.1%</td><td data-label="Error Handling">N/A</td></tr>
-                    <tr><td data-label="Processing Stage">Database Update</td><td data-label="Status Code">FINALIZING</td><td data-label="Average Duration">2-5 seconds</td><td data-label="Success Rate">99.8%</td><td data-label="Error Handling">N/A</td></tr>
-                    <tr><td data-label="Processing Stage">Processing Complete</td><td data-label="Status Code">OPTIMIZED</td><td data-label="Average Duration">N/A</td><td data-label="Success Rate">98.9%</td><td data-label="Error Handling">Manual review queue</td></tr>
-                </tbody>
-            </table>
         </section>
 
-        <section id="ai-integration" class="content-section">
-            <h2 class="content-section__title">AI Integration & Intelligence</h2>
-            
-            <h3 class="content-section__subtitle">AI Services Integration</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Service</th>
-                        <th scope="col">Model/Version</th>
-                        <th scope="col">Primary Use Case</th>
-                        <th scope="col">Integration Status</th>
-                        <th scope="col">Performance Metrics</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Service">OpenAI Vision</td><td data-label="Model/Version">GPT-4 Vision</td><td data-label="Primary Use Case">Image analysis, quality scoring</td><td data-label="Integration Status">✅ Implemented</td><td data-label="Performance Metrics">94.2% accuracy, 15-30s</td></tr>
-                    <tr><td data-label="Service">OpenAI Embeddings</td><td data-label="Model/Version">text-embedding-3-small</td><td data-label="Primary Use Case">Semantic search vectors</td><td data-label="Integration Status">✅ Implemented</td><td data-label="Performance Metrics">98.7% accuracy, 5-10s</td></tr>
-                    <tr><td data-label="Service">Mistral OCR</td><td data-label="Model/Version">Latest</td><td data-label="Primary Use Case">Document text extraction</td><td data-label="Integration Status">🚧 In Progress</td><td data-label="Performance Metrics">96.8% accuracy, 10-25s</td></tr>
-                    <tr><td data-label="Service">AWS Textract</td><td data-label="Model/Version">Latest</td><td data-label="Primary Use Case">Forms, tables processing</td><td data-label="Integration Status">✅ Implemented</td><td data-label="Performance Metrics">91.5% accuracy, 8-15s</td></tr>
-                    <tr><td data-label="Service">OpenAI GPT-4</td><td data-label="Model/Version">GPT-4 Turbo</td><td data-label="Primary Use Case">RAG responses, analysis</td><td data-label="Integration Status">✅ Implemented</td><td data-label="Performance Metrics">High quality, 2-5s</td></tr>
-                </tbody>
-            </table>
+        <!-- Quick Reference -->
+        <section id="quick-reference" class="content-section">
+            <h2 class="content-section__title">Quick Reference</h2>
 
-            <h3 class="content-section__subtitle" id="mcp-configuration">Model Context Protocol (MCP) Configuration</h3>
-            <p>The Model Context Protocol (MCP) is an open standard enabling secure, two-way connections between data sources and AI-powered tools. In this architecture, MCP is implemented through intelligent agents that monitor events, validate compliance, and orchestrate workflows across the distributed system.</p>
-
-            <h3 class="content-section__subtitle">MCP Agent Services</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Agent Name</th>
-                        <th scope="col">Responsibilities</th>
-                        <th scope="col">Subscribes To</th>
-                        <th scope="col">Resources</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Agent Name"><strong>MediaProcessor</strong></td>
-                        <td data-label="Responsibilities">
-                            • Monitor asset.events exchange for new uploads<br>
-                            • Validate MCP compliance and metadata standards<br>
-                            • Route to appropriate processing workflows<br>
-                            • Handle errors, retries, and dead letter queues
-                        </td>
-                        <td data-label="Subscribes To">asset.events</td>
-                        <td data-label="Resources">2 CPU / 2Gi RAM</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Agent Name"><strong>PLMOrchestrator</strong></td>
-                        <td data-label="Responsibilities">
-                            • Manage Product Lifecycle Management stage transitions<br>
-                            • Enforce approval matrix and governance policies<br>
-                            • Coordinate cross-system updates and synchronization<br>
-                            • Generate compliance reports and certificates
-                        </td>
-                        <td data-label="Subscribes To">plm.transitions</td>
-                        <td data-label="Resources">1 CPU / 1Gi RAM</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Agent Name"><strong>QualityGuardian</strong></td>
-                        <td data-label="Responsibilities">
-                            • Monitor processing quality and validation metrics<br>
-                            • Validate output standards and compliance requirements<br>
-                            • Trigger re-processing for failed quality checks<br>
-                            • Generate quality metrics and performance reports
-                        </td>
-                        <td data-label="Subscribes To">ppap.quality, *.stage.*</td>
-                        <td data-label="Resources">GPU-optional for AI processing</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Agent Name"><strong>IntegrationManager</strong></td>
-                        <td data-label="Responsibilities">
-                            • Synchronize data between external systems<br>
-                            • Handle API failures and implement retry logic<br>
-                            • Manage rate limits and API quotas<br>
-                            • Ensure data consistency across platforms
-                        </td>
-                        <td data-label="Subscribes To">system.notifications</td>
-                        <td data-label="Resources">1 CPU / 512Mi RAM</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle">MCP Server Environment Configuration</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>MCP Environment Variables</span>
-                    <button class="code-toggle">▼</button>
+            <div class="reference-grid">
+                <div class="reference-card">
+                    <h3><i class="fas fa-plug"></i> Service Ports</h3>
+                    <table class="reference-table">
+                        <tr><td>AI Ecosystem UI</td><td>3000</td></tr>
+                        <tr><td>API Gateway</td><td>3000</td></tr>
+                        <tr><td>NVIDIA NIM</td><td>8000</td></tr>
+                        <tr><td>n8n Workflow</td><td>5678</td></tr>
+                        <tr><td>RabbitMQ UI</td><td>15672</td></tr>
+                        <tr><td>Weaviate</td><td>8080</td></tr>
+                    </table>
                 </div>
-                <div class="code-content">
-                    <pre><code># Example Environment Variables for MCP Servers
-RABBITMQ_URI=amqps://user:password@rabbitmq-cluster:5671        # mTLS enforced
-MCP_AGENT_NAME=MediaProcessor                                    # Agent identifier
-POSTGRESQL_URL=postgres://dsi_user:password@postgres:5432/dsi_db # Metadata database
-WEAVIATE_ENDPOINT=http://weaviate-cluster:8080                   # Vector database
-OPENAI_API_KEY=sk-proj-example-key-here                         # LLM access
-ERP_API_URL=https://erp.designershaik.com                       # ERPNext integration
-GDRIVE_WEBHOOK_SECRET=example-webhook-secret                    # Drive event validation
-LOG_LEVEL=INFO                                                   # Logging verbosity</code></pre>
+
+                <div class="reference-card">
+                    <h3><i class="fas fa-key"></i> Default Credentials</h3>
+                    <table class="reference-table">
+                        <tr><td>RabbitMQ</td><td>admin / password</td></tr>
+                        <tr><td>Redis</td><td>redis / redis123</td></tr>
+                        <tr><td>PostgreSQL</td><td>postgres / postgres123</td></tr>
+                        <tr><td>n8n</td><td>admin / admin123</td></tr>
+                    </table>
+                </div>
+
+                <div class="reference-card">
+                    <h3><i class="fas fa-terminal"></i> Common Commands</h3>
+                    <table class="reference-table">
+                        <tr><td>Start all services</td><td><code>docker-compose up -d</code></td></tr>
+                        <tr><td>View logs</td><td><code>docker-compose logs -f</code></td></tr>
+                        <tr><td>Restart service</td><td><code>docker-compose restart [service]</code></td></tr>
+                        <tr><td>Stop all</td><td><code>docker-compose down</code></td></tr>
+                    </table>
                 </div>
             </div>
-
-            <h3 class="content-section__subtitle" id="semantic-search">Weaviate Vector Database & Semantic Search</h3>
-            <p>Weaviate is an open-source, AI-native vector database that stores data objects and their vector embeddings. It enables semantic search, where users can query data based on its meaning rather than just keywords. This is achieved by converting data (text, images, etc.) into numerical vectors (embeddings) using machine learning models.</p>
-
-            <p>Weaviate's architecture is designed for scalability and performance. It supports horizontal scaling, allowing it to handle large volumes of data and high query loads by distributing data across multiple nodes. It also offers various modules for different vectorization needs, such as <code>text2vec-openai</code> for OpenAI embeddings and <code>qna-openai</code> for question-answering capabilities.</p>
-
-            <h3 class="content-section__subtitle">Weaviate Cluster Schema Visualization</h3>
-            <div class="mermaid-container1"> 
-                <div class="mermaid" id="weaviate-er-diagram">
-erDiagram
-
-    MediaAsset {
-        STRING    fileId            "Google Drive file identifier"
-        STRING    mcpId             "Model Context Protocol identifier"
-        STRING    title             "Asset title from IPTC or filename"
-        TEXT      aiAnalysis        "AI-generated content description"
-        TEXT      extractedData     "AI-generated data in json"
-        STRING[]  tags              "AI-generated semantic tags"
-        STRING    fileType          "File type category (image, video, document)"
-        STRING    sku               "Stock keeping unit identifier"
-        STRING    productName       "Product name from folder structure"
-        STRING    productLine       "Product line from folder hierarchy"
-        STRING    productRange      "Product range from folder hierarchy"
-        STRING    palaceName        "Palace name from folder hierarchy"
-        STRING    folderPath        "Full folder path for context"
-        NUMBER    qualityScore      "AI-assessed quality rating (0-10)"
-        TEXT      iptcCore          "IPTC metadata as concatenated text"
-        TEXT      dublinCore        "Dublin Core metadata as text"
-        TEXT      customProps       "Custom properties as text"
-        STRING    plmStage          "Product Lifecycle Management stage"
-        NUMBER    fileSize          "File size in bytes"
-        STRING    mimeType          "MIME type of the file"
-        NUMBER    ocrConfidence     "OCR confidence score (0-1)"
-        STRING    processingStatus  "Current processing status"
-        DATETIME  createdAt         "Asset creation timestamp"
-    }
-
-    DocumentAsset {
-        STRING    fileId            "Google Drive file identifier"
-        STRING    mcpId             "Model Context Protocol identifier"
-        STRING    title             "Document title or filename"
-        TEXT      fullText          "Chunked OCR or extracted text"
-        STRING[]  searchTags        "AI + IPTC + user tags combined"
-        STRING    docType           "Document type classification"
-        STRING    sku               "Associated product SKU"
-        TEXT      aiAnalysis       "AI-generated content description"
-        TEXT      extractedData     "AI-generated data in json"
-        STRING    productName       "Product name from folder structure"
-        STRING    productLine       "Product line from folder hierarchy"
-        STRING    productRange      "Product range from folder hierarchy"
-        STRING    palaceName        "Palace name from folder hierarchy"
-        STRING    folderPath        "Full folder path for context"
-        STRING    language          "Document language (default: en)"
-        NUMBER    ocrConfidence     "OCR confidence score (0-1)"
-        STRING    processingStatus  "Current processing status"
-        DATETIME  createdAt         "Document creation timestamp"
-    }
-
-    ThreeDModel {
-        STRING    productName      "Product name from folder structure"
-        STRING    sku              "Stock keeping unit identifier"
-        TEXT      aiAnalysis      "AI-generated content description"
-        TEXT      extractedData     "AI-generated data in json"
-        STRING[]  tags             "AI-generated semantic tags"
-        STRING    fileFormat       "File format (e.g., OBJ, FBX, GLB)"
-        NUMBER    polygonCount     "Number of polygons in the 3D model"
-        NUMBER    textureCount     "Number of textures in the 3D model"
-        STRING    mcpId            "Model Context Protocol identifier"
-    }
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Weaviate Configuration</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Weaviate Cluster Setup</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code># Weaviate Cluster Setup
-version: '3.8'
-
-services:
-  weaviate:
-    image: semitechnologies/weaviate:latest
-    restart: unless-stopped
-    ports:
-      - "8080:8080"
-    environment:
-      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=false
-      - AUTHENTICATION_APIKEY_ENABLED=true
-      - AUTHENTICATION_APIKEY_ALLOWED_KEYS=${WEAVIATE_API_KEY}
-      - PERSISTENCE_DATA_PATH=/var/lib/weaviate
-      - DEFAULT_VECTORIZER_MODULE=text2vec-openai
-      - ENABLE_MODULES=text2vec-openai,text2vec-transformers,qna-openai
-      - OPENAI_APIKEY=${OPENAI_API_KEY}
-      - CLUSTER_HOSTNAME=weaviate-node-1
-      - CLUSTER_GOSSIP_BIND_PORT=7100
-      - CLUSTER_DATA_BIND_PORT=7101
-    volumes:
-      - weaviate_data:/var/lib/weaviate
-
-  weaviate-node-2:
-    image: semitechnologies/weaviate:latest
-    restart: unless-stopped
-    ports:
-      - "8081:8080"
-    environment:
-      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=false
-      - AUTHENTICATION_APIKEY_ENABLED=true
-      - AUTHENTICATION_APIKEY_ALLOWED_KEYS=${WEAVIATE_API_KEY}
-      - PERSISTENCE_DATA_PATH=/var/lib/weaviate
-      - DEFAULT_VECTORIZER_MODULE=text2vec-openai
-      - ENABLE_MODULES=text2vec-openai,text2vec-transformers,qna-openai
-      - OPENAI_APIKEY=${OPENAI_API_KEY}
-      - CLUSTER_HOSTNAME=weaviate-node-2
-      - CLUSTER_GOSSIP_BIND_PORT=7100
-      - CLUSTER_DATA_BIND_PORT=7101
-      - CLUSTER_JOIN=weaviate:7100
-    volumes:
-      - weaviate_data_2:/var/lib/weaviate
-    depends_on:
-      - weaviate
-
-volumes:
-  weaviate_data:
-  weaviate_data_2:</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Semantic Search Implementation</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Weaviate Client Configuration</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code>// Weaviate Client Configuration
-import weaviate from 'weaviate-ts-client';
-
-const client = weaviate.client({
-  scheme: 'http',
-  host: 'localhost:8080',
-  apiKey: new weaviate.ApiKey(process.env.WEAVIATE_API_KEY),
-  headers: { 'X-OpenAI-Api-Key': process.env.OPENAI_API_KEY },
-});
-
-// Semantic Search Functions
-const searchImages = async (query, limit = 10) => {
-  return await client.graphql
-    .get()
-    .withClassName('Image')
-    .withFields('productName sku description tags colors qualityScore mcpId resolution fileFormat')
-    .withNearText({ concepts: [query] })
-    .withLimit(limit)
-    .do();
-};
-
-// Cross-Asset Type Search
-const searchAllAssets = async (query, limit = 50) => {
-  const [images, videos, audio, documents, models] = await Promise.all([
-    searchImages(query, limit),
-    searchVideos(query, limit),
-    searchAudio(query, limit),
-    searchDocuments(query, limit),
-    search3DModels(query, limit)
-  ]);
-
-  return {
-    images: images.data.Get.Image || [],
-    videos: videos.data.Get.Video || [],
-    audio: audio.data.Get.Audio || [],
-    documents: documents.data.Get.Document || [],
-    models: models.data.Get.ThreeDModel || []
-  };
-};</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Weaviate Schema Configuration</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>MediaAsset Class Schema</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code>// Condensed example of the MediaAsset class schema in Weaviate
-{
-  "class": "MediaAsset",
-  "description": "Digital asset linked to a luxury product",
-  "vectorizer": "text2vec-openai",
-  "multiTenancyConfig": { "enabled": true },   // Enables multi-tenancy (e.g., by brand or business unit)
-  "properties": [
-    { "name": "title",      "dataType": ["text"] },
-    { "name": "fileType",   "dataType": ["text"] },
-    { "name": "iptcCore",   "dataType": ["text"] },   // Raw IPTC JSON or concatenated IPTC fields
-    { "name": "dublinCore", "dataType": ["text"] },  // Raw Dublin Core JSON or concatenated fields
-    { "name": "sku",        "dataType": ["text"] },
-    { "name": "mcpId",      "dataType": ["text"] },
-    // Other properties (description, tags, transcripts, technicalSpecs etc.) as defined in section 10.2
-    // with "vectorize": true where appropriate for semantic search.
-  ]
-}</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Embeddings & RAG Implementation</h3>
-            <p>The strategy focuses on generating high-quality vector embeddings to power advanced AI use cases, particularly Retrieval-Augmented Generation (RAG). The system uses OpenAI's text-embedding-3-small model to generate vectors for various text types including whole asset captions, chunked OCR text from documents, and product descriptions from ERPNext.</p>
-            
-            <div class="highlight-box">
-                <strong>Embedding Model:</strong> OpenAI text-embedding-3-small<br>
-                <strong>Semantic Search Threshold:</strong> Cosine similarity ≥ 0.85<br>
-                <strong>RAG Endpoint:</strong> /search with hybrid filter (BM25 + vector search)
-            </div>
-
-            <h3 class="content-section__subtitle">Semantic Search Capabilities</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Search Type</th>
-                        <th scope="col">Example Query</th>
-                        <th scope="col">Technology Used</th>
-                        <th scope="col">Response Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Search Type">Visual Similarity</td><td data-label="Example Query">"Find images similar to this luxury fragrance bottle"</td><td data-label="Technology Used">OpenAI Vision + Weaviate</td><td data-label="Response Time">45-80ms</td></tr>
-                    <tr><td data-label="Search Type">Semantic Content</td><td data-label="Example Query">"Show me all gold jewelry with modern styling"</td><td data-label="Technology Used">Text embeddings + Vector search</td><td data-label="Response Time">60-110ms</td></tr>
-                    <tr><td data-label="Search Type">Technical Specifications</td><td data-label="Example Query">"Find CAD files for products using titanium material"</td><td data-label="Technology Used">SOLIDWORKS metadata + Hybrid search</td><td data-label="Response Time">120-200ms</td></tr>
-                    <tr><td data-label="Search Type">Document Content</td><td data-label="Example Query">"Locate approval documents mentioning quality standards"</td><td data-label="Technology Used">OCR text + Full-text search</td><td data-label="Response Time">80-150ms</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle">Weaviate Performance Metrics</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Operation Type</th>
-                        <th scope="col">Average Response Time</th>
-                        <th scope="col">Throughput (ops/sec)</th>
-                        <th scope="col">Memory Usage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Operation Type">Vector Search (Single Class)</td><td data-label="Average Response Time">45-80ms</td><td data-label="Throughput (ops/sec)">1,200</td><td data-label="Memory Usage">2.1GB</td></tr>
-                    <tr><td data-label="Operation Type">Cross-Class Search</td><td data-label="Average Response Time">120-200ms</td><td data-label="Throughput (ops/sec)">500</td><td data-label="Memory Usage">3.8GB</td></tr>
-                    <tr><td data-label="Operation Type">Hybrid Search</td><td data-label="Average Response Time">60-110ms</td><td data-label="Throughput (ops/sec)">900</td><td data-label="Memory Usage">2.5GB</td></tr>
-                    <tr><td data-label="Operation Type">Asset Ingestion</td><td data-label="Average Response Time">200-350ms</td><td data-label="Throughput (ops/sec)">300</td><td data-label="Memory Usage">1.9GB</td></tr>
-                    <tr><td data-label="Operation Type">Batch Ingestion (100 items)</td><td data-label="Average Response Time">2.5-4.2s</td><td data-label="Throughput (ops/sec)">2,400</td><td data-label="Memory Usage">4.2GB</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle" id="ocr-services">OCR Services Architecture</h3>
-            <div class="mermaid-container5">
-                <div class="mermaid">
-graph TB
-    subgraph DI["Document Input"]
-        PDF["📄 PDF Documents<br>Invoices, Contracts"]
-        IMG["🖼️ Scanned Images<br>Photos, Scans"]
-    end
-    
-    subgraph OES["OCR Edge Service"]
-        PRE["⚙️ Pre-processor<br>Tesseract 5.4"]
-        GCV["👁️ Google Cloud Vision<br>Multi-language OCR"]
-        TXT["📊 AWS Textract<br>Forms & Tables"]
-        MRG["🔄 Result Merger<br>Textractor"]
-    end
-    
-    subgraph OP["Output"]
-        JSON["📋 Structured JSON<br>Extracted Data"]
-        TXT2["📝 Plain Text<br>Full Content"]
-        META["🏷️ Metadata<br>Key Terms"]
-    end
-    
-    subgraph INT["Integration"]
-        WV["🔍 Weaviate<br>Vector Search"]
-        ERP["📊 ERPNext<br>Document Index"]
-        CDN["🌐 Cloudinary<br>Storage"]
-        CHAT["💬 Google Chat<br>Notifications"]
-    end
-    
-    PDF --> PRE
-    IMG --> PRE
-    PRE --> GCV
-    PRE --> TXT
-    GCV --> MRG
-    TXT --> MRG
-    MRG --> JSON
-    MRG --> TXT2
-    MRG --> META
-    JSON --> WV
-    JSON --> ERP
-    JSON --> CDN
-    META --> CHAT
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Kubernetes Exploration</h3>
-            <p>Kubernetes (K8s) is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easy management and discovery. Kubernetes provides a robust framework for running distributed systems, ensuring high availability, scalability, and resilience.</p>
-
-            <p>In the DSI Media Repository, Kubernetes is used for deploying and orchestrating the MCP agents and other microservices. This allows for automatic scaling of agents based on processing load and queue depth, ensuring efficient resource utilization and high availability of the media processing pipeline. Kubernetes' self-healing capabilities ensure that if an agent or node fails, new instances are automatically started, maintaining the continuity of operations.</p>
-
-            <h3 class="content-section__subtitle">AI Processing Metrics</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">AI Service</th>
-                        <th scope="col">Processing Time</th>
-                        <th scope="col">Accuracy Rate</th>
-                        <th scope="col">Cost per Asset</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="AI Service">OpenAI Vision Analysis</td><td data-label="Processing Time">15-30 seconds</td><td data-label="Accuracy Rate">94.2%</td><td data-label="Cost per Asset">$0.08</td></tr>
-                    <tr><td data-label="AI Service">Weaviate Vector Generation</td><td data-label="Processing Time">5-10 seconds</td><td data-label="Accuracy Rate">98.7%</td><td data-label="Cost per Asset">$0.02</td></tr>
-                    <tr><td data-label="AI Service">OCR Text Extraction</td><td data-label="Processing Time">10-25 seconds</td><td data-label="Accuracy Rate">96.8%</td><td data-label="Cost per Asset">$0.05</td></tr>
-                    <tr><td data-label="AI Service">Quality Assessment</td><td data-label="Processing Time">8-15 seconds</td><td data-label="Accuracy Rate">91.5%</td><td data-label="Cost per Asset">$0.03</td></tr>
-                </tbody>
-            </table>
         </section>
 
-        <section id="deployment-operations" class="content-section">
-            <h2 class="content-section__title">Deployment & Operations</h2>
+        <!-- API Endpoints -->
+        <section id="api-endpoints" class="content-section">
+            <h2 class="content-section__title">Key API Endpoints</h2>
 
-            <h3 class="content-section__subtitle">Docker Compose Configuration</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Docker Compose Setup</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code>version: '3.8'
-
-services:
-  n8n:
-    image: n8nio/n8n:latest
-    restart: unless-stopped
-    ports:
-      - "5678:5678"
-    environment:
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=${N8N_USER}
-      - N8N_BASIC_AUTH_PASSWORD=${N8N_PASSWORD}
-      - N8N_HOST=n8n.designershaik.com
-      - N8N_PROTOCOL=https
-      - N8N_WEBHOOK_BASE_URL=https://n8n.designershaik.com
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_DATABASE=n8n
-      - DB_POSTGRESDB_USER=n8n_user
-      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD}
-    volumes:
-      - n8n_data:/home/node/.n8n
-    depends_on:
-      - postgres
-      - redis
-      - rabbitmq
-
-  postgres:
-    image: postgres:15
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=dsi_user
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=dsi_media
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-
-  weaviate:
-    image: semitechnologies/weaviate:latest
-    restart: unless-stopped
-    ports:
-      - "8080:8080"
-    environment:
-      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=false
-      - AUTHENTICATION_APIKEY_ENABLED=true
-      - AUTHENTICATION_APIKEY_ALLOWED_KEYS=${WEAVIATE_API_KEY}
-      - PERSISTENCE_DATA_PATH=/var/lib/weaviate
-      - DEFAULT_VECTORIZER_MODULE=text2vec-openai
-      - ENABLE_MODULES=text2vec-openai
-      - OPENAI_APIKEY=${OPENAI_API_KEY}
-    volumes:
-      - weaviate_data:/var/lib/weaviate
-
-  redis:
-    image: redis:7-alpine
-    restart: unless-stopped
-    command: redis-server --requirepass ${REDIS_PASSWORD}
-    volumes:
-      - redis_data:/data
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    restart: unless-stopped
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
-
-volumes:
-  n8n_data:
-  postgres_data:
-  weaviate_data:
-  redis_data:
-  rabbitmq_data:</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Environment Configuration</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Environment Variables</span>
-                    <button class="code-toggle">▼</button>
-                </div>
-                <div class="code-content">
-                    <pre><code># .env file
-N8N_USER=admin
-N8N_PASSWORD=secure_password_here
-DB_PASSWORD=postgres_password_here
-POSTGRES_PASSWORD=postgres_password_here
-WEAVIATE_API_KEY=weaviate_api_key_here
-OPENAI_API_KEY=sk-proj-...
-REDIS_PASSWORD=redis_password_here
-RABBITMQ_USER=dsi_admin
-RABBITMQ_PASSWORD=rabbitmq_password_here
-
-# Google Cloud
-GCP_PROJECT_ID=n8n-drive-integration-465208
-GCP_SERVICE_ACCOUNT_EMAIL=dsi-drive-watcher@n8n-drive-integration-465208.iam.gserviceaccount.com
-
-# Cloudinary
-CLOUDINARY_CLOUD_NAME=designershaik
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-# ERPNext
-ERPNEXT_URL=https://erp.designershaik.com
-ERPNEXT_API_KEY=your_api_key
-ERPNEXT_API_SECRET=your_api_secret</code></pre>
-                </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Deployment Options</h3>
-            <div class="cost-comparison">
-                <div class="cost-card">
-                    <h4 class="cost-card__title">Development Environment</h4>
-                    <p class="cost-card__price">~$12/month</p>
+            <div class="api-endpoints">
+                <div class="endpoint-group">
+                    <h3>Frappe MCP Endpoints</h3>
                     <ul>
-                        <li><strong>Components:</strong> All services on Docker containers, single VPS</li>
-                        <li><strong>Ideal For:</strong> Development, testing, small teams</li>
-                        <li><strong>Complexity:</strong> Low</li>
+                        <li><code>POST /api/v1/query/doctypes</code> - Query any doctype</li>
+                        <li><code>POST /api/v1/query/relationships</code> - Get relationships</li>
+                        <li><code>POST /api/v1/files/list</code> - List attachments</li>
+                        <li><code>POST /api/v1/analytics/dashboard</code> - Get dashboard data</li>
                     </ul>
                 </div>
-                <div class="cost-card">
-                    <h4 class="cost-card__title">Production Environment</h4>
-                    <p class="cost-card__price">~$60/month</p>
+
+                <div class="endpoint-group">
+                    <h3>iDempiere MCP Endpoints</h3>
                     <ul>
-                        <li><strong>Components:</strong> Kubernetes cluster, auto-scaling, load balancing</li>
-                        <li><strong>Ideal For:</strong> Production scale, high availability</li>
-                        <li><strong>Complexity:</strong> Medium</li>
-                    </ul>
-                </div>
-                <div class="cost-card">
-                    <h4 class="cost-card__title">Enterprise Environment</h4>
-                    <p class="cost-card__price">~$200/month</p>
-                    <ul>
-                        <li><strong>Components:</strong> Multi-region deployment, enterprise SLA</li>
-                        <li><strong>Ideal For:</strong> Enterprise requirements, compliance</li>
-                        <li><strong>Complexity:</strong> High</li>
+                        <li><code>POST /api/v1/execute_query</code> - Execute SQL query</li>
+                        <li><code>POST /api/v1/get_products</code> - Get product data</li>
+                        <li><code>POST /api/v1/get_business_partners</code> - Get B2B data</li>
+                        <li><code>POST /api/v1/list_tables</code> - List all tables</li>
                     </ul>
                 </div>
             </div>
+        </section>
 
-            <h3 class="content-section__subtitle" id="external-integrations">External Integrations</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">System</th>
-                        <th scope="col">Integration Method</th>
-                        <th scope="col">Data Flow Direction</th>
-                        <th scope="col">Sync Frequency</th>
-                        <th scope="col">Primary Use Case</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="System"><strong>ERPNext</strong></td><td data-label="Integration Method">REST API v15</td><td data-label="Data Flow Direction">Bidirectional</td><td data-label="Sync Frequency">Real-time + Daily batch</td><td data-label="Primary Use Case">Product management, BOMs, ECOs</td></tr>
-                    <tr><td data-label="System"><strong>Google Drive</strong></td><td data-label="Integration Method">Webhook + API v3</td><td data-label="Data Flow Direction">Bidirectional</td><td data-label="Sync Frequency">Real-time</td><td data-label="Primary Use Case">Primary media storage, file detection</td></tr>
-                    <tr><td data-label="System"><strong>Cloudinary</strong></td><td data-label="Integration Method">Upload API + Webhooks</td><td data-label="Data Flow Direction">Push + Callback</td><td data-label="Sync Frequency">Real-time</td><td data-label="Primary Use Case">Media optimization, CDN distribution</td></tr>
-                    <tr><td data-label="System"><strong>WooCommerce</strong></td><td data-label="Integration Method">REST API</td><td data-label="Data Flow Direction">Push only</td><td data-label="Sync Frequency">Hourly</td><td data-label="Primary Use Case">eCommerce product listings</td></tr>
-                    <tr><td data-label="System"><strong>Webflow</strong></td><td data-label="Integration Method">CMS API</td><td data-label="Data Flow Direction">Push only</td><td data-label="Sync Frequency">On approval</td><td data-label="Primary Use Case">Marketing website content</td></tr>
-                </tbody>
-            </table>
+        <!-- Troubleshooting -->
+        <section id="troubleshooting" class="content-section">
+            <h2 class="content-section__title">Troubleshooting</h2>
 
-            <h3 class="content-section__subtitle">ERPNext Synchronization</h3>
-            <p>The ERPNext integration maintains bidirectional synchronization between the media repository and product management system. Scheduled workflows update product records with optimized media URLs, ensuring that inventory management, pricing, and bill-of-materials (BOM) tracking remain synchronized with the latest approved media assets. The integration supports both individual product updates and bulk synchronization operations.</p>
-
-            <h3 class="content-section__subtitle">Cloudinary Configuration</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>Cloudinary Upload Preset</span>
-                    <button class="code-toggle">▼</button>
+            <div class="troubleshooting-grid">
+                <div class="trouble-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Common Issues</h3>
+                    <div class="issue-item">
+                        <h4>Services won't start</h4>
+                        <p>Check if ports are available and Docker is running.</p>
+                        <code>sudo netstat -tulpn | grep :3000</code>
+                    </div>
+                    <div class="issue-item">
+                        <h4>GPU not detected</h4>
+                        <p>Verify NVIDIA drivers and CUDA installation.</p>
+                        <code>nvidia-smi</code>
+                    </div>
+                    <div class="issue-item">
+                        <h4>Database connection failed</h4>
+                        <p>Check PostgreSQL status and credentials.</p>
+                        <code>docker exec -it postgres psql -U postgres</code>
+                    </div>
                 </div>
-                <div class="code-content">
-                    <pre><code>// DSI Upload Preset Configuration
-{
-  "name": "dsi-product-media",
-  "unsigned": false,
-  "folder": "dsi/products",
-  "allowed_formats": ["jpg", "png", "webp", "mp4", "mov"],
-  "transformation": [
-    {
-      "quality": "auto:best",
-      "fetch_format": "auto"
-    }
-  ],
-  "eager": [
-    {
-      "width": 150,
-      "height": 150,
-      "crop": "thumb",
-      "gravity": "auto"
-    },
-    {
-      "width": 800,
-      "quality": "auto",
-      "fetch_format": "auto"
-    },
-    {
-      "width": 1200,
-      "height": 630,
-      "crop": "fill",
-      "gravity": "auto"
-    }
-  ],
-  "eager_async": true,
-  "auto_tagging": 80,
-  "categorization": "google_tagging",
-  "detection": "adv_face"
-}</code></pre>
+
+                <div class="trouble-card">
+                    <h3><i class="fas fa-tools"></i> Debug Tools</h3>
+                    <ul>
+                        <li>Use <code>docker-compose logs [service]</code> to view logs</li>
+                        <li>Check health with <code>curl http://localhost:3000/health</code></li>
+                        <li>Monitor resources with <code>docker stats</code></li>
+                        <li>Test API endpoints with Postman or curl</li>
+                    </ul>
                 </div>
             </div>
+        </section>
 
-            <h3 class="content-section__subtitle" id="monitoring">System Monitoring</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Integration Target</th>
-                        <th scope="col">Current Status</th>
-                        <th scope="col">Last Sync</th>
-                        <th scope="col">Error Rate</th>
-                        <th scope="col">Error Handling</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Integration Target">ERPNext</td><td data-label="Current Status">✅ Operational</td><td data-label="Last Sync">2 hours ago</td><td data-label="Error Rate">0.2%</td><td data-label="Error Handling">Retry + Alert</td></tr>
-                    <tr><td data-label="Integration Target">Cloudinary</td><td data-label="Current Status">✅ Operational</td><td data-label="Last Sync">Real-time</td><td data-label="Error Rate">0.1%</td><td data-label="Error Handling">Queue + Retry</td></tr>
-                    <tr><td data-label="Integration Target">WooCommerce</td><td data-label="Current Status">✅ Operational</td><td data-label="Last Sync">1 hour ago</td><td data-label="Error Rate">0.5%</td><td data-label="Error Handling">Batch Retry</td></tr>
-                    <tr><td data-label="Integration Target">Webflow</td><td data-label="Current Status">✅ Operational</td><td data-label="Last Sync">4 hours ago</td><td data-label="Error Rate">0.3%</td><td data-label="Error Handling">Manual Review</td></tr>
-                    <tr><td data-label="Integration Target">Google Drive</td><td data-label="Current Status">✅ Operational</td><td data-label="Last Sync">Real-time</td><td data-label="Error Rate">0.1%</td><td data-label="Error Handling">Webhook Retry</td></tr>
-                </tbody>
-            </table>
+        <!-- Contributing -->
+        <section id="contributing" class="content-section">
+            <h2 class="content-section__title">Contributing</h2>
+            <p>We welcome contributions to the DSI platform! Here's how you can help:</p>
 
-            <h3 class="content-section__subtitle">Testing Procedures</h3>
-            <div class="code-block collapsible">
-                <div class="code-header">
-                    <span>End-to-End Testing Script</span>
-                    <button class="code-toggle">▼</button>
+            <div class="contribute-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Fork & Clone</h3>
+                    <p>Fork the repository and clone it to your local machine.</p>
                 </div>
-                <div class="code-content">
-                    <pre><code># End-to-End Testing Script
-1. Upload test image to: DSI-Product-Repository/Palace-of-Fragrances/Classic-Range/Opulent-Shaik-Amethyst/Media/Images/
-
-2. Monitor RabbitMQ queue:
-   docker exec rabbitmq rabbitmqctl list_queues
-
-3. Check n8n execution logs:
-   docker logs dsi_n8n_1 --tail 100 -f
-
-4. Verify PostgreSQL record:
-   SELECT * FROM media_assets 
-   WHERE drive_file_id = 'YOUR_FILE_ID';
-
-5. Check Weaviate storage:
-   curl http://localhost:8080/v1/objects?class=MediaAsset
-
-6. Verify Cloudinary upload:
-   https://res.cloudinary.com/designershaik/image/upload/dsi/...
-
-7. Confirm ERP synchronization:
-   Check ERPNext product record for updated media URLs
-
-8. Validate monitoring metrics:
-   Review dashboard for processing completion</code></pre>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Create Feature Branch</h3>
+                    <p>Create a new branch for your feature or fix.</p>
                 </div>
-            </div>
-
-            <h3 class="content-section__subtitle" id="governance">Governance & Compliance</h3>
-            <div class="mermaid-container7">
-                <div class="mermaid">
-%%{init: {
-  "theme": "base",
-  "themeCSS": ".edgePath marker path { fill: #808080 !important; stroke: #536277 !important; }\n.marker { fill: #808080 !important; }\n.text-item-align { fill: #808080 !important; }\n.subgraph .title { fill: #808080 !important; }"
-}}%%
-graph TB
-    MH["Marayai Holdings<br>Parent Company"]
-    SF["Shaikdom Foundation<br>Non-Profit Arm"]
-    DSS["Designer Shaik Studio<br>Creative Unit"]
-    DSI["DSI Product Repository<br>Content Hub"]
-    
-    MH --> SF
-    MH --> DSS
-    DSS --> DSI
-    SF --> DSI
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Test Changes</h3>
+                    <p>Ensure all tests pass and documentation is updated.</p>
                 </div>
-            </div>
-
-            <h3 class="content-section__subtitle">Digital Asset Ownership</h3>
-            <p>All digital assets created or acquired by any entity within the DSI ecosystem are ultimately owned by Marayai Holdings. Usage rights, licensing, and distribution are governed by specific protocols outlined in this guide. The system maintains comprehensive audit trails for all asset modifications, approvals, and distributions to ensure compliance with intellectual property regulations.</p>
-            
-            <h3 class="content-section__subtitle">Compliance Framework</h3>
-            <p>The architecture adheres to regional data privacy laws including GDPR and ADGM regulations. All processing activities are logged in PostgreSQL with immutable audit trails. Regular compliance audits are conducted through automated reporting systems integrated with the workflow engine. The system implements SHA-256 hashed approval certificates at each PLM gate to ensure immutable compliance records.</p>
-
-            <h3 class="content-section__subtitle">Data Governance Policies</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Data Category</th>
-                        <th scope="col">Retention Policy</th>
-                        <th scope="col">Access Control</th>
-                        <th scope="col">Backup Strategy</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Data Category">Product Media</td><td data-label="Retention Policy">Permanent</td><td data-label="Access Control">Role-based (Design Team)</td><td data-label="Backup Strategy">Multi-tier (Drive, NAS, Cloud)</td></tr>
-                    <tr><td data-label="Data Category">Processing Logs</td><td data-label="Retention Policy">7 years</td><td data-label="Access Control">IT Admin only</td><td data-label="Backup Strategy">PostgreSQL automated backup</td></tr>
-                    <tr><td data-label="Data Category">Approval Records</td><td data-label="Retention Policy">Permanent</td><td data-label="Access Control">Management + Legal</td><td data-label="Backup Strategy">Immutable audit trail</td></tr>
-                    <tr><td data-label="Data Category">AI Metadata</td><td data-label="Retention Policy">Linked to source asset</td><td data-label="Access Control">System automated</td><td data-label="Backup Strategy">Weaviate cluster backup</td></tr>
-                    <tr><td data-label="Data Category">MCP Context</td><td data-label="Retention Policy">Permanent</td><td data-label="Access Control">System + Audit</td><td data-label="Backup Strategy">PostgreSQL + JSON-LD</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle">Implementation Roadmap</h3>
-            <p>The journey to a fully governed knowledge graph follows these key implementation steps:</p>
-            
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Phase</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Timeline</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td data-label="Phase">Domain Workshop</td><td data-label="Description">Finalize vocabulary and define relationship cardinalities</td>><td data-label="Status">✅ Complete</td></tr>
-                    <tr><td data-label="Phase">PostgreSQL Migrations</td><td data-label="Description">Implement schema changes, new tables and JSONB indexes</td><<td data-label="Status">🚧 In Progress</td></tr>
-                    <tr><td data-label="Phase">Weaviate Cluster Deployment</td><td data-label="Description">Deploy 3-node HA cluster with multi-tenancy</td><td data-label="Status">📋 Planned</td></tr>
-                    <tr><td data-label="Phase">ETL Backfill</td><td data-label="Description">Ingest existing Drive folders and OpenAI embedding batch</td><td data-label="Status">📋 Planned</td></tr>
-                    <tr><td data-label="Phase">API Stitching</td><td data-label="Description">Develop n8n nodes for ERPNext v15, Cloudinary, Webflow</td><td data-label="Status">📋 Planned</td></tr>
-                    <tr><td data-label="Phase">Governance Rollout</td><td data-label="Description">Enable certificate generation and audit dashboards</td>td data-label="Status">📋 Planned</td></tr>
-                    <tr><td data-label="Phase">RAG Pilot</td><td data-label="Description">Launch semantic search in Designer Studio portal</td><td data-label="Status">📋 Planned</td></tr>
-                </tbody>
-            </table>
-
-            <h3 class="content-section__subtitle">Key Takeaways</h3>
-            <div class="highlight-box">
-                <strong>Shared Ontology:</strong> Establishing a shared ontology eliminates fragility and ensures consistency across AI, SQL, and REST layers.<br><br>
-                <strong>Optimized Performance:</strong> The combination of JSONB with GIN indexes in PostgreSQL ensures fast relational queries, while Weaviate efficiently handles semantic similarity searches.<br><br>
-                <strong>Future-Proofing:</strong> Leveraging open standards (IPTC, Dublin Core, Schema.org) future-proofs our data model, facilitating easier collaboration with partners and compliance with regulations.<br><br>
-                <strong>Seamless Integration:</strong> This strategy slots cleanly into our existing DSI event-driven architecture, avoiding the need for a disruptive rip-and-replace overhaul.
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Submit PR</h3>
+                    <p>Create a pull request with clear description of changes.</p>
+                </div>
             </div>
         </section>
 
     </main>
 
     <footer class="footer">
-        <p>© 2025 DSI Media Repository Architecture Guide</p>
-        <p>This documentation provides complete technical specifications for deploying the DSI Media Repository Integration Architecture with automated workflows, intelligent approval systems, and comprehensive monitoring.</p>
-        <p>Architecture: Event-driven RabbitMQ processing with multi-channel approval workflows, AI-powered content analysis, and automated cross-platform synchronization</p>
-        <p>Maintained by: DSI Technical Team</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Documentation</h4>
+                <ul>
+                    <li><a href="#platform-overview">Platform Overview</a></li>
+                    <li><a href="#getting-started">Getting Started</a></li>
+                    <li><a href="#api-endpoints">API Reference</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://github.com/your-org">GitHub</a></li>
+                    <li><a href="https://discord.gg/your-server">Discord</a></li>
+                    <li><a href="mailto:dev@designershaik.com">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DSI Developer Hub. All rights reserved.</p>
+            <p>Built with <i class="fas fa-heart"></i> by the DSI Team</p>
+        </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
-<script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <script src="script.js?v=20251217.14"></script>
 </body>
 </html>

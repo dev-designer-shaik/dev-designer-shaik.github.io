@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDempiere MCP Server - DSI Developer Hub</title>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css?v=20251217.14">
+    <link rel="stylesheet" href="components.css?v=20251217.14">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+    <!-- Code Highlight -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__content">
+            <div class="header__logo-container">
+                <a class="header__home" href="index.html" aria-label="Home">
+                    <img src="logo.webp" alt="DSI Logo" class="header__logo" />
+                </a>
+                <button class="header__sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">Menu</button>
+            </div>
+            <div class="header__text">
+                <h1 class="header__title">iDempiere MCP</h1>
+                <p class="header__subtitle">Secure MCP server for iDempiere database access</p>
+            </div>
+            <div class="header__actions">
+                <button class="header__search-btn" id="searchToggle" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="search-container" id="searchContainer">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search documentation...">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </header>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav-header">
+            <button class="nav-collapse-btn" id="navCollapseBtn" aria-label="Collapse navigation">
+                <span class="nav-collapse-icon">◀</span>
+            </button>
+        </div>
+        <div class="nav-tree" id="navTree"></div>
+    </nav>
+
+    <main class="main-content" id="main-content">
+        <nav class="page-tabs" id="pageTabs" aria-label="Repository sections"></nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <i class="fas fa-database"></i>
+                    iDempiere MCP Server
+                </h1>
+                <p class="hero-subtitle">
+                    Secure Model Context Protocol server for iDempiere ERP database access
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Tools</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Read-Only</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">API</span>
+                        <span class="stat-label">Auth</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">FastAPI</span>
+                        <span class="stat-label">Framework</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repo Content (switched via top page tabs + hash) -->
+        <div class="tab-content repo-tab-content">
+                <!-- Overview Tab -->
+                <div class="tab-pane active" id="overview-tab">
+                    <section class="doc-section">
+                        <h2>Introduction</h2>
+                        <p>
+                            The iDempiere MCP Server is a production-ready Model Context Protocol (MCP) server
+                            specifically designed for secure, controlled access to iDempiere ERP databases. It serves
+                            as an intermediary layer that allows AI agents to safely query iDempiere data using
+                            standardized MCP protocol instead of direct database connections.
+                        </p>
+
+                        <h3>Key Benefits</h3>
+                        <div class="requirements-grid">
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-shield-alt"></i> Enhanced Security</h4>
+                                <ul>
+                                    <li>Credentials isolated on EC2 server</li>
+                                    <li>API layer authentication</li>
+                                    <li>Read-only database access</li>
+                                    <li>Audit logging</li>
+                                </ul>
+                            </div>
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-plug"></i> Simplified Integration</h4>
+                                <ul>
+                                    <li>Single MCP client tool</li>
+                                    <li>Standardized protocol</li>
+                                    <li>AI agent friendly</li>
+                                    <li>Replaces multiple PostgreSQL nodes</li>
+                                </ul>
+                            </div>
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-chart-line"></i> Better Performance</h4>
+                                <ul>
+                                    <li>Connection pooling</li>
+                                    <li>Query result caching</li>
+                                    <li>5-500ms response times</li>
+                                    <li>Concurrent connection support</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>Architecture Overview</h3>
+                        <div class="mermaid-container">
+                            <div class="mermaid" id="architecture-overview">
+                                graph TB
+                                    subgraph "Client Layer"
+                                        n8n[n8n Workflow]
+                                        AI[AI Assistant]
+                                        UI[Open WebUI]
+                                    end
+
+                                    subgraph "Security Layer"
+                                        Auth[Authentication<br/>API Key/Token]
+                                        CORS[CORS Headers]
+                                        Log[Request Logging]
+                                    end
+
+                                    subgraph "MCP Server<br/>FastAPI (Port 8000)"
+                                        Protocol[MCP Protocol Handler]
+                                        Validator[Query Validator]
+                                        Pool[Connection Pool]
+                                    end
+
+                                    subgraph "Database Layer"
+                                        PG[PostgreSQL<br/>Port 5432]
+                                        Schema[iDempiere Schema<br/>adempiere]
+                                    end
+
+                                    n8n --> Auth
+                                    AI --> Auth
+                                    UI --> Auth
+                                    Auth --> Protocol
+                                    Protocol --> Validator
+                                    Validator --> Pool
+                                    Pool --> PG
+                                    PG --> Schema
+
+                                    style Auth fill:#e1f5fe
+                                    style Protocol fill:#f3e5f5
+                                    style PG fill:#e8f5e9
+                            </div>
+                        </div>
+
+                        <h3>Feature Comparison</h3>
+                        <div class="reference-card">
+                            <table class="reference-table">
+                                <thead>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Direct PostgreSQL</th>
+                                        <th>iDempiere MCP Server</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Credentials Storage</td>
+                                        <td>n8n (Risk)</td>
+                                        <td>EC2 Server (Secure)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Access Control</td>
+                                        <td>Database level</td>
+                                        <td>API + Database</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Query Limits</td>
+                                        <td>None</td>
+                                        <td>Configurable</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Audit Trail</td>
+                                        <td>Limited</td>
+                                        <td>Complete</td>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <td>Integration</td>
+                                        <td>Multiple nodes</td>
+                                        <td>Single tool</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Security</td>
+                                        <td>Risk of exposure</td>
+                                        <td>Enterprise grade</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Quick Stats</h3>
+                        <div class="tech-stack-container">
+                            <div class="tech-category">
+                                <h3>Performance Metrics</h3>
+                                <div class="tech-items">
+                                    <div class="tech-item">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>Response Time: 5-500ms</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-users"></i>
+                                        <span>Concurrent: ~100 connections</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-database"></i>
+                                        <span>Max Results: 1,000 rows</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Query Timeout: 30 seconds</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tech-category">
+                                <h3>Supported Features</h3>
+                                <div class="tech-items">
+                                    <div class="tech-item">
+                                        <i class="fas fa-key"></i>
+                                        <span>Multiple Auth Methods</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-lock"></i>
+                                        <span>Schema Enforcement</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Connection Pooling</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-file-alt"></i>
+                                        <span>Request Logging</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Database Schema Tab -->
+                <div class="tab-pane" id="database-tab">
+                    <section class="doc-section">
+                        <h2>Database Connection Architecture</h2>
+                        <p>
+                            The iDempiere MCP server uses a secure, pooled connection architecture to efficiently
+                            manage database connections while maintaining security and performance.
+                        </p>
+
+                        <div class="mermaid-container">
+                            <div class="mermaid" id="db-connection-arch">
+                                graph TB
+                                    subgraph "Application Layer"
+                                        MCP[MCP Server<br/>FastAPI]
+                                    end
+
+                                    subgraph "Connection Pool Layer"
+                                        Pool[psycopg2 Pool<br/>min: 2, max: 20]
+                                        Manager[Pool Manager]
+                                        Validator[Connection Validator]
+                                    end
+
+                                    subgraph "Transport Layer"
+                                        TCP[TCP Connection<br/>localhost:5432]
+                                        SSL[SSL/TLS Optional]
+                                    end
+
+                                    subgraph "Database Layer"
+                                        PG[(PostgreSQL<br/>iDempiere)]
+                                        Schema[adempiere schema]
+                                        Tables[Standard Tables<br/>c_bpartner, m_product, ...]
+                                    end
+
+                                    MCP --> Manager
+                                    Manager --> Pool
+                                    Pool --> Validator
+                                    Validator --> TCP
+                                    TCP --> SSL
+                                    SSL --> PG
+                                    PG --> Schema
+                                    Schema --> Tables
+
+                                    style Pool fill:#e1f5fe
+                                    style PG fill:#e8f5e9
+                            </div>
+                        </div>
+
+                        <h3>Key Tables Overview</h3>
+                        <div class="api-endpoints">
+                            <div class="endpoint-group">
+                                <h3>Business Entities</h3>
+                                <ul>
+                                    <li><strong>c_bpartner</strong> - Business Partners (Customers/Suppliers)</li>
+                                    <li><strong>ad_client</strong> - Client/Tenant information</li>
+                                    <li><strong>ad_org</strong> - Organization structure</li>
+                                    <li><strong>c_location</strong> - Address information</li>
+                                </ul>
+                            </div>
+                            <div class="endpoint-group">
+                                <h3>Product & Sales</h3>
+                                <ul>
+                                    <li><strong>m_product</strong> - Products/Items master</li>
+                                    <li><strong>c_order</strong> - Sales orders</li>
+                                    <li><strong>c_invoice</strong> - Invoices</li>
+                                    <li><strong>c_payment</strong> - Payments</li>
+                                </ul>
+                            </div>
+                            <div class="endpoint-group">
+                                <h3>Inventory & Warehouse</h3>
+                                <ul>
+                                    <li><strong>m_warehouse</strong> - Warehouse definition</li>
+                                    <li><strong>m_inout</strong> - Material receipts/shipments</li>
+                                    <li><strong>m_inventory</strong> - Inventory counts</li>
+                                    <li><strong>m_transaction</strong> - Stock movements</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>Table Relationships</h3>
+                        <div class="mermaid-container">
+                            <div class="mermaid" id="table-relationships">
+                                erDiagram
+                                    c_bpartner ||--o{ c_bpartner_location : has
+                                    c_bpartner ||--o{ c_order : places
+                                    c_bpartner ||--o{ c_invoice : receives
+                                    c_bpartner ||--o{ c_payment : makes
+
+                                    c_order ||--o{ c_orderline : contains
+                                    c_order ||--|| c_invoice : generates
+
+                                    m_product ||--o{ c_orderline : ordered_in
+                                    m_product ||--o{ m_inoutline : shipped_in
+                                    m_product ||--o{ m_inventoryline : counted_in
+
+                                    m_warehouse ||--o{ m_inout : manages
+                                    m_warehouse ||--o{ m_inventory : performs
+
+                                    c_bpartner {
+                                        int c_bpartner_id PK
+                                        string value
+                                        string name
+                                        boolean iscustomer
+                                        boolean isvendor
+                                        boolean isactive
+                                        timestamp created
+                                        timestamp updated
+                                    }
+
+                                    m_product {
+                                        int m_product_id PK
+                                        string value
+                                        string name
+                                        string description
+                                        boolean isactive
+                                        string upc
+                                        timestamp created
+                                    }
+
+                                    c_order {
+                                        int c_order_id PK
+                                        string documentno
+                                        int c_bpartner_id FK
+                                        date dateordered
+                                        decimal grandtotal
+                                        string docstatus
+                                    }
+                            </div>
+                        </div>
+
+                        <h3>Schema Security</h3>
+                        <div class="reference-card">
+                            <table class="reference-table">
+                                <thead>
+                                    <tr>
+                                        <th>Security Feature</th>
+                                        <th>Implementation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Schema Restriction</td>
+                                        <td>Only 'adempiere' schema accessible</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Query Type</td>
+                                        <td>SELECT only (no INSERT/UPDATE/DELETE)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Connection</td>
+                                        <td>Localhost or secure VPN only</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Credentials</td>
+                                        <td>Environment variables, not in code</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pool Limits</td>
+                                        <td>Max 20 concurrent connections</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Tools Tab -->
+                <div class="tab-pane" id="tools-tab">
+                    <section class="doc-section">
+                        <h2>Available Tools</h2>
+                        <p>
+                            The iDempiere MCP server provides 6 specialized tools for database access and
+                            analysis, each designed for specific use cases while maintaining security.
+                        </p>
+
+                        <div class="mermaid-container">
+                            <div class="mermaid" id="tools-flow">
+                                graph TD
+                                    subgraph "Tool Categories"
+                                        Discovery[Discovery Tools]
+                                        Query[Query Tools]
+                                        Business[Business Tools]
+                                    end
+
+                                    subgraph "Discovery Tools"
+                                        T1[list_tables]
+                                        T2[get_table_schema]
+                                    end
+
+                                    subgraph "Query Tools"
+                                        T3[execute_query]
+                                        T4[get_record_count]
+                                    end
+
+                                    subgraph "Business Tools"
+                                        T5[get_business_partners]
+                                        T6[get_products]
+                                    end
+
+                                    Discovery --> T1
+                                    Discovery --> T2
+                                    Query --> T3
+                                    Query --> T4
+                                    Business --> T5
+                                    Business --> T6
+
+                                    style Discovery fill:#e1f5fe
+                                    style Query fill:#f3e5f5
+                                    style Business fill:#e8f5e9
+                            </div>
+                        </div>
+
+                        <h3>Tool Documentation</h3>
+
+                        <!-- list_tables Tool -->
+                        <div class="reference-card">
+                            <h3><i class="fas fa-table"></i> list_tables</h3>
+                            <p><strong>Purpose:</strong> Lists all tables in iDempiere database with their sizes</p>
+
+                            <h4>Parameters:</h4>
+                            <p>None required</p>
+
+                            <h4>Example Usage:</h4>
+                            <div class="code-header">
+                                <span>JSON Request</span>
+                                <button class="copy-btn" onclick="copyCode('list-tables-json')">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code id="list-tables-json" class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "list_tables",
+    "arguments": {}
+  }
+}</code></pre>
+
+                            <h4>Sample Output:</h4>
+                            <pre><code class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "content": [{
+      "type": "text",
+      "text": "Tables in iDempiere database:\n\nc_bpartner (124 MB)\nm_product (89 MB)\nc_order (245 MB)\nc_invoice (198 MB)\nm_transaction (512 MB)\n... and 287 more tables"
+    }]
+  }
+}</code></pre>
+                        </div>
+
+                        <!-- get_table_schema Tool -->
+                        <div class="reference-card">
+                            <h3><i class="fas fa-project-diagram"></i> get_table_schema</h3>
+                            <p><strong>Purpose:</strong> Get detailed schema for any specific table</p>
+
+                            <h4>Parameters:</h4>
+                            <ul>
+                                <li><code>table_name</code> (required) - Name of the table to inspect</li>
+                            </ul>
+
+                            <h4>Example Usage:</h4>
+                            <div class="code-header">
+                                <span>Get c_bpartner schema</span>
+                                <button class="copy-btn" onclick="copyCode('get-schema-json')">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code id="get-schema-json" class="language-json">{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/call",
+  "params": {
+    "name": "get_table_schema",
+    "arguments": {
+      "table_name": "c_bpartner"
+    }
+  }
+}</code></pre>
+                        </div>
+
+                        <!-- execute_query Tool -->
+                        <div class="reference-card">
+                            <h3><i class="fas fa-code"></i> execute_query</h3>
+                            <p><strong>Purpose:</strong> Execute custom SELECT queries with security restrictions</p>
+
+                            <h4>Parameters:</h4>
+                            <ul>
+                                <li><code>query</code> (required) - PostgreSQL SELECT query with 'adempiere.' prefix</li>
+                                <li><code>limit</code> (optional, default: 100, max: 1000) - Maximum rows to return</li>
+                            </ul>
+
+                            <h4>Security Notes:</h4>
+                            <ul>
+                                <li>Only SELECT statements allowed</li>
+                                <li>Must use 'adempiere.' schema prefix</li>
+                                <li>Query timeout: 30 seconds</li>
+                                <li>Max 1000 rows returned</li>
+                            </ul>
+
+                            <h4>Example:</h4>
+                            <pre><code class="language-sql">SELECT c_bpartner_id, name, iscustomer, isvendor
+FROM adempiere.c_bpartner
+WHERE isactive = 'Y'
+LIMIT 10</code></pre>
+                        </div>
+
+                        <!-- get_record_count Tool -->
+                        <div class="reference-card">
+                            <h3><i class="fas fa-calculator"></i> get_record_count</h3>
+                            <p><strong>Purpose:</strong> Get total record count with optional filtering</p>
+
+                            <h4>Parameters:</h4>
+                            <ul>
+                                <li><code>table_name</code> (required) - Table name without schema prefix</li>
+                                <li><code>where_clause</code> (optional) - Filter condition without WHERE keyword</li>
+                            </ul>
+
+                            <h4>Example Usage:</h4>
+                            <pre><code class="language-json">{
+  "name": "get_record_count",
+  "arguments": {
+    "table_name": "c_bpartner",
+    "where_clause": "isactive='Y' AND iscustomer='Y'"
+  }
+}</code></pre>
+                        </div>
+
+                        <!-- get_business_partners Tool -->
+                        <div class="reference-card">
+                            <h3><i class="fas fa-handshake"></i> get_business_partners</h3>
+                            <p><strong>Purpose:</strong> Query business partners from c_bpartner table</p>
+
+                            <h4>Parameters:</h4>
+                            <ul>
+                                <li><code>limit</code> (optional, default: 100) - Maximum records</li>
+                                <li><code>is_customer</code> (optional) - Filter for customers only</li>
+                                <li><code>is_vendor</code> (optional) - Filter for vendors only</li>
+                            </ul>
+
+                            <h4>Example:</h4>
+                            <pre><code class="language-json">{
+  "name": "get_business_partners",
+  "arguments": {
+    "limit": 50,
+    "is_customer": true
+  }
+}</code></pre>
+                        </div>
+
+                        <!-- get_products Tool -->
+                        <div class="reference-card">
+                            <h3><i class="fas fa-box"></i> get_products</h3>
+                            <p><strong>Purpose:</strong> Query products from m_product table</p>
+
+                            <h4>Parameters:</h4>
+                            <ul>
+                                <li><code>limit</code> (optional, default: 100) - Maximum records</li>
+                                <li><code>is_active</code> (optional, default: true) - Filter for active products</li>
+                            </ul>
+
+                            <h4>Example:</h4>
+                            <pre><code class="language-json">{
+  "name": "get_products",
+  "arguments": {
+    "limit": 20,
+    "is_active": true
+  }
+}</code></pre>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- API Reference Tab -->
+                <div class="tab-pane" id="api-tab">
+                    <section class="doc-section">
+                        <h2>MCP Protocol Reference</h2>
+                        <p>
+                            The iDempiere MCP server implements the Model Context Protocol (MCP) specification
+                            for standardized communication with AI agents and automation tools.
+                        </p>
+
+                        <h3>Authentication Methods</h3>
+                        <div class="requirements-grid">
+                            <div class="requirement-card">
+                                <h4>Bearer Token</h4>
+                                <pre><code class="language-http">Authorization: Bearer your_secure_api_key</code></pre>
+                            </div>
+                            <div class="requirement-card">
+                                <h4>Frappe-style</h4>
+                                <pre><code class="language-http">Authorization: token api_key:secret</code></pre>
+                            </div>
+                            <div class="requirement-card">
+                                <h4>Plain API Key</h4>
+                                <pre><code class="language-http">Authorization: your_api_key</code></pre>
+                            </div>
+                        </div>
+
+                        <h3>Endpoints</h3>
+                        <div class="api-endpoints">
+                            <div class="endpoint-group">
+                                <h3>POST /message</h3>
+                                <p>Main MCP protocol endpoint for all tool calls</p>
+                                <pre><code class="language-bash">curl -X POST http://localhost:8000/message \
+  -H "Authorization: Bearer your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize",...}'</code></pre>
+                            </div>
+                            <div class="endpoint-group">
+                                <h3>GET /health</h3>
+                                <p>Health check endpoint</p>
+                                <pre><code class="language-bash">curl http://localhost:8000/health</code></pre>
+                                <p>Returns: <code>{"status": "healthy", "database": "connected"}</code></p>
+                            </div>
+                            <div class="endpoint-group">
+                                <h3>GET /</h3>
+                                <p>Server information</p>
+                                <pre><code class="language-bash">curl http://localhost:8000/</code></pre>
+                                <p>Returns server info and supported protocol version</p>
+                            </div>
+                        </div>
+
+                        <h3>Protocol Methods</h3>
+                        <div class="reference-grid">
+                            <div class="reference-card">
+                                <h3>initialize</h3>
+                                <p>Initialize MCP connection</p>
+                                <table class="reference-table">
+                                    <tr><td>Method</td><td>initialize</td></tr>
+                                    <tr><td>Required</td><td>Yes (first call)</td></tr>
+                                    <tr><td>Params</td><td>protocolVersion, capabilities, clientInfo</td></tr>
+                                </table>
+                            </div>
+                            <div class="reference-card">
+                                <h3>tools/list</h3>
+                                <p>List all available tools</p>
+                                <table class="reference-table">
+                                    <tr><td>Method</td><td>tools/list</td></tr>
+                                    <tr><td>Required</td><td>No</td></tr>
+                                    <tr><td>Returns</td><td>Array of tool definitions</td></tr>
+                                </table>
+                            </div>
+                            <div class="reference-card">
+                                <h3>tools/call</h3>
+                                <p>Execute a specific tool</p>
+                                <table class="reference-table">
+                                    <tr><td>Method</td><td>tools/call</td></tr>
+                                    <tr><td>Required</td><td>Yes (for queries)</td></tr>
+                                    <tr><td>Params</td><td>name, arguments</td></tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h3>Error Handling</h3>
+                        <div class="trouble-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Common Error Responses</h3>
+
+                            <div class="issue-item">
+                                <h4>Authentication Error</h4>
+                                <p>Invalid or missing API key</p>
+                                <code class="language-json">{"error": {"code": -32600, "message": "Unauthorized"}}</code>
+                            </div>
+
+                            <div class="issue-item">
+                                <h4>Invalid Method</h4>
+                                <p>Unsupported MCP method</p>
+                                <code class="language-json">{"error": {"code": -32601, "message": "Method not found"}}</code>
+                            </div>
+
+                            <div class="issue-item">
+                                <h4>Invalid Query</h4>
+                                <p>SQL syntax or security violation</p>
+                                <code class="language-json">{"error": {"code": -32602, "message": "Invalid query: Only SELECT allowed"}}</code>
+                            </div>
+
+                            <div class="issue-item">
+                                <h4>Database Error</h4>
+                                <p>Connection or query execution error</p>
+                                <code class="language-json">{"error": {"code": -32603, "message": "Database connection failed"}}</code>
+                            </div>
+                        </div>
+
+                        <h3>Rate Limits</h3>
+                        <div class="config-grid">
+                            <div class="config-card">
+                                <h4>Default Limits</h4>
+                                <ul>
+                                    <li>100 requests per minute</li>
+                                    <li>1000 rows per query</li>
+                                    <li>30 second query timeout</li>
+                                    <li>20 concurrent connections</li>
+                                </ul>
+                            </div>
+                            <div class="config-card">
+                                <h4>Rate Limit Headers</h4>
+                                <ul>
+                                    <li><code>X-RateLimit-Limit</code> - Requests per minute</li>
+                                    <li><code>X-RateLimit-Remaining</code> - Remaining requests</li>
+                                    <li><code>X-RateLimit-Reset</code> - Reset timestamp</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Deployment Tab -->
+                <div class="tab-pane" id="deployment-tab">
+                    <section class="doc-section">
+                        <h2>Production Deployment</h2>
+                        <p>
+                            The iDempiere MCP server is designed for production deployment on Linux servers
+                            with systemd service management and comprehensive security configurations.
+                        </p>
+
+                        <h3>Deployment Architecture</h3>
+                        <div class="mermaid-container">
+                            <div class="mermaid" id="deployment-arch">
+                                graph TB
+                                    subgraph "Load Balancer (Optional)"
+                                        LB[nginx/HAProxy]
+                                    end
+
+                                    subgraph "Application Server<br/>EC2/VM"
+                                        subgraph "Systemd"
+                                            Service[idempiere-mcp.service<br/>Auto-restart<br/>Logging]
+                                        end
+
+                                        subgraph "Python Environment"
+                                            App[app.py<br/>FastAPI]
+                                            VEnv[Virtual Environment<br/>Python 3.9+]
+                                        end
+
+                                        subgraph "Configuration"
+                                            Env[.env file<br/>Database creds<br/>API keys]
+                                            Config[app settings<br/>Pool config<br/>Security]
+                                        end
+                                    end
+
+                                    subgraph "Database Server"
+                                        PG[PostgreSQL<br/>iDempiere/DSILive]
+                                    end
+
+                                    subgraph "Monitoring"
+                                        Logs[Journalctl logs]
+                                        Metrics[Custom metrics]
+                                        Health[Health endpoint]
+                                    end
+
+                                    LB --> Service
+                                    Service --> App
+                                    App --> VEnv
+                                    App --> Env
+                                    App --> Config
+                                    App --> PG
+                                    Service --> Logs
+                                    App --> Metrics
+                                    App --> Health
+
+                                    style Service fill:#e1f5fe
+                                    style PG fill:#e8f5e9
+                                    style Env fill:#fff3e0
+                            </div>
+                        </div>
+
+                        <h3>Systemd Service Configuration</h3>
+                        <div class="code-header">
+                            <span>/etc/systemd/system/idempiere-mcp.service</span>
+                            <button class="copy-btn" onclick="copyCode('systemd-service')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <pre><code id="systemd-service" class="language-ini">[Unit]
+Description=iDempiere MCP Server
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/idempiere-mcp
+Environment=PATH=/opt/idempiere-mcp/venv/bin
+ExecStart=/opt/idempiere-mcp/venv/bin/python app.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+
+                        <h3>Environment Configuration</h3>
+                        <div class="code-header">
+                            <span>.env file</span>
+                            <button class="copy-btn" onclick="copyCode('env-config')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <pre><code id="env-config" class="language-bash"># Server Configuration
+PORT=8000
+HOST=0.0.0.0
+
+# Authentication
+REQUIRE_AUTH=true
+API_KEY=your_secure_generated_api_key_here
+
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=idempiere
+DB_USER=adempiere
+DB_PASSWORD=your_secure_db_password
+
+# Connection Pool
+DB_MIN_CONNECTIONS=2
+DB_MAX_CONNECTIONS=20
+
+# Security
+CORS_ORIGINS=["http://localhost:3000", "https://your-domain.com"]</code></pre>
+
+                        <h3>Deployment Steps</h3>
+                        <div class="contribute-steps">
+                            <div class="step-card">
+                                <div class="step-number">1</div>
+                                <h3>Server Setup</h3>
+                                <p>Deploy EC2 instance (Ubuntu 20.04+), install Python 3.9+, PostgreSQL client</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">2</div>
+                                <h3>Application Setup</h3>
+                                <p>Clone repository, create virtual environment, install dependencies</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">3</div>
+                                <h3>Configure</h3>
+                                <p>Create .env file with database credentials, configure API key</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">4</div>
+                                <h3>Service Setup</h3>
+                                <p>Create systemd service, enable and start the service</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">5</div>
+                                <h3>Security</h3>
+                                <p>Configure firewall, SSL certificate, monitoring</p>
+                            </div>
+                        </div>
+
+                        <h3>Monitoring & Logging</h3>
+                        <div class="config-grid">
+                            <div class="config-card">
+                                <h4>View Logs</h4>
+                                <ul>
+                                    <li>Systemd: <code>journalctl -u idempiere-mcp</code></li>
+                                    <li>Real-time: <code>journalctl -f -u idempiere-mcp</code></li>
+                                    <li>Since boot: <code>journalctl -b -u idempiere-mcp</code></li>
+                                </ul>
+                            </div>
+                            <div class="config-card">
+                                <h4>Service Management</h4>
+                                <ul>
+                                    <li>Start: <code>sudo systemctl start idempiere-mcp</code></li>
+                                    <li>Stop: <code>sudo systemctl stop idempiere-mcp</code></li>
+                                    <li>Status: <code>sudo systemctl status idempiere-mcp</code></li>
+                                    <li>Restart: <code>sudo systemctl restart idempiere-mcp</code></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>Security Best Practices</h3>
+                        <div class="trouble-card">
+                            <h3><i class="fas fa-shield-alt"></i> Security Checklist</h3>
+
+                            <div class="issue-item">
+                                <h4>Network Security</h4>
+                                <ul>
+                                    <li>Configure AWS Security Groups to allow only required IPs</li>
+                                    <li>Use VPC with private subnets</li>
+                                    <li>Enable SSL/TLS with nginx reverse proxy</li>
+                                </ul>
+                            </div>
+
+                            <div class="issue-item">
+                                <h4>Application Security</h4>
+                                <ul>
+                                    <li>Generate strong, random API keys</li>
+                                    <li>Rotate API keys regularly</li>
+                                    <li>Monitor logs for suspicious activity</li>
+                                    <li>Keep dependencies updated</li>
+                                </ul>
+                            </div>
+
+                            <div class="issue-item">
+                                <h4>Database Security</h4>
+                                <ul>
+                                    <li>Use dedicated database user with limited privileges</li>
+                                    <li>Enable PostgreSQL SSL connections</li>
+                                    <li>Regular backups of iDempiere database</li>
+                                    <li>Monitor for unauthorized access attempts</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>Performance Tuning</h3>
+                        <div class="tech-stack-container">
+                            <div class="tech-category">
+                                <h3>Connection Pool Settings</h3>
+                                <div class="tech-items">
+                                    <div class="tech-item">
+                                        <i class="fas fa-database"></i>
+                                        <span>Min connections: 2-5</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-users"></i>
+                                        <span>Max connections: 10-20</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Connection timeout: 30s</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-sync"></i>
+                                        <span>Pool recycling: 1 hour</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tech-category">
+                                <h3>Query Optimization</h3>
+                                <div class="tech-items">
+                                    <div class="tech-item">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>Query limit: 1000 rows</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-stopwatch"></i>
+                                        <span>Query timeout: 30s</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-memory"></i>
+                                        <span>Memory usage: ~100MB</span>
+                                    </div>
+                                    <div class="tech-item">
+                                        <i class="fas fa-server"></i>
+                                        <span>CPU usage: < 5% idle</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>DSI Developer Hub</h4>
+                <p>Comprehensive documentation for the DSI integrated platform</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-docker"></i></a>
+                    <a href="#"><i class="fab fa-python"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Overview</a></li>
+                    <li><a href="docker-system.html">Docker System</a></li>
+                    <li><a href="ai-ecosystem.html">AI Ecosystem</a></li>
+                    <li><a href="frappe-mcp.html">Frappe MCP</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">API Documentation</a></li>
+                    <li><a href="#">Getting Started</a></li>
+                    <li><a href="#">Community Forum</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Repository</h4>
+                <p>Clone the repository:</p>
+                <code>git clone https://github.com/mdadfrappe/idempiere-mcp</code>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DSI Developer Hub. Built with <i class="fas fa-heart"></i> using Docusaurus.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ini.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-http.min.js"></script>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js?v=20251217.14"></script>
+</body>
+</html>

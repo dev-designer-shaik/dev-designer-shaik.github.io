@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ecosystem - DSI Developer Hub</title>
+    <meta name="description" content="Comprehensive guide to DSI's AI-powered ecosystem featuring Open WebUI, NVIDIA NIM, and MCP connectors">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20251217.14">
+    <link rel="stylesheet" href="components.css?v=20251217.14">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header__content">
+            <div class="header__logo-container">
+                <a class="header__home" href="index.html" aria-label="Home">
+                    <img src="logo.webp" alt="DSI Logo" class="header__logo">
+                </a>
+                <button class="header__sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="header__text">
+                <h1 class="header__title">AI Ecosystem</h1>
+                <p class="header__subtitle">GPU-Accelerated AI Platform with Intelligent Tool Connectors</p>
+            </div>
+            <div class="header__actions">
+                <button class="header__search-btn" id="searchToggle" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="search-container" id="searchContainer">
+            <input type="text" class="search-input" placeholder="Search documentation..." id="searchInput">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </header>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav-header">
+            <button class="nav-collapse-btn" id="navCollapseBtn" aria-label="Collapse navigation">
+                <span class="nav-collapse-icon">◀</span>
+            </button>
+        </div>
+        <div class="nav-tree" id="navTree"></div>
+    </nav>
+
+    <main class="main-content" id="mainContent">
+        <nav class="page-tabs" id="pageTabs" aria-label="Repository sections"></nav>
+        <section id="overview" class="content-section">
+            <div class="section-header">
+                <h2>AI Ecosystem Overview</h2>
+                <p class="section-description">
+                    A powerful AI-powered platform combining Open WebUI, NVIDIA NIM GPU acceleration,
+                    and Model Context Protocol (MCP) connectors for intelligent business operations.
+                </p>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number">RTX 3070 Ti</span>
+                    <span class="stat-label">GPU Acceleration</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">4+</span>
+                    <span class="stat-label">MCP Connectors</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Multi-user</span>
+                    <span class="stat-label">Chat Interface</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">OpenAI</span>
+                    <span class="stat-label">API Compatible</span>
+                </div>
+            </div>
+
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <div class="platform-icon">🎯</div>
+                    <h3>Open WebUI</h3>
+                    <p>Multi-user chat interface with provider integrations and comprehensive tool support for AI-powered interactions.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Port 3000</span>
+                        <span class="tag">Multi-user</span>
+                        <span class="tag">Tool Calling</span>
+                    </div>
+                    <a href="#open-webui-details" class="platform-link">Learn more →</a>
+                </div>
+
+                <div class="platform-card">
+                    <div class="platform-icon">⚡</div>
+                    <h3>NVIDIA NIM</h3>
+                    <p>GPU-accelerated inference engine exposing an OpenAI-compatible API for high-performance AI model execution.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Port 8000</span>
+                        <span class="tag">GPU Powered</span>
+                        <span class="tag">OpenAI API</span>
+                    </div>
+                    <a href="#nim-details" class="platform-link">Learn more →</a>
+                </div>
+
+                <div class="platform-card">
+                    <div class="platform-icon">🔌</div>
+                    <h3>MCP Connectors</h3>
+                    <p>Intelligent bridges connecting AI to business systems including QNAP NAS, ERPNext, and iDempiere for real-time data access.</p>
+                    <div class="platform-tags">
+                        <span class="tag">Real-time</span>
+                        <span class="tag">Business Data</span>
+                        <span class="tag">Automated</span>
+                    </div>
+                    <a href="#connectors" class="platform-link">Learn more →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="content-section">
+            <div class="section-header">
+                <h2>System Architecture</h2>
+                <p class="section-description">
+                    The AI Ecosystem architecture demonstrates seamless integration between GPU acceleration,
+                    user interface, and business system connectors.
+                </p>
+            </div>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+graph TB
+    subgraph "User Layer"
+        Browser[User Browser]
+        Browser --> |Port 3000| WebUI
+    end
+
+    subgraph "Application Layer"
+        WebUI[Open WebUI<br/>Multi-user Chat Interface]
+        WebUI --> |OpenAI API| NIM[NVIDIA NIM<br/>GPU Inference<br/>Port 8000]
+    end
+
+    subgraph "MCP Connector Layer"
+        QNAP[QNAP NAS Bridge<br/>Storage Operations]
+        PLM[PLM MCP Server<br/>Analytics & Search]
+        FRAPPE[Frappe MCP<br/>ERPNext Data]
+        IDEM[iDempiere MCP<br/>Database Queries]
+    end
+
+    subgraph "Infrastructure Layer"
+        GPU[RTX 3070 Ti<br/>8GB VRAM]
+        NIM --> GPU
+    end
+
+    subgraph "External Systems"
+        NAS[QNAP NAS<br/>Storage System]
+        ERP[ERPNext<br/>Business System]
+        IDP[iDempiere<br/>ERP Database]
+        Weaviate[Weaviate<br/>Vector DB]
+
+        QNAP --> NAS
+        PLM --> Weaviate
+        FRAPPE --> ERP
+        IDEM --> IDP
+    end
+
+    WebUI -.-> |MCP Tool Calls| QNAP
+    WebUI -.-> |MCP Tool Calls| PLM
+    WebUI -.-> |MCP Tool Calls| FRAPPE
+    WebUI -.-> |MCP Tool Calls| IDEM
+
+    classDef userLayer fill:#e1f5fe
+    classDef appLayer fill:#f3e5f5
+    classDef connectorLayer fill:#e8f5e8
+    classDef infraLayer fill:#fff3e0
+    classDef externalLayer fill:#fce4ec
+
+    class Browser,WebUI userLayer
+    class NIM appLayer
+    class QNAP,PLM,FRAPPE,IDEM connectorLayer
+    class GPU infraLayer
+    class NAS,ERP,IDP,Weaviate externalLayer
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="content-section">
+            <div class="section-header">
+                <h2>Key Features</h2>
+            </div>
+
+            <div class="tech-stack-container">
+                <div class="tech-category">
+                    <h3><i class="fas fa-brain"></i> AI Capabilities</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-microchip"></i>
+                            <div>
+                                <strong>GPU Acceleration</strong>
+                                <p>NVIDIA RTX 3070 Ti with 8GB VRAM for fast inference</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-comments"></i>
+                            <div>
+                                <strong>Multi-user Chat</strong>
+                                <p>Concurrent conversations with context preservation</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-tools"></i>
+                            <div>
+                                <strong>Tool Integration</strong>
+                                <p>AI can call business tools for real-time data</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3><i class="fas fa-plug"></i> Integration Points</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <strong>ERP Systems</strong>
+                                <p>Connect to ERPNext and iDempiere for business data</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-search"></i>
+                            <div>
+                                <strong>Semantic Search</strong>
+                                <p>Weaviate-powered vector search capabilities</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-server"></i>
+                            <div>
+                                <strong>NAS Integration</strong>
+                                <p>QNAP storage system operations and monitoring</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3><i class="fas fa-cogs"></i> Technical Features</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fas fa-code"></i>
+                            <div>
+                                <strong>OpenAI Compatible</strong>
+                                <p>Standard /v1 API endpoint for easy integration</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>Secure Access</strong>
+                                <p>Authenticated access to all business systems</p>
+                            </div>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <strong>Performance</strong>
+                                <p>Low latency responses with GPU acceleration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="installation" class="content-section">
+            <div class="section-header">
+                <h2>Installation Guide</h2>
+                <p class="section-description">
+                    Step-by-step instructions to deploy the AI Ecosystem with all components.
+                </p>
+            </div>
+
+            <div class="getting-started-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="prerequisites">Prerequisites</button>
+                    <button class="tab-btn" data-tab="setup">Initial Setup</button>
+                    <button class="tab-btn" data-tab="start">Start Services</button>
+                    <button class="tab-btn" data-tab="verify">Verify Setup</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="prerequisites">
+                        <h3>System Requirements</h3>
+                        <div class="requirements-grid">
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-microchip"></i> Hardware</h4>
+                                <ul>
+                                    <li>NVIDIA GPU (RTX 3070 Ti or better)</li>
+                                    <li>8GB+ VRAM recommended</li>
+                                    <li>16GB+ System RAM</li>
+                                    <li>50GB+ Free Disk Space</li>
+                                </ul>
+                            </div>
+                            <div class="requirement-card">
+                                <h4><i class="fas fa-software"></i> Software</h4>
+                                <ul>
+                                    <li>NVIDIA Drivers 535+</li>
+                                    <li>Docker & Docker Compose</li>
+                                    <li>NVIDIA Container Toolkit</li>
+                                    <li>NGC API Key</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="setup">
+                        <h3>Initial Configuration</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Clone and Configure</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code># Clone the repository
+cd /home/mdad
+git clone &lt;ai-ecosystem-repo&gt;
+cd AI-Ecosystem
+
+# Configure NGC API Key
+echo "NGC_API_KEY=your_ngc_api_key_here" > nvidia-nim/.env
+
+# Configure Open WebUI
+echo "OPENAI_API_BASE_URL=http://host.docker.internal:8000/v1" >> open-webui/.env
+echo "OPENAI_API_KEY=nim" >> open-webui/.env</code></pre>
+                        </div>
+
+                        <h3>Network Configuration</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Docker Network Setup</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code># Create shared network
+docker network create ai-ecosystem
+
+# Or use existing network from docker-system
+docker network connect docker-system_default</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="start">
+                        <h3>Start All Services</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Service Startup Script</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code># Using the startup script
+./scripts/start-all.sh
+
+# Or manually start services
+cd nvidia-nim
+docker-compose up -d
+
+cd ../open-webui
+docker-compose up -d
+
+# Start MCP connectors
+cd ../mcp-connectors/qnap
+npm start &</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="verify">
+                        <h3>Verify Installation</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Health Check Commands</span>
+                                <button class="copy-btn" onclick="copyCode(this)">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <pre><code># Check NIM models endpoint
+curl -s http://localhost:8000/v1/models
+
+# Verify GPU utilization
+nvidia-smi
+
+# Run health check script
+./scripts/health-check.sh
+
+# Test Open WebUI
+curl -s http://localhost:3000/api/config</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="configuration" class="content-section">
+            <div class="section-header">
+                <h2>Configuration Guide</h2>
+                <p class="section-description">
+                    Detailed configuration options for optimal performance and integration.
+                </p>
+            </div>
+
+            <div class="config-grid">
+                <div class="config-card">
+                    <h4>NVIDIA NIM Settings</h4>
+                    <ul>
+                        <li><strong>Model:</strong> mistralai/Mistral-7B-Instruct-v0.2</li>
+                        <li><strong>GPU Memory:</strong> NIM_GPU_MEMORY_UTILIZATION=0.8</li>
+                        <li><strong>Max Tokens:</strong> NIM_MAX_TOKENS=4096</li>
+                        <li><strong>Port:</strong> 8000</li>
+                    </ul>
+                </div>
+
+                <div class="config-card">
+                    <h4>Open WebUI Settings</h4>
+                    <ul>
+                        <li><strong>Default Model:</strong> mistral</li>
+                        <li><strong>User Registration:</strong> OPENUI_SIGNUP=false</li>
+                        <li><strong>Default User:</strong> OPENUI_DEFAULT_USER=admin</li>
+                        <li><strong>Web Search:</strong> ENABLE_RAG=true</li>
+                    </ul>
+                </div>
+
+                <div class="config-card">
+                    <h4>MCP Connector Settings</h4>
+                    <ul>
+                        <li><strong>QNAP Host:</strong> QNAP_HOST=192.168.x.x</li>
+                        <li><strong>PLM Server:</strong> PLM_SERVER=localhost:3001</li>
+                        <li><strong>Frappe MCP:</strong> FRAPPE_MCP=localhost:3002</li>
+                        <li><strong>iDempiere MCP:</strong> IDEMPIERE_MCP=localhost:3003</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Performance Tuning</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>GPU Optimization</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code># Adjust GPU memory allocation
+export NIM_GPU_MEMORY_UTILIZATION=0.9
+
+# Enable model caching
+export NIM_CACHE_SIZE=10GB
+
+# Set concurrent requests
+export NIM_MAX_CONCURRENT_REQUESTS=4</code></pre>
+            </div>
+        </section>
+
+        <section id="connectors" class="content-section">
+            <div class="section-header">
+                <h2>MCP Connectors</h2>
+                <p class="section-description">
+                    The AI Ecosystem integrates with multiple business systems through MCP connectors.
+                </p>
+            </div>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    WebUI["Open WebUI"] --> NIM["NVIDIA NIM (/v1)"]
+
+    subgraph Tools["Tool Surfaces (MCP)"]
+        QNAP["QNAP Connector"]
+        PLM["PLM MCP (Docker System)"]
+        FRP["Frappe MCP (ERPNext)"]
+        IDM["iDempiere MCP"]
+    end
+
+    WebUI -->|"tools/call"| Tools
+
+    subgraph Auth["Auth Boundaries"]
+        A1["Local secrets (host)"]
+        A2["OAuth/Bearer tokens"]
+        A3["API key tokens"]
+    end
+
+    QNAP --- A1
+    PLM --- A2
+    FRP --- A3
+    IDM --- A3
+                </div>
+            </div>
+
+            <div class="reference-grid">
+                <div class="reference-card">
+                    <h3><i class="fas fa-server"></i> QNAP NAS Connector</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td>Location</td>
+                            <td><code>mcp-connectors/qnap/</code></td>
+                        </tr>
+                        <tr>
+                            <td>Functions</td>
+                            <td><code>get_system_info, list_shares, file_operations</code></td>
+                        </tr>
+                        <tr>
+                            <td>Auth</td>
+                            <td>API Key + Username/Password</td>
+                        </tr>
+                        <tr>
+                            <td>Data</td>
+                            <td>Storage metrics, file listings, user info</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="reference-card">
+                    <h3><i class="fas fa-chart-bar"></i> PLM Analytics Connector</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td>Location</td>
+                            <td><code>External Service</code></td>
+                        </tr>
+                        <tr>
+                            <td>Functions</td>
+                            <td><code>analytics, semantic_search, postgres_query</code></td>
+                        </tr>
+                        <tr>
+                            <td>Auth</td>
+                            <td>Bearer Token</td>
+                        </tr>
+                        <tr>
+                            <td>Data</td>
+                            <td>PLM analytics, Weaviate search results</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="reference-card">
+                    <h3><i class="fas fa-shopping-cart"></i> Frappe ERP Connector</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td>Location</td>
+                            <td><code>External Service</code></td>
+                        </tr>
+                        <tr>
+                            <td>Functions</td>
+                            <td><code>get_document, list_records, relationship_traverse</code></td>
+                        </tr>
+                        <tr>
+                            <td>Auth</td>
+                            <td>API Key & Secret</td>
+                        </tr>
+                        <tr>
+                            <td>Data</td>
+                            <td>ERPNext documents, reports, file attachments</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="reference-card">
+                    <h3><i class="fas fa-database"></i> iDempiere Connector</h3>
+                    <table class="reference-table">
+                        <tr>
+                            <td>Location</td>
+                            <td><code>External Service</code></td>
+                        </tr>
+                        <tr>
+                            <td>Functions</td>
+                            <td><code>execute_query, get_schema, list_tables</code></td>
+                        </tr>
+                        <tr>
+                            <td>Auth</td>
+                            <td>Database Credentials</td>
+                        </tr>
+                        <tr>
+                            <td>Data</td>
+                            <td>Read-only database queries, schema info</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflows" class="content-section">
+            <div class="section-header">
+                <h2>AI-Powered Workflows</h2>
+                <p class="section-description">
+                    Example workflows demonstrating how AI can assist with business operations.
+                </p>
+            </div>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+sequenceDiagram
+    participant User as User
+    participant WebUI as Open WebUI
+    participant NIM as NVIDIA NIM
+    participant MCP as MCP Connectors
+    participant Business as Business Systems
+
+    User->>WebUI: "Check inventory status for product X"
+    WebUI->>NIM: Chat completion request
+    NIM-->>WebUI: Tool call: frappe_get_stock
+
+    WebUI->>MCP: Execute tool call
+    MCP->>Business: Query ERPNext
+    Business-->>MCP: Stock levels
+    MCP-->>WebUI: Tool result: 500 units in stock
+
+    WebUI->>NIM: Continue with tool result
+    NIM-->>WebUI: "Product X has 500 units available"
+    WebUI-->>User: Display formatted response
+
+    Note over User,Business: AI can chain multiple tools for complex queries
+                </div>
+            </div>
+
+            <div class="api-endpoints">
+                <div class="endpoint-group">
+                    <h3>Common AI Workflows</h3>
+                    <ul>
+                        <li><strong>Inventory Check:</strong> "How much stock do we have for product X?"</li>
+                        <li><strong>Storage Analysis:</strong> "Show me disk usage trends on the NAS"</li>
+                        <li><strong>Sales Reports:</strong> "Generate a weekly sales summary"</li>
+                        <li><strong>Customer Data:</strong> "Find all customers from region Y"</li>
+                        <li><strong>Document Search:</strong> "Find documents about Z using semantic search"</li>
+                    </ul>
+                </div>
+
+                <div class="endpoint-group">
+                    <h3>Advanced Workflows</h3>
+                    <ul>
+                        <li><strong>Multi-System Queries:</strong> Combine data from ERP and PLM systems</li>
+                        <li><strong>Automated Actions:</strong> Trigger workflows based on AI insights</li>
+                        <li><strong>Data Analysis:</strong> Generate reports from multiple data sources</li>
+                        <li><strong>Predictive Analytics:</strong> Forecast trends using historical data</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="monitoring" class="content-section">
+            <div class="section-header">
+                <h2>Monitoring & Observability</h2>
+                <p class="section-description">
+                    Keep track of system health, performance, and usage patterns.
+                </p>
+            </div>
+
+            <h3>Model Lifecycle</h3>
+            <div class="mermaid-container">
+                <div class="mermaid">
+stateDiagram-v2
+    [*] --> Pulled: container image pulled
+    Pulled --> Starting: docker compose up
+    Starting --> Ready: /v1/models healthy
+    Ready --> Serving: requests in flight
+    Serving --> Ready: idle
+    Ready --> Restarting: config/model change
+    Restarting --> Starting
+    Ready --> [*]: shutdown
+                </div>
+            </div>
+
+            <div class="troubleshooting-grid">
+                <div class="trouble-card">
+                    <h3><i class="fas fa-heartbeat"></i> Health Monitoring</h3>
+                    <div class="issue-item">
+                        <h4>GPU Metrics</h4>
+                        <p>Monitor GPU utilization and memory usage</p>
+                        <code>nvidia-smi dmon</code>
+                        <ul>
+                            <li>Check GPU temperature and utilization</li>
+                            <li>Monitor VRAM usage patterns</li>
+                            <li>Track inference latency</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Service Health</h4>
+                        <p>Automated health checks for all services</p>
+                        <code>./scripts/health-check.sh</code>
+                        <ul>
+                            <li>Check API endpoint availability</li>
+                            <li>Verify MCP connector status</li>
+                            <li>Monitor response times</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="trouble-card">
+                    <h3><i class="fas fa-chart-line"></i> Performance Metrics</h3>
+                    <div class="issue-item">
+                        <h4>Request Metrics</h4>
+                        <p>Track AI request patterns and performance</p>
+                        <ul>
+                            <li>Requests per second</li>
+                            <li>Average response time</li>
+                            <li>Token usage statistics</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Resource Usage</h4>
+                        <p>Monitor system resource consumption</p>
+                        <ul>
+                            <li>CPU and memory utilization</li>
+                            <li>Disk space usage</li>
+                            <li>Network bandwidth</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Monitoring Script Example</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>GPU and Service Monitor</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code>#!/bin/bash
+# Continuous monitoring script
+while true; do
+    clear
+    echo "=== GPU Status ==="
+    nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits
+
+    echo -e "\n=== Service Status ==="
+    docker ps --filter "name=open-webui" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+    docker ps --filter "name=nim" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+
+    echo -e "\n=== Recent Logs ==="
+    docker logs --tail 5 open-webui 2>&1 | grep -E "(ERROR|WARN)"
+
+    sleep 5
+done</code></pre>
+            </div>
+        </section>
+
+        <section id="troubleshooting" class="content-section">
+            <div class="section-header">
+                <h2>Troubleshooting</h2>
+                <p class="section-description">
+                    Common issues and their solutions.
+                </p>
+            </div>
+
+            <div class="troubleshooting-grid">
+                <div class="trouble-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Common Issues</h3>
+
+                    <div class="issue-item">
+                        <h4>GPU Not Detected</h4>
+                        <p>NVIDIA NIM cannot access the GPU</p>
+                        <code>docker: Error response from daemon: could not select device driver</code>
+                        <ul>
+                            <li>Install NVIDIA Container Toolkit</li>
+                            <li>Restart Docker daemon</li>
+                            <li>Verify GPU drivers: <code>nvidia-smi</code></li>
+                            <li>Check Docker runtime: <code>docker info | grep nvidia</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Out of Memory</h4>
+                        <p>GPU memory insufficient for model</p>
+                        <code>CUDA out of memory</code>
+                        <ul>
+                            <li>Reduce NIM_GPU_MEMORY_UTILIZATION</li>
+                            <li>Use smaller model</li>
+                            <li>Close other GPU applications</li>
+                            <li>Increase system RAM for swapping</li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>MCP Connector Timeout</h4>
+                        <p>AI cannot connect to business systems</p>
+                        <code>Connection timeout after 30s</code>
+                        <ul>
+                            <li>Check network connectivity</li>
+                            <li>Verify authentication credentials</li>
+                            <li>Check firewall settings</li>
+                            <li>Review connector logs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="trouble-card">
+                    <h3><i class="fas fa-tools"></i> Debugging Tools</h3>
+
+                    <div class="issue-item">
+                        <h4>Container Logs</h4>
+                        <p>View real-time logs from services</p>
+                        <ul>
+                            <li><code>docker logs -f open-webui</code></li>
+                            <li><code>docker logs -f nim</code></li>
+                            <li><code>docker-compose logs</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Network Debugging</h4>
+                        <p>Test connectivity between services</p>
+                        <ul>
+                            <li><code>docker exec -it open-webui curl http://nim:8000/v1/models</code></li>
+                            <li><code>docker network ls</code></li>
+                            <li><code>docker network inspect</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="issue-item">
+                        <h4>Performance Profiling</h4>
+                        <p>Identify bottlenecks</p>
+                        <ul>
+                            <li><code>docker stats</code> for resource usage</li>
+                            <li><code>nvidia-smi dmon</code> for GPU metrics</li>
+                            <li>Check token generation rates</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="development" class="content-section">
+            <div class="section-header">
+                <h2>Development Guide</h2>
+                <p class="section-description">
+                    Extend and customize the AI Ecosystem for your specific needs.
+                </p>
+            </div>
+
+            <h3>Adding New MCP Connectors</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Connector Template</span>
+                    <button class="copy-btn" onclick="copyCode(this)">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <pre><code>// mcp-connectors/new-system/index.js
+const { Server } = require('@modelcontextprotocol/sdk/server');
+const { StdioServerTransport } = require('@modelcontextprotocol/sdk/server/stdio');
+
+const server = new Server({
+  name: 'new-system-mcp',
+  version: '1.0.0'
+}, {
+  capabilities: {
+    tools: {}
+  }
+});
+
+server.setRequestHandler('tools/list', async () => ({
+  tools: [
+    {
+      name: 'get_data',
+      description: 'Retrieve data from new system',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          query: { type: 'string' }
+        }
+      }
+    }
+  ]
+}));
+
+server.setRequestHandler('tools/call', async (request) => {
+  if (request.params.name === 'get_data') {
+    // Implement your logic here
+    return {
+      content: [{
+        type: 'text',
+        text: JSON.stringify(data)
+      }]
+    };
+  }
+});
+
+const transport = new StdioServerTransport();
+server.connect(transport);</code></pre>
+            </div>
+
+            <div class="contribute-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Develop Connector</h3>
+                    <p>Create MCP server with required tools and authentication</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Test Locally</h3>
+                    <p>Verify tools work correctly with test data</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Deploy</h3>
+                    <p>Deploy as service or expose via port</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Configure Open WebUI</h3>
+                    <p>Add connector to Open WebUI's MCP configuration</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Documentation</h4>
+                <ul>
+                    <li><a href="index.html">Developer Hub</a></li>
+                    <li><a href="docker-system.html">Docker System</a></li>
+                    <li><a href="ai-ecosystem.html">AI Ecosystem</a></li>
+                    <li><a href="frappe-mcp.html">Frappe MCP</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">GitHub Repository</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                    <li><a href="#">Community Forums</a></li>
+                    <li><a href="#">Support Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 DSI Platform. Built with <i class="fas fa-heart"></i> for the developer community.</p>
+            <p>Last updated: December 2025</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js?v=20251217.14"></script>
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.dataset.tab;
+
+                // Update active button
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Update active content
+                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
