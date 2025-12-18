@@ -275,16 +275,12 @@
             The system follows a layered approach with clear separation of concerns.
           </p>
 
-          <!-- Architecture Overview Diagram -->
-          <div class="mermaid-container">
-            <div class="code-header">
-              <span>Complete System Architecture</span>
-
-            </div>
-            <div class="mermaid">
-graph TB
-    subgraph "External Layer"
-        WEB[Web Clients]
+	          <!-- Architecture Overview Diagram -->
+	          <div class="mermaid-container">
+	            <div class="mermaid">
+	graph TB
+	    subgraph "External Layer"
+	        WEB[Web Clients]
         API[API Consumers]
         DEV[Developers]
     end
@@ -364,17 +360,13 @@ graph TB
             </div>
           </div>
 
-          <!-- Network Architecture -->
-          <h3>Network Architecture</h3>
-          <div class="mermaid-container">
-            <div class="code-header">
-              <span>Docker Network Isolation</span>
-
-            </div>
-            <div class="mermaid">
-flowchart TD
-    subgraph "Docker Networks"
-        subgraph "web-network (Public)"
+	          <!-- Network Architecture -->
+	          <h3>Network Architecture</h3>
+	          <div class="mermaid-container">
+	            <div class="mermaid">
+	flowchart TD
+	    subgraph "Docker Networks"
+	        subgraph "web-network (Public)"
             NGINX[Nginx Proxy]
             EXT[External Access]
         end
@@ -422,17 +414,13 @@ flowchart TD
             </div>
           </div>
 
-          <!-- Service Dependencies -->
-          <h3>Service Dependencies</h3>
-          <div class="mermaid-container">
-            <div class="code-header">
-              <span>Service Startup Dependencies</span>
-
-            </div>
-            <div class="mermaid">
-graph TD
-    %% Level 0 - Infrastructure
-    subgraph "Infrastructure Services"
+	          <!-- Service Dependencies -->
+	          <h3>Service Dependencies</h3>
+	          <div class="mermaid-container">
+	            <div class="mermaid">
+	graph TD
+	    %% Level 0 - Infrastructure
+	    subgraph "Infrastructure Services"
         PG1[(PostgreSQL)]
         PG2[(PostgreSQL ERP)]
         REDIS[(Redis)]
@@ -491,17 +479,13 @@ graph TD
             </div>
           </div>
 
-          <!-- Data Flow Architecture -->
-          <h3>Data Flow Architecture</h3>
-          <div class="mermaid-container">
-            <div class="code-header">
-              <span>Data Flow Between Services</span>
-
-            </div>
-            <div class="mermaid">
-sequenceDiagram
-    participant Client as Client Request
-    participant Nginx as Nginx Proxy
+	          <!-- Data Flow Architecture -->
+	          <h3>Data Flow Architecture</h3>
+	          <div class="mermaid-container">
+	            <div class="mermaid">
+	sequenceDiagram
+	    participant Client as Client Request
+	    participant Nginx as Nginx Proxy
     participant MCP as MCP Server
     participant DB as PostgreSQL
     participant Cache as Redis
@@ -535,17 +519,13 @@ sequenceDiagram
             </div>
           </div>
 
-          <!-- High Availability Setup -->
-          <h3>High Availability Architecture</h3>
-          <div class="mermaid-container">
-            <div class="code-header">
-              <span>HA Configuration Pattern</span>
-
-            </div>
-            <div class="mermaid">
-graph TB
-    subgraph "Primary Node"
-        P_DOCKER[Docker Engine]
+	          <!-- High Availability Setup -->
+	          <h3>High Availability Architecture</h3>
+	          <div class="mermaid-container">
+	            <div class="mermaid">
+	graph TB
+	    subgraph "Primary Node"
+	        P_DOCKER[Docker Engine]
         P_SERVICES[All Services]
         P_VOLUMES[Primary Volumes]
     end
@@ -832,17 +812,13 @@ graph TB
             </div>
           </div>
 
-          <!-- Service Interactions -->
-          <h3>Service Interaction Patterns</h3>
-          <div class="mermaid-container">
-            <div class="code-header">
-              <span>Service Communication Patterns</span>
-
-            </div>
-            <div class="mermaid">
-graph LR
-    subgraph "Request Patterns"
-        SYNC[Synchronous API Calls]
+	          <!-- Service Interactions -->
+	          <h3>Service Interaction Patterns</h3>
+	          <div class="mermaid-container">
+	            <div class="mermaid">
+	graph LR
+	    subgraph "Request Patterns"
+	        SYNC[Synchronous API Calls]
         ASYNC[Asynchronous Messages]
         CACHE[Cache Lookups]
         STREAM[Streaming Data]
@@ -877,16 +853,12 @@ graph LR
             of complex business processes. Workflows integrate all platform services and external systems.
           </p>
 
-          <!-- Workflow Architecture -->
-          <div class="mermaid-container">
-            <div class="code-header">
-              <span>n8n Integration Architecture</span>
-
-            </div>
-            <div class="mermaid">
-graph TB
-    subgraph "Triggers"
-        WEB[Webhook]
+	          <!-- Workflow Architecture -->
+	          <div class="mermaid-container">
+	            <div class="mermaid">
+	graph TB
+	    subgraph "Triggers"
+	        WEB[Webhook]
         SCHED[Schedule]
         MANUAL[Manual]
         MQ_MSG[Queue Message]
@@ -1082,17 +1054,13 @@ flowchart TD
             environments. Includes monitoring, scaling, backup strategies, and troubleshooting.
           </p>
 
-          <!-- Deployment Architecture -->
-          <h3>Production Deployment Architecture</h3>
-          <div class="mermaid-container">
-            <div class="code-header">
-              <span>Production Deployment Pattern</span>
-
-            </div>
-            <div class="mermaid">
-flowchart TB
-    subgraph "Load Balancer Layer"
-        LB[External Load Balancer]
+	          <!-- Deployment Architecture -->
+	          <h3>Production Deployment Architecture</h3>
+	          <div class="mermaid-container">
+	            <div class="mermaid">
+	flowchart TB
+	    subgraph "Load Balancer Layer"
+	        LB[External Load Balancer]
         SSL[SSL/TLS Termination]
     end
 
@@ -1293,16 +1261,12 @@ certbot certonly --webroot -w /var/www/html -d yourdomain.com</code></pre>
 
           <!-- Backup Strategy -->
           <h3>Backup & Disaster Recovery</h3>
-          <div class="backup-strategy">
-            <div class="mermaid-container">
-              <div class="code-header">
-                <span>Backup Workflow</span>
-
-              </div>
-              <div class="mermaid">
-sequenceDiagram
-    participant Scheduler as Cron Job
-    participant Backup as Backup Script
+	          <div class="backup-strategy">
+	            <div class="mermaid-container">
+	              <div class="mermaid">
+	sequenceDiagram
+	    participant Scheduler as Cron Job
+	    participant Backup as Backup Script
     participant DB as PostgreSQL
     participant Storage as S3/NFS
     participant Monitor as Monitoring
